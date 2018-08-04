@@ -63,7 +63,7 @@ public class Menu extends javax.swing.JPanel {
         pLateralLayout.setHorizontalGroup(
             pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pLateralLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnServicio)
                     .addComponent(btnPersonal)
