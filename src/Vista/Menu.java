@@ -28,7 +28,7 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
 
-        PeluditosPET.setFont(new java.awt.Font("Bodoni MT Poster Compressed", 0, 56)); // NOI18N
+        PeluditosPET.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
         PeluditosPET.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         PeluditosPET.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/huella48.png"))); // NOI18N
         PeluditosPET.setText("Peluditos PET");
@@ -60,10 +60,10 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        pLateral.setBackground(new java.awt.Color(204, 255, 255));
+        pLateral.setBackground(new java.awt.Color(153, 204, 255));
 
-        btnMascota.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        btnMascota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/jirafa48.png"))); // NOI18N
+        btnMascota.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnMascota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/perro48.png"))); // NOI18N
         btnMascota.setText("Mascota");
         btnMascota.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,15 +71,15 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnVeterinario.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnVeterinario.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btnVeterinario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/doctora48.png"))); // NOI18N
         btnVeterinario.setText("Veterinario");
 
-        btnPersonal.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnPersonal.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btnPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/persona48.png"))); // NOI18N
         btnPersonal.setText("Personal");
 
-        btnServicio.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnServicio.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btnServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/estetoscopio48.png"))); // NOI18N
         btnServicio.setText("Servicio");
 
@@ -107,7 +107,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnPersonal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnServicio)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -127,10 +127,10 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
