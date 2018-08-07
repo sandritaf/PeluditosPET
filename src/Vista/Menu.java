@@ -23,6 +23,7 @@ public class Menu extends javax.swing.JFrame {
         btnVeterinario = new javax.swing.JLabel();
         btnPersonal = new javax.swing.JLabel();
         btnServicio = new javax.swing.JLabel();
+        btnPeluquero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +84,19 @@ public class Menu extends javax.swing.JFrame {
         btnPersonal.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btnPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/persona48.png"))); // NOI18N
         btnPersonal.setText("Personal");
+        btnPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPersonalMouseClicked(evt);
+            }
+        });
 
         btnServicio.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btnServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/estetoscopio48.png"))); // NOI18N
         btnServicio.setText("Servicio");
+
+        btnPeluquero.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnPeluquero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/peluquero48.png"))); // NOI18N
+        btnPeluquero.setText("Peluquero");
 
         javax.swing.GroupLayout pLateralLayout = new javax.swing.GroupLayout(pLateral);
         pLateral.setLayout(pLateralLayout);
@@ -98,7 +108,8 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btnServicio)
                     .addComponent(btnPersonal)
                     .addComponent(btnVeterinario)
-                    .addComponent(btnMascota))
+                    .addComponent(btnMascota)
+                    .addComponent(btnPeluquero))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pLateralLayout.setVerticalGroup(
@@ -111,8 +122,10 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPersonal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPeluquero)
+                .addGap(2, 2, 2)
                 .addComponent(btnServicio)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -174,6 +187,17 @@ public class Menu extends javax.swing.JFrame {
         PanelPrincipal.updateUI();
     }//GEN-LAST:event_btnVeterinarioMouseClicked
 
+    private void btnPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPersonalMouseClicked
+        V_Personal panel = new V_Personal();
+        panel.setVisible(true);
+        panel.setLocation(0,0);
+        panel.setSize(PanelPrincipal.getSize());
+        System.out.println("Añadido Panel: Personal");
+        PanelPrincipal.removeAll();
+        PanelPrincipal.add(panel,BorderLayout.CENTER);
+        PanelPrincipal.updateUI();
+    }//GEN-LAST:event_btnPersonalMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -214,6 +238,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel PeluditosPET;
     private javax.swing.JLabel btnMascota;
+    private javax.swing.JLabel btnPeluquero;
     private javax.swing.JLabel btnPersonal;
     private javax.swing.JLabel btnServicio;
     private javax.swing.JLabel btnVeterinario;
