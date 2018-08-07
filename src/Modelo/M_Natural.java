@@ -12,25 +12,23 @@ public class M_Natural extends M_Propietario{
         super();
     }
 
-    public M_Natural(String direccion, String telefono, M_Mascota Mascotini, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula, int edad) {
+    public M_Natural(String direccion, String telefono, M_Mascota Mascotini, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
         super(direccion,telefono,Mascotini);
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.cedula = cedula;
-        this.edad = edad;
     }
     
-    public M_Natural(String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula, int edad) {
+    public M_Natural(String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.cedula = cedula;
-        this.edad = edad;
     }
-
+    
     public String getPrimerNombre() {
         return primerNombre;
     }
@@ -79,5 +77,8 @@ public class M_Natural extends M_Propietario{
         this.edad = edad;
     }
     
+    public String toString(){
+        return cedula + " - " + primerNombre + " " + primerApellido;
+    }
     
 }

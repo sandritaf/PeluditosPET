@@ -5,6 +5,7 @@ public class V_Servicio extends javax.swing.JPanel {
 
     public V_Servicio() {
         initComponents();
+        txtPK.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +33,7 @@ public class V_Servicio extends javax.swing.JPanel {
         txtDiagnosticoFinal = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
+        txtPK = new javax.swing.JTextField();
 
         PanelFondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -90,6 +92,11 @@ public class V_Servicio extends javax.swing.JPanel {
         VerLista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         VerLista.setVerifyInputWhenFocusTarget(false);
         VerLista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        VerLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VerListaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelLateralLayout = new javax.swing.GroupLayout(PanelLateral);
         PanelLateral.setLayout(PanelLateralLayout);
@@ -169,21 +176,18 @@ public class V_Servicio extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Descripcion)
-                            .addComponent(Nombre)
-                            .addComponent(DiagnosticoFinal))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDescripcion)
-                            .addComponent(jScrollPane1)
-                            .addComponent(cmbTipoServicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Observaciones))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Descripcion)
+                    .addComponent(Nombre)
+                    .addComponent(DiagnosticoFinal)
+                    .addComponent(Observaciones)
+                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(cmbTipoServicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDescripcion))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +202,10 @@ public class V_Servicio extends javax.swing.JPanel {
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DiagnosticoFinal)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(DiagnosticoFinal)
+                        .addGap(38, 38, 38)
+                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -246,6 +253,10 @@ public class V_Servicio extends javax.swing.JPanel {
         limpiarCajas();
     }//GEN-LAST:event_LimpiarMouseClicked
 
+    private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VerListaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Descripcion;
@@ -269,9 +280,11 @@ public class V_Servicio extends javax.swing.JPanel {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextArea txtDiagnosticoFinal;
     private javax.swing.JTextArea txtObservaciones;
+    private javax.swing.JTextField txtPK;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCajas(){
+        txtPK.setText(null);
         txtDiagnosticoFinal.setText(null);
         txtObservaciones.setText(null);
         txtDescripcion.setText(null);

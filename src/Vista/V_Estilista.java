@@ -5,10 +5,11 @@
  */
 package Vista;
 
-public class V_Peluquero extends javax.swing.JPanel {
+public class V_Estilista extends javax.swing.JPanel {
 
-    public V_Peluquero() {
+    public V_Estilista() {
         initComponents();
+        txtPK.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -20,11 +21,9 @@ public class V_Peluquero extends javax.swing.JPanel {
         Guardar = new javax.swing.JLabel();
         Modificar = new javax.swing.JLabel();
         Eliminar = new javax.swing.JLabel();
-        Personal = new javax.swing.JLabel();
+        Estilista = new javax.swing.JLabel();
         Limpiar = new javax.swing.JLabel();
         VerLista = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaPeluqueros = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         primerNombre = new javax.swing.JLabel();
         txtPrimerNombre = new javax.swing.JTextField();
@@ -46,6 +45,9 @@ public class V_Peluquero extends javax.swing.JPanel {
         txtRIF = new javax.swing.JTextField();
         Profesion = new javax.swing.JLabel();
         txtProfesion = new javax.swing.JTextField();
+        txtPK = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaPeluqueros = new javax.swing.JTable();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -76,13 +78,13 @@ public class V_Peluquero extends javax.swing.JPanel {
         Eliminar.setVerifyInputWhenFocusTarget(false);
         Eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        Personal.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
-        Personal.setForeground(new java.awt.Color(255, 255, 255));
-        Personal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/peluquero72.png"))); // NOI18N
-        Personal.setText("Peluquero");
-        Personal.setFocusable(false);
-        Personal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Personal.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        Estilista.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
+        Estilista.setForeground(new java.awt.Color(255, 255, 255));
+        Estilista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/peluquero72.png"))); // NOI18N
+        Estilista.setText("Estilista");
+        Estilista.setFocusable(false);
+        Estilista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Estilista.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         Limpiar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Limpiar.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,21 +111,21 @@ public class V_Peluquero extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(Guardar)
-                    .addComponent(Modificar)
-                    .addComponent(Eliminar)
-                    .addComponent(Personal)
+                    .addComponent(VerLista)
                     .addComponent(Limpiar)
-                    .addComponent(VerLista))
-                .addGap(23, 23, 23))
+                    .addComponent(Estilista)
+                    .addComponent(Eliminar)
+                    .addComponent(Modificar)
+                    .addComponent(Guardar))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(Personal)
+                .addComponent(Estilista)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Guardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -134,19 +136,8 @@ public class V_Peluquero extends javax.swing.JPanel {
                 .addComponent(Limpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VerLista)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-
-        tablaPeluqueros.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaPeluqueros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(tablaPeluqueros);
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -154,13 +145,11 @@ public class V_Peluquero extends javax.swing.JPanel {
         primerNombre.setText("1° Nombre");
 
         txtPrimerNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtPrimerNombre.setFocusable(false);
 
         primerApellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         primerApellido.setText("1° Apellido");
 
         txtCedula.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtCedula.setFocusable(false);
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCedulaActionPerformed(evt);
@@ -177,25 +166,20 @@ public class V_Peluquero extends javax.swing.JPanel {
         segundoNombre.setText("2° Nombre");
 
         txtSegundoNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtSegundoNombre.setFocusable(false);
 
         txtPrimerApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtPrimerApellido.setFocusable(false);
 
         segundoApellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         segundoApellido.setText("2° Apellido");
 
         txtSegundoApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtSegundoApellido.setFocusable(false);
 
         RIF.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         RIF.setText("RIF");
 
         txtAniosE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtAniosE.setFocusable(false);
 
         txtEdad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEdad.setFocusable(false);
         txtEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEdadActionPerformed(evt);
@@ -206,18 +190,14 @@ public class V_Peluquero extends javax.swing.JPanel {
         NivelInstruccion.setText("Nivel de Instrucción");
 
         cmbNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbNivelI.setFocusable(false);
 
         aniosExperiencia.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         aniosExperiencia.setText("Años de Experiencia");
 
         txtRIF.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtRIF.setFocusable(false);
 
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion.setText("Profesion");
-
-        txtProfesion.setFocusable(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -253,6 +233,10 @@ public class V_Peluquero extends javax.swing.JPanel {
                     .addComponent(txtSegundoApellido, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtSegundoNombre, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,8 +271,21 @@ public class V_Peluquero extends javax.swing.JPanel {
                     .addComponent(cmbNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Profesion)
                     .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        tablaPeluqueros.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaPeluqueros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tablaPeluqueros);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -297,20 +294,20 @@ public class V_Peluquero extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
-                .addGap(16, 16, 16))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -342,11 +339,11 @@ public class V_Peluquero extends javax.swing.JPanel {
     private javax.swing.JLabel Cedula;
     private javax.swing.JLabel Edad;
     private javax.swing.JLabel Eliminar;
+    private javax.swing.JLabel Estilista;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel NivelInstruccion;
-    private javax.swing.JLabel Personal;
     private javax.swing.JLabel Profesion;
     private javax.swing.JLabel RIF;
     private javax.swing.JLabel VerLista;
@@ -364,6 +361,7 @@ public class V_Peluquero extends javax.swing.JPanel {
     private javax.swing.JTextField txtAniosE;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtPK;
     private javax.swing.JTextField txtPrimerApellido;
     private javax.swing.JTextField txtPrimerNombre;
     private javax.swing.JTextField txtProfesion;

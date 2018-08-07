@@ -65,5 +65,7 @@ public class M_Mascota {
         this.dueno = dueno;
     }
     
-    
+    public String toString(){
+        return nombre + " " + especie + " " + edad + " " + raza + " " + observaciones;
+    }
 }

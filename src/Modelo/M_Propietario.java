@@ -9,7 +9,7 @@ public class M_Propietario {
 
     public M_Propietario() {
     }
-
+        
     public M_Propietario(String direccion, String telefono) {
         this.direccion = direccion;
         this.telefono = telefono;
@@ -44,7 +44,5 @@ public class M_Propietario {
     public void setMascoticas(M_Mascota Mascoticas) {
         this.Mascoticas.add(Mascoticas);
     }
-    
-    
-    
+        
 }

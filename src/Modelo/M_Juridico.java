@@ -20,17 +20,17 @@ public class M_Juridico extends M_Propietario{
         this.RIF = RIF;
         this.razonSocial = razonSocial;
     }
-
+    
     public M_Juridico() {
         super();
     }
 
-    public String getNombrE() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombrE(String nombrE) {
-        this.nombre = nombrE;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombreGerente() {
@@ -57,5 +57,8 @@ public class M_Juridico extends M_Propietario{
         this.razonSocial = razonSocial;
     }
     
+    public String toString(){
+        return RIF + " - " + nombre;
+    }
     
 }
