@@ -30,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
 
         PeluditosPET.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
+        PeluditosPET.setForeground(new java.awt.Color(102, 102, 102));
         PeluditosPET.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         PeluditosPET.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/huella48.png"))); // NOI18N
         PeluditosPET.setText("Peluditos PET");
@@ -38,7 +39,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PeluditosPET, javax.swing.GroupLayout.DEFAULT_SIZE, 922, Short.MAX_VALUE)
+            .addComponent(PeluditosPET, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,7 +64,8 @@ public class Menu extends javax.swing.JFrame {
 
         pLateral.setBackground(new java.awt.Color(153, 204, 255));
 
-        btnMascota.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnMascota.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnMascota.setForeground(new java.awt.Color(255, 255, 255));
         btnMascota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/perro48.png"))); // NOI18N
         btnMascota.setText("Mascota");
         btnMascota.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -72,7 +74,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnVeterinario.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnVeterinario.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnVeterinario.setForeground(new java.awt.Color(255, 255, 255));
         btnVeterinario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/doctora48.png"))); // NOI18N
         btnVeterinario.setText("Veterinario");
         btnVeterinario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -81,7 +84,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnPersonal.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnPersonal.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnPersonal.setForeground(new java.awt.Color(255, 255, 255));
         btnPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/persona48.png"))); // NOI18N
         btnPersonal.setText("Personal");
         btnPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -90,13 +94,25 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnServicio.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/estetoscopio48.png"))); // NOI18N
+        btnServicio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnServicio.setForeground(new java.awt.Color(255, 255, 255));
+        btnServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salud48.png"))); // NOI18N
         btnServicio.setText("Servicio");
+        btnServicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnServicioMouseClicked(evt);
+            }
+        });
 
-        btnPeluquero.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnPeluquero.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnPeluquero.setForeground(new java.awt.Color(255, 255, 255));
         btnPeluquero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/peluquero48.png"))); // NOI18N
         btnPeluquero.setText("Peluquero");
+        btnPeluquero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPeluqueroMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pLateralLayout = new javax.swing.GroupLayout(pLateral);
         pLateral.setLayout(pLateralLayout);
@@ -197,6 +213,28 @@ public class Menu extends javax.swing.JFrame {
         PanelPrincipal.add(panel,BorderLayout.CENTER);
         PanelPrincipal.updateUI();
     }//GEN-LAST:event_btnPersonalMouseClicked
+
+    private void btnPeluqueroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPeluqueroMouseClicked
+        V_Peluquero panel = new V_Peluquero();
+        panel.setVisible(true);
+        panel.setLocation(0,0);
+        panel.setSize(PanelPrincipal.getSize());
+        System.out.println("Añadido Panel: Peluquero");
+        PanelPrincipal.removeAll();
+        PanelPrincipal.add(panel,BorderLayout.CENTER);
+        PanelPrincipal.updateUI();
+    }//GEN-LAST:event_btnPeluqueroMouseClicked
+
+    private void btnServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnServicioMouseClicked
+        V_Servicio panel = new V_Servicio();
+        panel.setVisible(true);
+        panel.setLocation(0,0);
+        panel.setSize(PanelPrincipal.getSize());
+        System.out.println("Añadido Panel: Servicio");
+        PanelPrincipal.removeAll();
+        PanelPrincipal.add(panel,BorderLayout.CENTER);
+        PanelPrincipal.updateUI();
+    }//GEN-LAST:event_btnServicioMouseClicked
 
     /**
      * @param args the command line arguments
