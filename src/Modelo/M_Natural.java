@@ -1,7 +1,7 @@
 package Modelo;
 
 public class M_Natural extends M_Propietario{
-    String primerNombra;
+    String primerNombre;
     String segundoNombre;
     String primerApellido;
     String segundoApellido;
@@ -12,9 +12,9 @@ public class M_Natural extends M_Propietario{
         super();
     }
 
-    public M_Natural(String direccion, String telefono, M_Mascota Mascotini, String primerNombra, String segundoNombre, String primerApellido, String segundoApellido, String cedula, int edad) {
+    public M_Natural(String direccion, String telefono, M_Mascota Mascotini, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula, int edad) {
         super(direccion,telefono,Mascotini);
-        this.primerNombra = primerNombra;
+        this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
@@ -22,8 +22,8 @@ public class M_Natural extends M_Propietario{
         this.edad = edad;
     }
     
-    public M_Natural(String primerNombra, String segundoNombre, String primerApellido, String segundoApellido, String cedula, int edad) {
-        this.primerNombra = primerNombra;
+    public M_Natural(String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula, int edad) {
+        this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
@@ -31,12 +31,12 @@ public class M_Natural extends M_Propietario{
         this.edad = edad;
     }
 
-    public String getPrimerNombra() {
-        return primerNombra;
+    public String getPrimerNombre() {
+        return primerNombre;
     }
 
-    public void setPrimerNombra(String primerNombra) {
-        this.primerNombra = primerNombra;
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
     }
 
     public String getSegundoNombre() {
