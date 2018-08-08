@@ -3,6 +3,7 @@ package Main;
 import Conexion.Conexion;
 import Controlador.C_Juridico;
 import Controlador.C_Mascota;
+import Controlador.C_Natural;
 import Controlador.C_Propietario;
 import Modelo.M_Juridico;
 import Modelo.M_Mascota;
@@ -33,7 +34,7 @@ public class ProyectoBDDII {
 //        controlador.listarMascotas();
 //        controlador.modificarMascota("1", mascota);
 //        c.cerrarConexion();
-        
+
         Menu menu = new Menu();
         menu.setVisible(true);
     }

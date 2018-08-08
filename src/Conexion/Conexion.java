@@ -7,10 +7,11 @@ import com.db4o.ObjectContainer;
 public class Conexion {
     
     public ObjectContainer bd;
+    String direccionSandra = "C:\\Users\\brenda\\Desktop\\PeluditosPET\\peluditospet.yap";
+    String direccionGenova = "C:\\Users\\Ecastillo\\Documents\\NetBeansProjects\\PeluditosPET\\src\\Conexion\\peluditospet.yap";
     
     public Conexion(){
-        String direccion = "C:\\Users\\brenda\\Desktop\\PeluditosPET\\peluditospet.yap";
-        bd = Db4oEmbedded.openFile(direccion);
+        bd = Db4oEmbedded.openFile(direccionGenova);
     }
     
     public void cerrarConexion(){

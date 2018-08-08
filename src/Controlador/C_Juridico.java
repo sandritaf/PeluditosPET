@@ -59,4 +59,18 @@ public class C_Juridico {
         c.cerrarConexion();
     }
     
+    public void eliminarNatural(String rif){
+        Conexion c = new Conexion();
+        ObjectContainer bd = c.getObjectContainer();
+        
+        M_Propietario busqueda = new M_Juridico(null, null, null, null, null, rif, null);
+        ObjectSet resultado = bd.queryByExample(busqueda);
+        M_Juridico encontrado = (M_Juridico) resultado.next();
+        bd.delete(encontrado);
+        System.out.println("Eliminado: " + encontrado);
+        
+        JOptionPane.showMessageDialog(null,"Eliminado cliente natural exitosamente");
+        c.cerrarConexion();
+    }
+    
 }

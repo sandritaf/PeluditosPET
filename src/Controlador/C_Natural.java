@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Conexion.Conexion;
@@ -18,15 +13,15 @@ public class C_Natural {
     public C_Natural(){
     }
     
-    public void guardarJuridico(M_Juridico juridico){
+    public void guardarNatural(M_Natural persona){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        bd.store(juridico);
-        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+        bd.store(persona);
+        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente un cliente natural");
         c.cerrarConexion();
     }
     
-    public void modificarJuridico(String cedula, M_Natural n){
+    public void modificarNatural(String cedula, M_Natural n){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         
@@ -38,19 +33,19 @@ public class C_Natural {
         encontrado.setSegundoNombre(n.getSegundoNombre());
         encontrado.setPrimerApellido(n.getPrimerApellido());
         encontrado.setSegundoApellido(n.getSegundoApellido());
-        encontrado.setCedula(n.getCedula());
+        encontrado.setCedula(n.getCedula()); //?????
         encontrado.setEdad(n.getEdad());
         encontrado.setDireccion(n.getDireccion());
         encontrado.setTelefono(n.getTelefono());
 
         bd.store(encontrado);
 
-        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el registro" );
+        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
 
         c.cerrarConexion();
     }
     
-    public void verJuridico(String cedula){
+    public void verNatural(String cedula){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
@@ -71,4 +66,17 @@ public class C_Natural {
         c.cerrarConexion();
     }
     
+    public void eliminarNatural(String cedula){
+        Conexion c = new Conexion();
+        ObjectContainer bd = c.getObjectContainer();
+        
+        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+        ObjectSet resultado = bd.queryByExample(natural);
+        M_Natural encontrado = (M_Natural) resultado.next();
+        bd.delete(encontrado);
+        System.out.println("Eliminado: " + encontrado);
+        
+        JOptionPane.showMessageDialog(null,"Eliminado cliente natural exitosamente");
+        c.cerrarConexion();
+    }
 }
