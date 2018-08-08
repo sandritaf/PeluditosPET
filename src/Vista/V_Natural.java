@@ -438,8 +438,8 @@ public class V_Natural extends javax.swing.JPanel {
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
-        int guion = codigo.indexOf("-");
-        codigoFinal = codigo.substring(0, guion);
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(1, guion);
         
         return Integer.parseInt(codigoFinal);
     }
