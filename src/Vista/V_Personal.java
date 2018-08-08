@@ -152,13 +152,11 @@ public class V_Personal extends javax.swing.JPanel {
         primerNombre.setText("1° Nombre");
 
         txtPrimerNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtPrimerNombre.setFocusable(false);
 
         primerApellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         primerApellido.setText("1° Apellido");
 
         txtCedula.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtCedula.setFocusable(false);
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCedulaActionPerformed(evt);
@@ -175,25 +173,20 @@ public class V_Personal extends javax.swing.JPanel {
         segundoNombre.setText("2° Nombre");
 
         txtSegundoNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtSegundoNombre.setFocusable(false);
 
         txtPrimerApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtPrimerApellido.setFocusable(false);
 
         segundoApellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         segundoApellido.setText("2° Apellido");
 
         txtSegundoApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtSegundoApellido.setFocusable(false);
 
         RIF.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         RIF.setText("RIF");
 
         txtAniosE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtAniosE.setFocusable(false);
 
         txtEdad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEdad.setFocusable(false);
         txtEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEdadActionPerformed(evt);
@@ -204,18 +197,14 @@ public class V_Personal extends javax.swing.JPanel {
         NivelInstruccion.setText("Nivel de Instrucción");
 
         cmbNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbNivelI.setFocusable(false);
 
         aniosExperiencia.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         aniosExperiencia.setText("Años de Experiencia");
 
         txtRIF.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtRIF.setFocusable(false);
 
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion.setText("Profesion");
-
-        txtProfesion.setFocusable(false);
 
         Tipo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Tipo.setText("Tipo");

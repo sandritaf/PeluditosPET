@@ -1,19 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
-/**
- *
- * @author brenda
- */
-public class V_Mascota extends javax.swing.JPanel {
+import Controlador.C_Mascota;
+import Controlador.C_Propietario;
+import Modelo.M_Mascota;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
+public class V_Mascota extends javax.swing.JPanel {
+    
+    M_Mascota modelo;
+    C_Mascota controlador;
+    C_Propietario controladorDueno;
+    
     public V_Mascota() {
         initComponents();
         txtPK.setVisible(false);
+        
+        controlador = new C_Mascota();
+        
+        controlador.cargarDuenos(cmbDueno, "Natural");
     }
 
     @SuppressWarnings("unchecked")
@@ -36,15 +43,15 @@ public class V_Mascota extends javax.swing.JPanel {
         Raza = new javax.swing.JLabel();
         cmbRaza = new javax.swing.JComboBox<>();
         txtEdad = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        Edad = new javax.swing.JLabel();
+        Observaciones = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
+        Dueno = new javax.swing.JLabel();
         cmbDueno = new javax.swing.JComboBox<>();
-        txtPK = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaMascotas = new javax.swing.JTable();
+        txtPK = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -58,6 +65,11 @@ public class V_Mascota extends javax.swing.JPanel {
         Guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Guardar.setVerifyInputWhenFocusTarget(false);
         Guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GuardarMouseClicked(evt);
+            }
+        });
 
         Modificar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Modificar.setForeground(new java.awt.Color(255, 255, 255));
@@ -66,6 +78,11 @@ public class V_Mascota extends javax.swing.JPanel {
         Modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Modificar.setVerifyInputWhenFocusTarget(false);
         Modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarMouseClicked(evt);
+            }
+        });
 
         Eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Eliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,6 +120,11 @@ public class V_Mascota extends javax.swing.JPanel {
         VerLista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         VerLista.setVerifyInputWhenFocusTarget(false);
         VerLista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        VerLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VerListaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -142,37 +164,34 @@ public class V_Mascota extends javax.swing.JPanel {
         Nombre.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre.setFocusable(false);
 
         Especie.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Especie.setText("Especie");
 
         cmbEspecie.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbEspecie.setFocusable(false);
+        cmbEspecie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Canino" }));
 
         Raza.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Raza.setText("Raza");
 
         cmbRaza.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbRaza.setFocusable(false);
+        cmbRaza.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pastor Alemán", "Puddle" }));
 
         txtEdad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEdad.setFocusable(false);
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel4.setText("Edad");
+        Edad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Edad.setText("Edad");
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel5.setText("Observaciones");
+        Observaciones.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Observaciones.setText("Observaciones");
 
         txtObservaciones.setColumns(20);
         txtObservaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtObservaciones.setRows(5);
-        txtObservaciones.setFocusable(false);
         jScrollPane1.setViewportView(txtObservaciones);
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel6.setText("Dueño");
+        Dueno.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Dueno.setText("Dueño");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -183,11 +202,10 @@ public class V_Mascota extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Especie)
                     .addComponent(Raza)
-                    .addComponent(jLabel4)
+                    .addComponent(Edad)
                     .addComponent(Nombre)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Observaciones)
+                    .addComponent(Dueno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -216,17 +234,14 @@ public class V_Mascota extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(Edad))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
+                    .addComponent(Observaciones)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(Dueno)
                     .addComponent(cmbDueno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -250,7 +265,9 @@ public class V_Mascota extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
+                        .addGap(31, 31, 31)
+                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -261,8 +278,13 @@ public class V_Mascota extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -285,8 +307,43 @@ public class V_Mascota extends javax.swing.JPanel {
         limpiarCajas();
     }//GEN-LAST:event_LimpiarMouseClicked
 
+    private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
+        }
+        else{
+                    
+            String nombre, especie, raza, observaciones;
+            int edad;
+
+            nombre = txtNombre.getText();
+            edad = Integer.parseInt(txtEdad.getText());
+            observaciones = txtObservaciones.getText();
+            especie = (String) cmbEspecie.getSelectedItem();
+            raza = (String) cmbRaza.getSelectedItem();
+
+            modelo = new M_Mascota(nombre, especie, raza, edad, observaciones);
+            controlador.guardarMascota(modelo);
+
+            limpiarCajas();
+        }
+    }//GEN-LAST:event_GuardarMouseClicked
+
+    private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
+        controlador.listarMascotas();    // TODO add your handling code here:
+    }//GEN-LAST:event_VerListaMouseClicked
+
+    private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModificarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Dueno;
+    private javax.swing.JLabel Edad;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Especie;
     private javax.swing.JLabel Guardar;
@@ -294,14 +351,12 @@ public class V_Mascota extends javax.swing.JPanel {
     private javax.swing.JLabel Mascota;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel Nombre;
+    private javax.swing.JLabel Observaciones;
     private javax.swing.JLabel Raza;
     private javax.swing.JLabel VerLista;
     private javax.swing.JComboBox<String> cmbDueno;
     private javax.swing.JComboBox<String> cmbEspecie;
     private javax.swing.JComboBox<String> cmbRaza;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -323,4 +378,32 @@ public class V_Mascota extends javax.swing.JPanel {
         cmbEspecie.setSelectedIndex(0);
         cmbRaza.setSelectedIndex(0);
     }
+    
+    //Devuelve el codigo de la opcion seleccionada en un combo
+    public int getComboSelected(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf("-");
+        codigoFinal = codigo.substring(0, guion);
+        
+        return Integer.parseInt(codigoFinal);
+    }
+    
+    public boolean txtVacio(JTextField txt){
+        if(txt.getText().isEmpty())
+            return true;
+        return false;
+    }
+    
+    public boolean cajasVacias(){
+        if(txtVacio(txtNombre))
+            return true;
+        if(txtVacio(txtEdad))
+            return true;
+        if(txtObservaciones.getText().isEmpty())
+            return true;
+        return false;
+    }
+    
 }

@@ -24,6 +24,18 @@ public class C_Mascota {
         c.cerrarConexion();
     }
     
+    public void eliminarMascota(String nombre, M_Propietario p){
+//        Conexion c = new Conexion();
+//        ObjectContainer bd = c.getObjectContainer();
+//        
+//        M_Propietario prop = 
+//        
+//        ObjectSet result = bd.queryByExample(mascota);
+//        
+//        JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del animal");
+//        c.cerrarConexion();
+    }
+    
     public void modificarMascota(String nombre, M_Mascota m, M_Propietario p){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
@@ -72,22 +84,28 @@ public class C_Mascota {
         ObjectContainer bd = c.getObjectContainer();
         DefaultComboBoxModel aModel = new DefaultComboBoxModel();
         M_Propietario p = null;
+        M_Propietario p1 = null;
         String aux;
         
         duenos.setModel(aModel);
 
-        if(opc.equals("Natural")){
+    //    if(opc.equals("Natural")){
             p = new M_Natural(null, null, null, null, null);
-        }
-        if (opc.equals("Juridico"))
-        {
-            p = new M_Juridico(null, null, null, null, null, null, null);
-        }    
+    //    }
+    //    if (opc.equals("Juridico"))
+    //    {
+            p1 = new M_Juridico(null, null, null, null, null, null, null);
+    //    }    
 
         ObjectSet rs = bd.queryByExample(p);
+        ObjectSet rs1 = bd.queryByExample(p1);
 
         while(rs.hasNext() ){
            aux = rs.next().toString();
+           aModel.addElement(aux);
+        }
+        while(rs1.hasNext() ){
+           aux = rs1.next().toString();
            aModel.addElement(aux);
         }
         

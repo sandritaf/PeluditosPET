@@ -16,6 +16,17 @@ public class M_Mascota {
         this.observaciones = observaciones;
         this.dueno = dueno;
     }
+    
+    public M_Mascota(String nombre, String especie, String raza, int edad, String observaciones) {
+        this.nombre = nombre;
+        this.especie = especie;
+        this.raza = raza;
+        this.edad = edad;
+        this.observaciones = observaciones;
+    }
+    
+    public M_Mascota() {
+    }
 
     public String getNombre() {
         return nombre;
