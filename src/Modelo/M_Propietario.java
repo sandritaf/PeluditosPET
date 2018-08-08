@@ -44,5 +44,5 @@ public class M_Propietario {
     public void setMascoticas(M_Mascota Mascoticas) {
         this.Mascoticas.add(Mascoticas);
     }
-        
+    
 }

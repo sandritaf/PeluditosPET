@@ -21,7 +21,7 @@ public class vista extends javax.swing.JFrame {
         initComponents();
         c = new C_Mascota();
         String opc = "Juridico";
-        c.cargarDuenos(jComboBox1, opc);
+        c.cargarDuenos(jComboBox1/*, opc*/);
     }
     
     @SuppressWarnings("unchecked")

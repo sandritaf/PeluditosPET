@@ -128,6 +128,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="GuardarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Modificar">
               <Properties>
@@ -145,6 +148,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ModificarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Eliminar">
               <Properties>
@@ -162,6 +168,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="EliminarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Natural">
               <Properties>

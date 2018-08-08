@@ -128,6 +128,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="GuardarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Modificar">
               <Properties>
@@ -145,6 +148,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ModificarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Eliminar">
               <Properties>
@@ -162,6 +168,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="EliminarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Juridico">
               <Properties>
@@ -216,6 +225,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="VerListaMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -385,7 +397,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                <Component class="javax.swing.JTextArea" name="txtDireccion">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>

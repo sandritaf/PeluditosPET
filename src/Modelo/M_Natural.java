@@ -21,7 +21,8 @@ public class M_Natural extends M_Propietario{
         this.cedula = cedula;
     }
     
-    public M_Natural(String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
+    public M_Natural(String direccion, String telefono, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
+        super(direccion,telefono);
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.primerApellido = primerApellido;
@@ -81,4 +82,14 @@ public class M_Natural extends M_Propietario{
         return cedula + " - " + primerNombre + " " + primerApellido;
     }
     
+    
+    public void actualizar(String direccion, String telefono, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.cedula = cedula;
+    }
 }

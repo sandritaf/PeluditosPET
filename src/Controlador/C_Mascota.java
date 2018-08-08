@@ -24,23 +24,25 @@ public class C_Mascota {
         c.cerrarConexion();
     }
     
-    public void eliminarMascota(String nombre, M_Propietario p){
-//        Conexion c = new Conexion();
-//        ObjectContainer bd = c.getObjectContainer();
-//        
-//        M_Propietario prop = 
-//        
-//        ObjectSet result = bd.queryByExample(mascota);
-//        
-//        JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del animal");
-//        c.cerrarConexion();
-    }
-    
-    public void modificarMascota(String nombre, M_Mascota m, M_Propietario p){
+    public void eliminarMascota(String pk){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         
-        M_Mascota mascota = new M_Mascota(nombre, null, null, 0, null, p);
+        M_Mascota mascota = new M_Mascota(pk, null, null, null, 0, null);
+        ObjectSet result = bd.queryByExample(mascota);
+        
+        M_Mascota encontrado = (M_Mascota) result.next();
+        bd.delete(encontrado);
+        
+        JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del animal");
+        c.cerrarConexion();
+    }
+    
+    public void modificarMascota(String id, M_Mascota m){
+        Conexion c = new Conexion();
+        ObjectContainer bd = c.getObjectContainer();
+        
+        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null, null);
         ObjectSet result = bd.queryByExample(mascota);
         M_Mascota encontrado = (M_Mascota) result.next();
 
@@ -58,10 +60,10 @@ public class C_Mascota {
         c.cerrarConexion();
     }
     
-    public void verMascota(String nombre, M_Propietario p){
+    public void verMascota(String id, M_Propietario p){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Mascota mascota = new M_Mascota(nombre, null, null, 0, null, p);
+        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null, null);
         ObjectSet resultado = bd.queryByExample(mascota);
         JOptionPane.showMessageDialog(null, resultado.next());
         c.cerrarConexion();
@@ -70,7 +72,7 @@ public class C_Mascota {
     public void listarMascotas(){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Mascota m = new M_Mascota(null, null, null, 0, null, null);
+        M_Mascota m = new M_Mascota(null, null, null, null, 0, null, null);
         ObjectSet resultado = bd.queryByExample(m);
         System.out.println("Tengo " + resultado.size() + " mascotas");
         while(resultado.hasNext()){
@@ -79,38 +81,53 @@ public class C_Mascota {
         c.cerrarConexion();
     }
     
-    public void cargarDuenos(JComboBox duenos, String opc){
+    public void cargarDuenos(JComboBox duenos/*, String opc*/){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         DefaultComboBoxModel aModel = new DefaultComboBoxModel();
-        M_Propietario p = null;
-        M_Propietario p1 = null;
+        //M_Propietario p = null;
+        //M_Propietario p1 = null;
         String aux;
         
         duenos.setModel(aModel);
 
     //    if(opc.equals("Natural")){
-            p = new M_Natural(null, null, null, null, null);
+        M_Propietario p = new M_Natural(null, null, null, null, null, null, null, null);
     //    }
     //    if (opc.equals("Juridico"))
     //    {
-            p1 = new M_Juridico(null, null, null, null, null, null, null);
+        M_Propietario p1 = new M_Juridico(null, null, null, null, null, null);
     //    }    
 
         ObjectSet rs = bd.queryByExample(p);
         ObjectSet rs1 = bd.queryByExample(p1);
-
-        while(rs.hasNext() ){
-           aux = rs.next().toString();
-           aModel.addElement(aux);
-        }
-        while(rs1.hasNext() ){
-           aux = rs1.next().toString();
-           aModel.addElement(aux);
-        }
         
+        // si hay propietarios naturales
+        if(rs.size() >0){
+            while(rs.hasNext() ){
+                aux = rs.next().toString();
+                aModel.addElement(aux);
+            }
+        }
+        // si hay propietarios juridicos
+        if(rs1.size() > 0){ 
+            while(rs1.hasNext() ){
+               aux = rs1.next().toString();
+               aModel.addElement(aux);
+            }
+        }
         c.cerrarConexion();
     }
     
+    public boolean idExiste(String id){
+        Conexion c = new Conexion();
+        ObjectContainer bd = c.getObjectContainer();
+        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null, null);
+        ObjectSet resultado = bd.queryByExample(mascota);
+        if(!resultado.next().equals(""))
+            return true;
+        c.cerrarConexion();
+        return false;
+    }
     
 }

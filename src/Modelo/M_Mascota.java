@@ -1,6 +1,7 @@
 package Modelo;
 
 public class M_Mascota {
+    String id;
     String nombre;
     String especie;
     String raza;
@@ -8,7 +9,8 @@ public class M_Mascota {
     String observaciones;
     M_Propietario dueno;
 
-    public M_Mascota(String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+    public M_Mascota(String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+        this.id = id;
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
@@ -17,7 +19,8 @@ public class M_Mascota {
         this.dueno = dueno;
     }
     
-    public M_Mascota(String nombre, String especie, String raza, int edad, String observaciones) {
+    public M_Mascota(String id, String nombre, String especie, String raza, int edad, String observaciones) {
+        this.id = id;
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
@@ -77,6 +80,6 @@ public class M_Mascota {
     }
     
     public String toString(){
-        return nombre + " " + especie + " " + edad + " " + raza + " " + observaciones;
+        return id + " " + nombre + " " + especie + " " + edad + " " + raza + " " + observaciones;
     }
 }

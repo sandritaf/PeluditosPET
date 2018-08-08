@@ -13,14 +13,17 @@ public class V_Mascota extends javax.swing.JPanel {
     M_Mascota modelo;
     C_Mascota controlador;
     C_Propietario controladorDueno;
+    String id, nombre, raza, especie, observaciones;
+    int edad;
     
     public V_Mascota() {
         initComponents();
         txtPK.setVisible(false);
         
         controlador = new C_Mascota();
+        controlador.cargarDuenos(cmbDueno/*, "Natural"*/);
         
-        controlador.cargarDuenos(cmbDueno, "Natural");
+        reiniciarValores();
     }
 
     @SuppressWarnings("unchecked")
@@ -52,6 +55,7 @@ public class V_Mascota extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaMascotas = new javax.swing.JTable();
         txtPK = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -257,6 +261,13 @@ public class V_Mascota extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tablaMascotas);
 
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -265,8 +276,10 @@ public class V_Mascota extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104))
@@ -284,7 +297,9 @@ public class V_Mascota extends javax.swing.JPanel {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -314,18 +329,17 @@ public class V_Mascota extends javax.swing.JPanel {
         }
         else{
                     
-            String nombre, especie, raza, observaciones;
-            int edad;
-
-            nombre = txtNombre.getText();
-            edad = Integer.parseInt(txtEdad.getText());
+            id = getTextCombo(cmbDueno);
+            nombre = getText(txtNombre);
+            edad = Integer.parseInt(getText(txtEdad));
+            especie = getTextCombo(cmbEspecie);
+            raza = getTextCombo(cmbRaza);
             observaciones = txtObservaciones.getText();
-            especie = (String) cmbEspecie.getSelectedItem();
-            raza = (String) cmbRaza.getSelectedItem();
-
-            modelo = new M_Mascota(nombre, especie, raza, edad, observaciones);
+            
+            modelo = new M_Mascota(id, nombre, especie, raza, edad, observaciones);
             controlador.guardarMascota(modelo);
-
+            
+            reiniciarValores();
             limpiarCajas();
         }
     }//GEN-LAST:event_GuardarMouseClicked
@@ -337,8 +351,15 @@ public class V_Mascota extends javax.swing.JPanel {
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
         
         
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_ModificarMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        System.out.println("Este es la raza: " + getTextCombo(cmbRaza));        // TODO add your handling code here:
+        System.out.println("Esta es la especie: " + getTextCombo(cmbEspecie));        // TODO add your handling code here:
+        System.out.println("Esta es la id: " + getComboSelected(cmbDueno));        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -357,6 +378,7 @@ public class V_Mascota extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbDueno;
     private javax.swing.JComboBox<String> cmbEspecie;
     private javax.swing.JComboBox<String> cmbRaza;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -384,8 +406,8 @@ public class V_Mascota extends javax.swing.JPanel {
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
-        int guion = codigo.indexOf("-");
-        codigoFinal = codigo.substring(0, guion);
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(1, guion);
         
         return Integer.parseInt(codigoFinal);
     }
@@ -404,6 +426,23 @@ public class V_Mascota extends javax.swing.JPanel {
         if(txtObservaciones.getText().isEmpty())
             return true;
         return false;
+    }
+    
+    public void reiniciarValores(){
+        id = null;
+        nombre = null;
+        raza = null;
+        observaciones = null;
+        especie = null;
+        edad = 0;
+    }
+    
+    public String getText(JTextField txt){
+        return txt.getText();
+    }
+    
+    public String getTextCombo(JComboBox cmb){
+        return (String) cmb.getSelectedItem();
     }
     
 }

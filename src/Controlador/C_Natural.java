@@ -13,11 +13,23 @@ public class C_Natural {
     public C_Natural(){
     }
     
-    public void guardarNatural(M_Natural persona){
+    public void guardarNatural(M_Natural natural){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        bd.store(persona);
-        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente un cliente natural");
+        natural.setCedula("V"+natural.getCedula());
+        bd.store(natural);
+        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+        c.cerrarConexion();
+    }
+    
+    public void eliminarNatural(String cedula){
+        Conexion c = new Conexion();
+        ObjectContainer bd = c.getObjectContainer();
+        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+        ObjectSet result = bd.queryByExample(natural);
+        M_Natural encontrado = (M_Natural) result.next();
+        bd.delete(encontrado);
+        JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del propietario");
         c.cerrarConexion();
     }
     
@@ -66,17 +78,17 @@ public class C_Natural {
         c.cerrarConexion();
     }
     
-    public void eliminarNatural(String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
-        ObjectSet resultado = bd.queryByExample(natural);
-        M_Natural encontrado = (M_Natural) resultado.next();
-        bd.delete(encontrado);
-        System.out.println("Eliminado: " + encontrado);
-        
-        JOptionPane.showMessageDialog(null,"Eliminado cliente natural exitosamente");
-        c.cerrarConexion();
-    }
+//    public void eliminarNatural(String cedula){
+//        Conexion c = new Conexion();
+//        ObjectContainer bd = c.getObjectContainer();
+//        
+//        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+//        ObjectSet resultado = bd.queryByExample(natural);
+//        M_Natural encontrado = (M_Natural) resultado.next();
+//        bd.delete(encontrado);
+//        System.out.println("Eliminado: " + encontrado);
+//        
+//        JOptionPane.showMessageDialog(null,"Eliminado cliente natural exitosamente");
+//        c.cerrarConexion();
+//    }
 }
