@@ -45,4 +45,7 @@ public class M_Propietario {
         this.Mascoticas.add(Mascoticas);
     }
     
+    public int getNumMascotas(){
+        return Mascoticas.size();
+    }
 }

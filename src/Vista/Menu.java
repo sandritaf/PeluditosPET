@@ -1,5 +1,6 @@
 package Vista;
 
+import Conexion.Conexion;
 import java.awt.BorderLayout;
 
 public class Menu extends javax.swing.JFrame {
@@ -26,6 +27,7 @@ public class Menu extends javax.swing.JFrame {
         btnEstilista = new javax.swing.JLabel();
         btnJuridico = new javax.swing.JLabel();
         btnNatural = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +138,16 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Salir.png"))); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalirMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout pLateralLayout = new javax.swing.GroupLayout(pLateral);
         pLateral.setLayout(pLateralLayout);
         pLateralLayout.setHorizontalGroup(
@@ -151,6 +163,10 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btnJuridico)
                     .addComponent(btnNatural))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLateralLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pLateralLayout.setVerticalGroup(
             pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +185,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnJuridico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNatural)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -286,6 +304,11 @@ public class Menu extends javax.swing.JFrame {
         PanelPrincipal.updateUI();
     }//GEN-LAST:event_btnNaturalMouseClicked
 
+    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
+        Conexion.getInstancia().cerrarConexion();
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -330,6 +353,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel btnMascota;
     private javax.swing.JLabel btnNatural;
     private javax.swing.JLabel btnPersonal;
+    private javax.swing.JLabel btnSalir;
     private javax.swing.JLabel btnServicio;
     private javax.swing.JLabel btnVeterinario;
     private javax.swing.JPanel jPanel1;

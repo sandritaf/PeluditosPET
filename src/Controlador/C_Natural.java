@@ -15,93 +15,96 @@ public class C_Natural {
     }
     
     public void guardarNatural(M_Natural natural){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        natural.setCedula("V"+natural.getCedula());
-        bd.store(natural);
-        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
-        c.cerrarConexion();
+        try{
+            natural.setCedula("V"+natural.getCedula());
+            Conexion.getInstancia().guardar(natural);
+            JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del cliente natural");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void eliminarNatural(String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
-        ObjectSet result = bd.queryByExample(natural);
-        M_Natural encontrado = (M_Natural) result.next();
-        bd.delete(encontrado);
-        JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del propietario");
-        c.cerrarConexion();
+        try{
+            M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+            ObjectSet result = Conexion.getInstancia().buscar(natural);
+            M_Natural encontrado = (M_Natural) result.next();
+            Conexion.getInstancia().eliminar(encontrado);
+            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del cliente natural");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void modificarNatural(String cedula, M_Natural n){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
-        ObjectSet result = bd.queryByExample(natural);
-        M_Natural encontrado = (M_Natural) result.next();
+        try{
+            M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+            ObjectSet result = Conexion.getInstancia().buscar(natural);
+            M_Natural encontrado = (M_Natural) result.next();
 
-        encontrado.setPrimerNombre(n.getPrimerNombre());
-        encontrado.setSegundoNombre(n.getSegundoNombre());
-        encontrado.setPrimerApellido(n.getPrimerApellido());
-        encontrado.setSegundoApellido(n.getSegundoApellido());
-        encontrado.setCedula(n.getCedula()); //?????
-        encontrado.setEdad(n.getEdad());
-        encontrado.setDireccion(n.getDireccion());
-        encontrado.setTelefono(n.getTelefono());
+            encontrado.setPrimerNombre(n.getPrimerNombre());
+            encontrado.setSegundoNombre(n.getSegundoNombre());
+            encontrado.setPrimerApellido(n.getPrimerApellido());
+            encontrado.setSegundoApellido(n.getSegundoApellido());
+            encontrado.setCedula(n.getCedula()); 
+            encontrado.setEdad(n.getEdad());
+            encontrado.setDireccion(n.getDireccion());
+            encontrado.setTelefono(n.getTelefono());
 
-        bd.store(encontrado);
+            Conexion.getInstancia().guardar(encontrado);
 
-        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
+            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
 
-        c.cerrarConexion();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void verNatural(String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
-        ObjectSet resultado = bd.queryByExample(natural);
-        JOptionPane.showMessageDialog(null, resultado.next());
-        c.cerrarConexion();
+        try{
+            M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+            ObjectSet resultado = Conexion.getInstancia().buscar(natural);
+            JOptionPane.showMessageDialog(null, resultado.next());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void listarNaturales(){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, null);
-        ObjectSet resultado = bd.queryByExample(natural);
-        System.out.println("Tengo " + resultado.size() + " personas naturales");
-        while(resultado.hasNext()){
-            System.out.println(resultado.next());
+        try{
+            M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(natural);
+            System.out.println("Tengo " + resultado.size() + " personas naturales");
+            while(resultado.hasNext()){
+                System.out.println(resultado.next());
+            }
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
         }
-        c.cerrarConexion();
     }
     
     public void agregarMascota(M_Mascota mascotica, M_Natural n, String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
-        ObjectSet result = bd.queryByExample(natural);
-        M_Natural encontrado = (M_Natural) result.next();
+        try{        
+            M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+            ObjectSet result = Conexion.getInstancia().buscar(natural);
+            M_Natural encontrado = (M_Natural) result.next();
 
-        encontrado.setPrimerNombre(n.getPrimerNombre());
-        encontrado.setSegundoNombre(n.getSegundoNombre());
-        encontrado.setPrimerApellido(n.getPrimerApellido());
-        encontrado.setSegundoApellido(n.getSegundoApellido());
-        encontrado.setCedula(n.getCedula()); //?????
-        encontrado.setEdad(n.getEdad());
-        encontrado.setDireccion(n.getDireccion());
-        encontrado.setTelefono(n.getTelefono());
-        encontrado.setMascoticas(mascotica);
+            encontrado.setPrimerNombre(n.getPrimerNombre());
+            encontrado.setSegundoNombre(n.getSegundoNombre());
+            encontrado.setPrimerApellido(n.getPrimerApellido());
+            encontrado.setSegundoApellido(n.getSegundoApellido());
+            encontrado.setCedula(n.getCedula()); //?????
+            encontrado.setEdad(n.getEdad());
+            encontrado.setDireccion(n.getDireccion());
+            encontrado.setTelefono(n.getTelefono());
+            encontrado.setMascoticas(mascotica);
 
-        bd.store(encontrado);
+            Conexion.getInstancia().guardar(encontrado);
+            JOptionPane.showMessageDialog(null, "Se ha añadido la mascota al cliente natural" );
 
-        JOptionPane.showMessageDialog(null, "Se ha añadido la mascota al cliente natural" );
-
-        c.cerrarConexion();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
 }
