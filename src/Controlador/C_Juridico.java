@@ -75,6 +75,8 @@ public class C_Juridico {
         try{
             M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
+            if (resultado.isEmpty())
+                return null;
             M_Juridico encontrado = (M_Juridico) resultado.next();
             return encontrado;
         }catch(Exception e){

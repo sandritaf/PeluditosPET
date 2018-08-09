@@ -469,6 +469,4 @@ public class V_Juridico extends javax.swing.JPanel {
         return txt.getText();
     }
     
-   
-    
 }

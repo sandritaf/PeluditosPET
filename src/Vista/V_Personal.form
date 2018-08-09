@@ -45,7 +45,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="jPanel6" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="2" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
@@ -56,11 +56,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel6" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="219" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="217" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPanel3" alignment="0" pref="501" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -128,6 +128,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="GuardarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Modificar">
               <Properties>
@@ -145,6 +148,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ModificarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Eliminar">
               <Properties>
@@ -162,6 +168,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="EliminarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Personal">
               <Properties>
@@ -252,38 +261,45 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="aniosExperiencia" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="NivelInstruccion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="primerApellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="primerNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Nombre" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Cedula" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="2" attributes="0">
-                                  <Component id="txtAniosE" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="txtCedula" alignment="2" min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="txtPrimerApellido" alignment="2" max="32767" attributes="0"/>
-                                  <Component id="txtPrimerNombre" alignment="2" max="32767" attributes="0"/>
-                                  <Component id="cmbNivelI" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="2" attributes="0">
+                                          <Component id="txtAniosE" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="txtCedula" alignment="2" min="-2" pref="141" max="-2" attributes="0"/>
+                                          <Component id="txtNombre" alignment="2" max="32767" attributes="0"/>
+                                          <Component id="txtTelefono" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="txtNivelI" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="Profesion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="segundoApellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="segundoNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Apellido" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="RIF" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Edad" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtProfesion" alignment="1" pref="140" max="32767" attributes="0"/>
                                   <Component id="txtEdad" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtRIF" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtSegundoApellido" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtSegundoNombre" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtApellido" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="Tipo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Tipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Profesion1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                               <Component id="btnVeterinario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnEstilista" min="-2" max="-2" attributes="0"/>
@@ -303,17 +319,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="primerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="segundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="primerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="segundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Apellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -332,11 +341,16 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="NivelInstruccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbNivelI" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Profesion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtProfesion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNivelI" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Profesion1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Tipo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnVeterinario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -344,33 +358,25 @@
                           <Component id="btnOtro" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPK" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="primerNombre">
+            <Component class="javax.swing.JLabel" name="Nombre">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="1&#xb0; Nombre"/>
+                <Property name="text" type="java.lang.String" value="Nombre"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPrimerNombre">
+            <Component class="javax.swing.JTextField" name="txtNombre">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="12" style="0"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="primerApellido">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="1&#xb0; Apellido"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCedula">
@@ -399,37 +405,15 @@
                 <Property name="text" type="java.lang.String" value="Edad"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="segundoNombre">
+            <Component class="javax.swing.JLabel" name="Apellido">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="2&#xb0; Nombre"/>
+                <Property name="text" type="java.lang.String" value="Apellido"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtSegundoNombre">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="12" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtPrimerApellido">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="12" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="segundoApellido">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="2&#xb0; Apellido"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtSegundoApellido">
+            <Component class="javax.swing.JTextField" name="txtApellido">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="12" style="0"/>
@@ -469,19 +453,6 @@
                 <Property name="text" type="java.lang.String" value="Nivel de Instrucci&#xf3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbNivelI">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="12" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JLabel" name="aniosExperiencia">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -506,6 +477,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProfesion">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="12" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Tipo">
               <Properties>
@@ -558,6 +534,23 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPK">
+            </Component>
+            <Component class="javax.swing.JLabel" name="Profesion1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Telefono"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtTelefono">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="12" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtNivelI">
             </Component>
           </SubComponents>
         </Container>

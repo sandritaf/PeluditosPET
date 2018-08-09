@@ -1,9 +1,15 @@
 
 package Vista;
 
+import Controlador.C_Juridico;
 import Controlador.C_Mascota;
+import Controlador.C_Natural;
 import Controlador.C_Propietario;
+import Modelo.M_Juridico;
 import Modelo.M_Mascota;
+import Modelo.M_Natural;
+import Modelo.M_Propietario;
+import javafx.scene.control.ComboBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -22,7 +28,7 @@ public class V_Mascota extends javax.swing.JPanel {
         
         controlador = new C_Mascota();
         controlador.cargarDuenos(cmbDueno/*, "Natural"*/);
-        
+        tablaMascotas.setModel(this.controlador.cargarTabla());
         reiniciarValores();
     }
 
@@ -337,10 +343,11 @@ public class V_Mascota extends javax.swing.JPanel {
             observaciones = txtObservaciones.getText();
             
             modelo = new M_Mascota(id, nombre, especie, raza, edad, observaciones);
-            controlador.guardarMascota(modelo);
+            controlador.guardarMascota(modelo,obtenerDueno(cmbDueno));
             
             reiniciarValores();
             limpiarCajas();
+            tablaMascotas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -350,9 +357,6 @@ public class V_Mascota extends javax.swing.JPanel {
 
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
         
-        
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -391,6 +395,24 @@ public class V_Mascota extends javax.swing.JPanel {
     private javax.swing.JTextField txtPK;
     // End of variables declaration//GEN-END:variables
 
+    
+    private M_Propietario obtenerDueno(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";        
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(0, guion);
+        
+        C_Juridico controladorJuridico = new C_Juridico();
+        M_Juridico dueno = controladorJuridico.getPersona(codigoFinal);
+        if (!dueno.equals(null))
+            return dueno;
+        else {
+            C_Natural controladorNatural = new C_Natural();
+            M_Natural dueno2 = controladorNatural.getPersona(codigoFinal);
+            return dueno2;
+        }        
+    }
+    
     private void limpiarCajas(){
         txtPK.setText(null);
         txtNombre.setText(null);

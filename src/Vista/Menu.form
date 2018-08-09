@@ -73,7 +73,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="PeluditosPET" alignment="0" pref="959" max="32767" attributes="0"/>
+                  <Component id="PeluditosPET" alignment="0" pref="984" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
