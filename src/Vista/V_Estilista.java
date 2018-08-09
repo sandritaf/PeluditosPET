@@ -19,7 +19,7 @@ public class V_Estilista extends javax.swing.JPanel {
         initComponents();
         txtPK.setVisible(false);
         controlador = new C_Estilista();
-        tablaEstilistas.setModel(this.controlador.cargarTabla());
+    //    tablaEstilistas.setModel(this.controlador.cargarTabla());
         reiniciarValores();
     }
 
@@ -379,7 +379,7 @@ public class V_Estilista extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-            tablaEstilistas.setModel(this.controlador.cargarTabla());
+            //tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -403,7 +403,7 @@ public class V_Estilista extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-            tablaEstilistas.setModel(this.controlador.cargarTabla());
+            //tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_EliminarMouseClicked
@@ -431,13 +431,14 @@ public class V_Estilista extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-            tablaEstilistas.setModel(this.controlador.cargarTabla());
+            //tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
-        tablaEstilistas.setModel(this.controlador.cargarTabla());
+        //tablaEstilistas.setModel(this.controlador.cargarTabla());
+        controlador.listarEstilistas();
     }//GEN-LAST:event_VerListaMouseClicked
 
 
