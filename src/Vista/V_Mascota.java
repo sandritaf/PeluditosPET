@@ -101,6 +101,11 @@ public class V_Mascota extends javax.swing.JPanel {
         Eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Eliminar.setVerifyInputWhenFocusTarget(false);
         Eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarMouseClicked(evt);
+            }
+        });
 
         Mascota.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         Mascota.setForeground(new java.awt.Color(255, 255, 255));
@@ -265,6 +270,11 @@ public class V_Mascota extends javax.swing.JPanel {
 
             }
         ));
+        tablaMascotas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMascotasMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaMascotas);
 
         jButton1.setText("jButton1");
@@ -329,13 +339,12 @@ public class V_Mascota extends javax.swing.JPanel {
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-        
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
-        else{
-                    
-            id = getTextCombo(cmbDueno);
+        else{                    
+            //id = getTextCombo(cmbDueno);
+            id = getIDComboSelected(cmbDueno);
             nombre = getText(txtNombre);
             edad = Integer.parseInt(getText(txtEdad));
             especie = getTextCombo(cmbEspecie);
@@ -364,6 +373,30 @@ public class V_Mascota extends javax.swing.JPanel {
         System.out.println("Esta es la especie: " + getTextCombo(cmbEspecie));        // TODO add your handling code here:
         System.out.println("Esta es la id: " + getComboSelected(cmbDueno));        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void tablaMascotasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMascotasMousePressed
+        txtNombre.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 1).toString());
+        txtEdad.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 4).toString());
+        txtObservaciones.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 5).toString());
+        controlador.setComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString(), cmbDueno);
+    }//GEN-LAST:event_tablaMascotasMousePressed
+
+    private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
+        }
+        else{                    
+            id = getIDComboSelected(cmbDueno);
+            nombre = getText(txtNombre);
+            observaciones = txtObservaciones.getText();
+            
+            controlador.eliminarMascota(id,nombre,observaciones,obtenerDueno(cmbDueno));
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaMascotas.setModel(this.controlador.cargarTabla());
+        }
+    }//GEN-LAST:event_EliminarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -432,6 +465,17 @@ public class V_Mascota extends javax.swing.JPanel {
         codigoFinal = codigo.substring(1, guion);
         
         return Integer.parseInt(codigoFinal);
+    }
+    
+    //Devuelve el codigo de la opcion seleccionada en un combo
+    public String getIDComboSelected(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(0, guion);
+        
+        return codigoFinal;
     }
     
     public boolean txtVacio(JTextField txt){

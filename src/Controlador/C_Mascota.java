@@ -25,16 +25,14 @@ public class C_Mascota {
         try{
             Conexion.getInstancia().guardar(mascota);
             
-            if (dueno instanceof M_Natural){
+            if (dueno instanceof M_Natural){ //Si su dueño es un cliente Natural se le agrega a su lista de mascotas
                 C_Natural c1 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
                 c1.agregarMascota(mascota, n, n.getCedula());
-                JOptionPane.showMessageDialog(null, "Se agrego en Natural la mascota");
             } else {
-                C_Juridico c2 = new C_Juridico();
+                C_Juridico c2 = new C_Juridico(); //Si su dueño es un cliente Juridico se le agrega a su lista de mascotas
                 M_Juridico j = (M_Juridico)dueno;
                 c2.agregarMascota(j.getRIF(), j, mascota);
-                JOptionPane.showMessageDialog(null, "Se agrego a un cliente juridico la mascota");
             }
                         
             JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
@@ -43,17 +41,27 @@ public class C_Mascota {
         }        
     }
       
-    public void eliminarMascota(String pk){
+    public void eliminarMascota(String pk, String nombre, String observaciones, M_Propietario dueno){
         try{
-            M_Mascota mascota = new M_Mascota(pk, null, null, null, 0, null);
-            ObjectSet result = Conexion.getInstancia().buscar(mascota);
-        
+            M_Mascota mascota = new M_Mascota(pk, nombre, null, null, 0, observaciones);
+            ObjectSet result = Conexion.getInstancia().buscar(mascota);        
             M_Mascota encontrado = (M_Mascota) result.next();
+            
+            if (dueno instanceof M_Natural){ //Si su dueño es un cliente Natural se lelimina de su lista de mascotas
+                C_Natural c1 = new C_Natural();
+                M_Natural n = (M_Natural)dueno;
+                c1.eliminarMascota(mascota, n, n.getCedula());
+            } else {
+                C_Juridico c2 = new C_Juridico(); //Si su dueño es un cliente Juridico se elimina de su lista de mascotas
+                M_Juridico j = (M_Juridico)dueno;
+                c2.eliminarMascota(j.getRIF(), j, mascota);
+            }
+            
             Conexion.getInstancia().eliminar(encontrado);
-
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del animal");
+            
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->eliminarMascota: "+e);
         }
     }
     
@@ -193,5 +201,26 @@ public class C_Mascota {
             return null;
         }
     }
+    
+    
+    //Selecciona en un combo box la opcion que corresponde a un codigo PK dado.
+    public void setComboSelected(String codigoPK, JComboBox combito){
+        //Obtengo la longitud de mi combo
+        int largoCombo = combito.getItemCount();
+        String textoCombo = "";
+        //Recorro el arraycollection
+        for (int i = 0; i < largoCombo; i++) {
+            textoCombo = combito.getItemAt(i).toString();
+            int limite = textoCombo.indexOf(" -");
+           //Comparo los objetos de mi combo con el codigo del item que buscaba
+           if (textoCombo.substring(0, limite).compareTo(codigoPK) == 0)  {
+              //Si encuentra el item le asigno su index a mi combo
+              combito.setSelectedIndex(i);              
+              break;
+           }
+        }
+    }
+    
+    
     
 }

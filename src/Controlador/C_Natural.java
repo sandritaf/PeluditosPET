@@ -120,6 +120,30 @@ public class C_Natural {
         }
     }
     
+    
+    public void eliminarMascota(M_Mascota mascotica, M_Natural n, String cedula){
+        try{        
+            M_Propietario natural = new M_Natural(null, null, null, null, cedula);
+            ObjectSet result = Conexion.getInstancia().buscar(natural);
+            M_Natural encontrado = (M_Natural) result.next();
+                        
+            encontrado.setNombre(n.getNombre());
+            encontrado.setApellido(n.getApellido());
+            encontrado.setCedula(n.getCedula()); 
+            encontrado.setEdad(n.getEdad());
+            encontrado.setDireccion(n.getDireccion());
+            encontrado.setTelefono(n.getTelefono());
+            encontrado.retirarMascota(mascotica);
+
+            Conexion.getInstancia().guardar(encontrado);
+            JOptionPane.showMessageDialog(null, "Se ha eliminado la mascota del cliente natural" );
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Natural->eliminarMascota: "+e);
+        }
+    }
+    
+    
     public M_Natural[] getNaturales(){
         try {
             M_Natural[] personas = null;

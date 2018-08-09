@@ -11,7 +11,7 @@ import com.db4o.ext.DatabaseReadOnlyException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class C_Juridico {
+public class C_Juridico extends C_Propietario{
    
     public C_Juridico(){
     }
@@ -150,6 +150,28 @@ public class C_Juridico {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    
+    
+    public void eliminarMascota(String rif, M_Juridico j, M_Mascota mascotica){
+        try{
+            M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif, null);
+            ObjectSet result = Conexion.getInstancia().buscar(juridico);
+            M_Juridico encontrado = (M_Juridico) result.next();
+
+            encontrado.setNombre(j.getNombre());
+            encontrado.setNombreGerente(j.getNombreGerente());
+            encontrado.setTelefono(j.getTelefono());
+            encontrado.setRazonSocial(j.getRazonSocial());
+            encontrado.setRIF(j.getRIF());
+            encontrado.retirarMascota(mascotica);
+
+            Conexion.getInstancia().guardar(encontrado);
+            JOptionPane.showMessageDialog(null, "Se ha eliminado la mascota al cliente juridico");
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     
     public DefaultTableModel cargarTabla() {
         try{
