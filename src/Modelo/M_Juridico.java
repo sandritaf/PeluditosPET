@@ -5,7 +5,7 @@ public class M_Juridico extends M_Propietario{
     String nombreGerente;
     String RIF;
     String razonSocial;
-
+    
     public M_Juridico(String direccion, String telefono, M_Mascota Mascotini, String nombre, String nombreGerente, String RIF, String razonSocial) {
         super(direccion,telefono,Mascotini);
         this.nombre = nombre;
@@ -59,8 +59,7 @@ public class M_Juridico extends M_Propietario{
     }
     
     public String toString(){
-        return RIF + " - " + nombre + " - " + direccion + " - " + telefono + 
-                " - " + nombreGerente + " - " + razonSocial + " - Tiene " + Mascoticas.size() + " mascotas! ";
+        return RIF + " - " + nombre;
     }
     
     public void actualizar(String direccion, String telefono, String nombre, String nombreGerente, String RIF, String razonSocial) {

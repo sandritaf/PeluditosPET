@@ -31,7 +31,6 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtAniosE = new javax.swing.JTextField();
         txtEdad = new javax.swing.JTextField();
         NivelInstruccion = new javax.swing.JLabel();
-        cmbNivelI = new javax.swing.JComboBox<>();
         aniosExperiencia = new javax.swing.JLabel();
         txtRIF = new javax.swing.JTextField();
         Profesion = new javax.swing.JLabel();
@@ -39,7 +38,10 @@ public class V_Veterinario extends javax.swing.JPanel {
         Universidad = new javax.swing.JLabel();
         txtUniversidad = new javax.swing.JTextField();
         Especializacion = new javax.swing.JLabel();
-        cmbEspecializacion = new javax.swing.JComboBox<>();
+        Telefono = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
+        txtNivelI = new javax.swing.JTextField();
+        txtEspecializacion = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaVeterinario = new javax.swing.JTable();
 
@@ -177,9 +179,6 @@ public class V_Veterinario extends javax.swing.JPanel {
         NivelInstruccion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         NivelInstruccion.setText("Nivel de Instrucción");
 
-        cmbNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbNivelI.setFocusable(false);
-
         aniosExperiencia.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         aniosExperiencia.setText("Años de Experiencia");
 
@@ -200,8 +199,16 @@ public class V_Veterinario extends javax.swing.JPanel {
         Especializacion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Especializacion.setText("Especializacion");
 
-        cmbEspecializacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbEspecializacion.setFocusable(false);
+        Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Telefono.setText("Telefono");
+
+        txtTelefono.setFocusable(false);
+
+        txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNivelI.setFocusable(false);
+
+        txtEspecializacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEspecializacion.setFocusable(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -217,22 +224,28 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(Nombre)
                     .addComponent(Cedula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtAniosE, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre)
-                    .addComponent(cmbNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUniversidad)
-                    .addComponent(cmbEspecializacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(txtAniosE, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(txtUniversidad)
+                            .addComponent(txtEspecializacion))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Profesion)
                     .addComponent(Apellido)
                     .addComponent(RIF)
-                    .addComponent(Edad))
+                    .addComponent(Edad)
+                    .addComponent(Telefono))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProfesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(txtTelefono)
+                    .addComponent(txtProfesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                     .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtRIF, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -262,17 +275,21 @@ public class V_Veterinario extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NivelInstruccion)
-                    .addComponent(cmbNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Profesion)
-                    .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Universidad)
-                    .addComponent(txtUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Telefono)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Universidad)
+                        .addComponent(txtUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 19, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Especializacion)
-                    .addComponent(cmbEspecializacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEspecializacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -296,7 +313,7 @@ public class V_Veterinario extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -348,12 +365,11 @@ public class V_Veterinario extends javax.swing.JPanel {
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel Profesion;
     private javax.swing.JLabel RIF;
+    private javax.swing.JLabel Telefono;
     private javax.swing.JLabel Universidad;
     private javax.swing.JLabel VerLista;
     private javax.swing.JLabel Veterinario;
     private javax.swing.JLabel aniosExperiencia;
-    private javax.swing.JComboBox<String> cmbEspecializacion;
-    private javax.swing.JComboBox<String> cmbNivelI;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -363,9 +379,12 @@ public class V_Veterinario extends javax.swing.JPanel {
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtEspecializacion;
+    private javax.swing.JTextField txtNivelI;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtProfesion;
     private javax.swing.JTextField txtRIF;
+    private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUniversidad;
     // End of variables declaration//GEN-END:variables
     
@@ -377,8 +396,10 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtRIF.setText(null);
         txtApellido.setText(null);
         txtUniversidad.setText(null);
-        cmbEspecializacion.setSelectedIndex(0);
-        cmbNivelI.setSelectedIndex(0);
+        txtEspecializacion.setText(null);
+        txtNivelI.setText(null);
+        txtProfesion.setText(null);
+        txtTelefono.setText(null);
     }
 
 }

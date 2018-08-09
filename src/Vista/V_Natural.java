@@ -397,6 +397,7 @@ public class V_Natural extends javax.swing.JPanel {
         txtApellido.setText(null);
         txtTelefono.setText(null);
         txtDireccion.setText(null);
+        txtTelefono.setText(null);
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo

@@ -33,7 +33,7 @@ public class C_Trabajador {
     public void eliminarTrabajador(String cedula){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0);
+        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
         ObjectSet result = bd.queryByExample(trabajador);
         M_Veterinario encontrado = (M_Veterinario) result.next();
         bd.delete(encontrado);
@@ -45,7 +45,7 @@ public class C_Trabajador {
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         
-        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0);
+        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
         ObjectSet result = bd.queryByExample(trabajador);
         M_Veterinario encontrado = (M_Veterinario) result.next();
 
@@ -68,7 +68,7 @@ public class C_Trabajador {
     public void verTrabajador(String cedula){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0);
+        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
         ObjectSet resultado = bd.queryByExample(trabajador);
         JOptionPane.showMessageDialog(null, resultado.next());
         c.cerrarConexion();
@@ -77,7 +77,7 @@ public class C_Trabajador {
     public void listarTrabajadores(){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0);
+        M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null);
         ObjectSet resultado = bd.queryByExample(trabajador);
         System.out.println("Tengo " + resultado.size() + " trabajadores");
         while(resultado.hasNext()){

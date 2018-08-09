@@ -9,11 +9,12 @@ public class M_Trabajador {
     String nivelInstruccion;
     String profesion;
     int anosExperiencia;
+    String telefono;
 
     public M_Trabajador() {
     }
 
-    public M_Trabajador(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia) {
+    public M_Trabajador(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
@@ -22,6 +23,7 @@ public class M_Trabajador {
         this.nivelInstruccion = nivelInstruccion;
         this.profesion = profesion;
         this.anosExperiencia = anosExperiencia;
+        this.telefono = telefono;
     }
 
     public String getNombre() {
@@ -87,8 +89,26 @@ public class M_Trabajador {
     public void setAnosExperiencia(int anosExperiencia) {
         this.anosExperiencia = anosExperiencia;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     
-    
+    public void actualizar(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.RIF = RIF;
+        this.edad = edad;
+        this.nivelInstruccion = nivelInstruccion;
+        this.profesion = profesion;
+        this.anosExperiencia = anosExperiencia;
+        this.telefono = telefono;
+    }
     
     
 }

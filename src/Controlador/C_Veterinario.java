@@ -24,7 +24,7 @@ public class C_Veterinario {
     public void eliminarVeterinario(String cedula){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0);
+        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null);
         ObjectSet result = bd.queryByExample(veterinario);
         M_Veterinario encontrado = (M_Veterinario) result.next();
         bd.delete(encontrado);
@@ -36,7 +36,7 @@ public class C_Veterinario {
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         
-        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0);
+        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null);
         ObjectSet result = bd.queryByExample(veterinario);
         M_Veterinario encontrado = (M_Veterinario) result.next();
 
@@ -61,7 +61,7 @@ public class C_Veterinario {
     public void verVeterinario(String cedula){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0);
+        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null);
         ObjectSet resultado = bd.queryByExample(veterinario);
         JOptionPane.showMessageDialog(null, resultado.next());
         c.cerrarConexion();
@@ -70,7 +70,7 @@ public class C_Veterinario {
     public void listarVeterinarios(){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0);
+        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null);
         ObjectSet resultado = bd.queryByExample(veterinario);
         System.out.println("Tengo " + resultado.size() + " veterinarios");
         while(resultado.hasNext()){
