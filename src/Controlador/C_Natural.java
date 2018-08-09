@@ -113,7 +113,7 @@ public class C_Natural {
             encontrado.setMascoticas(mascotica);
 
             Conexion.getInstancia().guardar(encontrado);
-            JOptionPane.showMessageDialog(null, "Se ha añadido la mascota al cliente natural" );
+          //  JOptionPane.showMessageDialog(null, "Se ha añadido la mascota al cliente natural" );
 
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -136,7 +136,6 @@ public class C_Natural {
             encontrado.retirarMascota(mascotica);
 
             Conexion.getInstancia().guardar(encontrado);
-            JOptionPane.showMessageDialog(null, "Se ha eliminado la mascota del cliente natural" );
 
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Natural->eliminarMascota: "+e);

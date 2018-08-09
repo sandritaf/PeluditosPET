@@ -145,7 +145,6 @@ public class C_Juridico extends C_Propietario{
             encontrado.setMascoticas(mascotica);
 
             Conexion.getInstancia().guardar(encontrado);
-            JOptionPane.showMessageDialog(null, "Se ha añadido la mascota al cliente juridico");
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -166,7 +165,6 @@ public class C_Juridico extends C_Propietario{
             encontrado.retirarMascota(mascotica);
 
             Conexion.getInstancia().guardar(encontrado);
-            JOptionPane.showMessageDialog(null, "Se ha eliminado la mascota al cliente juridico");
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
