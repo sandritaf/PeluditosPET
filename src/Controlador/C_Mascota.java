@@ -91,7 +91,7 @@ public class C_Mascota {
         duenos.setModel(aModel);
 
     //    if(opc.equals("Natural")){
-        M_Propietario p = new M_Natural(null, null, null, null, null, null, null, null);
+        M_Propietario p = new M_Natural(null, null, null, null, null, null);
     //    }
     //    if (opc.equals("Juridico"))
     //    {

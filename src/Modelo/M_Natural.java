@@ -1,10 +1,8 @@
 package Modelo;
 
 public class M_Natural extends M_Propietario{
-    String primerNombre;
-    String segundoNombre;
-    String primerApellido;
-    String segundoApellido;
+    String nombre;
+    String apellido;
     String cedula;
     int edad;
 
@@ -12,56 +10,36 @@ public class M_Natural extends M_Propietario{
         super();
     }
 
-    public M_Natural(String direccion, String telefono, M_Mascota Mascotini, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
+    public M_Natural(String direccion, String telefono, M_Mascota Mascotini, String nombre, String apellido, String cedula) {
         super(direccion,telefono,Mascotini);
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.cedula = cedula;
     }
     
-    public M_Natural(String direccion, String telefono, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
+    public M_Natural(String direccion, String telefono, String nombre, String apellido, String cedula) {
         super(direccion,telefono);
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.cedula = cedula;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
     
-    public String getPrimerNombre() {
-        return primerNombre;
-    }
-
-    public void setPrimerNombre(String primerNombre) {
-        this.primerNombre = primerNombre;
-    }
-
-    public String getSegundoNombre() {
-        return segundoNombre;
-    }
-
-    public void setSegundoNombre(String segundoNombre) {
-        this.segundoNombre = segundoNombre;
-    }
-
-    public String getPrimerApellido() {
-        return primerApellido;
-    }
-
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
-    }
-
-    public String getSegundoApellido() {
-        return segundoApellido;
-    }
-
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
-    }
-
     public String getCedula() {
         return cedula;
     }
@@ -79,17 +57,15 @@ public class M_Natural extends M_Propietario{
     }
     
     public String toString(){
-        return cedula + " - " + primerNombre + " " + primerApellido;
+        return cedula + " - " + nombre + " " + apellido;
     }
     
     
-    public void actualizar(String direccion, String telefono, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String cedula) {
+    public void actualizar(String direccion, String telefono, String nombre, String apellido, String cedula) {
         this.direccion = direccion;
         this.telefono = telefono;
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.cedula = cedula;
     }
 }

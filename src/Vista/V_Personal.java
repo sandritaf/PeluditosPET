@@ -24,17 +24,13 @@ public class V_Personal extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaPersonal = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        primerNombre = new javax.swing.JLabel();
-        txtPrimerNombre = new javax.swing.JTextField();
-        primerApellido = new javax.swing.JLabel();
+        Nombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
         Cedula = new javax.swing.JLabel();
         Edad = new javax.swing.JLabel();
-        segundoNombre = new javax.swing.JLabel();
-        txtSegundoNombre = new javax.swing.JTextField();
-        txtPrimerApellido = new javax.swing.JTextField();
-        segundoApellido = new javax.swing.JLabel();
-        txtSegundoApellido = new javax.swing.JTextField();
+        Apellido = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
         RIF = new javax.swing.JLabel();
         txtAniosE = new javax.swing.JTextField();
         txtEdad = new javax.swing.JTextField();
@@ -148,13 +144,10 @@ public class V_Personal extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
 
-        primerNombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        primerNombre.setText("1° Nombre");
+        Nombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Nombre.setText("Nombre");
 
-        txtPrimerNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-
-        primerApellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        primerApellido.setText("1° Apellido");
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         txtCedula.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
@@ -169,17 +162,10 @@ public class V_Personal extends javax.swing.JPanel {
         Edad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Edad.setText("Edad");
 
-        segundoNombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        segundoNombre.setText("2° Nombre");
+        Apellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Apellido.setText("Apellido");
 
-        txtSegundoNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-
-        txtPrimerApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-
-        segundoApellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        segundoApellido.setText("2° Apellido");
-
-        txtSegundoApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         RIF.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         RIF.setText("RIF");
@@ -235,30 +221,26 @@ public class V_Personal extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(aniosExperiencia)
                             .addComponent(NivelInstruccion)
-                            .addComponent(primerApellido)
-                            .addComponent(primerNombre)
+                            .addComponent(Nombre)
                             .addComponent(Cedula))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(txtAniosE, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrimerApellido)
-                            .addComponent(txtPrimerNombre)
+                            .addComponent(txtNombre)
                             .addComponent(cmbNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Profesion)
-                            .addComponent(segundoApellido)
-                            .addComponent(segundoNombre)
+                            .addComponent(Apellido)
                             .addComponent(RIF)
                             .addComponent(Edad))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(7, 7, 7)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtProfesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtRIF, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSegundoApellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSegundoNombre, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(Tipo)
                         .addGap(122, 122, 122)
@@ -277,16 +259,10 @@ public class V_Personal extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(primerNombre)
-                    .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(segundoNombre)
-                    .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(primerApellido)
-                    .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(segundoApellido)
-                    .addComponent(txtSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Nombre)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Apellido)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,16 +300,16 @@ public class V_Personal extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -360,6 +336,7 @@ public class V_Personal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Apellido;
     private javax.swing.JLabel Cedula;
     private javax.swing.JLabel Edad;
     private javax.swing.JLabel Eliminar;
@@ -367,6 +344,7 @@ public class V_Personal extends javax.swing.JPanel {
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel NivelInstruccion;
+    private javax.swing.JLabel Nombre;
     private javax.swing.JLabel Personal;
     private javax.swing.JLabel Profesion;
     private javax.swing.JLabel RIF;
@@ -382,21 +360,15 @@ public class V_Personal extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel primerApellido;
-    private javax.swing.JLabel primerNombre;
-    private javax.swing.JLabel segundoApellido;
-    private javax.swing.JLabel segundoNombre;
     private javax.swing.JTable tablaPersonal;
     private javax.swing.JTextField txtAniosE;
+    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPK;
-    private javax.swing.JTextField txtPrimerApellido;
-    private javax.swing.JTextField txtPrimerNombre;
     private javax.swing.JTextField txtProfesion;
     private javax.swing.JTextField txtRIF;
-    private javax.swing.JTextField txtSegundoApellido;
-    private javax.swing.JTextField txtSegundoNombre;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCajas(){
@@ -404,11 +376,9 @@ public class V_Personal extends javax.swing.JPanel {
         txtAniosE.setText(null);
         txtCedula.setText(null);
         txtEdad.setText(null);
-        txtPrimerApellido.setText(null);
-        txtPrimerNombre.setText(null);
+        txtNombre.setText(null);
         txtRIF.setText(null);
-        txtSegundoApellido.setText(null);
-        txtSegundoNombre.setText(null);
+        txtApellido.setText(null);
         cmbNivelI.setSelectedIndex(0);
     }
 }

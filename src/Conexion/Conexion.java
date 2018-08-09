@@ -16,11 +16,11 @@ public class Conexion {
     String direccionGenova = "C:\\Users\\Ecastillo\\Documents\\NetBeansProjects\\PeluditosPET\\src\\Conexion\\peluditospet.yap";
     
     public Conexion(){
-        EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
-        configuration.common().objectClass(M_Propietario.class).updateDepth(3);
-        bd = Db4oEmbedded.openFile(configuration,direccionGenova);
-    }
-    
+//        EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+//        configuration.common().objectClass(M_Propietario.class).updateDepth(3);
+//        bd = Db4oEmbedded.openFile(configuration,direccionSandra);
+        bd = Db4oEmbedded.openFile(direccionSandra);
+    }    
         
     public void cerrarConexion(){
         bd.close();

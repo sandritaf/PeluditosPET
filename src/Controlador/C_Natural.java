@@ -19,14 +19,14 @@ public class C_Natural {
         ObjectContainer bd = c.getObjectContainer();
         natural.setCedula("V"+natural.getCedula());
         bd.store(natural);
-        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del propietario");
         c.cerrarConexion();
     }
     
     public void eliminarNatural(String cedula){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+        M_Propietario natural = new M_Natural(null, null, null, null, null, cedula);
         ObjectSet result = bd.queryByExample(natural);
         M_Natural encontrado = (M_Natural) result.next();
         bd.delete(encontrado);
@@ -38,22 +38,20 @@ public class C_Natural {
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+        M_Propietario natural = new M_Natural(null, null, null, null, null, cedula);
         ObjectSet result = bd.queryByExample(natural);
         M_Natural encontrado = (M_Natural) result.next();
 
-        encontrado.setPrimerNombre(n.getPrimerNombre());
-        encontrado.setSegundoNombre(n.getSegundoNombre());
-        encontrado.setPrimerApellido(n.getPrimerApellido());
-        encontrado.setSegundoApellido(n.getSegundoApellido());
-        encontrado.setCedula(n.getCedula()); //?????
+        encontrado.setNombre(n.getNombre());
+        encontrado.setApellido(n.getApellido());
+        encontrado.setCedula(n.getCedula());
         encontrado.setEdad(n.getEdad());
         encontrado.setDireccion(n.getDireccion());
         encontrado.setTelefono(n.getTelefono());
 
         bd.store(encontrado);
 
-        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
+        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente propietario" );
 
         c.cerrarConexion();
     }
@@ -61,7 +59,7 @@ public class C_Natural {
     public void verNatural(String cedula){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+        M_Propietario natural = new M_Natural(null, null, null, null, null, cedula);
         ObjectSet resultado = bd.queryByExample(natural);
         JOptionPane.showMessageDialog(null, resultado.next());
         c.cerrarConexion();
@@ -70,7 +68,7 @@ public class C_Natural {
     public void listarNaturales(){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, null);
+        M_Propietario natural = new M_Natural(null, null, null, null, null, null);
         ObjectSet resultado = bd.queryByExample(natural);
         System.out.println("Tengo " + resultado.size() + " personas naturales");
         while(resultado.hasNext()){
@@ -83,14 +81,12 @@ public class C_Natural {
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         
-        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+        M_Propietario natural = new M_Natural(null, null, null, null, null, cedula);
         ObjectSet result = bd.queryByExample(natural);
         M_Natural encontrado = (M_Natural) result.next();
 
-        encontrado.setPrimerNombre(n.getPrimerNombre());
-        encontrado.setSegundoNombre(n.getSegundoNombre());
-        encontrado.setPrimerApellido(n.getPrimerApellido());
-        encontrado.setSegundoApellido(n.getSegundoApellido());
+        encontrado.setNombre(n.getNombre());
+        encontrado.setApellido(n.getApellido());
         encontrado.setCedula(n.getCedula()); //?????
         encontrado.setEdad(n.getEdad());
         encontrado.setDireccion(n.getDireccion());

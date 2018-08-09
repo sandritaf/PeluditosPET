@@ -1,10 +1,8 @@
 package Modelo;
 
 public class M_Trabajador {
-    String primerNombre;
-    String primerApellido;
-    String segundoNombre;
-    String segundoApellido;
+    String nombre;
+    String apellido;
     String cedula;
     String RIF;
     int edad;
@@ -15,11 +13,9 @@ public class M_Trabajador {
     public M_Trabajador() {
     }
 
-    public M_Trabajador(String primerNombre, String primerApellido, String segundoNombre, String segundoApellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia) {
-        this.primerNombre = primerNombre;
-        this.primerApellido = primerApellido;
-        this.segundoNombre = segundoNombre;
-        this.segundoApellido = segundoApellido;
+    public M_Trabajador(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia) {
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.cedula = cedula;
         this.RIF = RIF;
         this.edad = edad;
@@ -28,36 +24,20 @@ public class M_Trabajador {
         this.anosExperiencia = anosExperiencia;
     }
 
-    public String getPrimerNombre() {
-        return primerNombre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPrimerNombre(String primerNombre) {
-        this.primerNombre = primerNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getPrimerApellido() {
-        return primerApellido;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
-    }
-
-    public String getSegundoNombre() {
-        return segundoNombre;
-    }
-
-    public void setSegundoNombre(String segundoNombre) {
-        this.segundoNombre = segundoNombre;
-    }
-
-    public String getSegundoApellido() {
-        return segundoApellido;
-    }
-
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getCedula() {
