@@ -41,7 +41,7 @@ public class V_Estilista extends javax.swing.JPanel {
         txtCedula = new javax.swing.JTextField();
         Cedula = new javax.swing.JLabel();
         Edad = new javax.swing.JLabel();
-        segundoNombre = new javax.swing.JLabel();
+        Apellido = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
         RIF = new javax.swing.JLabel();
         txtAniosE = new javax.swing.JTextField();
@@ -188,8 +188,8 @@ public class V_Estilista extends javax.swing.JPanel {
         Edad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Edad.setText("Edad");
 
-        segundoNombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        segundoNombre.setText("Apellido");
+        Apellido.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Apellido.setText("Apellido");
 
         txtApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
@@ -249,7 +249,7 @@ public class V_Estilista extends javax.swing.JPanel {
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Profesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(segundoNombre)
+                    .addComponent(Apellido)
                     .addComponent(RIF)
                     .addComponent(Edad)
                     .addComponent(txtPK))
@@ -268,7 +268,7 @@ public class V_Estilista extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(primerNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(segundoNombre)
+                    .addComponent(Apellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -443,6 +443,7 @@ public class V_Estilista extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Apellido;
     private javax.swing.JLabel Cedula;
     private javax.swing.JLabel Edad;
     private javax.swing.JLabel Eliminar;
@@ -461,7 +462,6 @@ public class V_Estilista extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel primerNombre;
-    private javax.swing.JLabel segundoNombre;
     private javax.swing.JTable tablaEstilistas;
     private javax.swing.JTextField txtAniosE;
     private javax.swing.JTextField txtApellido;
