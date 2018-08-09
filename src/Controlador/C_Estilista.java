@@ -3,8 +3,6 @@ package Controlador;
 
 import Conexion.Conexion;
 import Modelo.M_Estilista;
-import Modelo.M_Veterinario;
-import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
