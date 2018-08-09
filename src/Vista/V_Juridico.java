@@ -16,7 +16,7 @@ public class V_Juridico extends javax.swing.JPanel {
     public V_Juridico() {
         initComponents();
         controlador = new C_Juridico();
-        
+        tablaJuridicos.setModel(this.controlador.cargarTabla());
         reiniciarValores();
     }
     
@@ -34,7 +34,7 @@ public class V_Juridico extends javax.swing.JPanel {
         Limpiar = new javax.swing.JLabel();
         VerLista = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaPeluqueros = new javax.swing.JTable();
+        tablaJuridicos = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         Nombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -160,8 +160,8 @@ public class V_Juridico extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tablaPeluqueros.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaPeluqueros.setModel(new javax.swing.table.DefaultTableModel(
+        tablaJuridicos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaJuridicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -169,7 +169,7 @@ public class V_Juridico extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane2.setViewportView(tablaPeluqueros);
+        jScrollPane2.setViewportView(tablaJuridicos);
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -323,6 +323,7 @@ public class V_Juridico extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
+            tablaJuridicos.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -350,6 +351,7 @@ public class V_Juridico extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
+            tablaJuridicos.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_ModificarMouseClicked
@@ -374,6 +376,7 @@ public class V_Juridico extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
+            tablaJuridicos.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_EliminarMouseClicked
@@ -398,7 +401,7 @@ public class V_Juridico extends javax.swing.JPanel {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaPeluqueros;
+    private javax.swing.JTable tablaJuridicos;
     private javax.swing.JTextArea txtDireccion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreGerente;
@@ -465,5 +468,7 @@ public class V_Juridico extends javax.swing.JPanel {
     public String getText(JTextField txt){
         return txt.getText();
     }
+    
+   
     
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class M_Propietario {
     String direccion;
     String telefono;
-    ArrayList<M_Mascota> Mascoticas = new ArrayList<M_Mascota>();
+    ArrayList<M_Mascota> Mascoticas = new ArrayList<>();
 
     public M_Propietario() {
     }

@@ -42,7 +42,7 @@ public class C_Mascota {
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
         
-        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null, null);
+        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null);
         ObjectSet result = bd.queryByExample(mascota);
         M_Mascota encontrado = (M_Mascota) result.next();
 
@@ -51,7 +51,6 @@ public class C_Mascota {
         encontrado.setRaza(m.getRaza());
         encontrado.setObservaciones(m.getObservaciones());
         encontrado.setEdad(m.getEdad());
-        encontrado.setDueno(m.getDueno());
 
         bd.store(encontrado);
 
@@ -63,7 +62,7 @@ public class C_Mascota {
     public void verMascota(String id, M_Propietario p){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null, null);
+        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null);
         ObjectSet resultado = bd.queryByExample(mascota);
         JOptionPane.showMessageDialog(null, resultado.next());
         c.cerrarConexion();
@@ -72,7 +71,7 @@ public class C_Mascota {
     public void listarMascotas(){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Mascota m = new M_Mascota(null, null, null, null, 0, null, null);
+        M_Mascota m = new M_Mascota(null, null, null, null, 0, null);
         ObjectSet resultado = bd.queryByExample(m);
         System.out.println("Tengo " + resultado.size() + " mascotas");
         while(resultado.hasNext()){
@@ -122,7 +121,7 @@ public class C_Mascota {
     public boolean idExiste(String id){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
-        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null, null);
+        M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null);
         ObjectSet resultado = bd.queryByExample(mascota);
         if(!resultado.next().equals(""))
             return true;

@@ -1,8 +1,13 @@
 
 package Conexion;
 
+import Modelo.M_Propietario;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.config.EmbeddedConfiguration;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
 
 public class Conexion {
     
@@ -11,9 +16,12 @@ public class Conexion {
     String direccionGenova = "C:\\Users\\Ecastillo\\Documents\\NetBeansProjects\\PeluditosPET\\src\\Conexion\\peluditospet.yap";
     
     public Conexion(){
-        bd = Db4oEmbedded.openFile(direccionGenova);
+        EmbeddedConfiguration configuration = Db4oEmbedded.newConfiguration();
+        configuration.common().objectClass(M_Propietario.class).updateDepth(3);
+        bd = Db4oEmbedded.openFile(configuration,direccionGenova);
     }
     
+        
     public void cerrarConexion(){
         bd.close();
     }
@@ -21,6 +29,9 @@ public class Conexion {
     public ObjectContainer getObjectContainer(){
         return bd;
     }
+    
+    
+    
     
     
 }

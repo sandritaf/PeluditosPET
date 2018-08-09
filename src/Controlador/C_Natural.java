@@ -3,6 +3,7 @@ package Controlador;
 import Conexion.Conexion;
 import Modelo.M_Juridico;
 import Modelo.M_Natural;
+import Modelo.M_Mascota;
 import Modelo.M_Propietario;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -78,17 +79,29 @@ public class C_Natural {
         c.cerrarConexion();
     }
     
-//    public void eliminarNatural(String cedula){
-//        Conexion c = new Conexion();
-//        ObjectContainer bd = c.getObjectContainer();
-//        
-//        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
-//        ObjectSet resultado = bd.queryByExample(natural);
-//        M_Natural encontrado = (M_Natural) resultado.next();
-//        bd.delete(encontrado);
-//        System.out.println("Eliminado: " + encontrado);
-//        
-//        JOptionPane.showMessageDialog(null,"Eliminado cliente natural exitosamente");
-//        c.cerrarConexion();
-//    }
+    public void agregarMascota(M_Mascota mascotica, M_Natural n, String cedula){
+        Conexion c = new Conexion();
+        ObjectContainer bd = c.getObjectContainer();
+        
+        M_Propietario natural = new M_Natural(null, null, null, null, null, null, null, cedula);
+        ObjectSet result = bd.queryByExample(natural);
+        M_Natural encontrado = (M_Natural) result.next();
+
+        encontrado.setPrimerNombre(n.getPrimerNombre());
+        encontrado.setSegundoNombre(n.getSegundoNombre());
+        encontrado.setPrimerApellido(n.getPrimerApellido());
+        encontrado.setSegundoApellido(n.getSegundoApellido());
+        encontrado.setCedula(n.getCedula()); //?????
+        encontrado.setEdad(n.getEdad());
+        encontrado.setDireccion(n.getDireccion());
+        encontrado.setTelefono(n.getTelefono());
+        encontrado.setMascoticas(mascotica);
+
+        bd.store(encontrado);
+
+        JOptionPane.showMessageDialog(null, "Se ha añadido la mascota al cliente natural" );
+
+        c.cerrarConexion();
+    }
+    
 }
