@@ -60,7 +60,7 @@
                   <Component id="jScrollPane2" min="-2" pref="217" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="jPanel3" alignment="0" pref="500" max="32767" attributes="0"/>
+              <Component id="jPanel3" alignment="0" pref="501" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -106,7 +106,7 @@
                       <Component id="Limpiar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="VerLista" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -477,6 +477,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProfesion">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="12" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Tipo">
               <Properties>
@@ -539,6 +544,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTelefono">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="12" style="0"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNivelI">
             </Component>

@@ -159,7 +159,7 @@ public class V_Personal extends javax.swing.JPanel {
                 .addComponent(Limpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VerLista)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tablaPersonal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -221,6 +221,8 @@ public class V_Personal extends javax.swing.JPanel {
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion.setText("Profesion");
 
+        txtProfesion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         Tipo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Tipo.setText("Tipo");
 
@@ -241,6 +243,8 @@ public class V_Personal extends javax.swing.JPanel {
 
         Profesion1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion1.setText("Telefono");
+
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -354,7 +358,7 @@ public class V_Personal extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
