@@ -2,7 +2,6 @@
 package Vista;
 
 import Controlador.C_Veterinario;
-import Modelo.M_Estilista;
 import Modelo.M_Veterinario;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -131,6 +130,11 @@ public class V_Veterinario extends javax.swing.JPanel {
         VerLista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         VerLista.setVerifyInputWhenFocusTarget(false);
         VerLista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        VerLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VerListaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -443,9 +447,14 @@ public class V_Veterinario extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
+            tablaVeterinarios.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_EliminarMouseClicked
+
+    private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
+        tablaVeterinarios.setModel(this.controlador.cargarTabla());
+    }//GEN-LAST:event_VerListaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

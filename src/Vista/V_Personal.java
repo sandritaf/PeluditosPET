@@ -2,7 +2,6 @@
 package Vista;
 
 import Controlador.C_Trabajador;
-import Modelo.M_Juridico;
 import Modelo.M_Trabajador;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -20,6 +19,7 @@ public class V_Personal extends javax.swing.JPanel {
         txtPK.setVisible(false);
         controlador = new C_Trabajador();
         reiniciarValores();
+        tablaPersonal.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -370,7 +370,7 @@ public class V_Personal extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-            //tablaJuridicos.setModel(this.controlador.cargarTabla());
+            tablaPersonal.setModel(this.controlador.cargarTabla());
         }        
         
         
@@ -400,7 +400,7 @@ public class V_Personal extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-        //    tablaJuridicos.setModel(this.controlador.cargarTabla());
+            tablaPersonal.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_ModificarMouseClicked
@@ -425,6 +425,7 @@ public class V_Personal extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
+            tablaPersonal.setModel(this.controlador.cargarTabla());
         }       
         
     }//GEN-LAST:event_EliminarMouseClicked

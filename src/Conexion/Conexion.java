@@ -9,11 +9,12 @@ public class Conexion {
     
     private static Conexion modelo;
     private String direccionSandra = "C:\\Users\\brenda\\Desktop\\PeluditosPET\\peluditospet.yap";
+    private String direccionSandra2 = "C:\\Users\\brenda\\Documents\\NetBeansProjects\\PeluditosPET\\src\\Conexion\\peluditospet.yap";
     private String direccionGenova = "C:\\Users\\Ecastillo\\Documents\\NetBeansProjects\\PeluditosPET\\src\\Conexion\\peluditospet.yap";
     public ObjectContainer bd;
     
     public Conexion(){
-        bd = Db4oEmbedded.openFile(direccionGenova);
+        bd = Db4oEmbedded.openFile(direccionSandra2);
     }
         
     public void cerrarConexion(){

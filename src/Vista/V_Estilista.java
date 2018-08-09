@@ -130,6 +130,11 @@ public class V_Estilista extends javax.swing.JPanel {
         VerLista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         VerLista.setVerifyInputWhenFocusTarget(false);
         VerLista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        VerLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VerListaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -398,6 +403,7 @@ public class V_Estilista extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_EliminarMouseClicked
@@ -429,6 +435,10 @@ public class V_Estilista extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_ModificarMouseClicked
+
+    private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
+        tablaEstilistas.setModel(this.controlador.cargarTabla());
+    }//GEN-LAST:event_VerListaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -510,7 +520,7 @@ public class V_Estilista extends javax.swing.JPanel {
             return true;
         if(txtVacio(txtProfesion))
             return true;        
-        if(txtVacio(txtTelefono))
+        if(txtVacio(txtEdad))
             return true;        
         return false;
     }
