@@ -404,7 +404,7 @@ public class V_Mascota extends javax.swing.JPanel {
         
         C_Juridico controladorJuridico = new C_Juridico();
         M_Juridico dueno = controladorJuridico.getPersona(codigoFinal);
-        if (!dueno.equals(null))
+        if (dueno != null)
             return dueno;
         else {
             C_Natural controladorNatural = new C_Natural();

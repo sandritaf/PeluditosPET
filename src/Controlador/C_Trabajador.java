@@ -4,7 +4,6 @@ package Controlador;
 import Conexion.Conexion;
 import Modelo.M_Trabajador;
 import Modelo.M_Veterinario;
-import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import javax.swing.JOptionPane;
 
@@ -14,68 +13,72 @@ public class C_Trabajador {
     }
     
     public void guardarTrabajador(M_Trabajador trabajador){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        trabajador.setCedula("V"+trabajador.getCedula());
-        bd.store(trabajador);
-        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del trabajador");
-        c.cerrarConexion();
+        try{
+            trabajador.setCedula("V"+trabajador.getCedula());
+            Conexion.getInstancia().guardar(trabajador);
+            JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del trabajador");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void eliminarTrabajador(String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
-        ObjectSet result = bd.queryByExample(trabajador);
-        M_Veterinario encontrado = (M_Veterinario) result.next();
-        bd.delete(encontrado);
-        JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del trabajador");
-        c.cerrarConexion();
+        try{
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
+            ObjectSet result = Conexion.getInstancia().buscar(trabajador);
+            M_Veterinario encontrado = (M_Veterinario) result.next();
+            Conexion.getInstancia().guardar(encontrado);
+            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del trabajador");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void modificarTrabajador(String cedula, M_Trabajador t){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        
-        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
-        ObjectSet result = bd.queryByExample(trabajador);
-        M_Veterinario encontrado = (M_Veterinario) result.next();
+        try{
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
+            ObjectSet result = Conexion.getInstancia().buscar(trabajador);
+            M_Veterinario encontrado = (M_Veterinario) result.next();
 
-        encontrado.setNombre(t.getNombre());
-        encontrado.setApellido(t.getApellido());
-        encontrado.setCedula(t.getCedula());
-        encontrado.setEdad(t.getEdad());
-        encontrado.setAnosExperiencia(t.getAnosExperiencia());
-        encontrado.setProfesion(t.getProfesion());
-        encontrado.setNivelInstruccion(t.getNivelInstruccion());
-        encontrado.setRIF(t.getRIF());
+            encontrado.setNombre(t.getNombre());
+            encontrado.setApellido(t.getApellido());
+            encontrado.setCedula(t.getCedula());
+            encontrado.setEdad(t.getEdad());
+            encontrado.setAnosExperiencia(t.getAnosExperiencia());
+            encontrado.setProfesion(t.getProfesion());
+            encontrado.setNivelInstruccion(t.getNivelInstruccion());
+            encontrado.setRIF(t.getRIF());
 
-        bd.store(encontrado);
+            Conexion.getInstancia().guardar(encontrado);
 
-        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al trabajador");
+            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al trabajador");
 
-        c.cerrarConexion();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void verTrabajador(String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
-        ObjectSet resultado = bd.queryByExample(trabajador);
-        JOptionPane.showMessageDialog(null, resultado.next());
-        c.cerrarConexion();
+        try{
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(trabajador);
+            JOptionPane.showMessageDialog(null, resultado.next());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void listarTrabajadores(){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null);
-        ObjectSet resultado = bd.queryByExample(trabajador);
-        System.out.println("Tengo " + resultado.size() + " trabajadores");
-        while(resultado.hasNext()){
-            System.out.println(resultado.next());
+        try{
+            M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(trabajador);
+            System.out.println("Tengo " + resultado.size() + " trabajadores");
+            while(resultado.hasNext()){
+                System.out.println(resultado.next());
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
         }
-        c.cerrarConexion();
     }
     
 }

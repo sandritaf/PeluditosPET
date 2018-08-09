@@ -489,9 +489,9 @@ public class V_Estilista extends javax.swing.JPanel {
     }
     
     public boolean txtVacio(JTextField txt){
-        if(txt.getText().isEmpty())
-            return true;
-        return false;
+        return (txt.getText().isEmpty());
+         //   return true;
+       // return false;
     }
     
     //Verifica si hay txtFields sin llenar

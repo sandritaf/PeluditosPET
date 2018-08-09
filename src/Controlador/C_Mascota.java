@@ -175,7 +175,7 @@ public class C_Mascota {
             String titulos[] = {"ID", "Nombre","Especie","Raza", "Edad","Observaciones"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Mascota[] p = getMascotas();
-            if (!p.equals(null)) {
+            if (p != null) {
                 for (M_Mascota per : p) {
                     Object[] cli = new Object[6];
                     cli[0] = per.getId();
@@ -186,11 +186,8 @@ public class C_Mascota {
                     cli[5] = per.getObservaciones();
                     dtm.addRow(cli);
                 }
-                return dtm;
-            } else {
-                JOptionPane.showMessageDialog(null, "NO HAY MASCOYAS");
             }
-            return null;
+            return dtm;
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarTabla: " +e);
             return null;

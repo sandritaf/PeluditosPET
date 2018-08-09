@@ -14,68 +14,72 @@ import javax.swing.table.DefaultTableModel;
 public class C_Estilista {
  
     public void guardarEstilista(M_Estilista estilista){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        estilista.setCedula("V"+estilista.getCedula());
-        bd.store(estilista);
-        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del estilista");
-        c.cerrarConexion();
+        try{
+            estilista.setCedula("V"+estilista.getCedula());
+            Conexion.getInstancia().guardar(estilista);
+            JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del estilista");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void eliminarEstilista(String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
-        ObjectSet result = bd.queryByExample(estilista);
-        M_Estilista encontrado = (M_Estilista) result.next();
-        bd.delete(encontrado);
-        JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del estilistas");
-        c.cerrarConexion();
+        try{
+            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
+            ObjectSet result = Conexion.getInstancia().buscar(estilista);
+            M_Estilista encontrado = (M_Estilista) result.next();
+            Conexion.getInstancia().eliminar(encontrado);
+            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del estilistas");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void modificarEstilista(String cedula, M_Estilista e){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        
-        M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
-        ObjectSet result = bd.queryByExample(estilista);
-        M_Estilista encontrado = (M_Estilista) result.next();
+        try{
+            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
+            ObjectSet result = Conexion.getInstancia().buscar(estilista);
+            M_Estilista encontrado = (M_Estilista) result.next();
 
-        encontrado.setNombre(e.getNombre());
-        encontrado.setNombre(e.getApellido());
-        encontrado.setCedula(e.getCedula());
-        encontrado.setTelefono(e.getTelefono());
-        encontrado.setNivelInstruccion(e.getNivelInstruccion());
-        encontrado.setProfesion(e.getProfesion());
-        encontrado.setEdad(e.getEdad());
-        encontrado.setAnosExperiencia(e.getAnosExperiencia());
+            encontrado.setNombre(e.getNombre());
+            encontrado.setNombre(e.getApellido());
+            encontrado.setCedula(e.getCedula());
+            encontrado.setTelefono(e.getTelefono());
+            encontrado.setNivelInstruccion(e.getNivelInstruccion());
+            encontrado.setProfesion(e.getProfesion());
+            encontrado.setEdad(e.getEdad());
+            encontrado.setAnosExperiencia(e.getAnosExperiencia());
 
-        bd.store(encontrado);
+            Conexion.getInstancia().guardar(encontrado);
 
-        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al estilista" );
+            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al estilista" );
 
-        c.cerrarConexion();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }
     
     public void verEstilista(String cedula){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
-        ObjectSet result = bd.queryByExample(estilista);
-        JOptionPane.showMessageDialog(null, result.next());
-        c.cerrarConexion();
+        try{
+            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
+            ObjectSet result = Conexion.getInstancia().buscar(estilista);
+            JOptionPane.showMessageDialog(null, result.next());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     public void listarEstilistas(){
-        Conexion c = new Conexion();
-        ObjectContainer bd = c.getObjectContainer();
-        M_Estilista estilista = new M_Estilista(null, null, null, null, 0, null, null, 0, null);
-        ObjectSet resultado = bd.queryByExample(estilista);
-        System.out.println("Tengo " + resultado.size() + " estilistas");
-        while(resultado.hasNext()){
-            System.out.println(resultado.next());
-        }
-        c.cerrarConexion();
+       try{
+            M_Estilista estilista = new M_Estilista(null, null, null, null, 0, null, null, 0, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(estilista);
+            System.out.println("Tengo " + resultado.size() + " estilistas");
+            while(resultado.hasNext()){
+                System.out.println(resultado.next());
+            }
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e);
+       }
     }
     
     public M_Estilista[] getEstilistas(){
@@ -105,12 +109,11 @@ public class C_Estilista {
             M_Estilista[] p = getEstilistas();
             if (p != null) {
                 for (M_Estilista per : p) {
-                    Object[] cli = new Object[6];
+                    Object[] cli = new Object[4];
                     cli[0] = per.getCedula();
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
-//                    cli[5] = per.getNumMascotas();
                     dtm.addRow(cli);
                 }
             }

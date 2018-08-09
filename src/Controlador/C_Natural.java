@@ -159,7 +159,7 @@ public class C_Natural {
             }
             return dtm;
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Natural->cargarTabla: " +e);
             return null;
         }
     }
