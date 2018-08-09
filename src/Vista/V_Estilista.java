@@ -3,17 +3,24 @@ package Vista;
 
 import Controlador.C_Estilista;
 import Modelo.M_Estilista;
+import Modelo.M_Trabajador;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class V_Estilista extends javax.swing.JPanel {
 
     M_Estilista modelo;
     C_Estilista controlador;
-    
+    String nombre, apellido, cedula, rif, telefono, nivelI, profesion;
+    int edad, aniosE;
     
     public V_Estilista() {
         initComponents();
         txtPK.setVisible(false);
         controlador = new C_Estilista();
+        tablaEstilistas.setModel(this.controlador.cargarTabla());
+        reiniciarValores();
     }
 
     @SuppressWarnings("unchecked")
@@ -44,10 +51,12 @@ public class V_Estilista extends javax.swing.JPanel {
         txtRIF = new javax.swing.JTextField();
         Profesion = new javax.swing.JLabel();
         txtProfesion = new javax.swing.JTextField();
-        txtPK = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         txtNivelI = new javax.swing.JTextField();
+        Telefono = new javax.swing.JLabel();
+        txtPK = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaPeluqueros = new javax.swing.JTable();
+        tablaEstilistas = new javax.swing.JTable();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -61,6 +70,11 @@ public class V_Estilista extends javax.swing.JPanel {
         Guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Guardar.setVerifyInputWhenFocusTarget(false);
         Guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GuardarMouseClicked(evt);
+            }
+        });
 
         Modificar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Modificar.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,6 +83,11 @@ public class V_Estilista extends javax.swing.JPanel {
         Modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Modificar.setVerifyInputWhenFocusTarget(false);
         Modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarMouseClicked(evt);
+            }
+        });
 
         Eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Eliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,6 +96,11 @@ public class V_Estilista extends javax.swing.JPanel {
         Eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Eliminar.setVerifyInputWhenFocusTarget(false);
         Eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarMouseClicked(evt);
+            }
+        });
 
         Estilista.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         Estilista.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,7 +160,7 @@ public class V_Estilista extends javax.swing.JPanel {
                 .addComponent(Limpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VerLista)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
@@ -189,6 +213,9 @@ public class V_Estilista extends javax.swing.JPanel {
 
         txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
+        Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Telefono.setText("Teléfono");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -199,7 +226,8 @@ public class V_Estilista extends javax.swing.JPanel {
                     .addComponent(aniosExperiencia)
                     .addComponent(NivelInstruccion)
                     .addComponent(primerNombre)
-                    .addComponent(Cedula))
+                    .addComponent(Cedula)
+                    .addComponent(Telefono))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -210,15 +238,16 @@ public class V_Estilista extends javax.swing.JPanel {
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTelefono)
+                            .addComponent(txtNivelI, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Profesion)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Profesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(segundoNombre)
                     .addComponent(RIF)
-                    .addComponent(Edad))
+                    .addComponent(Edad)
+                    .addComponent(txtPK))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtProfesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
@@ -254,13 +283,16 @@ public class V_Estilista extends javax.swing.JPanel {
                     .addComponent(Profesion)
                     .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Telefono)
+                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tablaPeluqueros.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaPeluqueros.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEstilistas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaEstilistas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -268,7 +300,7 @@ public class V_Estilista extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane2.setViewportView(tablaPeluqueros);
+        jScrollPane2.setViewportView(tablaEstilistas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -277,19 +309,22 @@ public class V_Estilista extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -317,6 +352,84 @@ public class V_Estilista extends javax.swing.JPanel {
         limpiarCajas();
     }//GEN-LAST:event_LimpiarMouseClicked
 
+    private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
+        }
+        else{
+            
+            nombre = getText(txtNombre);
+            apellido = getText(txtApellido);
+            cedula = getText(txtCedula);
+            rif = getText(txtRIF);
+            telefono = getText(txtTelefono);
+            aniosE = Integer.parseInt(getText(txtAniosE));
+            profesion = getText(txtProfesion);
+            nivelI = getText(txtNivelI);
+            edad = Integer.parseInt(getText(txtEdad));
+            
+            modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            controlador.guardarEstilista(modelo);
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
+        }
+    }//GEN-LAST:event_GuardarMouseClicked
+
+    private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
+        
+        if(getText(txtCedula).equals("")){
+            JOptionPane.showMessageDialog(null, "El campo de Cedula debe estar lleno para realizar ésta acción");
+        }
+        else{
+            
+            cedula = getText(txtCedula);
+            
+            char valor = cedula.charAt(0);
+            char v = 'V';            
+            
+            if(!(valor == v) ){
+                cedula = "V"+cedula;
+            }
+            
+            controlador.eliminarEstilista(cedula);
+            
+            reiniciarValores();
+            limpiarCajas();
+        }
+        
+    }//GEN-LAST:event_EliminarMouseClicked
+
+    private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
+        }
+        else{
+            
+            nombre = getText(txtNombre);
+            apellido = getText(txtApellido);
+            cedula = getText(txtCedula);
+            rif = getText(txtRIF);
+            telefono = getText(txtTelefono);
+            aniosE = Integer.parseInt(getText(txtAniosE));
+            profesion = getText(txtProfesion);
+            nivelI = getText(txtNivelI);
+            edad = Integer.parseInt(getText(txtEdad));
+            
+            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            
+            controlador.modificarEstilista(cedula,modelo);
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
+        }
+        
+    }//GEN-LAST:event_ModificarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Cedula;
@@ -329,6 +442,7 @@ public class V_Estilista extends javax.swing.JPanel {
     private javax.swing.JLabel NivelInstruccion;
     private javax.swing.JLabel Profesion;
     private javax.swing.JLabel RIF;
+    private javax.swing.JLabel Telefono;
     private javax.swing.JLabel VerLista;
     private javax.swing.JLabel aniosExperiencia;
     private javax.swing.JPanel jPanel2;
@@ -337,7 +451,7 @@ public class V_Estilista extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel primerNombre;
     private javax.swing.JLabel segundoNombre;
-    private javax.swing.JTable tablaPeluqueros;
+    private javax.swing.JTable tablaEstilistas;
     private javax.swing.JTextField txtAniosE;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
@@ -347,6 +461,7 @@ public class V_Estilista extends javax.swing.JPanel {
     private javax.swing.JTextField txtPK;
     private javax.swing.JTextField txtProfesion;
     private javax.swing.JTextField txtRIF;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCajas(){
@@ -357,6 +472,64 @@ public class V_Estilista extends javax.swing.JPanel {
         txtNombre.setText(null);
         txtRIF.setText(null);
         txtNivelI.setText(null);
+        txtTelefono.setText(null);
         txtPK.setText(null);
+        txtProfesion.setText(null);
+    }
+    
+    //Devuelve el codigo de la opcion seleccionada en un combo
+    public int getComboSelected(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(1, guion);
+        
+        return Integer.parseInt(codigoFinal);
+    }
+    
+    public boolean txtVacio(JTextField txt){
+        if(txt.getText().isEmpty())
+            return true;
+        return false;
+    }
+    
+    //Verifica si hay txtFields sin llenar
+    public boolean cajasVacias(){
+        if(txtVacio(txtNombre))
+            return true;
+        if(txtVacio(txtApellido))
+            return true;
+        if(txtVacio(txtCedula))
+            return true;
+        if(txtVacio(txtTelefono))
+            return true;
+        if(txtVacio(txtRIF))
+            return true;
+        if(txtVacio(txtAniosE))
+            return true;
+        if(txtVacio(txtProfesion))
+            return true;        
+        if(txtVacio(txtTelefono))
+            return true;        
+        return false;
+    }
+    
+    //Coloca en null los atributos de la empresa
+    public void reiniciarValores(){
+        nombre = null;
+        apellido = null;
+        cedula = null;
+        aniosE = 0;
+        nivelI = null; 
+        profesion = null;
+        edad = 0;
+        telefono = null;
+        rif = null;
+    }
+    
+    //Devuelve el valor de un txtField
+    public String getText(JTextField txt){
+        return txt.getText();
     }
 }

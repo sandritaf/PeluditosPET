@@ -53,10 +53,6 @@ public class V_Personal extends javax.swing.JPanel {
         txtRIF = new javax.swing.JTextField();
         Profesion = new javax.swing.JLabel();
         txtProfesion = new javax.swing.JTextField();
-        Tipo = new javax.swing.JLabel();
-        btnVeterinario = new javax.swing.JRadioButton();
-        btnEstilista = new javax.swing.JRadioButton();
-        btnOtro = new javax.swing.JRadioButton();
         txtPK = new javax.swing.JTextField();
         Profesion1 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
@@ -159,7 +155,7 @@ public class V_Personal extends javax.swing.JPanel {
                 .addComponent(Limpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VerLista)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         tablaPersonal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -223,24 +219,6 @@ public class V_Personal extends javax.swing.JPanel {
 
         txtProfesion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
-        Tipo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Tipo.setText("Tipo");
-
-        btnVeterinario.setBackground(new java.awt.Color(153, 204, 255));
-        buttonGroup1.add(btnVeterinario);
-        btnVeterinario.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnVeterinario.setText("Veterinario");
-
-        btnEstilista.setBackground(new java.awt.Color(153, 204, 255));
-        buttonGroup1.add(btnEstilista);
-        btnEstilista.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnEstilista.setText("Estilista");
-
-        btnOtro.setBackground(new java.awt.Color(153, 204, 255));
-        buttonGroup1.add(btnOtro);
-        btnOtro.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnOtro.setText("Otro");
-
         Profesion1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion1.setText("Telefono");
 
@@ -270,7 +248,12 @@ public class V_Personal extends javax.swing.JPanel {
                                 .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                                 .addComponent(txtNivelI)
-                                .addGap(18, 18, 18)))
+                                .addGap(18, 18, 18))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(Profesion1)
+                        .addGap(244, 244, 244)))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Profesion)
                             .addComponent(Apellido)
@@ -283,16 +266,6 @@ public class V_Personal extends javax.swing.JPanel {
                             .addComponent(txtRIF, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Tipo)
-                            .addComponent(Profesion1))
-                        .addGap(89, 89, 89)
-                        .addComponent(btnVeterinario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEstilista)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnOtro)
-                        .addGap(18, 18, 18)
                         .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -327,15 +300,9 @@ public class V_Personal extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Profesion1)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Tipo)
-                    .addComponent(btnVeterinario)
-                    .addComponent(btnEstilista)
-                    .addComponent(btnOtro)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -354,9 +321,9 @@ public class V_Personal extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
         );
@@ -458,7 +425,8 @@ public class V_Personal extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-        }        
+        }       
+        
     }//GEN-LAST:event_EliminarMouseClicked
 
 
@@ -476,12 +444,8 @@ public class V_Personal extends javax.swing.JPanel {
     private javax.swing.JLabel Profesion;
     private javax.swing.JLabel Profesion1;
     private javax.swing.JLabel RIF;
-    private javax.swing.JLabel Tipo;
     private javax.swing.JLabel VerLista;
     private javax.swing.JLabel aniosExperiencia;
-    private javax.swing.JRadioButton btnEstilista;
-    private javax.swing.JRadioButton btnOtro;
-    private javax.swing.JRadioButton btnVeterinario;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -39,22 +39,26 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel6" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+                          <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel3" alignment="0" pref="500" max="32767" attributes="0"/>
+              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="243" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -102,7 +106,7 @@
                       <Component id="Limpiar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="VerLista" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -124,6 +128,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="GuardarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Modificar">
               <Properties>
@@ -141,6 +148,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ModificarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Eliminar">
               <Properties>
@@ -158,6 +168,9 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="EliminarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Estilista">
               <Properties>
@@ -232,6 +245,7 @@
                           <Component id="NivelInstruccion" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="primerNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Cedula" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Telefono" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -245,18 +259,19 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtPK" min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="txtNivelI" min="-2" pref="140" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtTelefono" max="32767" attributes="0"/>
+                                  <Component id="txtNivelI" pref="140" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Profesion" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="Profesion" alignment="0" max="32767" attributes="0"/>
                           <Component id="segundoNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="RIF" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Edad" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPK" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -300,8 +315,12 @@
                           <Component id="txtProfesion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNivelI" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtPK" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Telefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPK" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -422,7 +441,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtProfesion">
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPK">
+            <Component class="javax.swing.JTextField" name="txtTelefono">
             </Component>
             <Component class="javax.swing.JTextField" name="txtNivelI">
               <Properties>
@@ -430,6 +449,16 @@
                   <Font name="Century Gothic" size="12" style="0"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="Telefono">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtPK">
             </Component>
           </SubComponents>
         </Container>
@@ -440,7 +469,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tablaPeluqueros">
+            <Component class="javax.swing.JTable" name="tablaEstilistas">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="12" style="0"/>

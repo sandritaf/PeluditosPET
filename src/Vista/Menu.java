@@ -59,11 +59,11 @@ public class Menu extends javax.swing.JFrame {
         PanelPrincipal.setLayout(PanelPrincipalLayout);
         PanelPrincipalLayout.setHorizontalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 727, Short.MAX_VALUE)
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 498, Short.MAX_VALUE)
         );
 
         pLateral.setBackground(new java.awt.Color(153, 204, 255));
@@ -140,7 +140,7 @@ public class Menu extends javax.swing.JFrame {
 
         btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Salir.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir48.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -161,12 +161,9 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btnMascota)
                     .addComponent(btnEstilista)
                     .addComponent(btnJuridico)
-                    .addComponent(btnNatural))
+                    .addComponent(btnNatural)
+                    .addComponent(btnSalir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLateralLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         pLateralLayout.setVerticalGroup(
             pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +182,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnJuridico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNatural)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir)
-                .addContainerGap())
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

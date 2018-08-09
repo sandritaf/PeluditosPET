@@ -21,7 +21,7 @@ public class C_Juridico {
           try{
               juridico.setRIF("J"+juridico.getRIF());
               Conexion.getInstancia().guardar(juridico);
-              JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del propietario");
+              JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del cliente jurídico");
           }catch(Exception e){
               JOptionPane.showMessageDialog(null, e);
           }
@@ -109,7 +109,7 @@ public class C_Juridico {
         try{
             M_Propietario juridico = new M_Juridico(null, null, null, null, null, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
-            System.out.println("Tengo " + resultado.size() + " personas juridicas");
+            System.out.println("Tengo " + resultado.size() + " clientes juridicas");
             while(resultado.hasNext()){
                 System.out.println(resultado.next());
             }
@@ -154,7 +154,7 @@ public class C_Juridico {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"RIF", "Nombre","Telefono","Gerente", "Razon Social","Mascotaa registradas"};
+            String titulos[] = {"RIF", "Nombre","Telefono","Gerente", "Razon Social","Mascotas registradas"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Juridico[] p = getJuridicos();
             if (p != null) {

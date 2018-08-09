@@ -29,5 +29,19 @@ public class M_Veterinario extends M_Trabajador{
         this.universidad = universidad;
     }
     
+    public void actualizar(String especializacion, String universidad, String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.RIF = RIF;
+        this.edad = edad;
+        this.nivelInstruccion = nivelInstruccion;
+        this.profesion = profesion;
+        this.anosExperiencia = anosExperiencia;
+        this.telefono = telefono;
+        this.especializacion = especializacion;
+        this.universidad = universidad;
+    }
+    
     
 }

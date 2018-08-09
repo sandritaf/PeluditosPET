@@ -89,7 +89,7 @@ public class C_Natural {
         try{
             M_Propietario natural = new M_Natural(null, null, null, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(natural);
-            System.out.println("Tengo " + resultado.size() + " personas naturales");
+            System.out.println("Tengo " + resultado.size() + " clientes naturales");
             while(resultado.hasNext()){
                 System.out.println(resultado.next());
             }
@@ -142,7 +142,7 @@ public class C_Natural {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"Cedula", "Nombre","Apellido","Telefono", "Edad","Mascotaa registradas"};
+            String titulos[] = {"Cedula", "Nombre","Apellido","Telefono", "Edad","Mascotas registradas"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Natural[] p = getNaturales();
             if (p != null) {

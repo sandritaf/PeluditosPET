@@ -1,10 +1,25 @@
 
 package Vista;
 
+import Controlador.C_Veterinario;
+import Modelo.M_Estilista;
+import Modelo.M_Veterinario;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 public class V_Veterinario extends javax.swing.JPanel {
 
+    M_Veterinario modelo;
+    C_Veterinario controlador;
+    String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion;
+    int edad, aniosE;
+    
     public V_Veterinario() {
         initComponents();
+        controlador = new C_Veterinario();
+        tablaVeterinarios.setModel(this.controlador.cargarTabla());
+        reiniciarValores();
     }
     
     @SuppressWarnings("unchecked")
@@ -43,7 +58,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtNivelI = new javax.swing.JTextField();
         txtEspecializacion = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaVeterinario = new javax.swing.JTable();
+        tablaVeterinarios = new javax.swing.JTable();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -56,6 +71,11 @@ public class V_Veterinario extends javax.swing.JPanel {
         Guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Guardar.setVerifyInputWhenFocusTarget(false);
         Guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GuardarMouseClicked(evt);
+            }
+        });
 
         Modificar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Modificar.setForeground(new java.awt.Color(255, 255, 255));
@@ -64,6 +84,11 @@ public class V_Veterinario extends javax.swing.JPanel {
         Modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Modificar.setVerifyInputWhenFocusTarget(false);
         Modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarMouseClicked(evt);
+            }
+        });
 
         Eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Eliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,6 +97,11 @@ public class V_Veterinario extends javax.swing.JPanel {
         Eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Eliminar.setVerifyInputWhenFocusTarget(false);
         Eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarMouseClicked(evt);
+            }
+        });
 
         Veterinario.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         Veterinario.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,10 +170,8 @@ public class V_Veterinario extends javax.swing.JPanel {
         Nombre.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre.setFocusable(false);
 
         txtCedula.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtCedula.setFocusable(false);
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCedulaActionPerformed(evt);
@@ -160,16 +188,13 @@ public class V_Veterinario extends javax.swing.JPanel {
         Apellido.setText("Apellido");
 
         txtApellido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtApellido.setFocusable(false);
 
         RIF.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         RIF.setText("RIF");
 
         txtAniosE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtAniosE.setFocusable(false);
 
         txtEdad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEdad.setFocusable(false);
         txtEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEdadActionPerformed(evt);
@@ -183,18 +208,14 @@ public class V_Veterinario extends javax.swing.JPanel {
         aniosExperiencia.setText("Años de Experiencia");
 
         txtRIF.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtRIF.setFocusable(false);
 
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion.setText("Profesion");
-
-        txtProfesion.setFocusable(false);
 
         Universidad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Universidad.setText("Universidad");
 
         txtUniversidad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtUniversidad.setFocusable(false);
 
         Especializacion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Especializacion.setText("Especializacion");
@@ -202,13 +223,9 @@ public class V_Veterinario extends javax.swing.JPanel {
         Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Telefono.setText("Telefono");
 
-        txtTelefono.setFocusable(false);
-
         txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNivelI.setFocusable(false);
 
         txtEspecializacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEspecializacion.setFocusable(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -224,18 +241,14 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(Nombre)
                     .addComponent(Cedula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtAniosE, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(txtUniversidad)
-                            .addComponent(txtEspecializacion))
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtEspecializacion)
+                    .addComponent(txtCedula)
+                    .addComponent(txtAniosE)
+                    .addComponent(txtUniversidad)
+                    .addComponent(txtNivelI, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(txtNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Profesion)
                     .addComponent(Apellido)
@@ -244,11 +257,11 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(Telefono))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtProfesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRIF, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtApellido)
+                    .addComponent(txtRIF)
+                    .addComponent(txtEdad)
+                    .addComponent(txtProfesion, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(txtTelefono))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -293,8 +306,8 @@ public class V_Veterinario extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        tablaVeterinario.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaVeterinario.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVeterinarios.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaVeterinarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -302,7 +315,7 @@ public class V_Veterinario extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane2.setViewportView(tablaVeterinario);
+        jScrollPane2.setViewportView(tablaVeterinarios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -311,10 +324,10 @@ public class V_Veterinario extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,6 +364,89 @@ public class V_Veterinario extends javax.swing.JPanel {
         limpiarCajas();
     }//GEN-LAST:event_LimpiarMouseClicked
 
+    private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
+        
+    if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
+        }
+        else{
+            
+            nombre = getText(txtNombre);
+            apellido = getText(txtApellido);
+            cedula = getText(txtCedula);
+            rif = getText(txtRIF);
+            telefono = getText(txtTelefono);
+            aniosE = Integer.parseInt(getText(txtAniosE));
+            profesion = getText(txtProfesion);
+            nivelI = getText(txtNivelI);
+            edad = Integer.parseInt(getText(txtEdad));
+            universidad = getText(txtUniversidad);
+            especializacion = getText(txtEspecializacion);
+            
+            modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            controlador.guardarVeterinario(modelo);
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaVeterinarios.setModel(this.controlador.cargarTabla());
+        }
+        
+    }//GEN-LAST:event_GuardarMouseClicked
+
+    private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
+        }
+        else{
+            
+            nombre = getText(txtNombre);
+            apellido = getText(txtApellido);
+            cedula = getText(txtCedula);
+            rif = getText(txtRIF);
+            telefono = getText(txtTelefono);
+            aniosE = Integer.parseInt(getText(txtAniosE));
+            profesion = getText(txtProfesion);
+            nivelI = getText(txtNivelI);
+            edad = Integer.parseInt(getText(txtEdad));
+            universidad = getText(txtUniversidad);
+            especializacion = getText(txtEspecializacion);
+            
+            modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            controlador.guardarVeterinario(modelo);
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaVeterinarios.setModel(this.controlador.cargarTabla());
+
+        }
+        
+    }//GEN-LAST:event_ModificarMouseClicked
+
+    private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
+        
+        if(getText(txtCedula).equals("")){
+            JOptionPane.showMessageDialog(null, "El campo de Cedula debe estar lleno para realizar ésta acción");
+        }
+        else{
+            
+            cedula = getText(txtCedula);
+            
+            char valor = cedula.charAt(0);
+            char v = 'V';            
+            
+            if(!(valor == v) ){
+                cedula = "V"+cedula;
+            }
+            
+            controlador.eliminarVeterinario(cedula);
+            
+            reiniciarValores();
+            limpiarCajas();
+        }
+        
+    }//GEN-LAST:event_EliminarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;
@@ -374,7 +470,7 @@ public class V_Veterinario extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaVeterinario;
+    private javax.swing.JTable tablaVeterinarios;
     private javax.swing.JTextField txtAniosE;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
@@ -402,4 +498,66 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtTelefono.setText(null);
     }
 
+    //Devuelve el codigo de la opcion seleccionada en un combo
+    public int getComboSelected(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(1, guion);
+        
+        return Integer.parseInt(codigoFinal);
+    }
+    
+    public boolean txtVacio(JTextField txt){
+        if(txt.getText().isEmpty())
+            return true;
+        return false;
+    }
+    
+    //Verifica si hay txtFields sin llenar
+    public boolean cajasVacias(){
+        if(txtVacio(txtNombre))
+            return true;
+        if(txtVacio(txtApellido))
+            return true;
+        if(txtVacio(txtCedula))
+            return true;
+        if(txtVacio(txtTelefono))
+            return true;
+        if(txtVacio(txtRIF))
+            return true;
+        if(txtVacio(txtAniosE))
+            return true;
+        if(txtVacio(txtProfesion))
+            return true;        
+        if(txtVacio(txtTelefono))
+            return true;        
+        if(txtVacio(txtEspecializacion))
+            return true;        
+        if(txtVacio(txtUniversidad))
+            return true;        
+        return false;
+    }
+    
+    //Coloca en null los atributos de la empresa
+    public void reiniciarValores(){
+        nombre = null;
+        apellido = null;
+        cedula = null;
+        aniosE = 0;
+        nivelI = null; 
+        profesion = null;
+        edad = 0;
+        telefono = null;
+        rif = null;
+        universidad = null;
+        especializacion = null;
+    }
+    
+    //Devuelve el valor de un txtField
+    public String getText(JTextField txt){
+        return txt.getText();
+    }
+    
 }

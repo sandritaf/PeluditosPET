@@ -1,11 +1,15 @@
 package Controlador;
 
 import Conexion.Conexion;
+import Modelo.M_Estilista;
 import Modelo.M_Natural;
 import Modelo.M_Veterinario;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class C_Veterinario {
 
@@ -17,7 +21,7 @@ public class C_Veterinario {
         ObjectContainer bd = c.getObjectContainer();
         veterinario.setCedula("V"+veterinario.getCedula());
         bd.store(veterinario);
-        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+        JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del veterinario");
         c.cerrarConexion();
     }
     
@@ -53,7 +57,7 @@ public class C_Veterinario {
 
         bd.store(encontrado);
 
-        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
+        JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al veterinario" );
 
         c.cerrarConexion();
     }
@@ -67,6 +71,27 @@ public class C_Veterinario {
         c.cerrarConexion();
     }
     
+        public M_Veterinario[] getVeterinarios(){
+        try {
+            M_Veterinario[] personas = null;
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null);
+            ObjectSet resultados = Conexion.getInstancia().buscar(veterinario);
+            int i = 0;
+            if (resultados.hasNext()) {
+                personas = new M_Veterinario[resultados.size()];
+                while (resultados.hasNext()) {
+                    personas[i] = (M_Veterinario) resultados.next();
+                    i++;
+                }
+            }
+            return personas;
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Veterinario->getVeterinarios: "+e);
+            return null;
+        }
+    }
+    
+    
     public void listarVeterinarios(){
         Conexion c = new Conexion();
         ObjectContainer bd = c.getObjectContainer();
@@ -77,6 +102,29 @@ public class C_Veterinario {
             System.out.println(resultado.next());
         }
         c.cerrarConexion();
+    }
+    
+    public DefaultTableModel cargarTabla() {
+        try{
+            String titulos[] = {"Cedula","Nombre","Apellido","Teléfono"};
+            DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+            M_Veterinario[] p = getVeterinarios();
+            if (p != null) {
+                for (M_Veterinario per : p) {
+                    Object[] cli = new Object[6];
+                    cli[0] = per.getCedula();
+                    cli[1] = per.getNombre();
+                    cli[2] = per.getApellido();
+                    cli[3] = per.getTelefono();
+//                    cli[5] = per.getNumMascotas();
+                    dtm.addRow(cli);
+                }
+            }
+            return dtm;
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
     }
     
 }

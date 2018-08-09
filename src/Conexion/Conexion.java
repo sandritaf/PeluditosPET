@@ -1,13 +1,9 @@
 
 package Conexion;
 
-import Modelo.M_Propietario;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
-import com.db4o.config.EmbeddedConfiguration;
-import com.db4o.ext.DatabaseClosedException;
-import com.db4o.ext.DatabaseReadOnlyException;
 
 public class Conexion {
     
@@ -17,7 +13,7 @@ public class Conexion {
     public ObjectContainer bd;
     
     public Conexion(){
-        bd = Db4oEmbedded.openFile(direccionGenova);
+        bd = Db4oEmbedded.openFile(direccionSandra);
     }
         
     public void cerrarConexion(){
