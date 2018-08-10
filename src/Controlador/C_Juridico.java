@@ -156,8 +156,8 @@ public class C_Juridico extends C_Propietario{
             encontrado.setRazonSocial(j.getRazonSocial());
             encontrado.setRIF(j.getRIF());
             encontrado.setMascoticas(mascotica);
-
             Conexion.getInstancia().guardar(encontrado);
+            
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -178,6 +178,7 @@ public class C_Juridico extends C_Propietario{
             encontrado.retirarMascota(mascotica);
 
             Conexion.getInstancia().guardar(encontrado);
+            
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

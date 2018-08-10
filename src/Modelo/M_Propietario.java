@@ -48,7 +48,6 @@ public class M_Propietario {
     public void setMascoticas(M_Mascota Mascoticas) {
         this.Mascoticas.add(Mascoticas);
         numeroMascotas++;
-        JOptionPane.showMessageDialog(null, "Se ha eliminado la mascota del cliente" );
     }
     
     public int getNumMascotas(){
@@ -58,6 +57,5 @@ public class M_Propietario {
     public void retirarMascota(M_Mascota mascotica){
         Mascoticas.remove(mascotica);
         numeroMascotas--;
-        JOptionPane.showMessageDialog(null, "Se ha eliminado la mascota del cliente" );
     }
 }
