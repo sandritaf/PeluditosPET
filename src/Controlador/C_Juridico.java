@@ -58,8 +58,11 @@ public class C_Juridico extends C_Propietario{
                 encontrado.setRazonSocial(j.getRazonSocial());
                 encontrado.setRIF(rif);
                 
-                C_Mascota controladorMascota = new C_Mascota();
-                controladorMascota.recorrerMascotasParaModificarDueno(viejoRIF,encontrado,rif);
+                if (rif.compareTo(viejoRIF)!=0){ //Si los rif son iguales no hay que modificar a la mascota
+                    C_Mascota controladorMascota = new C_Mascota();
+                    controladorMascota.recorrerMascotasParaModificarDueno(viejoRIF,encontrado,rif);
+                }
+               
 
                 Conexion.getInstancia().guardar(encontrado);
                 JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el cliente jurídico" );

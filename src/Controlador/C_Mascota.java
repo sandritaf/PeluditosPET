@@ -51,6 +51,7 @@ public class C_Mascota {
                 C_Natural c1 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
                 c1.eliminarMascota(mascota, n, n.getCedula());
+                
             } else {
                 C_Juridico c2 = new C_Juridico(); //Si su dueño es un cliente Juridico se elimina de su lista de mascotas
                 M_Juridico j = (M_Juridico)dueno;

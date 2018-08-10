@@ -74,9 +74,12 @@ public class C_Natural {
                 encontrado.setDireccion(n.getDireccion());
                 encontrado.setTelefono(n.getTelefono());
 
-                C_Mascota controladorMascota = new C_Mascota();
-                controladorMascota.recorrerMascotasParaModificarDueno(viejaCedula,encontrado,nuevaCedula);
-
+                //Si la cedula se mantiene igual no hay que modificar a la mascota
+                if (viejaCedula.compareTo(nuevaCedula)!=0){                     
+                    C_Mascota controladorMascota = new C_Mascota();
+                    controladorMascota.recorrerMascotasParaModificarDueno(viejaCedula,encontrado,nuevaCedula);
+                }
+                
                 Conexion.getInstancia().guardar(encontrado);
                 JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
             }
