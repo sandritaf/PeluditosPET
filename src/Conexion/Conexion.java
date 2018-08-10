@@ -14,7 +14,7 @@ public class Conexion {
     public ObjectContainer bd;
     
     public Conexion(){
-        bd = Db4oEmbedded.openFile(direccionSandra2);
+        bd = Db4oEmbedded.openFile(direccionGenova);
     }
         
     public void cerrarConexion(){

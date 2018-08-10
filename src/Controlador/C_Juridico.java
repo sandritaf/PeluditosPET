@@ -32,6 +32,10 @@ public class C_Juridico extends C_Propietario{
             M_Juridico juridico = new M_Juridico(null, null, null, null, rif, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
             M_Juridico encontrado = (M_Juridico) resultado.next();
+            
+            C_Mascota controladorMascota = new C_Mascota();
+            controladorMascota.recorrerMascotasParaEliminarlas(encontrado.getRIF(),encontrado);
+            
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del propietario "+ 
                                                 encontrado.getNombre() + " RIF: "+encontrado.getRIF());
@@ -40,23 +44,29 @@ public class C_Juridico extends C_Propietario{
         }
     }
     
-    public void modificarJuridico(String rif, M_Juridico j){
+    public void modificarJuridico(String rif, M_Juridico j, String viejoRIF){
         try{    
-            M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif, null);
+            M_Propietario juridico = new M_Juridico(null, null, null, null, null, viejoRIF, null);
+            
             ObjectSet result = Conexion.getInstancia().buscar(juridico);
-            M_Juridico encontrado = (M_Juridico) result.next();
+            if (!result.isEmpty()){
+                M_Juridico encontrado = (M_Juridico) result.next();
 
-            encontrado.setNombre(j.getNombre());
-            encontrado.setNombreGerente(j.getNombreGerente());
-            encontrado.setTelefono(j.getTelefono());
-            encontrado.setRazonSocial(j.getRazonSocial());
-            encontrado.setRIF(j.getRIF());
+                encontrado.setNombre(j.getNombre());
+                encontrado.setNombreGerente(j.getNombreGerente());
+                encontrado.setTelefono(j.getTelefono());
+                encontrado.setRazonSocial(j.getRazonSocial());
+                encontrado.setRIF(rif);
+                
+                C_Mascota controladorMascota = new C_Mascota();
+                controladorMascota.recorrerMascotasParaModificarDueno(viejoRIF,encontrado,rif);
 
-            Conexion.getInstancia().guardar(encontrado);
-
-            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el cliente jurídico" );
+                Conexion.getInstancia().guardar(encontrado);
+                JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el cliente jurídico" );
+            }
+           
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "error en C_Juridico->modificarJuridico: "+e);
         }
     }
     

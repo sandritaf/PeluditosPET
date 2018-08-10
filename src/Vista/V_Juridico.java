@@ -11,7 +11,7 @@ public class V_Juridico extends javax.swing.JPanel {
     
     M_Juridico modelo;
     C_Juridico controlador;
-    String nombre, nombreGerente, rif, telefono, direccion, razonSocial;
+    String nombre, nombreGerente, rif, telefono, direccion, razonSocial, auxRIF;
     
     public V_Juridico() {
         initComponents();
@@ -169,6 +169,11 @@ public class V_Juridico extends javax.swing.JPanel {
 
             }
         ));
+        tablaJuridicos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaJuridicosMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaJuridicos);
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
@@ -347,7 +352,7 @@ public class V_Juridico extends javax.swing.JPanel {
             
             modelo.actualizar(direccion, telefono, nombre, nombreGerente, rif, razonSocial);
             
-            controlador.modificarJuridico(rif,modelo);
+            controlador.modificarJuridico(rif,modelo,auxRIF);
             
             reiniciarValores();
             limpiarCajas();
@@ -380,6 +385,18 @@ public class V_Juridico extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_EliminarMouseClicked
+
+    private void tablaJuridicosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaJuridicosMousePressed
+        modelo = controlador.getPersona(tablaJuridicos.getValueAt(tablaJuridicos.getSelectedRow(), 0).toString());
+        
+        auxRIF = modelo.getRIF();
+        txtNombre.setText(modelo.getNombre());
+        txtRIF.setText(modelo.getRIF());
+        txtTelefono.setText(modelo.getTelefono());
+        txtNombreGerente.setText(modelo.getNombreGerente());
+        txtDireccion.setText(modelo.getDireccion());
+        txtRazonSocial.setText(modelo.getRazonSocial());
+    }//GEN-LAST:event_tablaJuridicosMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -462,6 +479,7 @@ public class V_Juridico extends javax.swing.JPanel {
         direccion = null;
         telefono = null;
         rif = null;
+        auxRIF = null;
     }
     
     //Devuelve el valor de un txtField

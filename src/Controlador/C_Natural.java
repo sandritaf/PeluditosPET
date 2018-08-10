@@ -29,15 +29,21 @@ public class C_Natural {
     
     public void eliminarNatural(String cedula){
         try{
+            C_Mascota controladorMascota = new C_Mascota();
+            
             M_Propietario natural = new M_Natural(null, null, null, null, cedula);
             ObjectSet result = Conexion.getInstancia().buscar(natural);
             M_Natural encontrado = (M_Natural) result.next();
+            
+            controladorMascota.recorrerMascotasParaEliminarlas(encontrado.getCedula(),encontrado);
+            
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del cliente natural");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    
     
      public M_Natural getPersona(String cedula){
         try{
@@ -53,22 +59,27 @@ public class C_Natural {
         }      
     }
     
-    public void modificarNatural(String cedula, M_Natural n){
+    public void modificarNatural(String viejaCedula, M_Natural n, String nuevaCedula){
         try{
-            M_Propietario natural = new M_Natural(null, null, null, null, cedula);
+            M_Propietario natural = new M_Natural(null, null, null, null, viejaCedula);            
             ObjectSet result = Conexion.getInstancia().buscar(natural);
-            M_Natural encontrado = (M_Natural) result.next();
+            
+            if (!result.isEmpty()){
+                M_Natural encontrado = (M_Natural) result.next();
 
-            encontrado.setNombre(n.getNombre());
-            encontrado.setApellido(n.getApellido());
-            encontrado.setCedula(n.getCedula()); 
-            encontrado.setEdad(n.getEdad());
-            encontrado.setDireccion(n.getDireccion());
-            encontrado.setTelefono(n.getTelefono());
+                encontrado.setNombre(n.getNombre());
+                encontrado.setApellido(n.getApellido());
+                encontrado.setCedula(nuevaCedula); 
+                encontrado.setEdad(n.getEdad());
+                encontrado.setDireccion(n.getDireccion());
+                encontrado.setTelefono(n.getTelefono());
 
-            Conexion.getInstancia().guardar(encontrado);
+                C_Mascota controladorMascota = new C_Mascota();
+                controladorMascota.recorrerMascotasParaModificarDueno(viejaCedula,encontrado,nuevaCedula);
 
-            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
+                Conexion.getInstancia().guardar(encontrado);
+                JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al cliente natural" );
+            }
 
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);

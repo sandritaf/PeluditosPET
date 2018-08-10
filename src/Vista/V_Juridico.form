@@ -247,6 +247,9 @@
                   <Table columnCount="0" rowCount="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaJuridicosMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

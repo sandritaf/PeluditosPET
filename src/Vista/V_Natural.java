@@ -11,7 +11,7 @@ public class V_Natural extends javax.swing.JPanel {
 
     M_Natural modelo;
     C_Natural controlador;
-    String nombre, apellido, cedula, telefono, direccion;
+    String nombre, apellido, cedula, telefono, direccion, auxCI;
     
     public V_Natural() {
         initComponents();
@@ -251,6 +251,11 @@ public class V_Natural extends javax.swing.JPanel {
 
             }
         ));
+        tablaNaturales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaNaturalesMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaNaturales);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -305,7 +310,7 @@ public class V_Natural extends javax.swing.JPanel {
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             telefono = getText(txtTelefono);
-            cedula = getText(txtCedula);
+            cedula = getText(txtCedula); //Hay que verificar que no exista
             direccion = txtDireccion.getText();
             
             modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);
@@ -326,8 +331,6 @@ public class V_Natural extends javax.swing.JPanel {
         }
         else{
             
-            // aqui hay que obtener la cedula anterior para modificar el mismo registro
-            
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             telefono = getText(txtTelefono);
@@ -336,7 +339,7 @@ public class V_Natural extends javax.swing.JPanel {
             
             modelo.actualizar(direccion, telefono, nombre, apellido, cedula);
             
-            controlador.modificarNatural(cedula,modelo);
+            controlador.modificarNatural(auxCI,modelo,cedula);
             
             reiniciarValores();
             limpiarCajas();
@@ -351,15 +354,14 @@ public class V_Natural extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El campo de Cedula debe estar lleno para realizar ésta acción");
         }
         else{
-            
             cedula = getText(txtCedula);
             
-            char valor = cedula.charAt(0);
+        /*    char valor = cedula.charAt(0);
             char v = 'V';            
             
             if(!(valor == v) ){ //equals("V")){
                 cedula = "V"+cedula;
-            }
+            }*/
             
             controlador.eliminarNatural(cedula);
             
@@ -377,6 +379,17 @@ public class V_Natural extends javax.swing.JPanel {
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
         controlador.listarNaturales();
     }//GEN-LAST:event_VerListaMouseClicked
+
+    private void tablaNaturalesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaNaturalesMousePressed
+        modelo = controlador.getPersona(tablaNaturales.getValueAt(tablaNaturales.getSelectedRow(), 0).toString());
+        
+        auxCI = modelo.getCedula();
+        txtNombre.setText(modelo.getNombre());
+        txtApellido.setText(modelo.getApellido());
+        txtTelefono.setText(modelo.getTelefono());
+        txtCedula.setText(modelo.getCedula());
+        txtDireccion.setText(modelo.getDireccion());
+    }//GEN-LAST:event_tablaNaturalesMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -452,6 +465,7 @@ public class V_Natural extends javax.swing.JPanel {
         direccion = null;
         telefono = null;
         cedula = null;
+        auxCI = null;
     }
     
     //Devuelve el valor de un txtField
