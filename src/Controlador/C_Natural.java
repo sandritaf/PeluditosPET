@@ -45,7 +45,7 @@ public class C_Natural {
     }
     
     
-     public M_Natural getPersona(String cedula){
+    public M_Natural getPersona(String cedula){
         try{
             M_Natural n = new M_Natural(null, null, null, null, cedula);
             ObjectSet resultado = Conexion.getInstancia().buscar(n);
