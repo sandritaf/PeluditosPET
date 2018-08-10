@@ -11,7 +11,7 @@ public class V_Veterinario extends javax.swing.JPanel {
 
     M_Veterinario modelo;
     C_Veterinario controlador;
-    String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion;
+    String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCedula;
     int edad, aniosE, precioTrabajo;
     
     public V_Veterinario() {
@@ -319,6 +319,11 @@ public class V_Veterinario extends javax.swing.JPanel {
 
             }
         ));
+        tablaVeterinarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaVeterinariosMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaVeterinarios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -457,6 +462,23 @@ public class V_Veterinario extends javax.swing.JPanel {
         tablaVeterinarios.setModel(this.controlador.cargarTabla());
     }//GEN-LAST:event_VerListaMouseClicked
 
+    private void tablaVeterinariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVeterinariosMousePressed
+        modelo = controlador.getPersona(tablaVeterinarios.getValueAt(tablaVeterinarios.getSelectedRow(), 0).toString());
+        
+        auxCedula = modelo.getCedula();
+        txtNombre.setText(modelo.getNombre());
+        txtRIF.setText(modelo.getRIF());
+        txtTelefono.setText(modelo.getTelefono());
+        txtApellido.setText(modelo.getApellido());
+        txtUniversidad.setText(modelo.getUniversidad());
+        txtProfesion.setText(modelo.getProfesion());
+        txtEspecializacion.setText(modelo.getEspecializacion());
+        txtEdad.setText(Integer.toString(modelo.getEdad()));
+        txtNivelI.setText(modelo.getNivelInstruccion());
+        txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
+        txtCedula.setText(modelo.getCedula());
+    }//GEN-LAST:event_tablaVeterinariosMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;
@@ -564,6 +586,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         universidad = null;
         especializacion = null;
         precioTrabajo = 0;
+        auxCedula = null;
     }
     
     //Devuelve el valor de un txtField

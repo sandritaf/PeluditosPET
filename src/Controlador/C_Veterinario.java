@@ -131,4 +131,18 @@ public class C_Veterinario {
         }
     }
     
+    public M_Veterinario getPersona(String cedula){
+        try{
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null, 0);
+            ObjectSet resultado = Conexion.getInstancia().buscar(veterinario);
+            if (resultado.isEmpty())
+                return null;
+            M_Veterinario encontrado = (M_Veterinario) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
+    }
+    
 }

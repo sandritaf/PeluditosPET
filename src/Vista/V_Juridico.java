@@ -352,7 +352,7 @@ public class V_Juridico extends javax.swing.JPanel {
             direccion = txtDireccion.getText();
             
             modelo.actualizar(direccion, telefono, nombre, nombreGerente, rif, razonSocial);
-            
+            //auxrif no tiene valor aquí
             controlador.modificarJuridico(rif,modelo,auxRIF);
             
             reiniciarValores();

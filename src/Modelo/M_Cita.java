@@ -5,13 +5,17 @@ import java.util.Date;
 
 public class M_Cita {
 
+    int id;
     M_Trabajador trabajador;
     M_Servicio servicio;
     Date fecha;
     String diagnosticoFinal;
     String tratamiento;
+    M_Mascota mascota;
 
-    public M_Cita(M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento) {
+    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento) {
+        this.id = id;
+        this.mascota = mascota;
         this.trabajador = trabajador;
         this.servicio = servicio;
         this.fecha = fecha;
@@ -20,7 +24,8 @@ public class M_Cita {
     }
     
     // Si el servicio no es médico, entonces si usaría este constructor, ya que no aplica tratamiento
-    public M_Cita(M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal) {
+    public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal) {
+        this.id = id;
         this.trabajador = trabajador;
         this.servicio = servicio;
         this.fecha = fecha;
@@ -65,6 +70,22 @@ public class M_Cita {
 
     public void setTratamiento(String tratamiento) {
         this.tratamiento = tratamiento;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public M_Mascota getMascota() {
+        return mascota;
+    }
+
+    public void setMascota(M_Mascota mascota) {
+        this.mascota = mascota;
     }
     
     
