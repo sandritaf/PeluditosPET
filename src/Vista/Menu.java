@@ -371,7 +371,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCitaMouseClicked
 
     private void btnFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFacturaMouseClicked
-        // TODO add your handling code here:
+        V_Factura panel = new V_Factura();
+        panel.setVisible(true);
+        panel.setLocation(0,0);
+        panel.setSize(PanelPrincipal.getSize());
+        System.out.println("Añadido Panel: Factura");
+        PanelPrincipal.removeAll();
+        PanelPrincipal.add(panel,BorderLayout.CENTER);
+        PanelPrincipal.updateUI();
     }//GEN-LAST:event_btnFacturaMouseClicked
 
     /**

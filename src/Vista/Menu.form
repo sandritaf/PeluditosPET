@@ -54,7 +54,7 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="PanelPrincipal" pref="498" max="32767" attributes="0"/>
+                      <Component id="PanelPrincipal" max="32767" attributes="0"/>
                       <Component id="pLateral" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
