@@ -4,11 +4,13 @@ public class M_Servicio {
     String nombre;
     String descripción;
     String observaciones;
+    int precio;
 
-    public M_Servicio(String nombre, String descripción, String observaciones) {
+    public M_Servicio(String nombre, String descripción, String observaciones, int precio) {
         this.nombre = nombre;
         this.descripción = descripción;
         this.observaciones = observaciones;
+        this.precio = precio;
     }
 
     public M_Servicio() {
@@ -37,6 +39,13 @@ public class M_Servicio {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
     
 }

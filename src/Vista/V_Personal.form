@@ -42,12 +42,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="jPanel6" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -56,11 +56,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="248" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="jPanel3" alignment="0" pref="501" max="32767" attributes="0"/>
+              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -106,7 +106,7 @@
                       <Component id="Limpiar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="VerLista" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -273,7 +273,7 @@
                                           <Component id="txtNombre" alignment="2" max="32767" attributes="0"/>
                                           <Component id="txtTelefono" alignment="2" min="-2" pref="140" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="txtNivelI" max="32767" attributes="0"/>
@@ -287,25 +287,21 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Profesion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Apellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RIF" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Edad" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtProfesion" alignment="1" pref="140" max="32767" attributes="0"/>
-                                  <Component id="txtEdad" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtRIF" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtApellido" alignment="1" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="Profesion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Apellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="RIF" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Edad" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="txtPK" min="-2" pref="67" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="txtProfesion" alignment="1" pref="140" max="32767" attributes="0"/>
+                          <Component id="txtEdad" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtRIF" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtApellido" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

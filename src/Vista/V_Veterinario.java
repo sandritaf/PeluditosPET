@@ -183,7 +183,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         });
 
         Cedula.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Cedula.setText("Cedula");
+        Cedula.setText("Cédula");
 
         Edad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Edad.setText("Edad");
@@ -214,7 +214,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtRIF.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Profesion.setText("Profesion");
+        Profesion.setText("Profesión");
 
         Universidad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Universidad.setText("Universidad");
@@ -222,10 +222,10 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtUniversidad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         Especializacion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Especializacion.setText("Especializacion");
+        Especializacion.setText("Especialización");
 
         Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Telefono.setText("Telefono");
+        Telefono.setText("Teléfono");
 
         txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
@@ -252,7 +252,7 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(txtUniversidad)
                     .addComponent(txtNivelI, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                     .addComponent(txtNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Profesion)
                     .addComponent(Apellido)
@@ -264,7 +264,7 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(txtApellido)
                     .addComponent(txtRIF)
                     .addComponent(txtEdad)
-                    .addComponent(txtProfesion, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(txtProfesion, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                     .addComponent(txtTelefono))
                 .addContainerGap())
         );
@@ -327,19 +327,19 @@ public class V_Veterinario extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jScrollPane2)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+                .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );

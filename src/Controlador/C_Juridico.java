@@ -187,7 +187,7 @@ public class C_Juridico extends C_Propietario{
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"RIF", "Nombre","Telefono","Gerente", "Razon Social","Mascotas registradas"};
+            String titulos[] = {"RIF", "Nombre","Telefono","Gerente", "Razon Social","Mascotas"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Juridico[] p = getJuridicos();
             if (p != null) {

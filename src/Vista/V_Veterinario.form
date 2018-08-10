@@ -38,12 +38,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="jScrollPane2" alignment="2" max="32767" attributes="0"/>
                       <Component id="jPanel4" alignment="2" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -52,8 +52,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="207" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
@@ -253,7 +253,7 @@
                           <Component id="txtNivelI" alignment="0" pref="140" max="32767" attributes="0"/>
                           <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Profesion" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Apellido" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -266,7 +266,7 @@
                           <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtRIF" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtEdad" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtProfesion" alignment="0" pref="143" max="32767" attributes="0"/>
+                          <Component id="txtProfesion" alignment="0" pref="137" max="32767" attributes="0"/>
                           <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -356,7 +356,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cedula"/>
+                <Property name="text" type="java.lang.String" value="C&#xe9;dula"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Edad">
@@ -435,7 +435,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Profesion"/>
+                <Property name="text" type="java.lang.String" value="Profesi&#xf3;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProfesion">
@@ -460,7 +460,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Especializacion"/>
+                <Property name="text" type="java.lang.String" value="Especializaci&#xf3;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Telefono">
@@ -468,7 +468,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Telefono"/>
+                <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTelefono">

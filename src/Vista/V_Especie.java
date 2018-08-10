@@ -11,10 +11,11 @@ public class V_Especie extends javax.swing.JPanel {
     M_Especie modelo;
     C_Especie controlador;
     String especie, raza;
-    
+    Menu m;
     
     public V_Especie() {
         initComponents();
+        //setSize(m.getSize());
     }
 
     @SuppressWarnings("unchecked")
@@ -87,7 +88,7 @@ public class V_Especie extends javax.swing.JPanel {
 
         Especie.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         Especie.setForeground(new java.awt.Color(255, 255, 255));
-        Especie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/huella72.png"))); // NOI18N
+        Especie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/especie72.png"))); // NOI18N
         Especie.setText("Especie");
         Especie.setFocusable(false);
         Especie.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -160,8 +161,8 @@ public class V_Especie extends javax.swing.JPanel {
 
         txtRaza.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        jLabel1.setText("Si la raza a ingresar, está asociada con una Especie existente, por favor revise las opciones que se muestran");
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel1.setText("Verifique que la especie a ingresar no exista");
 
         jRadioButton1.setBackground(new java.awt.Color(153, 204, 255));
         buttonGroup1.add(jRadioButton1);
@@ -186,21 +187,21 @@ public class V_Especie extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Raza, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbEspecieExistente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbEspecieExistente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(Raza)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,13 +238,11 @@ public class V_Especie extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 20, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

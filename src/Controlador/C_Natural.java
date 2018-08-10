@@ -70,7 +70,6 @@ public class C_Natural {
                 encontrado.setNombre(n.getNombre());
                 encontrado.setApellido(n.getApellido());
                 encontrado.setCedula(nuevaCedula); 
-                encontrado.setEdad(n.getEdad());
                 encontrado.setDireccion(n.getDireccion());
                 encontrado.setTelefono(n.getTelefono());
 
@@ -120,8 +119,7 @@ public class C_Natural {
 
             encontrado.setNombre(n.getNombre());
             encontrado.setApellido(n.getApellido());
-            encontrado.setCedula(n.getCedula()); //?????
-            encontrado.setEdad(n.getEdad());
+            encontrado.setCedula(n.getCedula());
             encontrado.setDireccion(n.getDireccion());
             encontrado.setTelefono(n.getTelefono());
             encontrado.setMascoticas(mascotica);
@@ -144,7 +142,6 @@ public class C_Natural {
             encontrado.setNombre(n.getNombre());
             encontrado.setApellido(n.getApellido());
             encontrado.setCedula(n.getCedula()); 
-            encontrado.setEdad(n.getEdad());
             encontrado.setDireccion(n.getDireccion());
             encontrado.setTelefono(n.getTelefono());
             encontrado.retirarMascota(mascotica);
@@ -179,7 +176,7 @@ public class C_Natural {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"Cedula", "Nombre","Apellido","Telefono", "Edad","Mascotas registradas"};
+            String titulos[] = {"Cedula", "Nombre","Apellido","Telefono","Mascotas"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Natural[] p = getNaturales();
             if (p != null) {
@@ -189,7 +186,6 @@ public class C_Natural {
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
-                    cli[4] = per.getEdad();
                     cli[5] = per.getNumMascotas();
                     dtm.addRow(cli);
                 }

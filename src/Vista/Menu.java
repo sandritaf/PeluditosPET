@@ -2,12 +2,13 @@ package Vista;
 
 import Conexion.Conexion;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-        setLocationRelativeTo(null);
+    //    setLocationRelativeTo(null);
     }
 
     
@@ -28,6 +29,9 @@ public class Menu extends javax.swing.JFrame {
         btnJuridico = new javax.swing.JLabel();
         btnNatural = new javax.swing.JLabel();
         btnSalir = new javax.swing.JLabel();
+        btnEspecie = new javax.swing.JLabel();
+        btnCita = new javax.swing.JLabel();
+        btnFactura = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,14 +40,14 @@ public class Menu extends javax.swing.JFrame {
         PeluditosPET.setFont(new java.awt.Font("Trebuchet MS", 1, 48)); // NOI18N
         PeluditosPET.setForeground(new java.awt.Color(102, 102, 102));
         PeluditosPET.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PeluditosPET.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/huella48.png"))); // NOI18N
+        PeluditosPET.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/huellaperro48.png"))); // NOI18N
         PeluditosPET.setText("Peluditos PET");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PeluditosPET, javax.swing.GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
+            .addComponent(PeluditosPET, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,7 +67,7 @@ public class Menu extends javax.swing.JFrame {
         );
         PanelPrincipalLayout.setVerticalGroup(
             PanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         pLateral.setBackground(new java.awt.Color(153, 204, 255));
@@ -148,43 +152,88 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnEspecie.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnEspecie.setForeground(new java.awt.Color(255, 255, 255));
+        btnEspecie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/especie48.png"))); // NOI18N
+        btnEspecie.setText("Especie");
+        btnEspecie.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEspecieMouseClicked(evt);
+            }
+        });
+
+        btnCita.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnCita.setForeground(new java.awt.Color(255, 255, 255));
+        btnCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cita48.png"))); // NOI18N
+        btnCita.setText("Cita");
+        btnCita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCitaMouseClicked(evt);
+            }
+        });
+
+        btnFactura.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnFactura.setForeground(new java.awt.Color(255, 255, 255));
+        btnFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/factura488.png"))); // NOI18N
+        btnFactura.setText("Factura");
+        btnFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFacturaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout pLateralLayout = new javax.swing.GroupLayout(pLateral);
         pLateral.setLayout(pLateralLayout);
         pLateralLayout.setHorizontalGroup(
             pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pLateralLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnServicio)
-                    .addComponent(btnPersonal)
-                    .addComponent(btnVeterinario)
-                    .addComponent(btnMascota)
-                    .addComponent(btnEstilista)
-                    .addComponent(btnJuridico)
-                    .addComponent(btnNatural)
-                    .addComponent(btnSalir))
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pLateralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMascota)
+                            .addComponent(btnVeterinario)
+                            .addComponent(btnPersonal)
+                            .addComponent(btnEstilista)
+                            .addComponent(btnEspecie))
+                        .addGap(18, 18, 18)
+                        .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnServicio)
+                            .addComponent(btnJuridico)
+                            .addComponent(btnNatural)
+                            .addComponent(btnCita)
+                            .addComponent(btnFactura)))
+                    .addGroup(pLateralLayout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(btnSalir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pLateralLayout.setVerticalGroup(
             pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pLateralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnMascota)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVeterinario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPersonal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEstilista)
-                .addGap(2, 2, 2)
-                .addComponent(btnServicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnJuridico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNatural)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMascota)
+                    .addComponent(btnServicio))
+                .addGap(40, 40, 40)
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEspecie)
+                    .addComponent(btnJuridico))
+                .addGap(40, 40, 40)
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVeterinario)
+                    .addComponent(btnNatural))
+                .addGap(40, 40, 40)
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPersonal)
+                    .addComponent(btnCita))
+                .addGap(40, 40, 40)
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEstilista)
+                    .addComponent(btnFactura))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnSalir)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -195,7 +244,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -205,7 +254,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                     .addComponent(pLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -306,6 +355,25 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirMouseClicked
 
+    private void btnEspecieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEspecieMouseClicked
+        V_Especie panel = new V_Especie();
+        panel.setVisible(true);
+        panel.setLocation(0,0);
+        panel.setSize(PanelPrincipal.getSize());
+        System.out.println("Añadido Panel: Especie");
+        PanelPrincipal.removeAll();
+        PanelPrincipal.add(panel,BorderLayout.CENTER);
+        PanelPrincipal.updateUI();
+    }//GEN-LAST:event_btnEspecieMouseClicked
+
+    private void btnCitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCitaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCitaMouseClicked
+
+    private void btnFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFacturaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFacturaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -345,7 +413,10 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel PeluditosPET;
+    private javax.swing.JLabel btnCita;
+    private javax.swing.JLabel btnEspecie;
     private javax.swing.JLabel btnEstilista;
+    private javax.swing.JLabel btnFactura;
     private javax.swing.JLabel btnJuridico;
     private javax.swing.JLabel btnMascota;
     private javax.swing.JLabel btnNatural;
@@ -357,4 +428,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pLateral;
     // End of variables declaration//GEN-END:variables
+
+    public Dimension getSize(){
+        return PanelPrincipal.getSize();
+    }
 }

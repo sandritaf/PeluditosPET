@@ -5,7 +5,7 @@ public class V_Servicio extends javax.swing.JPanel {
 
     public V_Servicio() {
         initComponents();
-        txtPK.setVisible(false);
+        //txtPK.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,15 +25,13 @@ public class V_Servicio extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         Nombre = new javax.swing.JLabel();
         Descripcion = new javax.swing.JLabel();
-        DiagnosticoFinal = new javax.swing.JLabel();
+        Precio = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         Observaciones = new javax.swing.JLabel();
-        cmbTipoServicio = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtDiagnosticoFinal = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
-        txtPK = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
 
         PanelFondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -144,13 +142,13 @@ public class V_Servicio extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
 
         Nombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Nombre.setText("Tipo");
+        Nombre.setText("Nombre");
 
         Descripcion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Descripcion.setText("Descripción");
 
-        DiagnosticoFinal.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        DiagnosticoFinal.setText("Diagnostico Final");
+        Precio.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Precio.setText("Precio");
 
         txtDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDescripcion.setFocusable(false);
@@ -158,16 +156,15 @@ public class V_Servicio extends javax.swing.JPanel {
         Observaciones.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Observaciones.setText("Observaciones");
 
-        cmbTipoServicio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbTipoServicio.setFocusable(false);
-
-        txtDiagnosticoFinal.setColumns(20);
-        txtDiagnosticoFinal.setRows(5);
-        jScrollPane1.setViewportView(txtDiagnosticoFinal);
-
         txtObservaciones.setColumns(20);
+        txtObservaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtObservaciones.setRows(5);
         jScrollPane3.setViewportView(txtObservaciones);
+
+        txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNombre.setFocusable(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -178,16 +175,15 @@ public class V_Servicio extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Descripcion)
                     .addComponent(Nombre)
-                    .addComponent(DiagnosticoFinal)
-                    .addComponent(Observaciones)
-                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(cmbTipoServicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Precio)
+                    .addComponent(Observaciones))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescripcion))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,18 +191,15 @@ public class V_Servicio extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre)
-                    .addComponent(cmbTipoServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Descripcion)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(DiagnosticoFinal)
-                        .addGap(38, 38, 38)
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Precio)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(Observaciones)
@@ -220,19 +213,19 @@ public class V_Servicio extends javax.swing.JPanel {
             PanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFondoLayout.createSequentialGroup()
                 .addComponent(PanelLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(PanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE))
-                .addGap(16, 16, 16))
+                    .addComponent(jScrollPane2))
+                .addGap(26, 26, 26))
         );
         PanelFondoLayout.setVerticalGroup(
             PanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFondoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(PanelLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -260,7 +253,6 @@ public class V_Servicio extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Descripcion;
-    private javax.swing.JLabel DiagnosticoFinal;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Limpiar;
@@ -269,25 +261,24 @@ public class V_Servicio extends javax.swing.JPanel {
     private javax.swing.JLabel Observaciones;
     private javax.swing.JPanel PanelFondo;
     private javax.swing.JPanel PanelLateral;
+    private javax.swing.JLabel Precio;
     private javax.swing.JLabel Servicio;
     private javax.swing.JLabel VerLista;
-    private javax.swing.JComboBox<String> cmbTipoServicio;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaServicios;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextArea txtDiagnosticoFinal;
+    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextArea txtObservaciones;
-    private javax.swing.JTextField txtPK;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCajas(){
-        txtPK.setText(null);
-        txtDiagnosticoFinal.setText(null);
+//        txtPK.setText(null);
         txtObservaciones.setText(null);
         txtDescripcion.setText(null);
-        cmbTipoServicio.setSelectedIndex(0);
+        txtNombre.setText(null);
+        txtPrecio.setText(null);
     }
 }

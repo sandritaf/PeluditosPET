@@ -4,7 +4,6 @@ public class M_Natural extends M_Propietario{
     String nombre;
     String apellido;
     String cedula;
-    int edad;
 
     public M_Natural() {
         super();
@@ -46,14 +45,6 @@ public class M_Natural extends M_Propietario{
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
     
     public String toString(){
