@@ -11,13 +11,15 @@ public class M_Factura {
     float subtotal;
     float total;
     String modoPago;
+    String nombreCliente;
 
-    public M_Factura(Date fecha, float iva, float subtotal, float total, String modoPago) {
+    public M_Factura(Date fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
         this.fecha = fecha;
         this.iva = iva;
         this.subtotal = subtotal;
         this.total = total;
         this.modoPago = modoPago;
+        this.nombreCliente = nombreCliente;
     }
 
     public Date getFecha() {
@@ -59,7 +61,29 @@ public class M_Factura {
     public void setModoPago(String modoPago) {
         this.modoPago = modoPago;
     }
+
+    public M_Cita getCita() {
+        return cita;
+    }
+
+    public void setCita(M_Cita cita) {
+        this.cita = cita;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
     
+    public String toString(){
+        return "IVA: " + iva + " SUBTOTAL: " + subtotal + " TOTAL: " + total + " CLIENTE: " + nombreCliente;
+    }
     
+    public String toString(Date fecha){
+        return fecha.toString();
+    }
     
 }
