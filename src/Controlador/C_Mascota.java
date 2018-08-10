@@ -66,23 +66,52 @@ public class C_Mascota {
         }
     }
     
-    public void modificarMascota(String id, M_Mascota m){
+    public void modificarMascota(String viejaID, String nombreViejo, String observacionesViejas, M_Mascota m, String nuevaID, M_Propietario p){
         try{
-            M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(viejaID, nombreViejo, null, null, 0, observacionesViejas);
             ObjectSet result = Conexion.getInstancia().buscar(mascota);
-            M_Mascota encontrado = (M_Mascota) result.next();
-
-            encontrado.setNombre(m.getNombre());
-            encontrado.setEspecie(m.getEspecie());
-            encontrado.setRaza(m.getRaza());
-            encontrado.setObservaciones(m.getObservaciones());
-            encontrado.setEdad(m.getEdad());
-
-            Conexion.getInstancia().guardar(encontrado);
-
-            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el animalito" );
+            ObjectSet result2 = Conexion.getInstancia().buscar(mascota);
+            M_Mascota encontrado2 = (M_Mascota) result2.next();
+            
+            if(!result.isEmpty()){
+                M_Mascota encontrado = (M_Mascota) result.next();
+                encontrado.setNombre(m.getNombre());
+                encontrado.setEspecie(m.getEspecie());
+                encontrado.setRaza(m.getRaza());
+                encontrado.setObservaciones(m.getObservaciones());
+                encontrado.setEdad(m.getEdad());
+                encontrado.setDueno(m.getDueno());
+                encontrado.setId(nuevaID);
+                
+                if (viejaID.compareTo(nuevaID)!=0){ //Si los id son iguales no hay que modificar a los dueños
+                    
+                    if (m.getDueno() instanceof M_Natural){ //Si su nuevo dueño es un cliente Natural se le agrega 
+                        C_Natural c1 = new C_Natural();
+                        M_Natural n = (M_Natural)m.getDueno();
+                        c1.agregarMascota(mascota, n, n.getCedula());
+                    } else {
+                        C_Juridico c2 = new C_Juridico(); //Si su nuevo dueño es un cliente Juridico se le agrega
+                        M_Juridico j = (M_Juridico)m.getDueno();
+                        c2.agregarMascota(j.getRIF(), j, mascota);
+                    }
+                                        
+                    if (p instanceof M_Natural){ //Si el anterior dueño era cliente natural
+                        C_Natural c3 = new C_Natural();
+                        M_Natural n = (M_Natural)p;
+                        c3.eliminarMascota(encontrado2, n, n.getCedula());
+                    } else {
+                        C_Juridico c4 = new C_Juridico(); //Si su dueño anterior era un cliente Juridico 
+                        M_Juridico j = (M_Juridico)p;
+                        c4.eliminarMascota(j.getRIF(), j, encontrado2);
+                    }
+                    
+                }
+                
+                Conexion.getInstancia().guardar(encontrado);
+                JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el animalito" );
+            }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error modificando mascota: "+e);
         }
     }
     
@@ -111,8 +140,18 @@ public class C_Mascota {
             JOptionPane.showMessageDialog(null, resultado.next());
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, e);
-        }
-        
+        }        
+    }
+    
+    public M_Propietario buscarDueno(String id, String nombre){
+        try{
+            M_Mascota mascota = new M_Mascota(id, nombre, null, null, 0, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
+            return ((M_Mascota)resultado.next()).getDueno();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }        
     }
     
     public void listarMascotas(){

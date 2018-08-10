@@ -42,6 +42,10 @@ public class M_Mascota {
     public String getEspecie() {
         return especie;
     }
+    
+    public M_Propietario getDueno(){
+        return dueno;
+    }
 
     public void setEspecie(String especie) {
         this.especie = especie;
@@ -75,9 +79,6 @@ public class M_Mascota {
         this.id = id;
     }
 
-    public M_Propietario getDueno() {
-        return dueno;
-    }
 
     public void setDueno(M_Propietario dueno) {
         this.dueno = dueno;
@@ -89,7 +90,17 @@ public class M_Mascota {
         this.observaciones = observaciones;
     }
 
-       public String toString(){
+    public String toString(){
         return id + " - " + nombre + " - " + especie + " - " + edad + " - " + raza + " - " + observaciones;
+    }
+       
+     public void actualizar(String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+        this.id = id;
+        this.nombre = nombre;
+        this.especie = especie;
+        this.raza = raza;
+        this.edad = edad;
+        this.observaciones = observaciones;
+        this.dueno = dueno;
     }
 }

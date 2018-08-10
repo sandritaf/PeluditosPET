@@ -19,7 +19,7 @@ public class V_Mascota extends javax.swing.JPanel {
     M_Mascota modelo;
     C_Mascota controlador;
     C_Propietario controladorDueno;
-    String id, nombre, raza, especie, observaciones;
+    String id, nombre, raza, especie, observaciones, auxID, auxNombre, auxObservaciones;
     int edad;
     
     public V_Mascota() {
@@ -365,7 +365,25 @@ public class V_Mascota extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
-        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
+        }
+        else{                    
+            id = getIDComboSelected(cmbDueno);
+            nombre = getText(txtNombre);
+            edad = Integer.parseInt(getText(txtEdad));
+            especie = getTextCombo(cmbEspecie);
+            raza = getTextCombo(cmbRaza);
+            observaciones = txtObservaciones.getText();
+            
+            modelo = new M_Mascota(id, nombre, especie, raza, edad, observaciones,obtenerDueno(cmbDueno));
+            
+            controlador.modificarMascota(auxID,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaMascotas.setModel(this.controlador.cargarTabla());
+        }
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -379,6 +397,10 @@ public class V_Mascota extends javax.swing.JPanel {
         txtEdad.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 4).toString());
         txtObservaciones.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 5).toString());
         controlador.setComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString(), cmbDueno);
+        
+        auxID = tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString();
+        auxNombre = txtNombre.getText();
+        auxObservaciones = txtObservaciones.getText();
     }//GEN-LAST:event_tablaMascotasMousePressed
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
@@ -501,6 +523,9 @@ public class V_Mascota extends javax.swing.JPanel {
         observaciones = null;
         especie = null;
         edad = 0;
+        auxID = null;
+        auxNombre = null;
+        auxObservaciones = null;
     }
     
     public String getText(JTextField txt){
