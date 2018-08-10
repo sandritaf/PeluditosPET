@@ -4,8 +4,8 @@ public class M_Veterinario extends M_Trabajador{
     String especializacion;
     String universidad;
 
-    public M_Veterinario(String especializacion, String universidad, String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono) {
-        super(nombre, apellido, cedula, RIF, edad, nivelInstruccion, profesion, anosExperiencia, telefono);
+    public M_Veterinario(String especializacion, String universidad, String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono, int precioTrabajo) {
+        super(nombre, apellido, cedula, RIF, edad, nivelInstruccion, profesion, anosExperiencia, telefono, precioTrabajo);
         this.especializacion = especializacion;
         this.universidad = universidad;
     }
@@ -29,7 +29,7 @@ public class M_Veterinario extends M_Trabajador{
         this.universidad = universidad;
     }
     
-    public void actualizar(String especializacion, String universidad, String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono) {
+    public void actualizar(String especializacion, String universidad, String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono, int precioTrabajo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
@@ -37,10 +37,11 @@ public class M_Veterinario extends M_Trabajador{
         this.edad = edad;
         this.nivelInstruccion = nivelInstruccion;
         this.profesion = profesion;
-        this.anosExperiencia = anosExperiencia;
+        this.aniosExperiencia = anosExperiencia;
         this.telefono = telefono;
         this.especializacion = especializacion;
         this.universidad = universidad;
+        this.precioTrabajo = precioTrabajo;
     }
     
     

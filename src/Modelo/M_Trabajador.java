@@ -8,13 +8,14 @@ public class M_Trabajador {
     int edad;
     String nivelInstruccion;
     String profesion;
-    int anosExperiencia;
+    int aniosExperiencia;
     String telefono;
+    int precioTrabajo;
 
     public M_Trabajador() {
     }
 
-    public M_Trabajador(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono) {
+    public M_Trabajador(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono, int precioTrabajo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
@@ -22,8 +23,9 @@ public class M_Trabajador {
         this.edad = edad;
         this.nivelInstruccion = nivelInstruccion;
         this.profesion = profesion;
-        this.anosExperiencia = anosExperiencia;
+        this.aniosExperiencia = anosExperiencia;
         this.telefono = telefono;
+        this.precioTrabajo = precioTrabajo;
     }
 
     public String getNombre() {
@@ -82,12 +84,12 @@ public class M_Trabajador {
         this.profesion = profesion;
     }
 
-    public int getAnosExperiencia() {
-        return anosExperiencia;
+    public int getAniosExperiencia() {
+        return aniosExperiencia;
     }
 
-    public void setAnosExperiencia(int anosExperiencia) {
-        this.anosExperiencia = anosExperiencia;
+    public void setAniosExperiencia(int aniosExperiencia) {
+        this.aniosExperiencia = aniosExperiencia;
     }
 
     public String getTelefono() {
@@ -97,8 +99,16 @@ public class M_Trabajador {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public int getPrecioTrabajo() {
+        return precioTrabajo;
+    }
+
+    public void setPrecioTrabajo(int precioTrabajo) {
+        this.precioTrabajo = precioTrabajo;
+    }
     
-    public void actualizar(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono) {
+    public void actualizar(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono, int precioTrabajo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
@@ -106,9 +116,16 @@ public class M_Trabajador {
         this.edad = edad;
         this.nivelInstruccion = nivelInstruccion;
         this.profesion = profesion;
-        this.anosExperiencia = anosExperiencia;
+        this.aniosExperiencia = anosExperiencia;
         this.telefono = telefono;
+        this.precioTrabajo = precioTrabajo;
     }
     
-    
+    public int precioSegunAnios(int aniosExperiencia){
+        if(aniosExperiencia == 0){
+            return 100;
+        }
+        else 
+            return 100 * aniosExperiencia;
+    }
 }

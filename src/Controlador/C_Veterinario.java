@@ -28,7 +28,7 @@ public class C_Veterinario {
     
     public void eliminarVeterinario(String cedula){
        try{
-            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null);
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(veterinario);
             M_Veterinario encontrado = (M_Veterinario) result.next();
             Conexion.getInstancia().eliminar(encontrado);
@@ -41,7 +41,7 @@ public class C_Veterinario {
     public void modificarVeterinario(String cedula, M_Veterinario v){
         try{
         
-            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null);
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(veterinario);
             M_Veterinario encontrado = (M_Veterinario) result.next();
 
@@ -49,7 +49,7 @@ public class C_Veterinario {
             encontrado.setApellido(v.getApellido());
             encontrado.setCedula(v.getCedula()); //?????
             encontrado.setEdad(v.getEdad());
-            encontrado.setAnosExperiencia(v.getAnosExperiencia());
+            encontrado.setAniosExperiencia(v.getAniosExperiencia());
             encontrado.setUniversidad(v.getUniversidad());
             encontrado.setEspecializacion(v.getEspecializacion());
             encontrado.setProfesion(v.getProfesion());
@@ -67,7 +67,7 @@ public class C_Veterinario {
     
     public void verVeterinario(String cedula){
         try{
-            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null);
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(veterinario);
             JOptionPane.showMessageDialog(null, resultado.next());
         }catch(Exception e){
@@ -78,7 +78,7 @@ public class C_Veterinario {
     public M_Veterinario[] getVeterinarios(){
         try {
             M_Veterinario[] personas = null;
-            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null);
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet resultados = Conexion.getInstancia().buscar(veterinario);
             int i = 0;
             if (resultados.hasNext()) {
@@ -98,7 +98,7 @@ public class C_Veterinario {
     
     public void listarVeterinarios(){
         try{
-            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null);
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(veterinario);
             System.out.println("Tengo " + resultado.size() + " veterinarios");
             while(resultado.hasNext()){

@@ -27,7 +27,7 @@ public class C_Trabajador {
     
     public void eliminarTrabajador(String cedula){
         try{
-            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(trabajador);
             M_Veterinario encontrado = (M_Veterinario) result.next();
             Conexion.getInstancia().guardar(encontrado);
@@ -39,7 +39,7 @@ public class C_Trabajador {
     
     public void modificarTrabajador(String cedula, M_Trabajador t){
         try{
-            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(trabajador);
             M_Veterinario encontrado = (M_Veterinario) result.next();
 
@@ -47,7 +47,7 @@ public class C_Trabajador {
             encontrado.setApellido(t.getApellido());
             encontrado.setCedula(t.getCedula());
             encontrado.setEdad(t.getEdad());
-            encontrado.setAnosExperiencia(t.getAnosExperiencia());
+            encontrado.setAniosExperiencia(t.getAniosExperiencia());
             encontrado.setProfesion(t.getProfesion());
             encontrado.setNivelInstruccion(t.getNivelInstruccion());
             encontrado.setRIF(t.getRIF());
@@ -63,7 +63,7 @@ public class C_Trabajador {
     
     public void verTrabajador(String cedula){
         try{
-            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null);
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(trabajador);
             JOptionPane.showMessageDialog(null, resultado.next());
         }catch(Exception e){
@@ -73,7 +73,7 @@ public class C_Trabajador {
     
     public void listarTrabajadores(){
         try{
-            M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null);
+            M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(trabajador);
             System.out.println("Tengo " + resultado.size() + " trabajadores");
             while(resultado.hasNext()){
@@ -87,7 +87,7 @@ public class C_Trabajador {
     public M_Trabajador[] getTrabajadores(){
         try {
             M_Trabajador[] personas = null;
-            M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null);
+            M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet resultados = Conexion.getInstancia().buscar(trabajador);
             int i = 0;
             if (resultados.hasNext()) {

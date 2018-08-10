@@ -12,7 +12,7 @@ public class V_Personal extends javax.swing.JPanel {
     M_Trabajador modelo;
     C_Trabajador controlador;
     String nombre, apellido, cedula, rif, telefono, nivelI, profesion;
-    int edad, aniosE;
+    int edad, aniosE, precioTrabajo;
     
     public V_Personal() {
         initComponents();
@@ -364,8 +364,9 @@ public class V_Personal extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.guardarTrabajador(modelo);
             
             reiniciarValores();
@@ -393,8 +394,9 @@ public class V_Personal extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             
             controlador.modificarTrabajador(cedula,modelo);
             
@@ -512,7 +514,9 @@ public class V_Personal extends javax.swing.JPanel {
             return true;
         if(txtVacio(txtProfesion))
             return true;        
-        if(txtVacio(txtTelefono))
+        if(txtVacio(txtNivelI))
+            return true;        
+        if(txtVacio(txtEdad))
             return true;        
         return false;
     }

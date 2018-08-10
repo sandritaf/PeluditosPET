@@ -23,7 +23,7 @@ public class C_Estilista {
     
     public void eliminarEstilista(String cedula){
         try{
-            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
+            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(estilista);
             M_Estilista encontrado = (M_Estilista) result.next();
             Conexion.getInstancia().eliminar(encontrado);
@@ -35,7 +35,7 @@ public class C_Estilista {
     
     public void modificarEstilista(String cedula, M_Estilista e){
         try{
-            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
+            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(estilista);
             M_Estilista encontrado = (M_Estilista) result.next();
 
@@ -46,7 +46,7 @@ public class C_Estilista {
             encontrado.setNivelInstruccion(e.getNivelInstruccion());
             encontrado.setProfesion(e.getProfesion());
             encontrado.setEdad(e.getEdad());
-            encontrado.setAnosExperiencia(e.getAnosExperiencia());
+            encontrado.setAniosExperiencia(e.getAniosExperiencia());
 
             Conexion.getInstancia().guardar(encontrado);
 
@@ -59,7 +59,7 @@ public class C_Estilista {
     
     public void verEstilista(String cedula){
         try{
-            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null);
+            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(estilista);
             JOptionPane.showMessageDialog(null, result.next());
         }catch(Exception e){
@@ -69,7 +69,7 @@ public class C_Estilista {
     
     public void listarEstilistas(){
        try{
-            M_Estilista estilista = new M_Estilista(null, null, null, null, 0, null, null, 0, null);
+            M_Estilista estilista = new M_Estilista(null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(estilista);
             System.out.println("Tengo " + resultado.size() + " estilistas");
             while(resultado.hasNext()){
@@ -83,7 +83,7 @@ public class C_Estilista {
     public M_Estilista[] getEstilistas(){
         try {
             M_Estilista[] personas = null;
-            M_Estilista estilista = new M_Estilista(null, null, null, null, 0, null, null, 0, null);
+            M_Estilista estilista = new M_Estilista(null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet resultados = Conexion.getInstancia().buscar(estilista);
             int i = 0;
             if (resultados.hasNext()) {

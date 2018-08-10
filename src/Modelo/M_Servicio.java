@@ -3,13 +3,11 @@ package Modelo;
 public class M_Servicio {
     String nombre;
     String descripción;
-    String diagnosticoFinal;
     String observaciones;
 
-    public M_Servicio(String nombre, String descripción, String diagnosticoFinal, String observaciones) {
+    public M_Servicio(String nombre, String descripción, String observaciones) {
         this.nombre = nombre;
         this.descripción = descripción;
-        this.diagnosticoFinal = diagnosticoFinal;
         this.observaciones = observaciones;
     }
 
@@ -30,14 +28,6 @@ public class M_Servicio {
 
     public void setDescripción(String descripción) {
         this.descripción = descripción;
-    }
-
-    public String getDiagnosticoFinal() {
-        return diagnosticoFinal;
-    }
-
-    public void setDiagnosticoFinal(String diagnosticoFinal) {
-        this.diagnosticoFinal = diagnosticoFinal;
     }
 
     public String getObservaciones() {

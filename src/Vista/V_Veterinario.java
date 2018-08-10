@@ -12,7 +12,7 @@ public class V_Veterinario extends javax.swing.JPanel {
     M_Veterinario modelo;
     C_Veterinario controlador;
     String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion;
-    int edad, aniosE;
+    int edad, aniosE, precioTrabajo;
     
     public V_Veterinario() {
         initComponents();
@@ -387,7 +387,7 @@ public class V_Veterinario extends javax.swing.JPanel {
             universidad = getText(txtUniversidad);
             especializacion = getText(txtEspecializacion);
             
-            modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.guardarVeterinario(modelo);
             
             reiniciarValores();
@@ -415,8 +415,9 @@ public class V_Veterinario extends javax.swing.JPanel {
             edad = Integer.parseInt(getText(txtEdad));
             universidad = getText(txtUniversidad);
             especializacion = getText(txtEspecializacion);
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.guardarVeterinario(modelo);
             
             reiniciarValores();
@@ -562,6 +563,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         rif = null;
         universidad = null;
         especializacion = null;
+        precioTrabajo = 0;
     }
     
     //Devuelve el valor de un txtField

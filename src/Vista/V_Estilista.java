@@ -13,13 +13,13 @@ public class V_Estilista extends javax.swing.JPanel {
     M_Estilista modelo;
     C_Estilista controlador;
     String nombre, apellido, cedula, rif, telefono, nivelI, profesion;
-    int edad, aniosE;
+    int edad, aniosE, precioTrabajo;
     
     public V_Estilista() {
         initComponents();
         txtPK.setVisible(false);
         controlador = new C_Estilista();
-    //    tablaEstilistas.setModel(this.controlador.cargarTabla());
+        tablaEstilistas.setModel(this.controlador.cargarTabla());
         reiniciarValores();
     }
 
@@ -373,13 +373,14 @@ public class V_Estilista extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.guardarEstilista(modelo);
             
             reiniciarValores();
             limpiarCajas();
-            //tablaEstilistas.setModel(this.controlador.cargarTabla());
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -403,7 +404,7 @@ public class V_Estilista extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-            //tablaEstilistas.setModel(this.controlador.cargarTabla());
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_EliminarMouseClicked
@@ -424,14 +425,15 @@ public class V_Estilista extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono);
+            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             
             controlador.modificarEstilista(cedula,modelo);
             
             reiniciarValores();
             limpiarCajas();
-            //tablaEstilistas.setModel(this.controlador.cargarTabla());
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_ModificarMouseClicked
@@ -537,6 +539,7 @@ public class V_Estilista extends javax.swing.JPanel {
         edad = 0;
         telefono = null;
         rif = null;
+        precioTrabajo = 0;
     }
     
     //Devuelve el valor de un txtField
