@@ -4,6 +4,7 @@ package Vista;
 import Controlador.C_Especie;
 import Modelo.M_Especie;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -11,7 +12,7 @@ import javax.swing.JTextField;
 
 public class V_Especie extends javax.swing.JPanel {
 
-    M_Especie modelo;
+    M_Especie modelo, aux;
     C_Especie controlador;
     String especie, raza;
     boolean modificar;
@@ -21,6 +22,7 @@ public class V_Especie extends javax.swing.JPanel {
         initComponents();
         controlador = new C_Especie();
         reiniciarValores();
+        limpiarCajas();
         tablaEspecies.setModel(controlador.cargarTabla());
         controlador.cargarEspecies(cmbEspecieExistente);
         //setSize(m.getSize());
@@ -180,6 +182,9 @@ public class V_Especie extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AgregarEspecieMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                AgregarEspecieMousePressed(evt);
+            }
         });
 
         Existente.setBackground(new java.awt.Color(153, 204, 255));
@@ -189,6 +194,9 @@ public class V_Especie extends javax.swing.JPanel {
         Existente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ExistenteMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ExistenteMousePressed(evt);
             }
         });
 
@@ -318,13 +326,14 @@ public class V_Especie extends javax.swing.JPanel {
                 
             if(Existente.isSelected()){
                 especie = getComboSelected(cmbEspecieExistente);
-                modelo = new M_Especie(especie, raza);
-                controlador.modificarEspecie(especie, raza, modelo);
+                aux = new M_Especie(especie, raza);
+                controlador.guardarEspecie(aux);
             }
                 
             reiniciarValores();
             limpiarCajas();
             tablaEspecies.setModel(controlador.cargarTabla());
+//            controlador.imprimir();
         }
     
     }//GEN-LAST:event_GuardarMouseClicked
@@ -336,7 +345,26 @@ public class V_Especie extends javax.swing.JPanel {
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
-
+            
+        if(getText(txtEspecie).isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");            
+        }
+        else{
+            
+            if(AgregarEspecie.isSelected()){
+                especie = getText(txtEspecie);
+            }
+            if(Existente.isSelected()){
+                especie = getComboSelected(cmbEspecieExistente);
+            }
+            
+            controlador.eliminarEspecie(especie);
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaEspecies.setModel(controlador.cargarTabla());
+//            controlador.imprimir();
+        }
         
     }//GEN-LAST:event_EliminarMouseClicked
 
@@ -357,6 +385,16 @@ public class V_Especie extends javax.swing.JPanel {
         txtEspecie.setEnabled(false);
         cmbEspecieExistente.setEnabled(true);
     }//GEN-LAST:event_ExistenteMouseClicked
+
+    private void AgregarEspecieMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarEspecieMousePressed
+       cmbEspecieExistente.setEnabled(false);
+        txtEspecie.setEnabled(true);
+    }//GEN-LAST:event_AgregarEspecieMousePressed
+
+    private void ExistenteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExistenteMousePressed
+        txtEspecie.setEnabled(false);
+        cmbEspecieExistente.setEnabled(true);
+    }//GEN-LAST:event_ExistenteMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -386,7 +424,7 @@ public class V_Especie extends javax.swing.JPanel {
         txtRaza.setText(null);
         controlador.cargarEspecies(cmbEspecieExistente);
         cmbEspecieExistente.setSelectedItem(0);
-      //  cmbEspecieExistente.setEnabled(false);
+        cmbEspecieExistente.setEnabled(false);
         txtEspecie.setEnabled(false);
     }
     

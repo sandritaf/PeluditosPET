@@ -332,6 +332,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AgregarEspecieMouseClicked"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AgregarEspecieMousePressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="Existente">
@@ -349,6 +350,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExistenteMouseClicked"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExistenteMousePressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbEspecieExistente">
