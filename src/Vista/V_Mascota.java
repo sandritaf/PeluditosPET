@@ -28,6 +28,7 @@ public class V_Mascota extends javax.swing.JPanel {
         
         controlador = new C_Mascota();
         controlador.cargarDuenos(cmbDueno/*, "Natural"*/);
+        controlador.cargarEspecies(cmbEspecie);
         tablaMascotas.setModel(this.controlador.cargarTabla());
         reiniciarValores();
     }
@@ -184,6 +185,11 @@ public class V_Mascota extends javax.swing.JPanel {
         Especie.setText("Especie");
 
         cmbEspecie.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbEspecie.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbEspecieItemStateChanged(evt);
+            }
+        });
 
         Raza.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Raza.setText("Raza");
@@ -415,6 +421,10 @@ public class V_Mascota extends javax.swing.JPanel {
             tablaMascotas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_EliminarMouseClicked
+
+    private void cmbEspecieItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEspecieItemStateChanged
+        controlador.cargarRazas(cmbRaza, getTextCombo(cmbEspecie));
+    }//GEN-LAST:event_cmbEspecieItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

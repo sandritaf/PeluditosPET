@@ -362,9 +362,11 @@ public class V_Personal extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
-            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            
             
             modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            modelo.setPrecioTrabajo(precioTrabajo);
             controlador.guardarTrabajador(modelo);
             
             reiniciarValores();
@@ -395,6 +397,8 @@ public class V_Personal extends javax.swing.JPanel {
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             
             modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            modelo.setPrecioTrabajo(precioTrabajo);
             
             controlador.modificarTrabajador(cedula,modelo);
             
@@ -412,14 +416,14 @@ public class V_Personal extends javax.swing.JPanel {
         }
         else{
             
-            cedula = getText(txtCedula);
-            
-            char valor = cedula.charAt(0);
-            char v = 'V';            
-            
-            if(!(valor == v) ){
-                cedula = "V"+cedula;
-            }
+//            cedula = getText(txtCedula);
+//            
+//            char valor = cedula.charAt(0);
+//            char v = 'V';            
+//            
+//            if(!(valor == v) ){
+//                cedula = "V"+cedula;
+//            }
             
             controlador.eliminarTrabajador(cedula);
             

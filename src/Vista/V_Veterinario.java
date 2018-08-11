@@ -375,11 +375,9 @@ public class V_Veterinario extends javax.swing.JPanel {
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
         
-    if(cajasVacias()){
-            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
-        }
-        else{
-            
+        if(cajasVacias()){
+                JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
+        }else{
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             cedula = getText(txtCedula);
@@ -391,10 +389,10 @@ public class V_Veterinario extends javax.swing.JPanel {
             edad = Integer.parseInt(getText(txtEdad));
             universidad = getText(txtUniversidad);
             especializacion = getText(txtEspecializacion);
-            
+
             modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.guardarVeterinario(modelo);
-            
+
             reiniciarValores();
             limpiarCajas();
             tablaVeterinarios.setModel(this.controlador.cargarTabla());

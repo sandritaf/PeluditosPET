@@ -364,10 +364,13 @@ public class V_Estilista extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
-            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            
             
             modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            modelo.setPrecioTrabajo(precioTrabajo);
             controlador.guardarEstilista(modelo);
+            
             
             reiniciarValores();
             limpiarCajas();
@@ -382,14 +385,14 @@ public class V_Estilista extends javax.swing.JPanel {
         }
         else{
             
-            cedula = getText(txtCedula);
-            
-            char valor = cedula.charAt(0);
-            char v = 'V';            
-            
-            if(!(valor == v) ){
-                cedula = "V"+cedula;
-            }
+//            cedula = getText(txtCedula);
+//            
+//            char valor = cedula.charAt(0);
+//            char v = 'V';            
+//            
+//            if(!(valor == v) ){
+//                cedula = "V"+cedula;
+//            }
             
             controlador.eliminarEstilista(cedula);
             
@@ -416,9 +419,11 @@ public class V_Estilista extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
-            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            
             
             modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            modelo.setPrecioTrabajo(precioTrabajo);
             
             controlador.modificarEstilista(cedula,modelo);
             

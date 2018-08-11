@@ -11,10 +11,15 @@ public class V_Especie extends javax.swing.JPanel {
     M_Especie modelo;
     C_Especie controlador;
     String especie, raza;
+    boolean modificar;
     Menu m;
     
     public V_Especie() {
         initComponents();
+        controlador = new C_Especie();
+        reiniciarValores();
+        tablaEspecies.setModel(controlador.cargarTabla());
+        controlador.cargarEspecies(cmbEspecieExistente);
         //setSize(m.getSize());
     }
 
@@ -36,11 +41,11 @@ public class V_Especie extends javax.swing.JPanel {
         Raza = new javax.swing.JLabel();
         txtRaza = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        agregarEspecie = new javax.swing.JRadioButton();
+        Existente = new javax.swing.JRadioButton();
         cmbEspecieExistente = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaEstilistas = new javax.swing.JTable();
+        tablaEspecies = new javax.swing.JTable();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -164,20 +169,20 @@ public class V_Especie extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel1.setText("Verifique que la especie a ingresar no exista");
 
-        jRadioButton1.setBackground(new java.awt.Color(153, 204, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jRadioButton1.setText("Agregar Especie");
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        agregarEspecie.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(agregarEspecie);
+        agregarEspecie.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        agregarEspecie.setText("Agregar Especie");
+        agregarEspecie.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton1MouseClicked(evt);
+                agregarEspecieMouseClicked(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(153, 204, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jRadioButton2.setText("Existente");
+        Existente.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(Existente);
+        Existente.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Existente.setText("Existente");
 
         cmbEspecieExistente.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
 
@@ -190,11 +195,11 @@ public class V_Especie extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(agregarEspecie)
                         .addGap(4, 4, 4)
                         .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2)
+                        .addComponent(Existente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbEspecieExistente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -211,8 +216,8 @@ public class V_Especie extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
+                    .addComponent(agregarEspecie)
+                    .addComponent(Existente)
                     .addComponent(cmbEspecieExistente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -221,8 +226,8 @@ public class V_Especie extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tablaEstilistas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaEstilistas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEspecies.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaEspecies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -230,7 +235,7 @@ public class V_Especie extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane2.setViewportView(tablaEstilistas);
+        jScrollPane2.setViewportView(tablaEspecies);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -268,7 +273,27 @@ public class V_Especie extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-
+        if (agregarEspecie.isSelected())
+            especie = txtEspecie.getText();
+        else{
+            especie = cmbEspecieExistente.getSelectedItem().toString();
+            modificar = true;
+        }
+        
+        raza = txtRaza.getText();
+        modelo = new M_Especie(especie,raza);
+        
+        if(modificar){
+            System.out.println("Se va a modificar");
+            controlador.modificar(especie,raza,modelo);
+        }else{            
+            controlador.guardar(modelo);
+        }
+        
+        tablaEspecies.setModel(controlador.cargarTabla());
+        controlador.cargarEspecies(cmbEspecieExistente);
+        reiniciarValores();
+        limpiarCajas();
         
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -288,33 +313,32 @@ public class V_Especie extends javax.swing.JPanel {
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
-        //tablaEstilistas.setModel(this.controlador.cargarTabla());
-        //controlador.listarEstilistas();
+        controlador.listarEspecies();
     }//GEN-LAST:event_VerListaMouseClicked
 
-    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+    private void agregarEspecieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarEspecieMouseClicked
         cmbEspecieExistente.setEnabled(false);
-    }//GEN-LAST:event_jRadioButton1MouseClicked
+    }//GEN-LAST:event_agregarEspecieMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Especie;
+    private javax.swing.JRadioButton Existente;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel Raza;
     private javax.swing.JLabel VerLista;
+    private javax.swing.JRadioButton agregarEspecie;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbEspecieExistente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaEstilistas;
+    private javax.swing.JTable tablaEspecies;
     private javax.swing.JTextField txtEspecie;
     private javax.swing.JTextField txtRaza;
     // End of variables declaration//GEN-END:variables
@@ -355,6 +379,7 @@ public class V_Especie extends javax.swing.JPanel {
     public void reiniciarValores(){
         especie = null;
         raza = null;
+        modificar = false;
     }
     
     //Devuelve el valor de un txtField

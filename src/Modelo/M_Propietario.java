@@ -22,7 +22,7 @@ public class M_Propietario {
         this.direccion = direccion;
         this.telefono = telefono;
         Mascoticas.add(Mascotini);
-        numeroMascotas = 0;
+        numeroMascotas = 1;
     }
 
     public String getDireccion() {

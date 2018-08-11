@@ -2,6 +2,7 @@
 package Controlador;
 
 import Conexion.Conexion;
+import Modelo.M_Especie;
 import Modelo.M_Juridico;
 import Modelo.M_Mascota;
 import Modelo.M_Natural;
@@ -255,6 +256,24 @@ public class C_Mascota {
             return null;
         }
     }
+    
+    public String[] getRazas(String especie){
+        try {
+            String[] x = null;
+            M_Especie e = new M_Especie(especie, null);
+            ObjectSet resultados = Conexion.getInstancia().buscar(e);
+            if (resultados.hasNext()) {
+                x = new String[resultados.size()];
+                e = (M_Especie)resultados.next();
+                for (int i=0; i<e.getNumRazas(); i++)
+                    x[i] = e.razas.get(i).toString();                    
+            }
+            return x;
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
+            return null;
+        }
+    }
    
     
     public DefaultTableModel cargarTabla() {
@@ -300,6 +319,42 @@ public class C_Mascota {
         }
     }
     
+    public void cargarEspecies(JComboBox especies){
+        try{
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux;
+            especies.setModel(aModel);
+            M_Especie p = new M_Especie(null,null);
+            ObjectSet rs = Conexion.getInstancia().buscar(p);
+
+            // si hay propietarios naturales
+            if(rs.size() >0){
+                while(rs.hasNext() ){
+                    aux = ((M_Especie)rs.next()).getNombre();
+                    aModel.addElement(aux);
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     
+    public void cargarRazas(JComboBox razas, String especie){
+        try{
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux;
+            razas.setModel(aModel);
+            String[] x = getRazas(especie);
+
+            if (x != null) {
+                for (String per : x) {
+                    aux = per.toString();
+                    aModel.addElement(aux);
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     
 }
