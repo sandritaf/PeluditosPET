@@ -3,7 +3,10 @@ package Vista;
 
 import Controlador.C_Especie;
 import Modelo.M_Especie;
+import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class V_Especie extends javax.swing.JPanel {
@@ -41,7 +44,7 @@ public class V_Especie extends javax.swing.JPanel {
         Raza = new javax.swing.JLabel();
         txtRaza = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        agregarEspecie = new javax.swing.JRadioButton();
+        AgregarEspecie = new javax.swing.JRadioButton();
         Existente = new javax.swing.JRadioButton();
         cmbEspecieExistente = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -169,13 +172,13 @@ public class V_Especie extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel1.setText("Verifique que la especie a ingresar no exista");
 
-        agregarEspecie.setBackground(new java.awt.Color(153, 204, 255));
-        buttonGroup1.add(agregarEspecie);
-        agregarEspecie.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        agregarEspecie.setText("Agregar Especie");
-        agregarEspecie.addMouseListener(new java.awt.event.MouseAdapter() {
+        AgregarEspecie.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(AgregarEspecie);
+        AgregarEspecie.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        AgregarEspecie.setText("Agregar Especie");
+        AgregarEspecie.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                agregarEspecieMouseClicked(evt);
+                AgregarEspecieMouseClicked(evt);
             }
         });
 
@@ -183,6 +186,11 @@ public class V_Especie extends javax.swing.JPanel {
         buttonGroup1.add(Existente);
         Existente.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Existente.setText("Existente");
+        Existente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExistenteMouseClicked(evt);
+            }
+        });
 
         cmbEspecieExistente.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
 
@@ -195,7 +203,7 @@ public class V_Especie extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(agregarEspecie)
+                        .addComponent(AgregarEspecie)
                         .addGap(4, 4, 4)
                         .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -216,7 +224,7 @@ public class V_Especie extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(agregarEspecie)
+                    .addComponent(AgregarEspecie)
                     .addComponent(Existente)
                     .addComponent(cmbEspecieExistente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -273,28 +281,52 @@ public class V_Especie extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-        if (agregarEspecie.isSelected())
-            especie = txtEspecie.getText();
+//        if (agregarEspecie.isSelected())
+//            especie = txtEspecie.getText();
+//        else{
+//            especie = cmbEspecieExistente.getSelectedItem().toString();
+//            modificar = true;
+//        }
+//        
+//        raza = txtRaza.getText();
+//        modelo = new M_Especie(especie,raza);
+//        
+//        if(modificar){
+//            System.out.println("Se va a modificar");
+//            controlador.modificar(especie,raza,modelo);
+//        }else{            
+//            controlador.guardar(modelo);
+//        }
+//        
+//        tablaEspecies.setModel(controlador.cargarTabla());
+//        controlador.cargarEspecies(cmbEspecieExistente);
+//        reiniciarValores();
+//        limpiarCajas();
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");            
+        }
         else{
-            especie = cmbEspecieExistente.getSelectedItem().toString();
-            modificar = true;
+            
+            raza = getText(txtRaza);
+            
+            if(AgregarEspecie.isSelected()){
+                especie = getText(txtEspecie);
+                modelo = new M_Especie(especie, raza);
+                controlador.guardarEspecie(modelo);
+            }
+                
+            if(Existente.isSelected()){
+                especie = getComboSelected(cmbEspecieExistente);
+                modelo = new M_Especie(especie, raza);
+                controlador.modificarEspecie(especie, raza, modelo);
+            }
+                
+            reiniciarValores();
+            limpiarCajas();
+            tablaEspecies.setModel(controlador.cargarTabla());
         }
-        
-        raza = txtRaza.getText();
-        modelo = new M_Especie(especie,raza);
-        
-        if(modificar){
-            System.out.println("Se va a modificar");
-            controlador.modificar(especie,raza,modelo);
-        }else{            
-            controlador.guardar(modelo);
-        }
-        
-        tablaEspecies.setModel(controlador.cargarTabla());
-        controlador.cargarEspecies(cmbEspecieExistente);
-        reiniciarValores();
-        limpiarCajas();
-        
+    
     }//GEN-LAST:event_GuardarMouseClicked
 
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
@@ -316,12 +348,19 @@ public class V_Especie extends javax.swing.JPanel {
         controlador.listarEspecies();
     }//GEN-LAST:event_VerListaMouseClicked
 
-    private void agregarEspecieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarEspecieMouseClicked
+    private void AgregarEspecieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarEspecieMouseClicked
         cmbEspecieExistente.setEnabled(false);
-    }//GEN-LAST:event_agregarEspecieMouseClicked
+        txtEspecie.setEnabled(true);
+    }//GEN-LAST:event_AgregarEspecieMouseClicked
+
+    private void ExistenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExistenteMouseClicked
+        txtEspecie.setEnabled(false);
+        cmbEspecieExistente.setEnabled(true);
+    }//GEN-LAST:event_ExistenteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton AgregarEspecie;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Especie;
     private javax.swing.JRadioButton Existente;
@@ -330,7 +369,6 @@ public class V_Especie extends javax.swing.JPanel {
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel Raza;
     private javax.swing.JLabel VerLista;
-    private javax.swing.JRadioButton agregarEspecie;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbEspecieExistente;
     private javax.swing.JLabel jLabel1;
@@ -346,11 +384,14 @@ public class V_Especie extends javax.swing.JPanel {
     private void limpiarCajas(){
         txtEspecie.setText(null);
         txtRaza.setText(null);
-        cmbEspecieExistente.setSelectedIndex(0);
+        controlador.cargarEspecies(cmbEspecieExistente);
+        cmbEspecieExistente.setSelectedItem(0);
+      //  cmbEspecieExistente.setEnabled(false);
+        txtEspecie.setEnabled(false);
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
-    public int getComboSelected(JComboBox combito){
+    public int getIDComboSelected(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
@@ -359,19 +400,28 @@ public class V_Especie extends javax.swing.JPanel {
         
         return Integer.parseInt(codigoFinal);
     }
+    //Devuelve el codigo de la opcion seleccionada en un combo
+    public String getComboSelected(JComboBox combito){
+        return combito.getSelectedItem().toString();
+    }
     
     public boolean txtVacio(JTextField txt){
         return (txt.getText().isEmpty());
-         //   return true;
-       // return false;
     }
     
     //Verifica si hay txtFields sin llenar
     public boolean cajasVacias(){
-        if(txtVacio(txtEspecie))      
-        return true;
-        if(txtVacio(txtEspecie))      
-        return true;
+        if(txtVacio(txtRaza))      
+            return true;
+        // si se seleccionó especie pero no se escribió nada en el txtField
+        if(AgregarEspecie.isSelected() && !Existente.isSelected()){
+            if(txtVacio(txtEspecie))
+                return true;
+        }
+        // si no se seleccionó ninguna opción
+        if(!AgregarEspecie.isSelected() && !Existente.isSelected()){
+            return true;
+        }
         return false;
     }
     

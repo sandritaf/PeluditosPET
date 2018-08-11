@@ -11,7 +11,7 @@ public class V_Personal extends javax.swing.JPanel {
 
     M_Trabajador modelo;
     C_Trabajador controlador;
-    String nombre, apellido, cedula, rif, telefono, nivelI, profesion;
+    String nombre, apellido, cedula, rif, telefono, nivelI, profesion, auxCI;
     int edad, aniosE, precioTrabajo;
     
     public V_Personal() {
@@ -167,6 +167,11 @@ public class V_Personal extends javax.swing.JPanel {
 
             }
         ));
+        tablaPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaPersonalMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaPersonal);
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
@@ -239,16 +244,12 @@ public class V_Personal extends javax.swing.JPanel {
                             .addComponent(Cedula))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(txtAniosE, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre)
-                                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addComponent(txtNivelI)
-                                .addGap(18, 18, 18))))
+                            .addComponent(txtAniosE, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNivelI, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(Profesion1)
                         .addGap(244, 244, 244)))
@@ -433,6 +434,21 @@ public class V_Personal extends javax.swing.JPanel {
         }       
         
     }//GEN-LAST:event_EliminarMouseClicked
+
+    private void tablaPersonalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPersonalMousePressed
+        modelo = controlador.getPersona(tablaPersonal.getValueAt(tablaPersonal.getSelectedRow(), 0).toString());
+        
+        auxCI = modelo.getCedula();
+        txtNombre.setText(modelo.getNombre());
+        txtApellido.setText(modelo.getApellido());
+        txtTelefono.setText(modelo.getTelefono());
+        txtCedula.setText(modelo.getCedula());
+        txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
+        txtEdad.setText(Integer.toString(modelo.getEdad()));
+        txtRIF.setText(modelo.getRIF());
+        txtProfesion.setText(modelo.getProfesion());
+        txtNivelI.setText(modelo.getNivelInstruccion());
+    }//GEN-LAST:event_tablaPersonalMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

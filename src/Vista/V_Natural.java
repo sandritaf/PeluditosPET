@@ -16,8 +16,9 @@ public class V_Natural extends javax.swing.JPanel {
     public V_Natural() {
         initComponents();
         controlador = new C_Natural();
-        tablaNaturales.setModel(this.controlador.cargarTabla());
+        //tablaNaturales.setModel(this.controlador.cargarTabla());
         reiniciarValores();
+        tablaNaturales.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -378,6 +379,7 @@ public class V_Natural extends javax.swing.JPanel {
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
         controlador.listarNaturales();
+        tablaNaturales.setModel(controlador.cargarTabla());
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaNaturalesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaNaturalesMousePressed

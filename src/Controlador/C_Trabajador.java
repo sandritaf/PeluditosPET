@@ -128,5 +128,18 @@ public class C_Trabajador {
         }
     }
     
-    
+    public M_Trabajador getPersona(String cedula){
+        try{
+            M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
+            ObjectSet resultado = Conexion.getInstancia().buscar(trabajador);
+            if (resultado.isEmpty())
+                return null;
+            M_Trabajador encontrado = (M_Trabajador) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
+    }
+     
 }

@@ -266,7 +266,7 @@ public class C_Mascota {
                 x = new String[resultados.size()];
                 e = (M_Especie)resultados.next();
                 for (int i=0; i<e.getNumRazas(); i++)
-                    x[i] = e.razas.get(i).toString();                    
+                    x[i] = e.Razas.get(i).toString();                    
             }
             return x;
         } catch (DatabaseClosedException | DatabaseReadOnlyException e) {

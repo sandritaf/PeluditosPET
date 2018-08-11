@@ -82,21 +82,7 @@ public class C_Juridico extends C_Propietario{
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    public M_Juridico getPersona(String rif){
-        try{
-            M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif, null);
-            ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
-            if (resultado.isEmpty())
-                return null;
-            M_Juridico encontrado = (M_Juridico) resultado.next();
-            return encontrado;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-            return null;  
-        }      
-    }
-    
+        
     public M_Juridico[] getJuridicos(){
         try {
             M_Juridico[] personas = null;
@@ -207,8 +193,20 @@ public class C_Juridico extends C_Propietario{
             JOptionPane.showMessageDialog(null, e);
             return null;
         }
-        
-        
+    }
+    
+    public M_Juridico getPersona(String rif){
+        try{
+            M_Juridico juridico = new M_Juridico(null, null, null, null, rif, null); 
+            ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
+            if (resultado.isEmpty())
+                return null;
+            M_Juridico encontrado = (M_Juridico) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
     }
     
 }

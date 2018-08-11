@@ -6,11 +6,11 @@ public class M_Especie {
     
     private String nombre;
     private int cantRazas;
-    public ArrayList<String> razas = new ArrayList<>();
+    public ArrayList<String> Razas = new ArrayList<>();
     
     public M_Especie(String nombre, String raza){
         this.nombre = nombre;
-        razas.add(raza);
+        Razas.add(raza);
         cantRazas = 1;
     }
     
@@ -27,15 +27,15 @@ public class M_Especie {
     }
     
     private boolean razaExiste(String raza){
-        if (razas.indexOf(raza) == -1)
+        if (Razas.indexOf(raza) == -1)
             return false;
-        System.out.println("Se intenta añadir: "+raza+" y se encontro coincidencia con: "+razas.get(razas.indexOf(raza)));
+        System.out.println("Se intenta añadir: "+raza+" y se encontro coincidencia con: "+Razas.get(Razas.indexOf(raza)));
         return true;
     }
     
     public void setRaza(String raza){
         if (!razaExiste(raza)){ //Si no existe la raza
-            this.razas.add(raza);
+            this.Razas.add(raza);
             System.out.println("Añadida UNA especie ");
             cantRazas++;
             imprimir();
@@ -45,9 +45,32 @@ public class M_Especie {
     public void imprimir(){
         System.out.print("Especie: "+nombre+" | Razas: ");
         for ( int i = 0 ; i<cantRazas; i++){ 
-            System.out.print(" - "+razas.get(i).toString());
+            System.out.print(" - "+Razas.get(i).toString());
         }
         System.out.println();
     }
     
+//    public void setRazas(String raza) {
+//        if(buscarRaza(raza)){
+//            this.Razas.set(posRaza, raza);//this.Razas.set(cantRazas, raza) add(raza);
+//        }
+//        else
+//            this.Razas.add(raza);
+//        cantRazas++;
+//    }
+    
+//    public boolean buscarRaza(String raza) {
+//        for(String a: Razas) {
+//            if(raza.equals(a)) {
+//                posRaza = a.indexOf(raza);
+//                JOptionPane.showMessageDialog(null, "Posicion: "+posRaza);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+    
+    public String toString(){
+        return nombre;
+    }
 }
