@@ -13,21 +13,48 @@ import javax.swing.table.DefaultTableModel;
 
 public class C_Especie {
 
-    private ArrayList <String> Razas;
+    //private ArrayList <String> Razas;
     
     public C_Especie(){
-        Razas = new ArrayList<>();
+    //    Razas = new ArrayList<>();
     }
     
-    public void guardarEspecie(M_Especie especie){
+//    public void guardarEspecie(M_Especie especie, String raza){
+//        try{
+//            if(!especieExiste(especie.getNombre())){
+//                Conexion.getInstancia().guardar(especie);
+//            }
+//            else
+//                //modificarEspecie(especie.getNombre(), raza, especie);
+//            guardarRaza(especie.getNombre(), raza);
+//            JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos de la especie");
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//    }
+    
+    public void guardarEspecie(M_Especie especie/*, String raza*/){
         try{
-            if(especieExiste(especie.getNombre())){
-                JOptionPane.showMessageDialog(null, "La especie ya existe. Intente con otro");
+            JOptionPane.showMessageDialog(null, "Entré");
+            if(modeloExiste(especie.getNombre()) != null)// especieExiste(especie.getNombre()))
+            {
+                JOptionPane.showMessageDialog(null, "Si existo");
+                M_Especie aux = modeloExiste(especie.getNombre());
+                System.out.println("Aux Lista");aux.imprimirLista(aux.getNombre(), aux.Razas);
+                System.out.println("Especie Lista: ");especie.imprimirLista(especie.getNombre(), especie.Razas);
+                especie.setRazitas(especie.concatLista(aux.Razas, especie.Razas));
+                System.out.println("Mix Lista: "); especie.imprimirLista(especie.getNombre(), especie.Razas);
+//                ArrayList<String> lista = especie.concatLista(especie.Razas, aux.Razas);
+//                System.out.println("AuxImprimir: ");//especie.imprimir();
+//                System.out.println("");
+//                modificarEspecie(especie);
+//                especie.imprimir();// getRazas().toString();
+                Conexion.getInstancia().guardar(especie);
             }
-            else{
-                Conexion.getInstancia(). guardar(especie);
+            else
+                Conexion.getInstancia().guardar(especie);
                 JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos de la especie");
-            }
+//            }//especie.imprimir();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
@@ -38,6 +65,7 @@ public class C_Especie {
             M_Especie especie = new M_Especie(nombre, null);
             ObjectSet result = Conexion.getInstancia().buscar(especie);
             M_Especie encontrado = (M_Especie) result.next();
+            encontrado.eliminarRazas();
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos de la especie");
         }catch(Exception e){
@@ -45,18 +73,38 @@ public class C_Especie {
         }
     }
     
-    public void modificarEspecie(String nombre,String razaNueva, M_Especie e){
+//    public void guardarRaza(String nombre, String raza){
+//        try{
+//            M_Especie especie = new M_Especie(nombre, null);
+//            ObjectSet result = Conexion.getInstancia().buscar(especie);
+//            M_Especie encontrado = (M_Especie) result.next();
+//            
+//            encontrado.setNombre(nombre);
+//            encontrado.setRaza(raza);
+//            
+//            Conexion.getInstancia().guardar(encontrado);
+//
+//            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente la especie" );
+//            encontrado.imprimir();
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//    }
+    
+    public void modificarEspecie(M_Especie e/*,ArrayList razaNueva*/){
         try{
-            M_Especie especie = new M_Especie(nombre, null);
+            M_Especie especie = new M_Especie(e.getNombre(), null);
             ObjectSet result = Conexion.getInstancia().buscar(especie);
             M_Especie encontrado = (M_Especie) result.next();
             
             encontrado.setNombre(e.getNombre());
-            encontrado.setRaza(razaNueva);
+//            encontrado.setRaza(razaNueva);
+            encontrado.setRazitas(e.getRazas());
+            encontrado.setCantRazas(e.getCantRazas());
             
             Conexion.getInstancia().guardar(encontrado);
 
-            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente al estilista" );
+            JOptionPane.showMessageDialog(null, "Se ha modificado correctamente la especie" );
 
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
@@ -84,6 +132,20 @@ public class C_Especie {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
             return false;  
+        }  
+    }
+    
+    public M_Especie modeloExiste(String especie){
+        try{
+            M_Especie e = new M_Especie(especie, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(e);
+            if (resultado.isEmpty())
+                return null;
+            M_Especie encontrado = (M_Especie) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
         }  
     }
     
