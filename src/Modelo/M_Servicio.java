@@ -1,10 +1,10 @@
 package Modelo;
 
 public class M_Servicio {
-    String nombre;
-    String descripción;
-    String observaciones;
-    int precio;
+    private String nombre;
+    private String descripción;
+    private String observaciones;
+    private int precio;
 
     public M_Servicio(String nombre, String descripción, String observaciones, int precio) {
         this.nombre = nombre;

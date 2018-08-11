@@ -11,8 +11,13 @@ public class M_Especie {
     public M_Especie(String nombre, String raza){
         this.nombre = nombre;
         Razas.add(raza);
-        cantRazas = Razas.size();// = 1;
+        cantRazas = 1;// = 1;
     }
+
+    public M_Especie(String nombre) {
+        this.nombre = nombre;
+        cantRazas = 0;
+    }    
     
     public String getNombre() {
         return nombre;
@@ -49,15 +54,14 @@ public class M_Especie {
     public void setRaza(String raza){
         if (!razaExiste(raza)){ //Si no existe la raza
             this.Razas.add(raza);
-            System.out.println("Añadida UNA especie");
             cantRazas++;
-            imprimir();
         }
     }
     
     public void imprimir(){
-        System.out.print("Especie: "+nombre+" | Razas: ");
-        for ( int i = 0 ; i<cantRazas; i++){ 
+        System.out.println("Tienes "+Razas.size()+" vs "+cantRazas+" razas");
+        System.out.print("Especie: "+nombre+" | Razas:");
+        for ( int i = 0 ; i<Razas.size(); i++){ 
             System.out.print(" - "+Razas.get(i).toString());
         }
         System.out.println();

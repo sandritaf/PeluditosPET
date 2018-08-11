@@ -24,17 +24,19 @@ public class C_Mascota {
 
     public void guardarMascota(M_Mascota mascota, M_Propietario dueno){
         try{
-            Conexion.getInstancia().guardar(mascota);
-            agregarMascotaCliente(dueno,mascota);
-            JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+            
+            if (agregarMascotaCliente(dueno,mascota)){
+                Conexion.getInstancia().guardar(mascota);
+                JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+            }
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "GuardarMascota: "+e);
         }        
     }
       
-    public void eliminarMascota(String pk, String nombre, String observaciones, M_Propietario dueno){
+    public void eliminarMascota(int codigo,String pk, String nombre, M_Propietario dueno){
         try{
-            M_Mascota mascota = new M_Mascota(pk, nombre, null, null, 0, observaciones);
+            M_Mascota mascota = new M_Mascota(codigo,pk, nombre, null, null, 0, null);
             ObjectSet result = Conexion.getInstancia().buscar(mascota);        
             M_Mascota encontrado = (M_Mascota) result.next();
             
@@ -47,9 +49,9 @@ public class C_Mascota {
         }
     }
     
-    public void modificarMascota(String viejaID, String nombreViejo, String observacionesViejas, M_Mascota m, String nuevaID, M_Propietario p){
+    public void modificarMascota(int codigo, String viejaID, String nombreViejo, M_Mascota m, String nuevaID, M_Propietario p){
         try{
-            M_Mascota mascota = new M_Mascota(viejaID, nombreViejo, null, null, 0, observacionesViejas);
+            M_Mascota mascota = new M_Mascota(codigo,viejaID, nombreViejo, null, null, 0, null);
             ObjectSet result = Conexion.getInstancia().buscar(mascota);
             ObjectSet result2 = Conexion.getInstancia().buscar(mascota);            
             
@@ -64,6 +66,7 @@ public class C_Mascota {
                 encontrado.setEdad(m.getEdad());
                 encontrado.setDueno(m.getDueno());
                 encontrado.setId(nuevaID);
+                encontrado.setCodigo(codigo);
                 
                 if (viejaID.compareTo(nuevaID)!=0){ //Si los id son diferentes, hubo cambio de dueño
                     agregarMascotaCliente(m.getDueno(),encontrado); //Se le agrega a un nuevo cliente
@@ -77,20 +80,21 @@ public class C_Mascota {
         }
     }
     
-    public void agregarMascotaCliente(M_Propietario dueno, M_Mascota mascota){
+    public boolean agregarMascotaCliente(M_Propietario dueno, M_Mascota mascota){
         try{
             if (dueno instanceof M_Natural){ //Si su nuevo dueño es un cliente Natural se le agrega 
                 C_Natural c1 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
-                c1.agregarMascota(mascota, n, n.getCedula());
+                return c1.agregarMascota(mascota, n, n.getCedula());
             } else {
                 C_Juridico c2 = new C_Juridico(); //Si su nuevo dueño es un cliente Juridico se le agrega
                 M_Juridico j = (M_Juridico)dueno;
-                c2.agregarMascota(j.getRIF(), j, mascota);
+                return (c2.agregarMascota(j.getRIF(), j, mascota));
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error C_Mascota->agregarMascotaCliente: "+e);
         }
+        return false;
     }
     
     public void eliminarMascotaCliente(M_Propietario dueno, M_Mascota mascota){
@@ -109,9 +113,9 @@ public class C_Mascota {
         }
     }
     
-    public void modificarDuenoMascota(String viejoID, M_Propietario m, String nuevoID){
+    public void modificarDuenoMascota(int codigo, String viejoID, M_Propietario m, String nuevoID){
         try{
-            M_Mascota mascota = new M_Mascota(viejoID, null, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(codigo, viejoID, null, null, null, 0, null);
             ObjectSet result = Conexion.getInstancia().buscar(mascota);
             M_Mascota encontrado = (M_Mascota) result.next();
 
@@ -126,9 +130,24 @@ public class C_Mascota {
         }
     }
     
-    public void verMascota(String id, M_Propietario p){
+    
+    public int getNumMascotasExistentes(){
         try{
-            M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null);
+            M_Mascota c = new M_Mascota(0,null, null, null, null, 0, null);            
+            ObjectSet result = Conexion.getInstancia().buscar(c);
+            if (!result.isEmpty()){
+                return result.size();
+            }
+            return 0;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "error en C_Mascota->getNumMascotasExistentes: "+e);
+            return 0;
+        }
+    }
+    
+    public void verMascota(int cod, String id, M_Propietario p){
+        try{
+            M_Mascota mascota = new M_Mascota(cod, id, null, null, null, 0, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             JOptionPane.showMessageDialog(null, resultado.next());
         } catch (Exception e){
@@ -138,18 +157,18 @@ public class C_Mascota {
     
     public M_Propietario buscarDueno(String id, String nombre){
         try{
-            M_Mascota mascota = new M_Mascota(id, nombre, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(0,id, nombre, null, null, 0, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             return ((M_Mascota)resultado.next()).getDueno();
         } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error buscando dueño: "+e);
             return null;
         }        
     }
     
     public void listarMascotas(){
         try{
-            M_Mascota m = new M_Mascota(null, null, null, null, 0, null);
+            M_Mascota m = new M_Mascota(0,null, null, null, null, 0, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(m);
             System.out.println("Tengo " + resultado.size() + " mascotas");
             while(resultado.hasNext()){
@@ -166,22 +185,19 @@ public class C_Mascota {
             String aux;
             duenos.setModel(aModel);
 
-    //    if(opc.equals("Natural")){
-        M_Propietario p = new M_Natural(null, null, null, null, null, null);
-    //    }
-    //    if (opc.equals("Juridico"))
-    //    {
-        M_Propietario p1 = new M_Juridico(null, null, null, null, null, null);
-    //    }    
+    
+        M_Natural p = new M_Natural(null, null, null, null, null);
+        M_Juridico p1 = new M_Juridico(null, null, null, null, null, null); 
 
             ObjectSet rs = Conexion.getInstancia().buscar(p);
             ObjectSet rs1 = Conexion.getInstancia().buscar(p1);
 
             // si hay propietarios naturales
-            if(rs.size() >0){
+            if(rs.size() > 0){
                 while(rs.hasNext() ){
                     aux = rs.next().toString();
                     aModel.addElement(aux);
+                    System.out.println(aux);
                 }
             }
             // si hay propietarios juridicos
@@ -189,6 +205,7 @@ public class C_Mascota {
                 while(rs1.hasNext() ){
                    aux = rs1.next().toString();
                    aModel.addElement(aux);
+                   System.out.println(aux);
                 }
             }
         }catch(Exception e){
@@ -197,12 +214,12 @@ public class C_Mascota {
     }
     
     
-    public void recorrerMascotasParaEliminarlas(String id,M_Propietario dueno) {
+    public void recorrerMascotasParaEliminarlas(int codigo,String id,M_Propietario dueno) {
         try{
             M_Mascota[] p = getMascotas(id);
             if (p != null) {
                 for (M_Mascota per : p) {
-                    eliminarMascota(id,per.getNombre(),per.getObservaciones(),dueno);
+                    eliminarMascota(0,id,per.getNombre(),dueno);
                 }
             }
         }catch (Exception e) {
@@ -210,12 +227,12 @@ public class C_Mascota {
         }
     }
     
-    public void recorrerMascotasParaModificarDueno(String viejoID,M_Propietario dueno,String nuevoID) {
+    public void recorrerMascotasParaModificarDueno(int codigo, String viejoID,M_Propietario dueno,String nuevoID) {
         try{
             M_Mascota[] p = getMascotas(viejoID);
             if (p != null) {
                 for (M_Mascota per : p) {
-                    modificarDuenoMascota(viejoID,dueno,nuevoID);
+                    modificarDuenoMascota(codigo,viejoID,dueno,nuevoID);
                 }
             }
         }catch (Exception e) {
@@ -224,23 +241,23 @@ public class C_Mascota {
     }
     
     
-    public boolean idExiste(String id){
-        try{    
-            M_Mascota mascota = new M_Mascota(id, null, null, null, 0, null);
-            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
-            if(!resultado.next().equals(""))
-                return true;
-            return false;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-            return false;
-        }
-    }
+//    public boolean idExiste(String id){
+//        try{    
+//            M_Mascota mascota = new M_Mascota(0,id, null, null, null, 0, null);
+//            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
+//            if(!resultado.next().equals(""))
+//                return true;
+//            return false;
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//            return false;
+//        }
+//    }
     
     public M_Mascota[] getMascotas(String dueno){
         try {
             M_Mascota[] mascotas = null;
-            M_Mascota mascotica = new M_Mascota(dueno, null, null, null, 0, null, null);
+            M_Mascota mascotica = new M_Mascota(0,dueno, null, null, null, 0, null, null);
             ObjectSet resultados = Conexion.getInstancia().buscar(mascotica);
             int i = 0;
             if (resultados.hasNext()) {
@@ -260,17 +277,20 @@ public class C_Mascota {
     public String[] getRazas(String especie){
         try {
             String[] x = null;
-            M_Especie e = new M_Especie(especie, null);
-            ObjectSet resultados = Conexion.getInstancia().buscar(e);
+            M_Especie esp = new M_Especie(especie);
+            ObjectSet resultados = Conexion.getInstancia().buscar(esp);
             if (resultados.hasNext()) {
-                x = new String[resultados.size()];
-                e = (M_Especie)resultados.next();
-                for (int i=0; i<e.getNumRazas(); i++)
-                    x[i] = e.Razas.get(i).toString();                    
+                M_Especie e = (M_Especie)resultados.next();
+                x = new String[e.Razas.size()];
+                System.out.println("Obtuviste "+x.length+" razas");                
+                for (int i=0; i<e.Razas.size(); i++){
+                    x[i] = e.Razas.get(i).toString();  
+                }
             }
+            
             return x;
         } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
-            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getRazas(): "+e);
             return null;
         }
     }
@@ -278,18 +298,19 @@ public class C_Mascota {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"ID", "Nombre","Especie","Raza", "Edad","Observaciones"};
+            String titulos[] = {"CodigoIngreso","ID_Dueno", "Nombre","Especie","Raza", "Edad","Observaciones"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Mascota[] p = getMascotas(null);
             if (p != null) {
                 for (M_Mascota per : p) {
-                    Object[] cli = new Object[6];
-                    cli[0] = per.getId();
-                    cli[1] = per.getNombre();
-                    cli[2] = per.getEspecie();
-                    cli[3] = per.getRaza();
-                    cli[4] = per.getEdad();
-                    cli[5] = per.getObservaciones();
+                    Object[] cli = new Object[7];
+                    cli[0] = per.getCodigo();
+                    cli[1] = per.getId();
+                    cli[2] = per.getNombre();
+                    cli[3] = per.getEspecie();
+                    cli[4] = per.getRaza();
+                    cli[5] = per.getEdad();
+                    cli[6] = per.getObservaciones();
                     dtm.addRow(cli);
                 }
             }
@@ -324,7 +345,7 @@ public class C_Mascota {
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
             String aux;
             especies.setModel(aModel);
-            M_Especie p = new M_Especie(null,null);
+            M_Especie p = new M_Especie(null);
             ObjectSet rs = Conexion.getInstancia().buscar(p);
 
             // si hay propietarios naturales
@@ -335,7 +356,7 @@ public class C_Mascota {
                 }
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->CargarEspecies: "+e);
         }
     }
     
@@ -345,15 +366,15 @@ public class C_Mascota {
             String aux;
             razas.setModel(aModel);
             String[] x = getRazas(especie);
-
             if (x != null) {
+                System.out.println("Se encontraron "+x.length+" razas.");
                 for (String per : x) {
                     aux = per.toString();
                     aModel.addElement(aux);
                 }
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarRazas: "+e);
         }
     }
     

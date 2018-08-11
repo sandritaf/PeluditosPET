@@ -13,9 +13,13 @@ public class V_Cita extends javax.swing.JPanel {
     C_Cita controlador;
     
     
+    
     public V_Cita() {
         initComponents();
         controlador = new C_Cita();
+        controlador.cargarServicios(cmbServicio);
+        controlador.cargarTrabajadores(cmbTrabajador);
+        controlador.cargarMascotas(cmbMascota);
         reiniciarValores();
     }
 
@@ -43,11 +47,11 @@ public class V_Cita extends javax.swing.JPanel {
         Dueno = new javax.swing.JLabel();
         cmbMascota = new javax.swing.JComboBox<>();
         txtFecha = new javax.swing.JTextField();
-        cmbDueño = new javax.swing.JComboBox<>();
         Dueno1 = new javax.swing.JLabel();
         DiagnosticoFinal1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtTratamiento = new javax.swing.JTextArea();
+        txtDueno = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCitas = new javax.swing.JTable();
 
@@ -102,6 +106,11 @@ public class V_Cita extends javax.swing.JPanel {
         Cita.setFocusable(false);
         Cita.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Cita.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        Cita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CitaMouseClicked(evt);
+            }
+        });
 
         Limpiar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Limpiar.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,13 +212,6 @@ public class V_Cita extends javax.swing.JPanel {
             }
         });
 
-        cmbDueño.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cmbDueño.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbDueñoActionPerformed(evt);
-            }
-        });
-
         Dueno1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Dueno1.setText("Dueño");
 
@@ -220,6 +222,15 @@ public class V_Cita extends javax.swing.JPanel {
         txtTratamiento.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtTratamiento.setRows(5);
         jScrollPane3.setViewportView(txtTratamiento);
+
+        txtDueno.setEditable(false);
+        txtDueno.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        txtDueno.setForeground(new java.awt.Color(102, 102, 102));
+        txtDueno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDuenoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -242,10 +253,10 @@ public class V_Cita extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Dueno)
                             .addComponent(Dueno1))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbDueño, 0, 150, Short.MAX_VALUE)
-                            .addComponent(cmbMascota, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cmbMascota, 0, 150, Short.MAX_VALUE)
+                            .addComponent(txtDueno))
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -266,8 +277,8 @@ public class V_Cita extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Servicio)
                     .addComponent(cmbServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDueño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Dueno1))
+                    .addComponent(Dueno1)
+                    .addComponent(txtDueno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Trabajador)
@@ -346,12 +357,12 @@ public class V_Cita extends javax.swing.JPanel {
         }
         else{
             
-            //modelo = new M_Mascota(id, nombre, especie, raza, edad, observaciones);
-            //controlador.guardarMascota(modelo,obtenerDueno(cmbDueno));
-
+           /* modelo = new M_Cita(controlador.getNumCitasExistentes()+1, controlador.getTrabajador(), especie, raza, edad, observaciones);
+            controlador.guardarCita(modelo);
+           */
             reiniciarValores();
             limpiarCajas();
-//            tablaMascotas.setModel(this.controlador.cargarTabla());
+            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -405,9 +416,13 @@ public class V_Cita extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtFechaActionPerformed
 
-    private void cmbDueñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDueñoActionPerformed
+    private void CitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CitaMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbDueñoActionPerformed
+    }//GEN-LAST:event_CitaMouseClicked
+
+    private void txtDuenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuenoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDuenoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -424,7 +439,6 @@ public class V_Cita extends javax.swing.JPanel {
     private javax.swing.JLabel Servicio;
     private javax.swing.JLabel Trabajador;
     private javax.swing.JLabel VerLista;
-    private javax.swing.JComboBox<String> cmbDueño;
     private javax.swing.JComboBox<String> cmbMascota;
     private javax.swing.JComboBox<String> cmbServicio;
     private javax.swing.JComboBox<String> cmbTrabajador;
@@ -436,6 +450,7 @@ public class V_Cita extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaCitas;
     private javax.swing.JTextArea txtDiagnosticoFinal;
+    private javax.swing.JTextField txtDueno;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextArea txtTratamiento;
     // End of variables declaration//GEN-END:variables
@@ -444,6 +459,7 @@ public class V_Cita extends javax.swing.JPanel {
 //        txtPK.setText(null);
 //        txtNombre.setText(null);
         txtFecha.setText(null);
+        txtDueno.setText(null);
         txtDiagnosticoFinal.setText(null);
         cmbMascota.setSelectedIndex(0);
         cmbServicio.setSelectedIndex(0);
@@ -451,14 +467,14 @@ public class V_Cita extends javax.swing.JPanel {
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
-    public int getComboSelected(JComboBox combito){
+    public String getComboSelected(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
         int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(1, guion);
+        codigoFinal = codigo.substring(0, guion);
         
-        return Integer.parseInt(codigoFinal);
+        return codigoFinal;
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
@@ -489,8 +505,8 @@ public class V_Cita extends javax.swing.JPanel {
     }
     
     public void reiniciarValores(){
-        txtDiagnosticoFinal.setEnabled(false);
-        txtTratamiento.setEnabled(false);
+        txtDiagnosticoFinal.setText(null);
+        txtTratamiento.setText(null);
         txtFecha.setText(null);
         
     }

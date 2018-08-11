@@ -35,7 +35,7 @@ public class C_Natural {
             ObjectSet result = Conexion.getInstancia().buscar(natural);
             M_Natural encontrado = (M_Natural) result.next();
             
-            controladorMascota.recorrerMascotasParaEliminarlas(encontrado.getCedula(),encontrado);
+            controladorMascota.recorrerMascotasParaEliminarlas(0,encontrado.getCedula(),encontrado);
             
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del cliente natural");
@@ -76,7 +76,7 @@ public class C_Natural {
                 //Si la cedula se mantiene igual no hay que modificar a la mascota
                 if (viejaCedula.compareTo(nuevaCedula)!=0){                     
                     C_Mascota controladorMascota = new C_Mascota();
-                    controladorMascota.recorrerMascotasParaModificarDueno(viejaCedula,encontrado,nuevaCedula);
+                    controladorMascota.recorrerMascotasParaModificarDueno(0,viejaCedula,encontrado,nuevaCedula);
                 }
                 
                 Conexion.getInstancia().guardar(encontrado);
@@ -111,25 +111,27 @@ public class C_Natural {
         }
     }
     
-    public void agregarMascota(M_Mascota mascotica, M_Natural n, String cedula){
+    public boolean agregarMascota(M_Mascota mascotica, M_Natural n, String cedula){
         try{        
             M_Propietario natural = new M_Natural(null, null, null, null, cedula);
             ObjectSet result = Conexion.getInstancia().buscar(natural);
-            M_Natural encontrado = (M_Natural) result.next();
+            if(!result.isEmpty()){
+                M_Natural encontrado = (M_Natural) result.next();
 
-            encontrado.setNombre(n.getNombre());
-            encontrado.setApellido(n.getApellido());
-            encontrado.setCedula(n.getCedula());
-            encontrado.setDireccion(n.getDireccion());
-            encontrado.setTelefono(n.getTelefono());
-            encontrado.setMascoticas(mascotica);
-
-            Conexion.getInstancia().guardar(encontrado);
-          //  JOptionPane.showMessageDialog(null, "Se ha añadido la mascota al cliente natural" );
-
+                encontrado.setNombre(n.getNombre());
+                encontrado.setApellido(n.getApellido());
+                encontrado.setCedula(n.getCedula());
+                encontrado.setDireccion(n.getDireccion());
+                encontrado.setTelefono(n.getTelefono());
+                encontrado.setMascoticas(mascotica);
+                encontrado.imprimirMascotas();
+                Conexion.getInstancia().guardar(encontrado);
+                return true;
+            }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Error agregando mascota al Cliente Natural: "+e);
         }
+        return false;
     }
     
     

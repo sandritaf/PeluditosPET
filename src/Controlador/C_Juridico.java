@@ -34,7 +34,7 @@ public class C_Juridico extends C_Propietario{
             M_Juridico encontrado = (M_Juridico) resultado.next();
             
             C_Mascota controladorMascota = new C_Mascota();
-            controladorMascota.recorrerMascotasParaEliminarlas(encontrado.getRIF(),encontrado);
+            controladorMascota.recorrerMascotasParaEliminarlas(0,encontrado.getRIF(),encontrado);
             
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del propietario "+ 
@@ -60,7 +60,7 @@ public class C_Juridico extends C_Propietario{
                 
                 if (rif.compareTo(viejoRIF)!=0){ //Si los rif son iguales no hay que modificar a la mascota
                     C_Mascota controladorMascota = new C_Mascota();
-                    controladorMascota.recorrerMascotasParaModificarDueno(viejoRIF,encontrado,rif);
+                    controladorMascota.recorrerMascotasParaModificarDueno(0,viejoRIF,encontrado,rif);
                 }
                
 
@@ -86,7 +86,7 @@ public class C_Juridico extends C_Propietario{
     public M_Juridico[] getJuridicos(){
         try {
             M_Juridico[] personas = null;
-            M_Propietario juridico = new M_Juridico(null, null, null, null, null, null, null);
+            M_Propietario juridico = new M_Juridico(null, null, null, null, null, null);
             ObjectSet resultados = Conexion.getInstancia().buscar(juridico);
             int i = 0;
             if (resultados.hasNext()) {
@@ -105,7 +105,7 @@ public class C_Juridico extends C_Propietario{
     
     public void listarJuridicos(){
         try{
-            M_Propietario juridico = new M_Juridico(null, null, null, null, null, null, null);
+            M_Propietario juridico = new M_Juridico(null, null, null, null, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
             System.out.println("Tengo " + resultado.size() + " clientes juridicas");
             while(resultado.hasNext()){
@@ -130,29 +130,33 @@ public class C_Juridico extends C_Propietario{
         }
     }
     
-    public void agregarMascota(String rif, M_Juridico j, M_Mascota mascotica){
+    public boolean agregarMascota(String rif, M_Juridico j, M_Mascota mascotica){
         try{
-            M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif, null);
+            M_Propietario juridico = new M_Juridico(null, null, null, null, rif,null);
             ObjectSet result = Conexion.getInstancia().buscar(juridico);
-            M_Juridico encontrado = (M_Juridico) result.next();
+            if (!result.isEmpty()){
+                M_Juridico encontrado = (M_Juridico) result.next();            
 
-            encontrado.setNombre(j.getNombre());
-            encontrado.setNombreGerente(j.getNombreGerente());
-            encontrado.setTelefono(j.getTelefono());
-            encontrado.setRazonSocial(j.getRazonSocial());
-            encontrado.setRIF(j.getRIF());
-            encontrado.setMascoticas(mascotica);
-            Conexion.getInstancia().guardar(encontrado);
-            
+                encontrado.setNombre(j.getNombre());
+                encontrado.setNombreGerente(j.getNombreGerente());
+                encontrado.setTelefono(j.getTelefono());
+                encontrado.setRazonSocial(j.getRazonSocial());
+                encontrado.setRIF(j.getRIF());
+                encontrado.setMascoticas(mascotica);
+                encontrado.imprimirMascotas();
+                Conexion.getInstancia().guardar(encontrado);
+                return true;
+            }         
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error agregando la mascota al cliente Juridico: "+e);
         }
+        return false;
     }
     
     
     public void eliminarMascota(String rif, M_Juridico j, M_Mascota mascotica){
         try{
-            M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif, null);
+            M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif);
             ObjectSet result = Conexion.getInstancia().buscar(juridico);
             M_Juridico encontrado = (M_Juridico) result.next();
 

@@ -58,4 +58,11 @@ public class M_Propietario {
         Mascoticas.remove(mascotica);
         numeroMascotas--;
     }
+    
+    public void imprimirMascotas(){
+        for ( int i = 0 ; i<numeroMascotas; i++){ 
+            System.out.print(" - "+Mascoticas.get(i).getNombre());
+        }
+        System.out.println();
+    }
 }

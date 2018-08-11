@@ -1,15 +1,16 @@
 package Modelo;
 
 public class M_Mascota {
-    String id;
-    String nombre;
-    String especie;
-    String raza;
-    int edad;
-    String observaciones;
-    M_Propietario dueno;
+    private String id;
+    private String nombre;
+    private String especie;
+    private String raza;
+    private int edad, codigo;
+    private String observaciones;
+    private M_Propietario dueno;
     
-    public M_Mascota(String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+    public M_Mascota(int codigo, String id,String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+        this.codigo = codigo;
         this.id = id;
         this.nombre = nombre;
         this.especie = especie;
@@ -19,7 +20,8 @@ public class M_Mascota {
         this.dueno = dueno;
     }
     
-    public M_Mascota(String id, String nombre, String especie, String raza, int edad, String observaciones) {
+    public M_Mascota(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones) {
+        this.codigo = codigo;
         this.id = id;
         this.nombre = nombre;
         this.especie = especie;
@@ -84,7 +86,13 @@ public class M_Mascota {
         this.dueno = dueno;
     }
 
-    
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
     
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
@@ -94,7 +102,8 @@ public class M_Mascota {
         return id + " - " + nombre + " - " + especie + " - " + edad + " - " + raza + " - " + observaciones;
     }
        
-     public void actualizar(String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+     public void actualizar(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+        this.codigo = codigo;
         this.id = id;
         this.nombre = nombre;
         this.especie = especie;

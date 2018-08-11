@@ -1,16 +1,8 @@
 package Modelo;
 
 public class M_Trabajador {
-    String nombre;
-    String apellido;
-    String cedula;
-    String RIF;
-    int edad;
-    String nivelInstruccion;
-    String profesion;
-    int aniosExperiencia;
-    String telefono;
-    int precioTrabajo;
+    protected String nombre, apellido, cedula, RIF, nivelInstruccion, profesion, telefono;
+    protected int edad, aniosExperiencia, precioTrabajo;
 
     public M_Trabajador() {
     }

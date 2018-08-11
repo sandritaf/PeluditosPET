@@ -1,9 +1,9 @@
 package Modelo;
 
 public class M_Natural extends M_Propietario{
-    String nombre;
-    String apellido;
-    String cedula;
+    private String nombre;
+    private String apellido;
+    private String cedula;
 
     public M_Natural() {
         super();

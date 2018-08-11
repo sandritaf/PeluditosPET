@@ -5,13 +5,13 @@ import java.util.Date;
 
 public class M_Factura {
     
-    M_Cita cita;
-    Date fecha;
-    float iva;
-    float subtotal;
-    float total;
-    String modoPago;
-    String nombreCliente;
+    private M_Cita cita;
+    private Date fecha;
+    private float iva;
+    private float subtotal;
+    private   float total;
+    private   String modoPago;
+    private   String nombreCliente;
 
     public M_Factura(Date fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
         this.fecha = fecha;

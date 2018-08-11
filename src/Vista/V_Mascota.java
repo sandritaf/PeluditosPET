@@ -20,7 +20,7 @@ public class V_Mascota extends javax.swing.JPanel {
     C_Mascota controlador;
     C_Propietario controladorDueno;
     String id, nombre, raza, especie, observaciones, auxID, auxNombre, auxObservaciones;
-    int edad;
+    int edad, codigo;
     
     public V_Mascota() {
         initComponents();
@@ -353,7 +353,8 @@ public class V_Mascota extends javax.swing.JPanel {
             raza = getTextCombo(cmbRaza);
             observaciones = txtObservaciones.getText();
             
-            modelo = new M_Mascota(id, nombre, especie, raza, edad, observaciones);
+            
+            modelo = new M_Mascota(controlador.getNumMascotasExistentes()+1,id, nombre, especie, raza, edad, observaciones);
             controlador.guardarMascota(modelo,obtenerDueno(cmbDueno));
             
             reiniciarValores();
@@ -378,9 +379,9 @@ public class V_Mascota extends javax.swing.JPanel {
             raza = getTextCombo(cmbRaza);
             observaciones = txtObservaciones.getText();
             
-            modelo = new M_Mascota(id, nombre, especie, raza, edad, observaciones,obtenerDueno(cmbDueno));
+            modelo = new M_Mascota(codigo,id, nombre, especie, raza, edad, observaciones,obtenerDueno(cmbDueno));
             
-            controlador.modificarMascota(auxID,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
+            controlador.modificarMascota(codigo,auxID,auxNombre, modelo,id,controlador.buscarDueno(auxID,auxNombre));
             
             reiniciarValores();
             limpiarCajas();
@@ -395,12 +396,14 @@ public class V_Mascota extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void tablaMascotasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMascotasMousePressed
-        txtNombre.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 1).toString());
-        txtEdad.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 4).toString());
-        txtObservaciones.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 5).toString());
-        controlador.setComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString(), cmbDueno);
+        txtNombre.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 2).toString());
+        txtEdad.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 5).toString());
+        txtObservaciones.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 6).toString());
+        controlador.setComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 1).toString(), cmbDueno);
+       
+        codigo = Integer.parseInt(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString());
         
-        auxID = tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString();
+        auxID = tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 1).toString();
         auxNombre = txtNombre.getText();
         auxObservaciones = txtObservaciones.getText();
     }//GEN-LAST:event_tablaMascotasMousePressed
@@ -414,7 +417,7 @@ public class V_Mascota extends javax.swing.JPanel {
             nombre = getText(txtNombre);
             observaciones = txtObservaciones.getText();
             
-            controlador.eliminarMascota(id,nombre,observaciones,obtenerDueno(cmbDueno));
+            controlador.eliminarMascota(codigo,id,nombre,obtenerDueno(cmbDueno));
             
             reiniciarValores();
             limpiarCajas();
@@ -532,6 +535,7 @@ public class V_Mascota extends javax.swing.JPanel {
         auxID = null;
         auxNombre = null;
         auxObservaciones = null;
+        codigo = 0;
     }
     
     public String getText(JTextField txt){

@@ -326,8 +326,11 @@ public class V_Especie extends javax.swing.JPanel {
                 
             if(Existente.isSelected()){
                 especie = getComboSelected(cmbEspecieExistente);
-                aux = new M_Especie(especie, raza);
-                controlador.guardarEspecie(aux);
+                modelo = new M_Especie(especie);
+                controlador.modificarEspecie(especie, raza, modelo);
+               // aux = new M_Especie(especie, raza);
+                //controlador.guardarEspecie(aux);
+                
             }
                 
             reiniciarValores();

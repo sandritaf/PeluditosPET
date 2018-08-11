@@ -1,8 +1,8 @@
 package Modelo;
 
 public class M_Veterinario extends M_Trabajador{
-    String especializacion;
-    String universidad;
+    private String especializacion;
+    private String universidad;
 
     public M_Veterinario(String especializacion, String universidad, String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono, int precioTrabajo) {
         super(nombre, apellido, cedula, RIF, edad, nivelInstruccion, profesion, anosExperiencia, telefono, precioTrabajo);

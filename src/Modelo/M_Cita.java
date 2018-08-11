@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class M_Cita {
 
-    int id;
-    M_Trabajador trabajador;
-    M_Servicio servicio;
-    Date fecha;
-    String diagnosticoFinal;
-    String tratamiento;
-    M_Mascota mascota;
+    private int id;
+    private M_Trabajador trabajador;
+    private M_Servicio servicio;
+    private Date fecha;
+    private String diagnosticoFinal;
+    private String tratamiento;
+    private  M_Mascota mascota;
+    private boolean cancelado;
 
     public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento) {
         this.id = id;
@@ -20,15 +21,18 @@ public class M_Cita {
         this.fecha = fecha;
         this.diagnosticoFinal = diagnosticoFinal;
         this.tratamiento = tratamiento;
+        this.cancelado = false;
     }
     
     // Si el servicio no es médico, entonces si usaría este constructor, ya que no aplica tratamiento
-    public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal) {
+    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal) {
         this.id = id;
+        this.mascota = mascota;
         this.trabajador = trabajador;
         this.servicio = servicio;
         this.fecha = fecha;
         this.diagnosticoFinal = diagnosticoFinal;
+        this.cancelado = false;
     }
 
     public M_Trabajador getTrabajador() {
@@ -43,6 +47,14 @@ public class M_Cita {
         return servicio;
     }
 
+    public boolean isCancelado() {
+        return cancelado;
+    }
+
+    public void setCancelado(boolean cancelado) {
+        this.cancelado = cancelado;
+    }    
+    
     public void setServicio(M_Servicio servicio) {
         this.servicio = servicio;
     }
@@ -85,6 +97,13 @@ public class M_Cita {
 
     public void setMascota(M_Mascota mascota) {
         this.mascota = mascota;
+    }
+    
+    public void imprimir(){
+        System.out.println(id+" "+fecha+" Trabajador: "+trabajador.getNombre()+" "+trabajador.getApellido()+
+                "\nMascota atendida: "+mascota.getNombre()+" quien es propiedad de: "+
+                mascota.getDueno().toString()+"\nEl diagnostico fue: "+diagnosticoFinal+" y el tratamiento+"
+                        + "recomendado fue: "+tratamiento+"\nSe prestó el servicio: "+servicio.getNombre()+"\n");
     }
     
     
