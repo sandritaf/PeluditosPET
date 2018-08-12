@@ -120,4 +120,9 @@ public class M_Trabajador {
         else 
             return 100 * aniosExperiencia;
     }
+    
+    public String toString(){
+        return cedula + "- " + nombre + " " + apellido;
+    }
+    
 }

@@ -5,14 +5,7 @@ public class M_Juridico extends M_Propietario{
     private String nombreGerente;
     private  String RIF;
     private  String razonSocial;
-    
-    public M_Juridico(String direccion, String telefono, M_Mascota Mascotini, String nombre, String nombreGerente, String RIF, String razonSocial) {
-        super(direccion,telefono,Mascotini);
-        this.nombre = nombre;
-        this.nombreGerente = nombreGerente;
-        this.RIF = RIF;
-        this.razonSocial = razonSocial;
-    }
+
     
     public M_Juridico(String direccion, String telefono, String nombre, String nombreGerente, String RIF, String razonSocial) {
         super(direccion,telefono);
@@ -67,7 +60,7 @@ public class M_Juridico extends M_Propietario{
         this.telefono = telefono;
         this.nombre = nombre;
         this.nombreGerente = nombreGerente;
-        this.RIF = "J"+RIF;
+        this.RIF = RIF;
         this.razonSocial = razonSocial;
     }
     

@@ -303,6 +303,7 @@ public class V_Juridico extends javax.swing.JPanel {
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
         limpiarCajas();
+        reiniciarValores();
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -346,7 +347,7 @@ public class V_Juridico extends javax.swing.JPanel {
             nombreGerente = getText(txtNombreGerente);
             razonSocial = getText(txtRazonSocial);
             direccion = txtDireccion.getText();
-            auxRIF = txtRIF.getText(); //nuevo rif
+            auxRIF = "J"+txtRIF.getText(); //nuevo rif
             
             modelo.actualizar(direccion, telefono, nombre, nombreGerente, auxRIF, razonSocial);
             //auxrif no tiene valor aquí
@@ -375,10 +376,15 @@ public class V_Juridico extends javax.swing.JPanel {
     }//GEN-LAST:event_EliminarMouseClicked
 
     private void tablaJuridicosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaJuridicosMousePressed
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
+        Limpiar.setEnabled(true);
+        Guardar.setEnabled(false);
+        
         modelo = controlador.getPersona(tablaJuridicos.getValueAt(tablaJuridicos.getSelectedRow(), 0).toString());
         
         txtNombre.setText(modelo.getNombre());
-        txtRIF.setText(modelo.getRIF());
+        txtRIF.setText(getRIF(modelo.getRIF()));
         rif = modelo.getRIF();
         txtTelefono.setText(modelo.getTelefono());
         txtNombreGerente.setText(modelo.getNombreGerente());
@@ -463,6 +469,10 @@ public class V_Juridico extends javax.swing.JPanel {
         telefono = null;
         rif = null;
         auxRIF = null;
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+        Limpiar.setEnabled(false);
+        Guardar.setEnabled(true);
     }
     
     //Devuelve el valor de un txtField

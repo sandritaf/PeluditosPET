@@ -1,15 +1,16 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class M_Especie {
     
     private String nombre;
-    public ArrayList<String> Razas;
+    public List<String> Razas;
     
     public M_Especie(String nombre, String raza){
         this.nombre = nombre;
-        Razas = new ArrayList<>();
+        Razas = new ArrayList<String>();
         Razas.add(raza);
     }
 
@@ -49,10 +50,10 @@ public class M_Especie {
     
     public void imprimir(){
         System.out.println("Especie: "+nombre+" | Razas:");
-        for ( int i = 0 ; i<Razas.size(); i++){ 
+       /* for ( int i = 0 ; i<Razas.size(); i++){ 
             System.out.println(Razas.get(i).toString());
-        }
-        System.out.println();
+        }*/
+        System.out.println(Razas);
     }
     
 //    public void setRazas(String raza) {
@@ -122,7 +123,7 @@ public class M_Especie {
     }
     
     public ArrayList<String> getRazas(){
-        return Razas;
+        return (ArrayList<String>) Razas;
     }
     
 }

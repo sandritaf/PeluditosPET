@@ -298,6 +298,7 @@ public class V_Natural extends javax.swing.JPanel {
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
         limpiarCajas();
+        reiniciarValores();
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
@@ -368,6 +369,11 @@ public class V_Natural extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaNaturalesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaNaturalesMousePressed
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
+        Limpiar.setEnabled(true);
+        Guardar.setEnabled(false);
+        
         modelo = controlador.getPersona(tablaNaturales.getValueAt(tablaNaturales.getSelectedRow(), 0).toString());
         
         auxCI = modelo.getCedula();
@@ -444,6 +450,10 @@ public class V_Natural extends javax.swing.JPanel {
     
     //Coloca en null los atributos de la empresa
     public void reiniciarValores(){
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+        Limpiar.setEnabled(false);
+        Guardar.setEnabled(true);
         nombre = null;
         apellido = null;
         direccion = null;

@@ -1,8 +1,15 @@
 
 package Vista;
 
+import Controlador.C_Servicio;
+import Modelo.M_Servicio;
+
 public class V_Servicio extends javax.swing.JPanel {
 
+    C_Servicio controlador;
+    M_Servicio modelo;
+    String nombre, descripcion, precio, observaciones;
+    
     public V_Servicio() {
         initComponents();
         //txtPK.setVisible(false);
@@ -45,6 +52,11 @@ public class V_Servicio extends javax.swing.JPanel {
         Guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Guardar.setVerifyInputWhenFocusTarget(false);
         Guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GuardarMouseClicked(evt);
+            }
+        });
 
         Modificar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Modificar.setForeground(new java.awt.Color(255, 255, 255));
@@ -249,6 +261,10 @@ public class V_Servicio extends javax.swing.JPanel {
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_VerListaMouseClicked
+
+    private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

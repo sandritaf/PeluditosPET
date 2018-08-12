@@ -111,7 +111,7 @@ public class C_Natural {
         }
     }
     
-    public boolean agregarMascota(M_Mascota mascotica, M_Natural n, String cedula){
+    public boolean agregarMascota(M_Natural n, String cedula){
         try{        
             M_Propietario natural = new M_Natural(null, null, null, null, cedula);
             ObjectSet result = Conexion.getInstancia().buscar(natural);
@@ -123,8 +123,7 @@ public class C_Natural {
                 encontrado.setCedula(n.getCedula());
                 encontrado.setDireccion(n.getDireccion());
                 encontrado.setTelefono(n.getTelefono());
-                encontrado.setMascoticas(mascotica);
-                encontrado.imprimirMascotas();
+                encontrado.agregarMascota();
                 Conexion.getInstancia().guardar(encontrado);
                 return true;
             }
@@ -135,7 +134,7 @@ public class C_Natural {
     }
     
     
-    public void eliminarMascota(M_Mascota mascotica, M_Natural n, String cedula){
+    public void eliminarMascota(M_Natural n, String cedula){
         try{        
             M_Propietario natural = new M_Natural(null, null, null, null, cedula);
             ObjectSet result = Conexion.getInstancia().buscar(natural);
@@ -146,7 +145,7 @@ public class C_Natural {
             encontrado.setCedula(n.getCedula()); 
             encontrado.setDireccion(n.getDireccion());
             encontrado.setTelefono(n.getTelefono());
-            encontrado.retirarMascota(mascotica);
+            encontrado.retirarMascota();
 
             Conexion.getInstancia().guardar(encontrado);
 

@@ -2,11 +2,14 @@
 package Controlador;
 
 import Conexion.Conexion;
+import Modelo.M_Especie;
 import Modelo.M_Trabajador;
 import Modelo.M_Veterinario;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -141,5 +144,24 @@ public class C_Trabajador {
             return null;  
         }      
     }
-     
+
+    public void cargarTrabajadores(JComboBox trabajadores){
+        try{
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux;
+            trabajadores.setModel(aModel);
+            M_Trabajador p = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
+            ObjectSet rs = Conexion.getInstancia().buscar(p);
+
+            // si hay propietarios naturales
+            if(rs.size() >0){
+                while(rs.hasNext() ){
+                    aux = ((M_Trabajador)rs.next()).toString();
+                    aModel.addElement(aux);
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Trabajador->CargarTrabajadores: "+e);
+        }
+    }
 }

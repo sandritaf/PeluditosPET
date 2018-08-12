@@ -1,8 +1,45 @@
 package Controlador;
 
+import Modelo.M_Juridico;
+import Modelo.M_Natural;
+import Modelo.M_Propietario;
+import javax.swing.JComboBox;
+
 public class C_Propietario {
 
     public C_Propietario() {
     }
+
+    public M_Propietario obtenerDueno(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";        
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(0, guion);
+        
+        C_Juridico controladorJuridico = new C_Juridico();
+        M_Juridico dueno = controladorJuridico.getPersona(codigoFinal);
+        if (dueno != null)
+            return dueno;
+        else {
+            C_Natural controladorNatural = new C_Natural();
+            M_Natural dueno2 = controladorNatural.getPersona(codigoFinal);
+            return dueno2;
+        }        
+    }
+    
+//    public M_Natural getPersona(String cedula){
+//        try{
+//            M_Natural n = new M_Natural(null, null, null, null, cedula);
+//            ObjectSet resultado = Conexion.getInstancia().buscar(n);
+//            if (resultado.isEmpty())
+//                return null;
+//            M_Natural encontrado = (M_Natural) resultado.next();
+//            return encontrado;
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//            return null;  
+//        }      
+//    }
+
     
 }

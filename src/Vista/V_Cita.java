@@ -2,7 +2,21 @@
 package Vista;
 
 import Controlador.C_Cita;
+import Controlador.C_Fecha;
+import Controlador.C_Juridico;
+import Controlador.C_Mascota;
+import Controlador.C_Natural;
+import Controlador.C_Propietario;
+import Controlador.C_Servicio;
+import Controlador.C_Trabajador;
 import Modelo.M_Cita;
+import Modelo.M_Juridico;
+import Modelo.M_Mascota;
+import Modelo.M_Natural;
+import Modelo.M_Propietario;
+import Modelo.M_Trabajador;
+import Modelo.M_Servicio;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -11,12 +25,30 @@ public class V_Cita extends javax.swing.JPanel {
     
     M_Cita modelo;
     C_Cita controlador;
-    
-    
+//    C_Propietario cPropietario; M_Propietario mPropietario;
+    C_Natural cNatural; M_Natural mNatural;
+    C_Juridico cJuridico; M_Juridico mJuridico;
+    C_Servicio cServicio; M_Servicio mServicio;
+    C_Trabajador cTrabajador; M_Trabajador mTrabajador;
+    C_Mascota cMascota; M_Mascota mMascota;
+    C_Fecha cFecha; 
+    String servicio, dueño, trabajador, mascota, fecha, diagnosticoFinal, tratamiento;
+    Date date;
     
     public V_Cita() {
         initComponents();
         controlador = new C_Cita();
+        cServicio = new C_Servicio();
+        cTrabajador = new C_Trabajador();
+        cMascota = new C_Mascota();
+//        cPropietario = new C_Propietario();
+        cNatural = new C_Natural();
+        cJuridico = new C_Juridico();
+        cFecha = new C_Fecha();
+
+        cServicio.cargarServicios(cmbServicio);
+        cTrabajador.cargarTrabajadores(cmbTrabajador);
+        cMascota.cargarDuenos(cmbDueño);
         reiniciarValores();
     }
 
@@ -41,14 +73,14 @@ public class V_Cita extends javax.swing.JPanel {
         DiagnosticoFinal = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDiagnosticoFinal = new javax.swing.JTextArea();
-        Dueno = new javax.swing.JLabel();
+        Mascota = new javax.swing.JLabel();
         cmbMascota = new javax.swing.JComboBox<>();
         txtFecha = new javax.swing.JTextField();
-        Dueno1 = new javax.swing.JLabel();
-        DiagnosticoFinal1 = new javax.swing.JLabel();
+        Dueño = new javax.swing.JLabel();
+        Tratamiento = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtTratamiento = new javax.swing.JTextArea();
-        txtDueno = new javax.swing.JTextField();
+        cmbDueño = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCitas = new javax.swing.JTable();
 
@@ -190,8 +222,8 @@ public class V_Cita extends javax.swing.JPanel {
         txtDiagnosticoFinal.setRows(5);
         jScrollPane1.setViewportView(txtDiagnosticoFinal);
 
-        Dueno.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Dueno.setText("Mascota");
+        Mascota.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Mascota.setText("Mascota");
 
         cmbMascota.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbMascota.addActionListener(new java.awt.event.ActionListener() {
@@ -209,25 +241,16 @@ public class V_Cita extends javax.swing.JPanel {
             }
         });
 
-        Dueno1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Dueno1.setText("Dueño");
+        Dueño.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Dueño.setText("Dueño");
 
-        DiagnosticoFinal1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        DiagnosticoFinal1.setText("Tratamiento");
+        Tratamiento.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Tratamiento.setText("Tratamiento");
 
         txtTratamiento.setColumns(20);
         txtTratamiento.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtTratamiento.setRows(5);
         jScrollPane3.setViewportView(txtTratamiento);
-
-        txtDueno.setEditable(false);
-        txtDueno.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        txtDueno.setForeground(new java.awt.Color(102, 102, 102));
-        txtDueno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDuenoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -248,17 +271,17 @@ public class V_Cita extends javax.swing.JPanel {
                             .addComponent(cmbTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Dueno)
-                            .addComponent(Dueno1))
+                            .addComponent(Mascota)
+                            .addComponent(Dueño))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbMascota, 0, 150, Short.MAX_VALUE)
-                            .addComponent(txtDueno))
+                            .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(DiagnosticoFinal1)
+                                .addComponent(Tratamiento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -274,14 +297,14 @@ public class V_Cita extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Servicio)
                     .addComponent(cmbServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Dueno1)
-                    .addComponent(txtDueno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Dueño)
+                    .addComponent(cmbDueño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Trabajador)
                     .addComponent(cmbTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbMascota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Dueno))
+                    .addComponent(Mascota))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,7 +315,7 @@ public class V_Cita extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(DiagnosticoFinal1)
+                    .addComponent(Tratamiento)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -354,9 +377,28 @@ public class V_Cita extends javax.swing.JPanel {
         }
         else{
             
-           /* modelo = new M_Cita(controlador.getNumCitasExistentes()+1, controlador.getTrabajador(), especie, raza, edad, observaciones);
+            servicio = getComboSelected(cmbServicio);
+            dueño = getIDComboSelected(cmbDueño);
+            mascota = getIDComboSelected(cmbMascota);
+            trabajador = getIDComboSelected(cmbTrabajador);
+            fecha = getText(txtFecha);
+            diagnosticoFinal = txtDiagnosticoFinal.getText();
+            tratamiento = txtTratamiento.getText();
+            
+            mTrabajador = cTrabajador.getPersona(trabajador);
+            if(tipoDueño(cmbDueño).equals("V")){
+                mNatural = cNatural.getPersona(dueño);
+                mMascota = cMascota.getMascota(mascota, mNatural);
+            }
+            else if(tipoDueño(cmbDueño).equals("J")){
+                mJuridico = cJuridico.getPersona(dueño);
+                mMascota = cMascota.getMascota(mascota, mJuridico);
+            }
+            mServicio = cServicio.getServicio(servicio);      
+            
+            modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
             controlador.guardarCita(modelo);
-           */
+           
             reiniciarValores();
             limpiarCajas();
            // tablaCitas.setModel(this.controlador.cargarTabla());
@@ -417,25 +459,22 @@ public class V_Cita extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_CitaMouseClicked
 
-    private void txtDuenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuenoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDuenoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Cita;
     private javax.swing.JLabel DiagnosticoFinal;
-    private javax.swing.JLabel DiagnosticoFinal1;
-    private javax.swing.JLabel Dueno;
-    private javax.swing.JLabel Dueno1;
+    private javax.swing.JLabel Dueño;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Fecha;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Limpiar;
+    private javax.swing.JLabel Mascota;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel Servicio;
     private javax.swing.JLabel Trabajador;
+    private javax.swing.JLabel Tratamiento;
     private javax.swing.JLabel VerLista;
+    private javax.swing.JComboBox<String> cmbDueño;
     private javax.swing.JComboBox<String> cmbMascota;
     private javax.swing.JComboBox<String> cmbServicio;
     private javax.swing.JComboBox<String> cmbTrabajador;
@@ -447,7 +486,6 @@ public class V_Cita extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaCitas;
     private javax.swing.JTextArea txtDiagnosticoFinal;
-    private javax.swing.JTextField txtDueno;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextArea txtTratamiento;
     // End of variables declaration//GEN-END:variables
@@ -456,19 +494,31 @@ public class V_Cita extends javax.swing.JPanel {
 //        txtPK.setText(null);
 //        txtNombre.setText(null);
         txtFecha.setText(null);
-        txtDueno.setText(null);
+//        txtDueno.setText(null);
         txtDiagnosticoFinal.setText(null);
+        cmbDueño.setSelectedIndex(0);
         cmbMascota.setSelectedIndex(0);
         cmbServicio.setSelectedIndex(0);
         cmbTrabajador.setSelectedIndex(0);
     }
     
-    //Devuelve el codigo de la opcion seleccionada en un combo
+    //Devuelve el string de la opcion seleccionada en un combo
     public String getComboSelected(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
         int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(0, guion);
+        
+        return codigoFinal;
+    }
+
+    //Devuelve el string de la opcion seleccionada en un combo
+    public String getNombreComboSelected(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf("- ");
         codigoFinal = codigo.substring(0, guion);
         
         return codigoFinal;
@@ -502,10 +552,13 @@ public class V_Cita extends javax.swing.JPanel {
     }
     
     public void reiniciarValores(){
-        txtDiagnosticoFinal.setText(null);
-        txtTratamiento.setText(null);
-        txtFecha.setText(null);
-        
+        servicio = null;
+        dueño = null; 
+        trabajador = null;
+        mascota = null;
+        fecha = null;
+        diagnosticoFinal = null;
+        tratamiento = null;
     }
     
     public String getText(JTextField txt){
@@ -514,6 +567,12 @@ public class V_Cita extends javax.swing.JPanel {
     
     public String getTextCombo(JComboBox cmb){
         return (String) cmb.getSelectedItem();
+    }
+    
+    public String tipoDueño(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = codigo.substring(0,1);
+        return codigoFinal;
     }
     
 }

@@ -9,12 +9,6 @@ public class M_Natural extends M_Propietario{
         super();
     }
 
-    public M_Natural(String direccion, String telefono, M_Mascota Mascotini, String nombre, String apellido, String cedula) {
-        super(direccion,telefono,Mascotini);
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.cedula = cedula;
-    }
     
     public M_Natural(String direccion, String telefono, String nombre, String apellido, String cedula) {
         super(direccion,telefono);

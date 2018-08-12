@@ -24,8 +24,7 @@ public class C_Mascota {
         try{
             
             if (agregarMascotaCliente(dueno,mascota)){
-                Conexion.getInstancia().guardar(mascota);                
-                dueno.imprimirMascotas();
+                Conexion.getInstancia().guardar(mascota);        
                 JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
             }
         } catch(Exception e){
@@ -88,12 +87,12 @@ public class C_Mascota {
                 C_Natural c1 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
                 System.out.println(n.getCedula());
-                return c1.agregarMascota(mascota, n, n.getCedula());
+                return c1.agregarMascota(n, n.getCedula());
             } else {
                 C_Juridico c2 = new C_Juridico(); //Si su nuevo dueño es un cliente Juridico se le agrega
                 M_Juridico j = (M_Juridico)dueno;
                 System.out.println(j.getRIF());
-                return (c2.agregarMascota(j.getRIF(), j, mascota));
+                return (c2.agregarMascota(j.getRIF(), j));
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error C_Mascota->agregarMascotaCliente: "+e);
@@ -106,11 +105,11 @@ public class C_Mascota {
             if (dueno instanceof M_Natural){ //Si el anterior dueño era cliente natural
                 C_Natural c3 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
-                c3.eliminarMascota(mascota, n, n.getCedula());
+                c3.eliminarMascota(n, n.getCedula());
             } else {
                 C_Juridico c4 = new C_Juridico(); //Si su dueño anterior era un cliente Juridico 
                 M_Juridico j = (M_Juridico)dueno;
-                c4.eliminarMascota(pk, j, mascota);
+                c4.eliminarMascota(pk, j);
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error C_Mascota->eliminarMascotaCliente: "+e);
@@ -324,7 +323,21 @@ public class C_Mascota {
     
     
     //Selecciona en un combo box la opcion que corresponde a un codigo PK dado.
-    public void setComboSelected(String codigoPK, JComboBox combito){
+    public void setComboSelected(String string, JComboBox combito){
+        String textoCombo = "";
+        for (int i = 0; i < combito.getItemCount(); i++) {
+            textoCombo = combito.getItemAt(i).toString();
+           //Comparo los objetos de mi combo con el codigo del item que buscaba
+           if (string.compareTo(textoCombo) == 0)  {
+              //Si encuentra el item le asigno su index a mi combo
+              combito.setSelectedIndex(i);              
+              break;
+           }
+        }
+    }
+    
+     //Selecciona en un combo box la opcion que corresponde a un codigo PK dado.
+    public void setCodigoComboSelected(String codigoPK, JComboBox combito){
         //Obtengo la longitud de mi combo
         int largoCombo = combito.getItemCount();
         String textoCombo = "";
@@ -377,5 +390,20 @@ public class C_Mascota {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarRazas: "+e);
         }
     }
+
+    public M_Mascota getMascota(String id, M_Propietario dueno){
+        try{
+            M_Mascota mascota = new M_Mascota(0, id, null, null, null, 0, null, dueno);//(null, null, null, null, rif, null); 
+            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
+            if (resultado.isEmpty())
+                return null;
+            M_Mascota encontrado = (M_Mascota) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
+    }
+    
     
 }

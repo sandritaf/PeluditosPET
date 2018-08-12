@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class M_Propietario {
     protected String direccion;
     protected String telefono;
-    protected ArrayList<M_Mascota> Mascoticas = new ArrayList<>();
     protected int numeroMascotas;
 
     public M_Propietario() {
@@ -14,13 +13,6 @@ public class M_Propietario {
         this.direccion = direccion;
         this.telefono = telefono;
         numeroMascotas = 0;
-    }
-
-    public M_Propietario(String direccion, String telefono, M_Mascota Mascotini) {
-        this.direccion = direccion;
-        this.telefono = telefono;
-        Mascoticas.add(Mascotini);
-        numeroMascotas = 1;
     }
 
     public String getDireccion() {
@@ -39,28 +31,17 @@ public class M_Propietario {
         this.telefono = telefono;
     }
 
-    public ArrayList<M_Mascota> getMascoticas() {
-        return Mascoticas;
+    
+    public int getNumMascotas(){
+        return numeroMascotas;
     }
-
-    public void setMascoticas(M_Mascota Mascoticas) {
-        this.Mascoticas.add(Mascoticas);
+    
+    public void agregarMascota(){
         numeroMascotas++;
     }
     
-    public int getNumMascotas(){
-        return Mascoticas.size();
-    }
-    
-    public void retirarMascota(M_Mascota mascotica){
-        Mascoticas.remove(mascotica);
+    public void retirarMascota(){
         numeroMascotas--;
     }
     
-    public void imprimirMascotas(){
-        for ( int i = 0 ; i<numeroMascotas; i++){ 
-            System.out.print(" - "+Mascoticas.get(i).getNombre());
-        }
-        System.out.println();
-    }
 }
