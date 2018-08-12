@@ -401,7 +401,7 @@ public class V_Mascota extends javax.swing.JPanel {
         txtObservaciones.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 6).toString());
         
         controlador.setCodigoComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 1).toString(), cmbDueno);
-        controlador.setCodigoComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 3).toString(), cmbEspecie);
+        controlador.setComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 3).toString(), cmbEspecie);
         controlador.setComboSelected(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 4).toString(), cmbRaza);
        
         codigo = Integer.parseInt(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString());
