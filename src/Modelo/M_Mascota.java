@@ -80,8 +80,7 @@ public class M_Mascota {
     public void setId(String id) {
         this.id = id;
     }
-
-
+    
     public void setDueno(M_Propietario dueno) {
         this.dueno = dueno;
     }
@@ -101,7 +100,11 @@ public class M_Mascota {
     public String toString(){
         return id + " - " + nombre + " - " + especie + " - " + edad + " - " + raza + " - " + observaciones;
     }
-       
+    
+    public String printNombreID(){
+        return id + " - " +nombre;
+    }
+    
      public void actualizar(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
         this.codigo = codigo;
         this.id = id;

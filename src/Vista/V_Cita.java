@@ -32,7 +32,7 @@ public class V_Cita extends javax.swing.JPanel {
     C_Trabajador cTrabajador; M_Trabajador mTrabajador;
     C_Mascota cMascota; M_Mascota mMascota;
     C_Fecha cFecha; 
-    String servicio, dueño, trabajador, mascota, fecha, diagnosticoFinal, tratamiento;
+    String idViejo, servicio, dueño, trabajador, mascota, fecha, diagnosticoFinal, tratamiento;
     Date date;
     
     public V_Cita() {
@@ -50,6 +50,9 @@ public class V_Cita extends javax.swing.JPanel {
         cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         reiniciarValores();
+    //    limpiarCajas();
+        
+//        tablaCitas.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -410,9 +413,31 @@ public class V_Cita extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
         else{
-            
-            //modelo = new M_Mascota(id, nombre, especie, raza, edad, observaciones,obtenerDueno(cmbDueno));
 
+            servicio = getComboSelected(cmbServicio);
+            dueño = getIDComboSelected(cmbDueño);
+            mascota = getIDComboSelected(cmbMascota);
+            trabajador = getIDComboSelected(cmbTrabajador);
+            fecha = getText(txtFecha);
+            diagnosticoFinal = txtDiagnosticoFinal.getText();
+            tratamiento = txtTratamiento.getText();
+            
+            mTrabajador = cTrabajador.getPersona(trabajador);
+            if(tipoDueño(cmbDueño).equals("V")){
+                mNatural = cNatural.getPersona(dueño);
+                mMascota = cMascota.getMascota(mascota, mNatural);
+            }
+            else if(tipoDueño(cmbDueño).equals("J")){
+                mJuridico = cJuridico.getPersona(dueño);
+                mMascota = cMascota.getMascota(mascota, mJuridico);
+            }
+            mServicio = cServicio.getServicio(servicio);      
+            int id = 0;
+            
+            modelo.actualizar(id, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
+
+            controlador.modificarCita(id, modelo);
+            
             //controlador.modificarMascota(auxID,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
 
             reiniciarValores();
@@ -444,7 +469,13 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaCitasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCitasMousePressed
-    
+        modelo = controlador.getCita(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
+
+        idViejo = Integer.toString(modelo.getId());
+        cmbServicio.setSelectedItem(modelo.getServicio().toString());
+        cmbDueño.setSelectedItem(modelo.getMascota().getDueno().toString());
+        cmbMascota.setSelectedItem(modelo.getMascota().toString());
+        cmbTrabajador.setSelectedItem(modelo.getTrabajador().toString());
     }//GEN-LAST:event_tablaCitasMousePressed
 
     private void cmbMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMascotaActionPerformed
@@ -496,8 +527,8 @@ public class V_Cita extends javax.swing.JPanel {
         txtFecha.setText(null);
 //        txtDueno.setText(null);
         txtDiagnosticoFinal.setText(null);
-        cmbDueño.setSelectedIndex(0);
-        cmbMascota.setSelectedIndex(0);
+//        cmbDueño.setSelectedIndex(0);
+//        cmbMascota.setSelectedIndex(0);
         cmbServicio.setSelectedIndex(0);
         cmbTrabajador.setSelectedIndex(0);
     }
@@ -505,12 +536,13 @@ public class V_Cita extends javax.swing.JPanel {
     //Devuelve el string de la opcion seleccionada en un combo
     public String getComboSelected(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
-        String codigoFinal = "";
-        
-        int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(0, guion);
-        
-        return codigoFinal;
+//        String codigoFinal = "";
+//        
+//        int guion = codigo.indexOf(" -");
+//        codigoFinal = codigo.substring(0, guion);
+//            
+//return codigoFinal;
+        return codigo;
     }
 
     //Devuelve el string de la opcion seleccionada en un combo
@@ -552,6 +584,7 @@ public class V_Cita extends javax.swing.JPanel {
     }
     
     public void reiniciarValores(){
+        idViejo = null;
         servicio = null;
         dueño = null; 
         trabajador = null;

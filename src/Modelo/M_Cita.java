@@ -106,6 +106,15 @@ public class M_Cita {
                         + "recomendado fue: "+tratamiento+"\nSe prestó el servicio: "+servicio.getNombre()+"\n");
     }
     
-    
+    public void actualizar(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento) {
+        this.id = id;
+        this.mascota = mascota;
+        this.trabajador = trabajador;
+        this.servicio = servicio;
+        this.fecha = fecha;
+        this.diagnosticoFinal = diagnosticoFinal;
+        this.tratamiento = tratamiento;
+        this.cancelado = false;
+    }
     
 }

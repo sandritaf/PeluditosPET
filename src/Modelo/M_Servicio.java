@@ -55,4 +55,7 @@ public class M_Servicio {
         this.precio = precio;
     }
     
+    public String toString(){
+        return nombre;
+    }
 }
