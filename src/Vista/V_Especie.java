@@ -321,13 +321,13 @@ public class V_Especie extends javax.swing.JPanel {
             if(AgregarEspecie.isSelected()){
                 especie = getText(txtEspecie);
                 modelo = new M_Especie(especie, raza);
-                controlador.guardarEspecie(modelo);
+                controlador.guardarEspecie(especie,raza);//modelo);
             }
                 
             if(Existente.isSelected()){
                 especie = getComboSelected(cmbEspecieExistente);
                 modelo = new M_Especie(especie);
-                controlador.modificarEspecie(especie, raza, modelo);
+                controlador.modificarEspecie(especie, raza);
                // aux = new M_Especie(especie, raza);
                 //controlador.guardarEspecie(aux);
                 
@@ -361,7 +361,7 @@ public class V_Especie extends javax.swing.JPanel {
                 especie = getComboSelected(cmbEspecieExistente);
             }
             
-            controlador.eliminarEspecie(especie);
+           // controlador.eliminarEspecie(especie);
             
             reiniciarValores();
             limpiarCajas();

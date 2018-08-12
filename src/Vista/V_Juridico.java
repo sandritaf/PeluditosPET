@@ -310,12 +310,10 @@ public class V_Juridico extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-        
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
-        else{
-            
+        else{            
             nombre = getText(txtNombre);
             rif = getText(txtRIF);
             telefono = getText(txtTelefono);
@@ -323,8 +321,7 @@ public class V_Juridico extends javax.swing.JPanel {
             razonSocial = getText(txtRazonSocial);
             direccion = txtDireccion.getText();
             
-            modelo = new M_Juridico(direccion, telefono, nombre, nombreGerente, rif, razonSocial);
-            
+            modelo = new M_Juridico(direccion, telefono, nombre, nombreGerente, rif, razonSocial);            
             controlador.guardarJuridico(modelo);
             
             reiniciarValores();
@@ -345,15 +342,15 @@ public class V_Juridico extends javax.swing.JPanel {
         else{
             
             nombre = getText(txtNombre);
-            rif = getText(txtRIF);
             telefono = getText(txtTelefono);
             nombreGerente = getText(txtNombreGerente);
             razonSocial = getText(txtRazonSocial);
             direccion = txtDireccion.getText();
+            auxRIF = txtRIF.getText(); //nuevo rif
             
-            modelo.actualizar(direccion, telefono, nombre, nombreGerente, rif, razonSocial);
+            modelo.actualizar(direccion, telefono, nombre, nombreGerente, auxRIF, razonSocial);
             //auxrif no tiene valor aquí
-            controlador.modificarJuridico(rif,modelo,auxRIF);
+            controlador.modificarJuridico(auxRIF,modelo,rif);
             
             reiniciarValores();
             limpiarCajas();
@@ -367,17 +364,7 @@ public class V_Juridico extends javax.swing.JPanel {
         if(getText(txtRIF).equals("")){
             JOptionPane.showMessageDialog(null, "El campo de RIF debe estar lleno para realizar ésta acción");
         }
-        else{
-            
-            rif = getText(txtRIF);
-            
-            char valor = rif.charAt(0);
-            char j = 'J';            
-            
-            if(!(valor == j) ){ //equals("V")){
-                rif = "J"+rif;
-            }
-            
+        else{                       
             controlador.eliminarJuridico(rif);
             
             reiniciarValores();
@@ -390,9 +377,9 @@ public class V_Juridico extends javax.swing.JPanel {
     private void tablaJuridicosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaJuridicosMousePressed
         modelo = controlador.getPersona(tablaJuridicos.getValueAt(tablaJuridicos.getSelectedRow(), 0).toString());
         
-        auxRIF = modelo.getRIF();
         txtNombre.setText(modelo.getNombre());
         txtRIF.setText(modelo.getRIF());
+        rif = modelo.getRIF();
         txtTelefono.setText(modelo.getTelefono());
         txtNombreGerente.setText(modelo.getNombreGerente());
         txtDireccion.setText(modelo.getDireccion());
@@ -438,21 +425,16 @@ public class V_Juridico extends javax.swing.JPanel {
         txtDireccion.setText(null);
     }
     
-    //Devuelve el codigo de la opcion seleccionada en un combo
-    public int getComboSelected(JComboBox combito){
-        String codigo = combito.getSelectedItem().toString(); 
-        String codigoFinal = "";
+    public String getRIF(String c){ 
+        String codigoFinal = "";        
+        int guion = c.length();
+        codigoFinal = c.substring(1, guion);
         
-        int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(1, guion);
-        
-        return Integer.parseInt(codigoFinal);
+        return codigoFinal;
     }
     
     public boolean txtVacio(JTextField txt){
-        if(txt.getText().isEmpty())
-            return true;
-        return false;
+        return (txt.getText().isEmpty());
     }
     
     //Verifica si hay txtFields sin llenar

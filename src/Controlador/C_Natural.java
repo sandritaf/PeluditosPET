@@ -33,12 +33,12 @@ public class C_Natural {
             
             M_Propietario natural = new M_Natural(null, null, null, null, cedula);
             ObjectSet result = Conexion.getInstancia().buscar(natural);
-            M_Natural encontrado = (M_Natural) result.next();
-            
-            controladorMascota.recorrerMascotasParaEliminarlas(0,encontrado.getCedula(),encontrado);
-            
-            Conexion.getInstancia().eliminar(encontrado);
-            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del cliente natural");
+            if (!result.isEmpty()){
+                M_Natural encontrado = (M_Natural) result.next();
+                controladorMascota.recorrerMascotasParaEliminarlas(0,encontrado.getCedula(),encontrado);
+                Conexion.getInstancia().eliminar(encontrado);
+                JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del cliente natural");
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Error en C_Natural->eliminarNatural()"+ e);
         }

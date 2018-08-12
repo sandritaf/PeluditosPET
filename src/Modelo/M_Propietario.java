@@ -49,7 +49,7 @@ public class M_Propietario {
     }
     
     public int getNumMascotas(){
-        return numeroMascotas;
+        return Mascoticas.size();
     }
     
     public void retirarMascota(M_Mascota mascotica){

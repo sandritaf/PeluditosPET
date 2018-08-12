@@ -7,14 +7,12 @@ import Modelo.M_Juridico;
 import Modelo.M_Mascota;
 import Modelo.M_Natural;
 import Modelo.M_Propietario;
-import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
 
 public class C_Mascota {
@@ -26,7 +24,7 @@ public class C_Mascota {
         try{
             
             if (agregarMascotaCliente(dueno,mascota)){
-                Conexion.getInstancia().guardar(mascota);
+                Conexion.getInstancia().guardar(mascota);                
                 dueno.imprimirMascotas();
                 JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
             }
@@ -40,9 +38,10 @@ public class C_Mascota {
             M_Mascota mascota = new M_Mascota(codigo,pk, nombre, null, null, 0, null);
             ObjectSet result = Conexion.getInstancia().buscar(mascota); 
             if(!result.isEmpty()){
+                
                 M_Mascota encontrado = (M_Mascota) result.next();
                 eliminarMascotaCliente(pk,dueno,mascota);    
-                dueno.imprimirMascotas();
+                
                 Conexion.getInstancia().eliminar(encontrado);
                 JOptionPane.showMessageDialog(null, "Se han eliminado correctamente la mascotica");
             }            
@@ -84,13 +83,16 @@ public class C_Mascota {
     
     public boolean agregarMascotaCliente(M_Propietario dueno, M_Mascota mascota){
         try{
+            System.out.print("Mascotas de: ");
             if (dueno instanceof M_Natural){ //Si su nuevo dueño es un cliente Natural se le agrega 
                 C_Natural c1 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
+                System.out.println(n.getCedula());
                 return c1.agregarMascota(mascota, n, n.getCedula());
             } else {
                 C_Juridico c2 = new C_Juridico(); //Si su nuevo dueño es un cliente Juridico se le agrega
                 M_Juridico j = (M_Juridico)dueno;
+                System.out.println(j.getRIF());
                 return (c2.agregarMascota(j.getRIF(), j, mascota));
             }
         }catch(Exception e){
@@ -199,7 +201,6 @@ public class C_Mascota {
                 while(rs.hasNext() ){
                     aux = rs.next().toString();
                     aModel.addElement(aux);
-                    System.out.println(aux);
                 }
             }
             // si hay propietarios juridicos
@@ -207,7 +208,6 @@ public class C_Mascota {
                 while(rs1.hasNext() ){
                    aux = rs1.next().toString();
                    aModel.addElement(aux);
-                   System.out.println(aux);
                 }
             }
         }catch(Exception e){
@@ -283,8 +283,7 @@ public class C_Mascota {
             ObjectSet resultados = Conexion.getInstancia().buscar(esp);
             if (resultados.hasNext()) {
                 M_Especie e = (M_Especie)resultados.next();
-                x = new String[e.Razas.size()];
-                System.out.println("Obtuviste "+x.length+" razas");                
+                x = new String[e.Razas.size()];                
                 for (int i=0; i<e.Razas.size(); i++){
                     x[i] = e.Razas.get(i).toString();  
                 }
@@ -369,7 +368,6 @@ public class C_Mascota {
             razas.setModel(aModel);
             String[] x = getRazas(especie);
             if (x != null) {
-                System.out.println("Se encontraron "+x.length+" razas.");
                 for (String per : x) {
                     aux = per.toString();
                     aModel.addElement(aux);

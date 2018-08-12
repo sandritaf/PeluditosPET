@@ -67,7 +67,7 @@ public class M_Juridico extends M_Propietario{
         this.telefono = telefono;
         this.nombre = nombre;
         this.nombreGerente = nombreGerente;
-        this.RIF = RIF;
+        this.RIF = "J"+RIF;
         this.razonSocial = razonSocial;
     }
     

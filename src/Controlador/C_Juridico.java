@@ -47,7 +47,6 @@ public class C_Juridico extends C_Propietario{
     public void modificarJuridico(String rif, M_Juridico j, String viejoRIF){
         try{    
             M_Propietario juridico = new M_Juridico(null, null, null, null, null, viejoRIF, null);
-            
             ObjectSet result = Conexion.getInstancia().buscar(juridico);
             if (!result.isEmpty()){
                 M_Juridico encontrado = (M_Juridico) result.next();
@@ -63,7 +62,6 @@ public class C_Juridico extends C_Propietario{
                     controladorMascota.recorrerMascotasParaModificarDueno(0,viejoRIF,encontrado,rif);
                 }
                
-
                 Conexion.getInstancia().guardar(encontrado);
                 JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el cliente jurídico" );
             }
@@ -109,7 +107,10 @@ public class C_Juridico extends C_Propietario{
             ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
             System.out.println("Tengo " + resultado.size() + " clientes juridicas");
             while(resultado.hasNext()){
-                System.out.println(resultado.next());
+                M_Juridico x = (M_Juridico)resultado.next();
+                System.out.println(x);
+                x.imprimirMascotas();
+               // System.out.println(resultado.next());
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
@@ -117,7 +118,7 @@ public class C_Juridico extends C_Propietario{
         
     }
     
-    public boolean idExiste(String rif){
+    /*public boolean idExiste(String rif){
         try{
             M_Propietario juridico = new M_Juridico(null, null, null, null, null, rif, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
@@ -128,7 +129,7 @@ public class C_Juridico extends C_Propietario{
             JOptionPane.showMessageDialog(null, e);
             return false;
         }
-    }
+    }*/
     
     public boolean agregarMascota(String rif, M_Juridico j, M_Mascota mascotica){
         try{

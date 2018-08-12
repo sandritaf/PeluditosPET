@@ -16,7 +16,6 @@ public class V_Natural extends javax.swing.JPanel {
     public V_Natural() {
         initComponents();
         controlador = new C_Natural();
-        //tablaNaturales.setModel(this.controlador.cargarTabla());
         reiniciarValores();
         tablaNaturales.setModel(controlador.cargarTabla());
     }
@@ -306,16 +305,14 @@ public class V_Natural extends javax.swing.JPanel {
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
-        else{
-            
+        else{            
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             telefono = getText(txtTelefono);
             cedula = getText(txtCedula); //Hay que verificar que no exista
             direccion = txtDireccion.getText();
             
-            modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);
-            
+            modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
             controlador.guardarNatural(modelo);
             
             reiniciarValores();
@@ -330,23 +327,20 @@ public class V_Natural extends javax.swing.JPanel {
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
-        else{
-            
+        else{            
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             telefono = getText(txtTelefono);
-            cedula = getText(txtCedula);
+            cedula = "V"+getText(txtCedula);
             direccion = txtDireccion.getText();
             
-            modelo.actualizar(direccion, telefono, nombre, apellido, cedula);
-            
+            modelo.actualizar(direccion, telefono, nombre, apellido, cedula);            
             controlador.modificarNatural(auxCI,modelo,cedula);
             
             reiniciarValores();
             limpiarCajas();
             tablaNaturales.setModel(this.controlador.cargarTabla());
         }
-
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
@@ -355,16 +349,7 @@ public class V_Natural extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El campo de Cedula debe estar lleno para realizar ésta acción");
         }
         else{
-            cedula = getText(txtCedula);
-            
-        /*    char valor = cedula.charAt(0);
-            char v = 'V';            
-            
-            if(!(valor == v) ){ //equals("V")){
-                cedula = "V"+cedula;
-            }*/
-            
-            controlador.eliminarNatural(cedula);
+            controlador.eliminarNatural(auxCI);
             
             reiniciarValores();
             limpiarCajas();
@@ -374,7 +359,7 @@ public class V_Natural extends javax.swing.JPanel {
     }//GEN-LAST:event_EliminarMouseClicked
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
@@ -389,8 +374,9 @@ public class V_Natural extends javax.swing.JPanel {
         txtNombre.setText(modelo.getNombre());
         txtApellido.setText(modelo.getApellido());
         txtTelefono.setText(modelo.getTelefono());
-        txtCedula.setText(modelo.getCedula());
+        txtCedula.setText(getCedula(modelo.getCedula()));
         txtDireccion.setText(modelo.getDireccion());
+        
     }//GEN-LAST:event_tablaNaturalesMousePressed
 
 
@@ -428,21 +414,17 @@ public class V_Natural extends javax.swing.JPanel {
         txtTelefono.setText(null);
     }
     
-    //Devuelve el codigo de la opcion seleccionada en un combo
-    public int getComboSelected(JComboBox combito){
-        String codigo = combito.getSelectedItem().toString(); 
-        String codigoFinal = "";
+    
+    public String getCedula(String c){ 
+        String codigoFinal = "";        
+        int guion = c.length();
+        codigoFinal = c.substring(1, guion);
         
-        int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(1, guion);
-        
-        return Integer.parseInt(codigoFinal);
+        return codigoFinal;
     }
     
     public boolean txtVacio(JTextField txt){
-        if(txt.getText().isEmpty())
-            return true;
-        return false;
+        return (txt.getText().isEmpty());
     }
     
     //Verifica si hay txtFields sin llenar

@@ -12,20 +12,20 @@ import javax.swing.table.DefaultTableModel;
 
 public class C_Especie {
 
-    //private ArrayList <String> Razas;
+    private M_Especie modelo;
     
     public C_Especie(){
-    //    Razas = new ArrayList<>();
     }
     
     
-    public void guardarEspecie(M_Especie especie){
+    public void guardarEspecie(String especie, String raza){
         try{
-            if(especieExiste(especie.getNombre())){
+            if(especieExiste(especie)){
                 JOptionPane.showMessageDialog(null, "La especie ya existe. Intente con otro");
             }
             else{
-                Conexion.getInstancia().guardar(especie);
+                modelo = new M_Especie(especie,raza);
+                Conexion.getInstancia().guardar(modelo);
                 JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos de la especie");
             }
         }catch(Exception e){
@@ -74,18 +74,18 @@ public class C_Especie {
 //        }
 //    }
     
-    public void eliminarEspecie(String nombre){
-        try{
-            M_Especie especie = new M_Especie(nombre, null);
-            ObjectSet result = Conexion.getInstancia().buscar(especie);
-            M_Especie encontrado = (M_Especie) result.next();
-            encontrado.eliminarRazas();
-            Conexion.getInstancia().eliminar(encontrado);
-            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos de la especie");
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+//    public void eliminarEspecie(String nombre){
+//        try{
+//            M_Especie especie = new M_Especie(nombre, null);
+//            ObjectSet result = Conexion.getInstancia().buscar(especie);
+//            M_Especie encontrado = (M_Especie) result.next();
+//            encontrado.eliminarRazas();
+//            Conexion.getInstancia().eliminar(encontrado);
+//            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos de la especie");
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//    }
     
 //    public void guardarRaza(String nombre, String raza){
 //        try{
@@ -105,16 +105,18 @@ public class C_Especie {
 //        }
 //    }
     
-    public void modificarEspecie(String nombre,String razaNueva, M_Especie es){
+    public void modificarEspecie(String nombre,String razaNueva){
         try{
-            M_Especie especie = new M_Especie(nombre);
-            ObjectSet result = Conexion.getInstancia().buscar(especie);
+            M_Especie esp = new M_Especie(nombre);
+            ObjectSet result = Conexion.getInstancia().buscar(esp);
+            M_Especie x = (M_Especie)result.next(); 
             
-            if (!result.isEmpty()){ //Si existen coincidencias con la especie
-                M_Especie encontrado = (M_Especie)result.next();  
-                encontrado.setNombre(es.getNombre());
-                encontrado.setRaza(razaNueva);
-                Conexion.getInstancia().guardar(encontrado);
+            if (!result.isEmpty()){ //Si existen coincidencias con la especie                 
+                x.setNombre(nombre);
+                x.getRazas().add(razaNueva);
+                Conexion.getInstancia().guardar(x);
+                x.imprimir();
+                Conexion.getInstancia().soda(nombre);
                 JOptionPane.showMessageDialog(null, "Se han almacenado la raza nuevaaaa");
             }
          }catch(Exception ex){

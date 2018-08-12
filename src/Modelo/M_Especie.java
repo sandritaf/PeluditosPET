@@ -5,18 +5,17 @@ import java.util.ArrayList;
 public class M_Especie {
     
     private String nombre;
-    private int cantRazas;
-    public ArrayList<String> Razas = new ArrayList<>();
+    public ArrayList<String> Razas;
     
     public M_Especie(String nombre, String raza){
         this.nombre = nombre;
+        Razas = new ArrayList<>();
         Razas.add(raza);
-        cantRazas = 1;// = 1;
     }
 
     public M_Especie(String nombre) {
         this.nombre = nombre;
-        cantRazas = 0;
+        Razas = new ArrayList<>();
     }    
     
     public String getNombre() {
@@ -24,7 +23,7 @@ public class M_Especie {
     }
     
     public int getNumRazas(){
-        return cantRazas;
+        return Razas.size();
     }
 
     public void setNombre(String nombre) {
@@ -33,15 +32,6 @@ public class M_Especie {
     
     public void setRazitas(ArrayList<String> raza){
         this.Razas = raza;
-        cantRazas = raza.size();
-    }
-
-    public int getCantRazas() {
-        return cantRazas;
-    }
-
-    public void setCantRazas(int cantRazas) {
-        this.cantRazas = cantRazas;
     }
     
     private boolean razaExiste(String raza){
@@ -54,15 +44,13 @@ public class M_Especie {
     public void setRaza(String raza){
         if (!razaExiste(raza)){ //Si no existe la raza
             this.Razas.add(raza);
-            cantRazas++;
         }
     }
     
     public void imprimir(){
-        System.out.println("Tienes "+Razas.size()+" vs "+cantRazas+" razas");
-        System.out.print("Especie: "+nombre+" | Razas:");
+        System.out.println("Especie: "+nombre+" | Razas:");
         for ( int i = 0 ; i<Razas.size(); i++){ 
-            System.out.print(" - "+Razas.get(i).toString());
+            System.out.println(Razas.get(i).toString());
         }
         System.out.println();
     }
@@ -94,7 +82,6 @@ public class M_Especie {
     public void agregarRaza(String nombre, String raza){
         this.nombre = nombre;
         this.Razas.add(raza);
-        cantRazas++;
     }
     
     public ArrayList concatLista(/*String nombresito/*/ ArrayList aux, ArrayList especie){
