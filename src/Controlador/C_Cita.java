@@ -75,6 +75,19 @@ public class C_Cita {
         }
     }
     
+    public M_Cita getCita(String id){
+        try{
+            M_Cita cita = new M_Cita(0, null, null, null, null, null, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(cita);
+            if (resultado.isEmpty())
+                return null;
+            M_Cita encontrado = (M_Cita) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
+    }
     
     public void listarCitas(){
         try{
@@ -111,26 +124,49 @@ public class C_Cita {
     }
     
     
+//    public DefaultTableModel cargarTabla() {
+//        try{
+//            String titulos[] = {"Codigo", "Servicio","Mascota","Dueño", "Fecha","Conclusion"};
+//            DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+//            M_Cita[] p = getCitas();
+//            if (p != null) {
+//                for (M_Cita per : p) {
+//                    Object[] cli = new Object[6];
+//                    cli[0] = per.getId();
+//                    cli[1] = per.getServicio().getNombre();
+//                    cli[2] = per.getMascota().getNombre();
+//                    cli[3] = per.getMascota().getDueno().toString();
+//                    cli[4] = per.getFecha();
+//                    cli[4] = per.getDiagnosticoFinal();
+//                    dtm.addRow(cli);
+//                }
+//            }
+//            return dtm;
+//        }catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//            return null;
+//        }
+//    }
+    
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"Codigo", "Servicio","Mascota","Dueño", "Fecha","Conclusion"};
+            String titulos[] = {"ID","Mascota","Dueño","Trabajador", "Servicio"};//,"RIF", "Profesión"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Cita[] p = getCitas();
             if (p != null) {
                 for (M_Cita per : p) {
-                    Object[] cli = new Object[6];
+                    Object[] cli = new Object[3];
                     cli[0] = per.getId();
-                    cli[1] = per.getServicio().getNombre();
-                    cli[2] = per.getMascota().getNombre();
-                    cli[3] = per.getMascota().getDueno().toString();
-                    cli[4] = per.getFecha();
-                    cli[4] = per.getDiagnosticoFinal();
+                    cli[1] = per.getMascota().printNombreID();
+                    cli[2] = per.getMascota().getDueno().toString();
+                    cli[3] = per.getTrabajador().toString();
+                    cli[4] = per.getServicio().toString();
                     dtm.addRow(cli);
                 }
             }
             return dtm;
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Cita->cargarTabla: "+e);
             return null;
         }
     }
