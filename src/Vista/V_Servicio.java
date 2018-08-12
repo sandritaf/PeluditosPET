@@ -3,16 +3,23 @@ package Vista;
 
 import Controlador.C_Servicio;
 import Modelo.M_Servicio;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class V_Servicio extends javax.swing.JPanel {
 
     C_Servicio controlador;
     M_Servicio modelo;
-    String nombre, descripcion, precio, observaciones;
+    String nombre, viejoNombre, descripcion, observaciones;
+    int precio;
     
     public V_Servicio() {
         initComponents();
         //txtPK.setVisible(false);
+        controlador = new C_Servicio();
+        reiniciarValores();
+        limpiarCajas();
+        tablaServicios.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -65,6 +72,11 @@ public class V_Servicio extends javax.swing.JPanel {
         Modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Modificar.setVerifyInputWhenFocusTarget(false);
         Modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarMouseClicked(evt);
+            }
+        });
 
         Eliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Eliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -73,6 +85,11 @@ public class V_Servicio extends javax.swing.JPanel {
         Eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Eliminar.setVerifyInputWhenFocusTarget(false);
         Eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarMouseClicked(evt);
+            }
+        });
 
         Servicio.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         Servicio.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,6 +166,11 @@ public class V_Servicio extends javax.swing.JPanel {
 
             }
         ));
+        tablaServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaServiciosMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaServicios);
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
@@ -163,7 +185,6 @@ public class V_Servicio extends javax.swing.JPanel {
         Precio.setText("Precio");
 
         txtDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtDescripcion.setFocusable(false);
 
         Observaciones.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Observaciones.setText("Observaciones");
@@ -176,7 +197,6 @@ public class V_Servicio extends javax.swing.JPanel {
         txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre.setFocusable(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -259,12 +279,91 @@ public class V_Servicio extends javax.swing.JPanel {
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-        // TODO add your handling code here:
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
+        }
+        else{
+            
+            nombre = getText(txtNombre);
+            observaciones = txtObservaciones.getText();
+            descripcion = txtDescripcion.getText();
+            precio = Integer.parseInt(txtPrecio.getText());
+        
+            modelo = new M_Servicio(nombre, descripcion, observaciones, precio);
+            controlador.guardarServicio(modelo);
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaServicios.setModel(controlador.cargarTabla());
+        }
     }//GEN-LAST:event_GuardarMouseClicked
+
+    private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
+        }
+        else{
+            
+            nombre = getText(txtNombre);
+            observaciones = txtObservaciones.getText();
+            descripcion = txtDescripcion.getText();
+            precio = Integer.parseInt(txtPrecio.getText());
+        
+            modelo.actualizar(nombre, descripcion, observaciones, precio);
+            if(viejoNombre!=null)
+                controlador.modificarServicio(nombre, viejoNombre, modelo);
+            else
+                JOptionPane.showMessageDialog(null, "No hay viejoNombre");
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaServicios.setModel(controlador.cargarTabla());
+        }
+        
+    }//GEN-LAST:event_ModificarMouseClicked
+
+    private void tablaServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaServiciosMousePressed
+        modelo = controlador.getServicio(tablaServicios.getValueAt(tablaServicios.getSelectedRow(), 0).toString());
+        
+        if(modelo != null){
+            //JOptionPane.showMessageDialog(null, "no soy null");
+        
+        
+        viejoNombre = modelo.getNombre(); System.out.println(viejoNombre);
+        txtNombre.setText(modelo.getNombre()); 
+        txtObservaciones.setText(modelo.getObservaciones());
+        txtDescripcion.setText(modelo.getDescripción());
+        txtPrecio.setText(Integer.toString(modelo.getPrecio()));
+        }
+        
+        Guardar.setEnabled(false);
+        
+            //JOptionPane.showMessageDialog(null, modelo);
+        
+    }//GEN-LAST:event_tablaServiciosMousePressed
+
+    private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
+        
+        if(txtVacio(txtNombre)){
+            JOptionPane.showMessageDialog(null, "Debe llenar al menos el campo Nombre para realizar ésta acción");
+        }
+        else{
+            
+            nombre = getText(txtNombre);
+            
+            controlador.eliminarServicio(nombre);
+            
+            reiniciarValores();
+            limpiarCajas();
+            tablaServicios.setModel(controlador.cargarTabla());
+        }
+        
+    }//GEN-LAST:event_EliminarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -290,11 +389,49 @@ public class V_Servicio extends javax.swing.JPanel {
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 
+    
+    
+    private void reiniciarValores(){
+        nombre = null;
+        viejoNombre = null;
+        descripcion = null;
+        precio = 0;
+        observaciones = null;
+    }
+
     private void limpiarCajas(){
 //        txtPK.setText(null);
         txtObservaciones.setText(null);
         txtDescripcion.setText(null);
         txtNombre.setText(null);
         txtPrecio.setText(null);
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
     }
+    
+    public boolean txtVacio(JTextField txt){
+        if(txt.getText().isEmpty())
+            return true;
+        return false;
+    }
+    
+    public boolean cajasVacias(){
+        if(txtObservaciones.getText().isEmpty())
+            return true;
+        if(txtDescripcion.getText().isEmpty())
+            return true;
+        if(txtVacio(txtNombre))
+            return true;
+        if(txtVacio(txtPrecio))
+            return true;
+        return false;
+    }
+    
+    //Devuelve el valor de un txtField
+    public String getText(JTextField txt){
+        return txt.getText();
+    }
+    
+    
 }

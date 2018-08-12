@@ -3,10 +3,14 @@ package Controlador;
 
 import Conexion.Conexion;
 import Modelo.M_Servicio;
+import Modelo.M_Trabajador;
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class C_Servicio {
 
@@ -15,7 +19,8 @@ public class C_Servicio {
 
     public void guardarServicio(M_Servicio servicio){
           try{
-              servicio.getNombre().toLowerCase();
+                String nombre = servicio.getNombre().toLowerCase();
+                servicio.setNombre(nombre);
 //              juridico.setRIF("J"+juridico.getRIF());
               Conexion.getInstancia().guardar(servicio);
               JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del cliente jurídico");
@@ -38,20 +43,23 @@ public class C_Servicio {
         }
     }
     
-    public void modificarServicio(String nombre, M_Servicio s){
+    public void modificarServicio(String nombre, String viejoNombre, M_Servicio s){
         try{    
-            nombre.toLowerCase();
-            M_Servicio servicio = new M_Servicio(nombre, null, null,0);
+            
+            viejoNombre = viejoNombre.toLowerCase();
+            nombre = nombre.toLowerCase();
+            
+            M_Servicio servicio = new M_Servicio(viejoNombre, null, null, 0);
             
             ObjectSet result = Conexion.getInstancia().buscar(servicio);
             if (!result.isEmpty()){
                 M_Servicio encontrado = (M_Servicio) result.next();
 
-                encontrado.setNombre(s.getNombre().toLowerCase());
+                encontrado.setNombre(nombre);
                 encontrado.setDescripción(s.getDescripción());
                 encontrado.setObservaciones(s.getObservaciones());
                 encontrado.setPrecio(s.getPrecio());
-
+                
                 Conexion.getInstancia().guardar(encontrado);
                 JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el servicio" );
             }
@@ -94,6 +102,47 @@ public class C_Servicio {
             return null;  
         }      
     }
-
+    
+    public M_Servicio[] getServicios(){
+        try {
+            M_Servicio[] servicios = null;
+            M_Servicio servicio = new M_Servicio(null, null, null, 0);
+            ObjectSet resultados = Conexion.getInstancia().buscar(servicio);
+            int i = 0;
+            if (resultados.hasNext()) {
+                servicios = new M_Servicio[resultados.size()];
+                while (resultados.hasNext()) {
+                    servicios[i] = (M_Servicio) resultados.next();
+                    i++;
+                }
+            }
+            return servicios;
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Servicio->getServicios: "+e);
+            return null;
+        }
+    }
+    
+    public DefaultTableModel cargarTabla() {
+        try{
+            String titulos[] = {"Nombre","Precio","Descripción"};//,"RIF", "Profesión"};
+            DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+            M_Servicio[] p = getServicios();
+            if (p != null) {
+                for (M_Servicio per : p) {
+                    Object[] cli = new Object[3];
+                    cli[0] = per.getNombre();
+                    cli[1] = per.getPrecio();
+                    cli[2] = per.getDescripción();
+                    dtm.addRow(cli);
+                }
+            }
+            return dtm;
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Servicio->cargarTabla: "+e);
+            return null;
+        }
+    }
+    
     
 }

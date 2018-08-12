@@ -282,9 +282,9 @@ public class C_Mascota {
             ObjectSet resultados = Conexion.getInstancia().buscar(esp);
             if (resultados.hasNext()) {
                 M_Especie e = (M_Especie)resultados.next();
-                x = new String[e.Razas.size()];                
-                for (int i=0; i<e.Razas.size(); i++){
-                    x[i] = e.Razas.get(i).toString();  
+                x = new String[e.getNumRazas()];                
+                for (int i=0; i<e.getNumRazas(); i++){
+                    x[i] = e.getRaza(i);  
                 }
             }
             

@@ -1,129 +1,104 @@
 package Modelo;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class M_Especie {
     
+    public static int MAX_RAZAS = 10;
     private String nombre;
-    public List<String> Razas;
+    private String[] razas = new String[MAX_RAZAS];
+    private int numRazas;
     
     public M_Especie(String nombre, String raza){
-        this.nombre = nombre;
-        Razas = new ArrayList<String>();
-        Razas.add(raza);
+        this.nombre = nombre;   
+        numRazas = 0;
+        inicializarArreglo();
+        agregarRaza(raza);
     }
 
     public M_Especie(String nombre) {
-        this.nombre = nombre;
-        Razas = new ArrayList<>();
+        this.nombre = nombre;     
+        numRazas = 0;
+        inicializarArreglo();  
     }    
+    
+    public void inicializarArreglo(){
+        for(int i=0; i<MAX_RAZAS; i++){
+            razas[i] = "";
+        }
+    }
     
     public String getNombre() {
         return nombre;
     }
     
+    public String getRaza(int i){
+        return razas[i];
+    }
+    
     public int getNumRazas(){
-        return Razas.size();
+        return numRazas;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     
-    public void setRazitas(ArrayList<String> raza){
-        this.Razas = raza;
-    }
-    
-    private boolean razaExiste(String raza){
-        if (Razas.indexOf(raza) == -1)
-            return false;
-        System.out.println("Se intenta añadir: "+raza+" y se encontro coincidencia con: "+Razas.get(Razas.indexOf(raza)));
-        return true;
-    }
-    
     public void setRaza(String raza){
-        if (!razaExiste(raza)){ //Si no existe la raza
-            this.Razas.add(raza);
+        for(int i=0; i<MAX_RAZAS; i++){
+            System.out.println("Ciclo:"+i);
+            if (razas[i].compareTo("")==0){
+                razas[i] = raza;
+                numRazas++;
+                System.out.println("Se añadio una raza: "+raza+ ""+numRazas);
+                break;
+            }
+        }
+    }
+    
+      
+    private int razaExiste(String raza){
+        for(int i=0; i<MAX_RAZAS; i++){
+            if (razas[i].compareTo(raza)==0){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public void agregarRaza(String raza){
+        if (razaExiste(raza) == -1){ //Si no existe la raza
+            setRaza(raza);
         }
     }
     
     public void imprimir(){
         System.out.println("Especie: "+nombre+" | Razas:");
-       /* for ( int i = 0 ; i<Razas.size(); i++){ 
-            System.out.println(Razas.get(i).toString());
-        }*/
-        System.out.println(Razas);
+        System.out.println(razas.toString());
     }
-    
-//    public void setRazas(String raza) {
-//        if(buscarRaza(raza)){
-//            this.Razas.set(posRaza, raza);//this.Razas.set(cantRazas, raza) add(raza);
-//        }
-//        else
-//            this.Razas.add(raza);
-//        cantRazas++;
-//    }
-    
-//    public boolean buscarRaza(String raza) {
-//        for(String a: Razas) {
-//            if(raza.equals(a)) {
-//                posRaza = a.indexOf(raza);
-//                JOptionPane.showMessageDialog(null, "Posicion: "+posRaza);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-    
+        
     public String toString(){
         return nombre;
     }
+        
     
-    public void agregarRaza(String nombre, String raza){
-        this.nombre = nombre;
-        this.Razas.add(raza);
-    }
-    
-    public ArrayList concatLista(/*String nombresito/*/ ArrayList aux, ArrayList especie){
-//        System.out.print("ESPECIE LISTA Especie: "+nombresito+" | Razas: ");
-//        for ( int i = 0 ; i<especie.size(); i++){ 
-//            System.out.print(" - "+especie.get(i).toString());
-//        }
-//        System.out.println();
-//        
-//        System.out.print("AUX LISTA Especie: "+nombresito+" | Razas: ");
-//        for ( int i = 0 ; i<aux.size(); i++){ 
-//            System.out.print(" - "+aux.get(i).toString());
-//        }
-//        System.out.println();
-        int sizeE = especie.size();
-        int auxE = aux.size();
-        aux.addAll(especie);
-    //    Razas = aux;
-//        System.out.print("MIX LISTA Especie: "+nombresito+" | Razas: ");
-//        for ( int i = 0 ; i<aux.size(); i++){ 
-//            System.out.print(" - "+aux.get(i).toString());
-//        }
-//        System.out.println();
-        return aux;
-    }
-    
-    public void imprimirLista(String nombre, ArrayList aux){
+    public void imprimirLista(){
         //Razas = aux;
         System.out.print("Lista Especie: "+nombre+" | Razas: ");
-        for ( int i = 0 ; i<aux.size(); i++){ 
-            System.out.print(" - "+aux.get(i).toString());
+        for ( int i = 0 ; i<MAX_RAZAS; i++){ 
+            System.out.print(" - "+razas[i]);
         }
         System.out.println();
     }
     
-    public void eliminarRazas(){
-        Razas.removeAll(Razas);
+    public void eliminarRazas(String raza){
+        for(int i=0; i<MAX_RAZAS; i++){
+            if (razas[i].compareTo(raza)==0){
+                razas[i] = "";
+                numRazas--;
+                break;
+            }
+        }
     }
-    
-    public ArrayList<String> getRazas(){
-        return (ArrayList<String>) Razas;
-    }
-    
 }

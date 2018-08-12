@@ -48,4 +48,11 @@ public class M_Servicio {
         this.precio = precio;
     }
     
+    public void actualizar(String nombre, String descripción, String observaciones, int precio) {
+        this.nombre = nombre;
+        this.descripción = descripción;
+        this.observaciones = observaciones;
+        this.precio = precio;
+    }
+    
 }
