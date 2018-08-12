@@ -1,13 +1,9 @@
-
 package Vista;
 
 import Controlador.C_Especie;
 import Modelo.M_Especie;
-import java.awt.event.MouseEvent;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class V_Especie extends javax.swing.JPanel {
@@ -15,7 +11,6 @@ public class V_Especie extends javax.swing.JPanel {
     M_Especie modelo, aux;
     C_Especie controlador;
     String especie, raza;
-    boolean modificar;
     Menu m;
     
     public V_Especie() {
@@ -289,28 +284,6 @@ public class V_Especie extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-//        if (agregarEspecie.isSelected())
-//            especie = txtEspecie.getText();
-//        else{
-//            especie = cmbEspecieExistente.getSelectedItem().toString();
-//            modificar = true;
-//        }
-//        
-//        raza = txtRaza.getText();
-//        modelo = new M_Especie(especie,raza);
-//        
-//        if(modificar){
-//            System.out.println("Se va a modificar");
-//            controlador.modificar(especie,raza,modelo);
-//        }else{            
-//            controlador.guardar(modelo);
-//        }
-//        
-//        tablaEspecies.setModel(controlador.cargarTabla());
-//        controlador.cargarEspecies(cmbEspecieExistente);
-//        reiniciarValores();
-//        limpiarCajas();
-        
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");            
         }
@@ -321,22 +294,18 @@ public class V_Especie extends javax.swing.JPanel {
             if(AgregarEspecie.isSelected()){
                 especie = getText(txtEspecie);
                 modelo = new M_Especie(especie, raza);
-                controlador.guardarEspecie(especie,raza);//modelo);
+                controlador.guardarEspecie(especie,raza);
             }
                 
             if(Existente.isSelected()){
                 especie = getComboSelected(cmbEspecieExistente);
                 modelo = new M_Especie(especie);
-                controlador.modificarEspecie(especie, raza);
-               // aux = new M_Especie(especie, raza);
-                //controlador.guardarEspecie(aux);
-                
+                controlador.modificarEspecie(especie, raza);                
             }
                 
             reiniciarValores();
             limpiarCajas();
             tablaEspecies.setModel(controlador.cargarTabla());
-//            controlador.imprimir();
         }
     
     }//GEN-LAST:event_GuardarMouseClicked
@@ -470,7 +439,6 @@ public class V_Especie extends javax.swing.JPanel {
     public void reiniciarValores(){
         especie = null;
         raza = null;
-        modificar = false;
     }
     
     //Devuelve el valor de un txtField
