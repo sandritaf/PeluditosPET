@@ -17,9 +17,6 @@ public class V_Cita extends javax.swing.JPanel {
     public V_Cita() {
         initComponents();
         controlador = new C_Cita();
-        controlador.cargarServicios(cmbServicio);
-        controlador.cargarTrabajadores(cmbTrabajador);
-        controlador.cargarMascotas(cmbMascota);
         reiniciarValores();
     }
 
@@ -362,7 +359,7 @@ public class V_Cita extends javax.swing.JPanel {
            */
             reiniciarValores();
             limpiarCajas();
-            tablaCitas.setModel(this.controlador.cargarTabla());
+           // tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 

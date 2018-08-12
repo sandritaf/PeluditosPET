@@ -1,8 +1,6 @@
 package Modelo;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-
 public class M_Propietario {
     protected String direccion;
     protected String telefono;

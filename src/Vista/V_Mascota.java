@@ -412,10 +412,9 @@ public class V_Mascota extends javax.swing.JPanel {
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
-        else{                    
+        else{     
             id = getIDComboSelected(cmbDueno);
             nombre = getText(txtNombre);
-            observaciones = txtObservaciones.getText();
             
             controlador.eliminarMascota(codigo,id,nombre,obtenerDueno(cmbDueno));
             

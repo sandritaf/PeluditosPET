@@ -40,7 +40,7 @@ public class C_Natural {
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del cliente natural");
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null,"Error en C_Natural->eliminarNatural()"+ e);
         }
     }
     
@@ -54,7 +54,7 @@ public class C_Natural {
             M_Natural encontrado = (M_Natural) resultado.next();
             return encontrado;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Natural->getPersona():"+e);
             return null;  
         }      
     }
@@ -183,12 +183,12 @@ public class C_Natural {
             M_Natural[] p = getNaturales();
             if (p != null) {
                 for (M_Natural per : p) {
-                    Object[] cli = new Object[6];
+                    Object[] cli = new Object[5];
                     cli[0] = per.getCedula();
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
-                    cli[5] = per.getNumMascotas();
+                    cli[4] = per.getNumMascotas();
                     dtm.addRow(cli);
                 }
             }

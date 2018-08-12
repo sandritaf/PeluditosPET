@@ -27,6 +27,7 @@ public class C_Mascota {
             
             if (agregarMascotaCliente(dueno,mascota)){
                 Conexion.getInstancia().guardar(mascota);
+                dueno.imprimirMascotas();
                 JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
             }
         } catch(Exception e){
@@ -37,13 +38,14 @@ public class C_Mascota {
     public void eliminarMascota(int codigo,String pk, String nombre, M_Propietario dueno){
         try{
             M_Mascota mascota = new M_Mascota(codigo,pk, nombre, null, null, 0, null);
-            ObjectSet result = Conexion.getInstancia().buscar(mascota);        
-            M_Mascota encontrado = (M_Mascota) result.next();
-            
-            eliminarMascotaCliente(dueno,mascota);            
-            Conexion.getInstancia().eliminar(encontrado);
-            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente la mascotica");
-            
+            ObjectSet result = Conexion.getInstancia().buscar(mascota); 
+            if(!result.isEmpty()){
+                M_Mascota encontrado = (M_Mascota) result.next();
+                eliminarMascotaCliente(pk,dueno,mascota);    
+                dueno.imprimirMascotas();
+                Conexion.getInstancia().eliminar(encontrado);
+                JOptionPane.showMessageDialog(null, "Se han eliminado correctamente la mascotica");
+            }            
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->eliminarMascota: "+e);
         }
@@ -70,7 +72,7 @@ public class C_Mascota {
                 
                 if (viejaID.compareTo(nuevaID)!=0){ //Si los id son diferentes, hubo cambio de dueño
                     agregarMascotaCliente(m.getDueno(),encontrado); //Se le agrega a un nuevo cliente
-                    eliminarMascotaCliente(p,encontrado2); //Se elimina del antiguo dueño
+                    eliminarMascotaCliente(viejaID,p,encontrado2); //Se elimina del antiguo dueño
                 }                
                 Conexion.getInstancia().guardar(encontrado);
                 JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el animalito" );
@@ -97,7 +99,7 @@ public class C_Mascota {
         return false;
     }
     
-    public void eliminarMascotaCliente(M_Propietario dueno, M_Mascota mascota){
+    public void eliminarMascotaCliente(String pk, M_Propietario dueno, M_Mascota mascota){
         try{
             if (dueno instanceof M_Natural){ //Si el anterior dueño era cliente natural
                 C_Natural c3 = new C_Natural();
@@ -106,7 +108,7 @@ public class C_Mascota {
             } else {
                 C_Juridico c4 = new C_Juridico(); //Si su dueño anterior era un cliente Juridico 
                 M_Juridico j = (M_Juridico)dueno;
-                c4.eliminarMascota(j.getRIF(), j, mascota);
+                c4.eliminarMascota(pk, j, mascota);
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error C_Mascota->eliminarMascotaCliente: "+e);
