@@ -6,6 +6,8 @@ import Controlador.C_Mascota;
 import Modelo.M_Juridico;
 import Modelo.M_Mascota;
 import Vista.Menu;
+import Vista.vista;
+import javax.swing.JComboBox;
 
 public class ProyectoBDDII {
 
@@ -41,9 +43,12 @@ public class ProyectoBDDII {
 //        controladorPropietario.listarJuridicos();
 //        
 //        Conexion.getInstancia().cerrarConexion();
-        
+    
+            
+
         Menu menu = new Menu();
         menu.setVisible(true);
-    }
-    
+//        vista menu = new vista();
+//        menu.setVisible(true);
+    }   
 }

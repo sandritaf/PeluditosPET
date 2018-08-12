@@ -22,7 +22,7 @@ public class C_Cita {
               Conexion.getInstancia().guardar(cita);
               JOptionPane.showMessageDialog(null, "Se ha almacenado la cita");
           }catch(Exception e){
-              JOptionPane.showMessageDialog(null, e);
+              JOptionPane.showMessageDialog(null, "error en C_Cita->guardarCita: "+ e);
           }
         
     }
@@ -136,24 +136,6 @@ public class C_Cita {
             JOptionPane.showMessageDialog(null, e);
             return null;
         }
-    }
-    
-    
-    private M_Cita obtenerDueno(JComboBox combito){
-        String codigo = combito.getSelectedItem().toString(); 
-        String codigoFinal = "";        
-        int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(0, guion);
-        
-        C_Juridico controladorJuridico = new C_Juridico();
-        M_Juridico dueno = controladorJuridico.getPersona(codigoFinal);
-        if (dueno != null)
-            return dueno;
-        else {
-            C_Natural controladorNatural = new C_Natural();
-            M_Natural dueno2 = controladorNatural.getPersona(codigoFinal);
-            return dueno2;
-        }        
     }
     
 }

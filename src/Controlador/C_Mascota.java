@@ -377,5 +377,20 @@ public class C_Mascota {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarRazas: "+e);
         }
     }
+
+    public M_Mascota getMascota(String id, M_Propietario dueno){
+        try{
+            M_Mascota mascota = new M_Mascota(0, id, null, null, null, 0, null, dueno);//(null, null, null, null, rif, null); 
+            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
+            if (resultado.isEmpty())
+                return null;
+            M_Mascota encontrado = (M_Mascota) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
+    }
+    
     
 }

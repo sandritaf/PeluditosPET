@@ -7,6 +7,8 @@ package Vista;
 
 import Conexion.Conexion;
 import Controlador.C_Mascota;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +23,8 @@ public class vista extends javax.swing.JFrame {
         initComponents();
         c = new C_Mascota();
         String opc = "Juridico";
-        c.cargarDuenos(jComboBox1/*, opc*/);
+        getIDComboSelected(jComboBox1);
+    //    c.cargarDuenos(jComboBox1/*, opc*/);
     }
     
     @SuppressWarnings("unchecked")
@@ -33,7 +36,14 @@ public class vista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V27 - Sandra Farreras" }));
+
         Cargar.setText("Cargar");
+        Cargar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CargarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,6 +71,10 @@ public class vista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CargarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CargarMouseClicked
+        JOptionPane.showMessageDialog(null, getNombreComboSelected(jComboBox1));        // TODO add your handling code here:
+    }//GEN-LAST:event_CargarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -101,4 +115,32 @@ public class vista extends javax.swing.JFrame {
     private javax.swing.JButton Cargar;
     private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
+
+    //Devuelve el string de la opcion seleccionada en un combo
+    public String getNombreComboSelected(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        codigoFinal = codigo.substring(0,1);
+        
+     //   codigoFinal = (String) codigo.lastIndexOf(codigo);
+        
+//        int guion = codigo.lastIndexOf(codigo);//indexOf(" - ");
+//        codigoFinal = codigo.substring(0, guion);
+        
+        return codigoFinal;
+    }
+
+    
+    //Devuelve el codigo de la opcion seleccionada en un combo
+    public String getIDComboSelected(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf(" -");
+        codigoFinal = codigo.substring(0, guion);
+        
+        return codigoFinal;
+    }
+    
 }
