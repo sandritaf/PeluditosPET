@@ -30,6 +30,9 @@ public class V_Mascota extends javax.swing.JPanel {
         controlador.cargarDuenos(cmbDueno/*, "Natural"*/);
         controlador.cargarEspecies(cmbEspecie);
         tablaMascotas.setModel(this.controlador.cargarTabla());
+//        System.out.println(controlador.getNumMascotasExistentes());
+//        //controlador.listarMascotas();
+//        controlador.verMascota("V27656860",null);
         reiniciarValores();
     }
 

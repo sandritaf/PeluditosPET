@@ -150,17 +150,18 @@ public class C_Cita {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"ID","Mascota","Dueño","Trabajador", "Servicio"};//,"RIF", "Profesión"};
+            //String titulos[] = {"ID","Mascota","Dueño","Trabajador", "Servicio"};//,"RIF", "Profesión"};
+            String titulos[] = {"ID","Trabajador", "Servicio"};//,"RIF", "Profesión"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Cita[] p = getCitas();
             if (p != null) {
                 for (M_Cita per : p) {
-                    Object[] cli = new Object[5];
+                    Object[] cli = new Object[3];
                     cli[0] = per.getId();
-                    cli[1] = per.getMascota().printNombreID();
-                    cli[2] = per.getMascota().getDueno().toString();
-                    cli[3] = per.getTrabajador().nombreApellido();// toString();
-                    cli[4] = per.getServicio().toString();
+    //                cli[1] = per.getMascota().printNombreID();
+    //                cli[2] = per.getMascota().getDueno().toString();
+                    cli[1] = per.getTrabajador().nombreApellido();// toString();
+                    cli[2] = per.getServicio().toString();
                     dtm.addRow(cli);
                 }
             }

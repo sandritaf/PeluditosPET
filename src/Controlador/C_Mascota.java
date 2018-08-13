@@ -154,7 +154,19 @@ public class C_Mascota {
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             JOptionPane.showMessageDialog(null, resultado.next());
         } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en void verMascota "+ e);
+        }        
+    }
+    
+    public M_Mascota verMascota(String cod, M_Propietario p){
+        try{
+            M_Mascota mascota = new M_Mascota(0, cod, null, null, null, 0,null, p);
+            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
+            return (M_Mascota) resultado;
+//            JOptionPane.showMessageDialog(null, resultado.next());
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error en void M_Mascota verMascota "+ e);
+            return null;
         }        
     }
     

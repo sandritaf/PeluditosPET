@@ -51,11 +51,10 @@ public class V_Cita extends javax.swing.JPanel {
         cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         reiniciarValores();
-        JOptionPane.showMessageDialog(null, controlador.getNumCitasExistentes());
 //        controlador.listarCitas();
     //    limpiarCajas();
         
-//        tablaCitas.setModel(controlador.cargarTabla());
+        tablaCitas.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -399,7 +398,7 @@ public class V_Cita extends javax.swing.JPanel {
             servicio = getComboSelected(cmbServicio); //JOptionPane.showMessageDialog(null, "Servicio: "+servicio);
             dueño = getIDComboSelected(cmbDueño);//JOptionPane.showMessageDialog(null, "Dueño: "+dueño);
             //mascota = getID(cmbMascota); //JOptionPane.showMessageDialog(null, "Mascota: "+mascota);
-            mascota = getComboSelected(cmbMascota); JOptionPane.showMessageDialog(null, "Mascota: "+mascota);
+            mascota = getComboSelected(cmbMascota); //JOptionPane.showMessageDialog(null, "Mascota: "+mascota);
             trabajador = getIDComboSelected(cmbTrabajador); //JOptionPane.showMessageDialog(null, "Trabajador: "+trabajador);
             fecha = getText(txtFecha); //JOptionPane.showMessageDialog(null, "Fecha: "+fecha);
             diagnosticoFinal = txtDiagnosticoFinal.getText(); //JOptionPane.showMessageDialog(null, "D. final: "+diagnosticoFinal);
@@ -411,7 +410,7 @@ public class V_Cita extends javax.swing.JPanel {
                 mNatural = cNatural.getPersona("V"+dueño);
                 JOptionPane.showMessageDialog(null, mNatural.getCedula() + " " + mNatural.nombreApellido());
                 //mMascota = cMascota.getMascota(Integer.parseInt(mascota),mNatural);
-                mMascota = cMascota.getMascota(mascota,mNatural);
+                mMascota = cMascota.getMascota(mascota, mNatural); //getMascota(mascota,mNatural);
                 if(mMascota != null)
                     JOptionPane.showMessageDialog(null, mMascota.printNombreID());
                 else
@@ -421,8 +420,13 @@ public class V_Cita extends javax.swing.JPanel {
             }
             else if(tipoDueño(cmbDueño).equals("J")){
                 mJuridico = cJuridico.getPersona("J"+dueño);
-                //mMascota = cMascota.getMascota(Integer.parseInt(mascota), dueño, mJuridico);
-                JOptionPane.showMessageDialog(null, mJuridico.toString() + mMascota.printNombreID());
+                JOptionPane.showMessageDialog(null, mJuridico.getRIF() + " " + mJuridico.getNombre());
+                mMascota = cMascota.getMascota(mascota, mJuridico);
+//                JOptionPane.showMessageDialog(null, mJuridico.toString() + mMascota.printNombreID());
+                if(mMascota != null)
+                    JOptionPane.showMessageDialog(null, mMascota.printNombreID());
+                else
+                    JOptionPane.showMessageDialog(null, "chama soy null");
             }
             mServicio = cServicio.getServicio(servicio);     
             //JOptionPane.showMessageDialog(null, mServicio.toString());
@@ -433,7 +437,7 @@ public class V_Cita extends javax.swing.JPanel {
            
             reiniciarValores();
             limpiarCajas();
-            controlador.listarCitas();
+//            controlador.listarCitas();
 //            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
@@ -455,11 +459,11 @@ public class V_Cita extends javax.swing.JPanel {
             mTrabajador = cTrabajador.getPersona(trabajador);
             if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
-//                mMascota = cMascota.getMascota(Integer.parseInt(mascota), mNatural);
+                mMascota = cMascota.getMascota(mascota, mNatural);
             }
             else if(tipoDueño(cmbDueño).equals("J")){
                 mJuridico = cJuridico.getPersona(dueño);
-//                mMascota = cMascota.getMascota(Integer.parseInt(mascota), mJuridico);
+                mMascota = cMascota.getMascota(mascota, mJuridico);
             }
             mServicio = cServicio.getServicio(servicio);      
             id = Integer.parseInt(getText(txtPK));
@@ -468,7 +472,7 @@ public class V_Cita extends javax.swing.JPanel {
 
             controlador.modificarCita(id, modelo);
             
-            //controlador.modificarMascota(auxID,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
+//            controlador.modificarMascota(idViejo,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
 
             reiniciarValores();
             limpiarCajas();
@@ -500,9 +504,13 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaCitasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCitasMousePressed
+        
+        Guardar.setEnabled(false);
+        
         modelo = controlador.getCita(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
-
+        
         idViejo = Integer.toString(modelo.getId());
+        txtPK.setText(idViejo);
         cmbServicio.setSelectedItem(modelo.getServicio().toString());
         cmbDueño.setSelectedItem(modelo.getMascota().getDueno().toString());
         cmbMascota.setSelectedItem(modelo.getMascota().toString());
@@ -528,6 +536,7 @@ public class V_Cita extends javax.swing.JPanel {
         //JOptionPane.showMessageDialog(null, getIDComboSelected(cmbDueño)); 
         //cMascota.cargarDuenos(cmbDueño);
         
+        //Guardar.setEnabled(false);
     }//GEN-LAST:event_cmbDueñoItemStateChanged
 
 
@@ -574,6 +583,8 @@ public class V_Cita extends javax.swing.JPanel {
         cmbTrabajador.setSelectedIndex(0);
         txtTratamiento.setText(null);
         txtPK.setText(null);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
     }
     
     //Devuelve el string de la opcion seleccionada en un combo
