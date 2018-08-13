@@ -4,10 +4,13 @@ package Controlador;
 import Conexion.Conexion;
 import Modelo.M_Juridico;
 import Modelo.M_Mascota;
+import Controlador.C_Mascota;
 import Modelo.M_Propietario;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -215,5 +218,24 @@ public class C_Juridico extends C_Propietario{
             return null;  
         }      
     }
+    
+//    public void cargarDuenoConMascota(JComboBox dueno, String cedula){
+//        try{
+//            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+//            String aux;
+//            dueno.setModel(aModel);
+//
+//            //if(cedula.startsWith("V", 0))// charAt(0) == "V")
+//                M_Mascota[] x = getMascotas();
+//            if (x != null) {
+//                for (M_Juridico per : x) {
+//                    aux = per. getRIF() + " - " + per.getNombre();
+//                    aModel.addElement(aux);
+//                }
+//            }
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarRazas: "+e);
+//        }
+//    }
     
 }

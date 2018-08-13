@@ -210,7 +210,7 @@ public class C_Mascota {
                 }
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
         }
     }
     
@@ -362,7 +362,7 @@ public class C_Mascota {
             M_Especie p = new M_Especie(null);
             ObjectSet rs = Conexion.getInstancia().buscar(p);
 
-            // si hay propietarios naturales
+            // si hay especies
             if(rs.size() >0){
                 while(rs.hasNext() ){
                     aux = ((M_Especie)rs.next()).getNombre();
@@ -391,19 +391,36 @@ public class C_Mascota {
         }
     }
 
-    public M_Mascota getMascota(String id, M_Propietario dueno){
+    public M_Mascota getMascota(String nombre, M_Propietario dueno){
         try{
-            M_Mascota mascota = new M_Mascota(0, id, null, null, null, 0, null, dueno);//(null, null, null, null, rif, null); 
+            M_Mascota mascota = new M_Mascota(0, null, nombre, null, null, 0, null, dueno);//(null, null, null, null, rif, null); 
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             if (resultado.isEmpty())
                 return null;
             M_Mascota encontrado = (M_Mascota) resultado.next();
             return encontrado;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascota"+ e);
             return null;  
         }      
     }
     
+    public void cargarDuenoConMascota(JComboBox dueno, String cedula){
+        try{
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux;
+            dueno.setModel(aModel);
+            M_Mascota[] x = getMascotas(cedula);
+            if (x != null) {
+                for (M_Mascota per : x) {
+                    //aux = per.printNombreID();// toString();
+                    aux = per.getNombre();
+                    aModel.addElement(aux);
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenoConMascota: "+e);
+        }
+    }
     
 }

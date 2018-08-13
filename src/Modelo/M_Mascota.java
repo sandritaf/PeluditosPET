@@ -9,7 +9,7 @@ public class M_Mascota {
     private String observaciones;
     private M_Propietario dueno;
     
-    public M_Mascota(int codigo, String id,String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+    public M_Mascota(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
         this.codigo = codigo;
         this.id = id;
         this.nombre = nombre;
@@ -102,7 +102,7 @@ public class M_Mascota {
     }
     
     public String printNombreID(){
-        return id + " - " +nombre;
+        return codigo + " - " +nombre;
     }
     
      public void actualizar(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {

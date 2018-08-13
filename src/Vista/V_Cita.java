@@ -33,6 +33,7 @@ public class V_Cita extends javax.swing.JPanel {
     C_Mascota cMascota; M_Mascota mMascota;
     C_Fecha cFecha; 
     String idViejo, servicio, dueño, trabajador, mascota, fecha, diagnosticoFinal, tratamiento;
+    int id;
     Date date;
     
     public V_Cita() {
@@ -50,6 +51,8 @@ public class V_Cita extends javax.swing.JPanel {
         cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         reiniciarValores();
+        JOptionPane.showMessageDialog(null, controlador.getNumCitasExistentes());
+//        controlador.listarCitas();
     //    limpiarCajas();
         
 //        tablaCitas.setModel(controlador.cargarTabla());
@@ -84,6 +87,7 @@ public class V_Cita extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtTratamiento = new javax.swing.JTextArea();
         cmbDueño = new javax.swing.JComboBox<>();
+        txtPK = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCitas = new javax.swing.JTable();
 
@@ -255,6 +259,12 @@ public class V_Cita extends javax.swing.JPanel {
         txtTratamiento.setRows(5);
         jScrollPane3.setViewportView(txtTratamiento);
 
+        cmbDueño.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDueñoItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -274,12 +284,17 @@ public class V_Cita extends javax.swing.JPanel {
                             .addComponent(cmbTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Mascota)
-                            .addComponent(Dueño))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbMascota, 0, 150, Short.MAX_VALUE)
-                            .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Mascota)
+                                    .addComponent(Dueño))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbMascota, 0, 150, Short.MAX_VALUE)
+                                    .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -311,7 +326,8 @@ public class V_Cita extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Fecha))
+                    .addComponent(Fecha)
+                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(DiagnosticoFinal)
@@ -380,31 +396,45 @@ public class V_Cita extends javax.swing.JPanel {
         }
         else{
             
-            servicio = getComboSelected(cmbServicio);
-            dueño = getIDComboSelected(cmbDueño);
-            mascota = getIDComboSelected(cmbMascota);
-            trabajador = getIDComboSelected(cmbTrabajador);
-            fecha = getText(txtFecha);
-            diagnosticoFinal = txtDiagnosticoFinal.getText();
-            tratamiento = txtTratamiento.getText();
+            servicio = getComboSelected(cmbServicio); //JOptionPane.showMessageDialog(null, "Servicio: "+servicio);
+            dueño = getIDComboSelected(cmbDueño);//JOptionPane.showMessageDialog(null, "Dueño: "+dueño);
+            //mascota = getID(cmbMascota); //JOptionPane.showMessageDialog(null, "Mascota: "+mascota);
+            mascota = getComboSelected(cmbMascota); JOptionPane.showMessageDialog(null, "Mascota: "+mascota);
+            trabajador = getIDComboSelected(cmbTrabajador); //JOptionPane.showMessageDialog(null, "Trabajador: "+trabajador);
+            fecha = getText(txtFecha); //JOptionPane.showMessageDialog(null, "Fecha: "+fecha);
+            diagnosticoFinal = txtDiagnosticoFinal.getText(); //JOptionPane.showMessageDialog(null, "D. final: "+diagnosticoFinal);
+            tratamiento = txtTratamiento.getText(); //JOptionPane.showMessageDialog(null, "Trat: "+tratamiento);
             
             mTrabajador = cTrabajador.getPersona(trabajador);
+            //JOptionPane.showMessageDialog(null, mTrabajador.nombreApellido());
             if(tipoDueño(cmbDueño).equals("V")){
-                mNatural = cNatural.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota, mNatural);
+                mNatural = cNatural.getPersona("V"+dueño);
+                JOptionPane.showMessageDialog(null, mNatural.getCedula() + " " + mNatural.nombreApellido());
+                //mMascota = cMascota.getMascota(Integer.parseInt(mascota),mNatural);
+                mMascota = cMascota.getMascota(mascota,mNatural);
+                if(mMascota != null)
+                    JOptionPane.showMessageDialog(null, mMascota.printNombreID());
+                else
+                    JOptionPane.showMessageDialog(null, "chama soy null");
+                
+                //JOptionPane.showMessageDialog(null, mNatural.nombreApellido() + mMascota.printNombreID());
             }
             else if(tipoDueño(cmbDueño).equals("J")){
-                mJuridico = cJuridico.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota, mJuridico);
+                mJuridico = cJuridico.getPersona("J"+dueño);
+                //mMascota = cMascota.getMascota(Integer.parseInt(mascota), dueño, mJuridico);
+                JOptionPane.showMessageDialog(null, mJuridico.toString() + mMascota.printNombreID());
             }
-            mServicio = cServicio.getServicio(servicio);      
+            mServicio = cServicio.getServicio(servicio);     
+            //JOptionPane.showMessageDialog(null, mServicio.toString());
+//            JOptionPane.showMessageDialog(null, controlador.getNumCitasExistentes());
             
-            modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
-            controlador.guardarCita(modelo);
+//            modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
+//            controlador.guardarCita(modelo);
            
             reiniciarValores();
             limpiarCajas();
-           // tablaCitas.setModel(this.controlador.cargarTabla());
+            controlador.listarCitas();
+//            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -416,7 +446,7 @@ public class V_Cita extends javax.swing.JPanel {
 
             servicio = getComboSelected(cmbServicio);
             dueño = getIDComboSelected(cmbDueño);
-            mascota = getIDComboSelected(cmbMascota);
+            mascota = getID(cmbMascota);
             trabajador = getIDComboSelected(cmbTrabajador);
             fecha = getText(txtFecha);
             diagnosticoFinal = txtDiagnosticoFinal.getText();
@@ -425,14 +455,14 @@ public class V_Cita extends javax.swing.JPanel {
             mTrabajador = cTrabajador.getPersona(trabajador);
             if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota, mNatural);
+//                mMascota = cMascota.getMascota(Integer.parseInt(mascota), mNatural);
             }
             else if(tipoDueño(cmbDueño).equals("J")){
                 mJuridico = cJuridico.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota, mJuridico);
+//                mMascota = cMascota.getMascota(Integer.parseInt(mascota), mJuridico);
             }
             mServicio = cServicio.getServicio(servicio);      
-            int id = 0;
+            id = Integer.parseInt(getText(txtPK));
             
             modelo.actualizar(id, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
 
@@ -447,6 +477,7 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
+
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
@@ -490,6 +521,15 @@ public class V_Cita extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_CitaMouseClicked
 
+    private void cmbDueñoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDueñoItemStateChanged
+        
+        //if(tipoDueño(cmbDueño).equals("J"))
+        cMascota.cargarDuenoConMascota(cmbMascota, getID(cmbDueño));
+        //JOptionPane.showMessageDialog(null, getIDComboSelected(cmbDueño)); 
+        //cMascota.cargarDuenos(cmbDueño);
+        
+    }//GEN-LAST:event_cmbDueñoItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Cita;
@@ -518,6 +558,7 @@ public class V_Cita extends javax.swing.JPanel {
     private javax.swing.JTable tablaCitas;
     private javax.swing.JTextArea txtDiagnosticoFinal;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtPK;
     private javax.swing.JTextArea txtTratamiento;
     // End of variables declaration//GEN-END:variables
 
@@ -531,6 +572,8 @@ public class V_Cita extends javax.swing.JPanel {
 //        cmbMascota.setSelectedIndex(0);
         cmbServicio.setSelectedIndex(0);
         cmbTrabajador.setSelectedIndex(0);
+        txtTratamiento.setText(null);
+        txtPK.setText(null);
     }
     
     //Devuelve el string de la opcion seleccionada en un combo
@@ -561,8 +604,8 @@ public class V_Cita extends javax.swing.JPanel {
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
-        int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(0, guion);
+        int guion = codigo.indexOf(" - ");
+        codigoFinal = codigo.substring(1, guion);
         
         return codigoFinal;
     }
@@ -592,6 +635,7 @@ public class V_Cita extends javax.swing.JPanel {
         fecha = null;
         diagnosticoFinal = null;
         tratamiento = null;
+        id = 0;
     }
     
     public String getText(JTextField txt){
@@ -608,4 +652,13 @@ public class V_Cita extends javax.swing.JPanel {
         return codigoFinal;
     }
     
+    public String getID(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf(" - ");
+        codigoFinal = codigo.substring(0, guion);
+        
+        return codigoFinal;
+    }    
 }

@@ -95,10 +95,10 @@ public class C_Cita {
             ObjectSet resultado = Conexion.getInstancia().buscar(c);
             System.out.println("Tengo " + resultado.size() + " citas.\n");
             while(resultado.hasNext()){
-                ((M_Cita)resultado.next()).imprimir();
+                ((M_Cita)resultado.next()).getId();//toString();// imprimir();
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Cita->listarCitas() "+e);
         }      
     }
     
@@ -155,11 +155,11 @@ public class C_Cita {
             M_Cita[] p = getCitas();
             if (p != null) {
                 for (M_Cita per : p) {
-                    Object[] cli = new Object[3];
+                    Object[] cli = new Object[5];
                     cli[0] = per.getId();
                     cli[1] = per.getMascota().printNombreID();
                     cli[2] = per.getMascota().getDueno().toString();
-                    cli[3] = per.getTrabajador().toString();
+                    cli[3] = per.getTrabajador().nombreApellido();// toString();
                     cli[4] = per.getServicio().toString();
                     dtm.addRow(cli);
                 }

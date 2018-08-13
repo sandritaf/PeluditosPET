@@ -3,7 +3,9 @@ package Controlador;
 import Modelo.M_Juridico;
 import Modelo.M_Natural;
 import Modelo.M_Propietario;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class C_Propietario {
 
@@ -40,6 +42,24 @@ public class C_Propietario {
 //            return null;  
 //        }      
 //    }
-
+    
+//    public void cargarDuenoConMascota(JComboBox dueno, String cedula){
+//        try{
+//            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+//            String aux;
+//            dueno.setModel(aModel);
+//            
+//            if(cedula.startsWith("V", 0))// charAt(0) == "V")
+//                String[] x = getCedula
+//            if (x != null) {
+//                for (String per : x) {
+//                    aux = per.toString();
+//                    aModel.addElement(aux);
+//                }
+//            }
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarRazas: "+e);
+//        }
+//    }
     
 }

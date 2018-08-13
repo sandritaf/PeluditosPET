@@ -122,7 +122,11 @@ public class M_Trabajador {
     }
     
     public String toString(){
-        return cedula + "- " + nombre + " " + apellido;
+        return cedula + " - " + nombre + " " + apellido;
+    }
+
+    public String nombreApellido(){
+        return nombre + " " + apellido;
     }
     
 }

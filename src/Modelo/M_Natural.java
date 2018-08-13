@@ -9,7 +9,6 @@ public class M_Natural extends M_Propietario{
         super();
     }
 
-    
     public M_Natural(String direccion, String telefono, String nombre, String apellido, String cedula) {
         super(direccion,telefono);
         this.nombre = nombre;
@@ -53,4 +52,9 @@ public class M_Natural extends M_Propietario{
         this.apellido = apellido;
         this.cedula = cedula;
     }
+    
+    public String nombreApellido(){
+        return nombre + " " + apellido;
+    }
+
 }

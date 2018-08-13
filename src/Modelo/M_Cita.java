@@ -117,4 +117,8 @@ public class M_Cita {
         this.cancelado = false;
     }
     
+    public String toString(){
+       return id + " " + mascota.getNombre() + " " + fecha + " " ;
+    }
+        
 }
