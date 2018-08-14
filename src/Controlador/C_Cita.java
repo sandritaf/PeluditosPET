@@ -182,7 +182,6 @@ public class C_Cita {
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
             String aux = "";
             combito.setModel(aModel);
-            int i = 0;
             
             if(resultados.size() >0){
                 while(resultados.hasNext() ){

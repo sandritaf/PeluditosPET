@@ -98,7 +98,7 @@ public class M_Mascota {
     }
 
     public String toString(){
-        return id + " - " + nombre + " - " + especie + " - " + edad + " - " + raza + " - " + observaciones;
+        return codigo + " - " + nombre + " - " + especie + " - " + edad + " - " + raza + " - " + observaciones;
     }
     
     public String printNombreID(){
