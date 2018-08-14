@@ -10,6 +10,9 @@ public class M_Especie {
     private String[] razas = new String[MAX_RAZAS];
     private int numRazas;
     
+    public M_Especie(){
+    }
+    
     public M_Especie(String nombre, String raza){
         this.nombre = nombre;   
         numRazas = 0;

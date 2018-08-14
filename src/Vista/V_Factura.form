@@ -326,7 +326,7 @@
                                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                                       <Component id="txtTotal" min="-2" pref="140" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="Cita" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -341,9 +341,12 @@
                                                   <Component id="txtRepresentante" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="txtTrabajador" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="cmbCitaSinCancelar" alignment="0" pref="240" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="cmbTrabajador" max="32767" attributes="0"/>
+                                                  <Component id="cmbCitaSinCancelar" pref="240" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -365,7 +368,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Trabajador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTrabajador" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbTrabajador" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -569,14 +572,6 @@
                 <Property name="text" type="java.lang.String" value="Trabajador"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtTrabajador">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="12" style="0"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="Fecha">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -600,6 +595,16 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFechaActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbTrabajador">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

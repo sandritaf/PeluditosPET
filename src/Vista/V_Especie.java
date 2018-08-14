@@ -10,7 +10,7 @@ public class V_Especie extends javax.swing.JPanel {
 
     M_Especie modelo, aux;
     C_Especie controlador;
-    String especie, raza;
+    String especie, raza, nombreViejo;
     Menu m;
     
     public V_Especie() {
@@ -246,6 +246,11 @@ public class V_Especie extends javax.swing.JPanel {
 
             }
         ));
+        tablaEspecies.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaEspeciesMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaEspecies);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -300,7 +305,7 @@ public class V_Especie extends javax.swing.JPanel {
             if(Existente.isSelected()){
                 especie = getComboSelected(cmbEspecieExistente);
                 modelo = new M_Especie(especie);
-                controlador.modificarEspecie(especie, raza);                
+                controlador.modificarEspecie(especie,especie, raza);                
             }
                 
             reiniciarValores();
@@ -311,7 +316,30 @@ public class V_Especie extends javax.swing.JPanel {
     }//GEN-LAST:event_GuardarMouseClicked
 
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
-
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");            
+        }
+        else{
+            
+            raza = getText(txtRaza);
+            
+            if(AgregarEspecie.isSelected()){
+                especie = getText(txtEspecie);
+                modelo = new M_Especie();
+                controlador.modificarEspecie(nombreViejo, especie, raza);// guardarEspecie(especie,raza);
+            }
+                
+            if(Existente.isSelected()){
+                especie = getComboSelected(cmbEspecieExistente);
+                modelo = new M_Especie();
+                controlador.modificarEspecie(nombreViejo,especie, raza);                
+            }
+                
+            reiniciarValores();
+            limpiarCajas();
+            tablaEspecies.setModel(controlador.cargarTabla());
+        } 
         
 
     }//GEN-LAST:event_ModificarMouseClicked
@@ -330,7 +358,7 @@ public class V_Especie extends javax.swing.JPanel {
                 especie = getComboSelected(cmbEspecieExistente);
             }
             
-           // controlador.eliminarEspecie(especie);
+           //controlador.eliminarEspecie(especie);
             
             reiniciarValores();
             limpiarCajas();
@@ -368,6 +396,22 @@ public class V_Especie extends javax.swing.JPanel {
         cmbEspecieExistente.setEnabled(true);
     }//GEN-LAST:event_ExistenteMousePressed
 
+    private void tablaEspeciesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEspeciesMousePressed
+        Guardar.setEnabled(false);        // TODO add your handling code here:
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
+
+        AgregarEspecie.setEnabled(false);
+        Existente.setEnabled(false);
+        
+        txtEspecie.setEnabled(true);
+        
+        modelo = controlador.getEspecie(tablaEspecies.getValueAt(tablaEspecies.getSelectedRow(), 0).toString());
+        
+        nombreViejo = modelo.getNombre();
+        txtEspecie.setText(nombreViejo);
+    }//GEN-LAST:event_tablaEspeciesMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AgregarEspecie;
@@ -398,6 +442,9 @@ public class V_Especie extends javax.swing.JPanel {
         cmbEspecieExistente.setSelectedItem(0);
         cmbEspecieExistente.setEnabled(false);
         txtEspecie.setEnabled(false);
+        Guardar.setEnabled(true);
+        Eliminar.setEnabled(false);
+        Modificar.setEnabled(false);
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
@@ -439,6 +486,7 @@ public class V_Especie extends javax.swing.JPanel {
     public void reiniciarValores(){
         especie = null;
         raza = null;
+        nombreViejo = null;
     }
     
     //Devuelve el valor de un txtField

@@ -2,6 +2,9 @@
 package Vista;
 
 import Controlador.C_Factura;
+import Controlador.C_Juridico;
+import Controlador.C_Natural;
+import Controlador.C_Trabajador;
 import Modelo.M_Factura;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -11,11 +14,21 @@ public class V_Factura extends javax.swing.JPanel {
 
     M_Factura modelo;
     C_Factura controlador;
-    
+    C_Juridico cJuridico;
+    C_Natural cNatural;
+    C_Trabajador cTrabajador;
+    String cita, cliente, modoPago, fecha, trabajador;
+    float iva, subtotal, total;
     
     public V_Factura() {
         initComponents();
         controlador = new C_Factura();
+        cNatural = new C_Natural();
+        cJuridico = new C_Juridico();
+        cTrabajador = new C_Trabajador();
+        
+        cTrabajador.cargarTrabajadoresNoVet(cmbTrabajador);
+        
         tablaFacturas.setModel(controlador.cargarTabla());
         reiniciarValores();
 //        txtPK.setVisible(false);
@@ -53,10 +66,10 @@ public class V_Factura extends javax.swing.JPanel {
         Cita = new javax.swing.JLabel();
         cmbCitaSinCancelar = new javax.swing.JComboBox<>();
         Trabajador = new javax.swing.JLabel();
-        txtTrabajador = new javax.swing.JTextField();
         Fecha = new javax.swing.JLabel();
         txtPK = new javax.swing.JTextField();
         txtFecha = new javax.swing.JTextField();
+        cmbTrabajador = new javax.swing.JComboBox<>();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
         jPanel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -247,9 +260,6 @@ public class V_Factura extends javax.swing.JPanel {
         Trabajador.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Trabajador.setText("Trabajador");
 
-        txtTrabajador.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtTrabajador.setEnabled(false);
-
         Fecha.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Fecha.setText("Fecha");
 
@@ -318,9 +328,11 @@ public class V_Factura extends javax.swing.JPanel {
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(txtRepresentante)))
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtTrabajador, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cmbCitaSinCancelar, javax.swing.GroupLayout.Alignment.LEADING, 0, 240, Short.MAX_VALUE)))))))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(cmbTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmbCitaSinCancelar, 0, 240, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -333,7 +345,7 @@ public class V_Factura extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Trabajador)
-                    .addComponent(txtTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NombreCliente)
@@ -409,7 +421,7 @@ public class V_Factura extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
-            
+        
             reiniciarValores();
             limpiarCajas();        
             tablaFacturas.setModel(controlador.cargarTabla());
@@ -498,6 +510,7 @@ public class V_Factura extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbCitaSinCancelar;
     private javax.swing.JComboBox<String> cmbDueño;
     private javax.swing.JComboBox<String> cmbModoPago;
+    private javax.swing.JComboBox<String> cmbTrabajador;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
@@ -509,20 +522,22 @@ public class V_Factura extends javax.swing.JPanel {
     private javax.swing.JTextField txtRepresentante;
     private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txtTrabajador;
     // End of variables declaration//GEN-END:variables
 
     // Vacia todos los txtField de la ventana
     public void limpiarCajas(){
-        txtFecha.setText(null);
+        txtFecha.setText("yyyy-mm-dd");
         txtIVA.setText(null);
         txtRepresentante.setText(null);
         txtSubtotal.setText(null);
         txtTotal.setText(null);
-        txtTrabajador.setText(null);
-//        cmbCitaSinCancelar.setSelectedIndex(0);
-//        cmbDueño.setSelectedIndex(0);
-//        cmbModoPago.setSelectedIndex(0);
+        txtPK.setText(null);
+        Representante.setSelected(false);
+        Dueño.setSelected(false);
+        cmbDueño.setEnabled(false);
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
@@ -559,18 +574,14 @@ public class V_Factura extends javax.swing.JPanel {
     
     //Coloca en null los atributos de la empresa
     public void reiniciarValores(){
-        txtFecha.setText(null);
-        txtIVA.setText(null);
-        txtPK.setText(null);
-        txtRepresentante.setText(null);
-        txtSubtotal.setText(null);
-        txtTotal.setText(null);
-        txtTrabajador.setText(null);
-        Representante.setSelected(false);
-        Dueño.setSelected(false);
-        txtRepresentante.setEnabled(false);
-        cmbDueño.setEnabled(false);
-//        cmbDueño.setSelectedIndex(0);
+        cita = null;
+        cliente = null; 
+        modoPago = null; 
+        fecha = null;
+        iva = 0;
+        subtotal = 0;
+        total = 0;
+        trabajador = null;
     }
     
     //Devuelve el valor de un txtField

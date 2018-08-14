@@ -12,7 +12,7 @@ public class V_Estilista extends javax.swing.JPanel {
 
     M_Estilista modelo;
     C_Estilista controlador;
-    String nombre, apellido, cedula, rif, telefono, nivelI, profesion;
+    String cedulaVieja, nombre, apellido, cedula, rif, telefono, nivelI, profesion;
     int edad, aniosE, precioTrabajo;
     
     public V_Estilista() {
@@ -21,6 +21,7 @@ public class V_Estilista extends javax.swing.JPanel {
         controlador = new C_Estilista();
         tablaEstilistas.setModel(this.controlador.cargarTabla());
         reiniciarValores();
+        limpiarCajas();
     }
 
     @SuppressWarnings("unchecked")
@@ -299,6 +300,11 @@ public class V_Estilista extends javax.swing.JPanel {
 
             }
         ));
+        tablaEstilistas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaEstilistasMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaEstilistas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -328,7 +334,7 @@ public class V_Estilista extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 727, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,13 +370,11 @@ public class V_Estilista extends javax.swing.JPanel {
             profesion = getText(txtProfesion);
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
-            
-            
+                        
             modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             modelo.setPrecioTrabajo(precioTrabajo);
             controlador.guardarEstilista(modelo);
-            
             
             reiniciarValores();
             limpiarCajas();
@@ -385,7 +389,8 @@ public class V_Estilista extends javax.swing.JPanel {
         }
         else{
             
-//            cedula = getText(txtCedula);
+            
+            cedula = getText(txtCedula);
 //            
 //            char valor = cedula.charAt(0);
 //            char v = 'V';            
@@ -420,12 +425,14 @@ public class V_Estilista extends javax.swing.JPanel {
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
             
+            modelo = null;
+            modelo = new M_Estilista();
             
             modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             modelo.setPrecioTrabajo(precioTrabajo);
             
-            controlador.modificarEstilista(cedula,modelo);
+            controlador.modificarEstilista(cedulaVieja,cedula,modelo);
             
             reiniciarValores();
             limpiarCajas();
@@ -435,9 +442,31 @@ public class V_Estilista extends javax.swing.JPanel {
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
-        //tablaEstilistas.setModel(this.controlador.cargarTabla());
+        tablaEstilistas.setModel(this.controlador.cargarTabla());
         controlador.listarEstilistas();
     }//GEN-LAST:event_VerListaMouseClicked
+
+    private void tablaEstilistasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEstilistasMousePressed
+        
+        Guardar.setEnabled(false);
+        Eliminar.setEnabled(true);
+        Modificar.setEnabled(true);
+        
+        modelo = controlador.getPersona(tablaEstilistas.getValueAt(tablaEstilistas.getSelectedRow(), 0).toString());
+
+        cedulaVieja = modelo.getCedula();
+        txtCedula.setText(modelo.getCedula());
+        txtNombre.setText(modelo.getNombre());
+        txtApellido.setText(modelo.getApellido());
+        txtRIF.setText(modelo.getRIF());
+        txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
+        txtEdad.setText(Integer.toString(modelo.getEdad()));
+        txtNivelI.setText(modelo.getNivelInstruccion());
+        txtProfesion.setText(modelo.getProfesion());
+        txtTelefono.setText(modelo.getTelefono());
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaEstilistasMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -484,6 +513,9 @@ public class V_Estilista extends javax.swing.JPanel {
         txtTelefono.setText(null);
         txtPK.setText(null);
         txtProfesion.setText(null);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+        Guardar.setEnabled(true);
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
@@ -526,6 +558,7 @@ public class V_Estilista extends javax.swing.JPanel {
     
     //Coloca en null los atributos de la empresa
     public void reiniciarValores(){
+        cedulaVieja = null;
         nombre = null;
         apellido = null;
         cedula = null;

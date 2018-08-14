@@ -47,15 +47,15 @@ public class C_Especie {
 //        }
 //    }
         
-    public void modificarEspecie(String nombre,String razaNueva){
+    public void modificarEspecie(String nombreViejo, String nombre, String razaNueva){
         try{
-            M_Especie esp = new M_Especie(nombre);
+            M_Especie esp = new M_Especie(nombreViejo);
             ObjectSet result = Conexion.getInstancia().buscar(esp);
             M_Especie x = (M_Especie)result.next(); 
             
             if (!result.isEmpty()){ //Si existen coincidencias con la especie    
                 if (x.getNumRazas() == x.MAX_RAZAS)
-                    JOptionPane.showMessageDialog(null, "El sistema no soporta màs razas para la especie "+nombre);
+                    JOptionPane.showMessageDialog(null, "El sistema no soporta más razas para la especie "+nombre);
                 else {
                     x.setNombre(nombre);
                     x.agregarRaza(razaNueva);
@@ -178,6 +178,20 @@ public class C_Especie {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    
+    public M_Especie getEspecie(String nombre){
+        try{
+            M_Especie especie = new M_Especie(nombre);
+            ObjectSet resultado = Conexion.getInstancia().buscar(especie);
+            if (resultado.isEmpty())
+                return null;
+            M_Especie encontrado = (M_Especie) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
     }
     
 }

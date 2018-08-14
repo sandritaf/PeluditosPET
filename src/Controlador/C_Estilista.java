@@ -33,15 +33,15 @@ public class C_Estilista {
         }
     }
     
-    public void modificarEstilista(String cedula, M_Estilista e){
+    public void modificarEstilista(String cedulaVieja, String cedula, M_Estilista e){
         try{
-            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null, 0);
+            M_Estilista estilista = new M_Estilista(null, null, cedulaVieja, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(estilista);
             M_Estilista encontrado = (M_Estilista) result.next();
 
             encontrado.setNombre(e.getNombre());
-            encontrado.setNombre(e.getApellido());
-            encontrado.setCedula(e.getCedula());
+            encontrado.setApellido(e.getApellido());
+            encontrado.setCedula("V"+cedula);
             encontrado.setTelefono(e.getTelefono());
             encontrado.setNivelInstruccion(e.getNivelInstruccion());
             encontrado.setProfesion(e.getProfesion());
@@ -122,5 +122,17 @@ public class C_Estilista {
         }
     }
     
-    
+    public M_Estilista getPersona(String cedula){
+        try{
+            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null, 0);
+            ObjectSet resultado = Conexion.getInstancia().buscar(estilista);
+            if (resultado.isEmpty())
+                return null;
+            M_Estilista encontrado = (M_Estilista) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;  
+        }      
+    }
 }

@@ -100,7 +100,7 @@ public class M_Trabajador {
         this.precioTrabajo = precioTrabajo;
     }
     
-    public void actualizar(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int anosExperiencia, String telefono, int precioTrabajo) {
+    public void actualizar(String nombre, String apellido, String cedula, String RIF, int edad, String nivelInstruccion, String profesion, int aniosExperiencia, String telefono, int precioTrabajo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
@@ -108,7 +108,7 @@ public class M_Trabajador {
         this.edad = edad;
         this.nivelInstruccion = nivelInstruccion;
         this.profesion = profesion;
-        this.aniosExperiencia = anosExperiencia;
+        this.aniosExperiencia = aniosExperiencia;
         this.telefono = telefono;
         this.precioTrabajo = precioTrabajo;
     }

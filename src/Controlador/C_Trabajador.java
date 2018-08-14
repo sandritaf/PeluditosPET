@@ -8,6 +8,7 @@ import Modelo.M_Veterinario;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
+import static com.sun.org.apache.xerces.internal.util.FeatureState.is;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -164,4 +165,27 @@ public class C_Trabajador {
             JOptionPane.showMessageDialog(null, "Error en C_Trabajador->CargarTrabajadores: "+e);
         }
     }
+    
+    public void cargarTrabajadoresNoVet(JComboBox trabajadores){
+        try{
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux;
+            trabajadores.setModel(aModel);
+            M_Trabajador p = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
+            ObjectSet rs = Conexion.getInstancia().buscar(p);
+
+            // si hay propietarios naturales
+            if(rs.size() >0){
+                while(rs.hasNext() ){
+                    if (!(rs instanceof M_Veterinario)){
+                    aux = ((M_Trabajador)rs.next()).toString();
+                    aModel.addElement(aux);
+                    }
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Trabajador->CargarTrabajadores: "+e);
+        }
+    }
+    
 }

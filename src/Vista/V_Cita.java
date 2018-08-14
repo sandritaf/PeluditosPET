@@ -52,7 +52,7 @@ public class V_Cita extends javax.swing.JPanel {
         cMascota.cargarDuenos(cmbDueño);
         reiniciarValores();
 //        controlador.listarCitas();
-    //    limpiarCajas();
+        limpiarCajas();
         
         tablaCitas.setModel(controlador.cargarTabla());
     }
@@ -506,6 +506,8 @@ public class V_Cita extends javax.swing.JPanel {
     private void tablaCitasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCitasMousePressed
         
         Guardar.setEnabled(false);
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
         
         modelo = controlador.getCita(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
         

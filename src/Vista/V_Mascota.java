@@ -412,6 +412,9 @@ public class V_Mascota extends javax.swing.JPanel {
         auxID = tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 1).toString();
         auxNombre = txtNombre.getText();
         auxObservaciones = txtObservaciones.getText();
+        
+        Guardar.setEnabled(false);
+
     }//GEN-LAST:event_tablaMascotasMousePressed
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
