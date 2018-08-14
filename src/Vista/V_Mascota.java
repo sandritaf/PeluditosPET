@@ -341,6 +341,7 @@ public class V_Mascota extends javax.swing.JPanel {
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
         limpiarCajas();
+        reiniciarValores();
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
@@ -414,6 +415,8 @@ public class V_Mascota extends javax.swing.JPanel {
         auxObservaciones = txtObservaciones.getText();
         
         Guardar.setEnabled(false);
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
 
     }//GEN-LAST:event_tablaMascotasMousePressed
 
@@ -544,6 +547,9 @@ public class V_Mascota extends javax.swing.JPanel {
         auxNombre = null;
         auxObservaciones = null;
         codigo = 0;
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
     }
     
     public String getText(JTextField txt){

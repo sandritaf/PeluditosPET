@@ -31,6 +31,9 @@ public class M_Propietario {
         this.telefono = telefono;
     }
 
+    public String nombreCompleto(){
+        return "";
+    }
     
     public int getNumMascotas(){
         return numeroMascotas;

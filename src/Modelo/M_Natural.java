@@ -32,6 +32,11 @@ public class M_Natural extends M_Propietario{
         this.apellido = apellido;
     }
     
+    @Override
+    public String nombreCompleto(){
+        return nombre+" "+apellido;
+    }
+    
     public String getCedula() {
         return cedula;
     }
@@ -40,6 +45,7 @@ public class M_Natural extends M_Propietario{
         this.cedula = cedula;
     }
     
+    @Override
     public String toString(){
         return cedula + " - " + nombre + " " + apellido;
     }

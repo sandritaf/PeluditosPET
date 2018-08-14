@@ -39,6 +39,11 @@ public class M_Juridico extends M_Propietario{
         return RIF;
     }
 
+    @Override
+    public String nombreCompleto(){
+        return nombre;
+    }
+    
     public void setRIF(String RIF) {
         this.RIF = RIF;
     }
@@ -51,6 +56,7 @@ public class M_Juridico extends M_Propietario{
         this.razonSocial = razonSocial;
     }
     
+    @Override
     public String toString(){
         return RIF + " - " + nombre;
     }

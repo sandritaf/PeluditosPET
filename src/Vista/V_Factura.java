@@ -38,7 +38,7 @@ public class V_Factura extends javax.swing.JPanel {
         
         cTrabajador.cargarVeterinariosEstilistas(cmbTrabajador);
         cMascota.cargarDuenosSinID(cmbDueño);
-        //cCita.cargarCitas(cmbCitas);
+        cCita.cargarCitas(cmbCitaSinCancelar);
         
         tablaFacturas.setModel(controlador.cargarTabla());
         reiniciarValores();
@@ -433,7 +433,7 @@ public class V_Factura extends javax.swing.JPanel {
             total = Float.parseFloat(getText(txtTotal));
             cita = getIDComboSelected(cmbCitaSinCancelar);
             
-            mCita = cCita.getCita(cita);
+            mCita = cCita.getCita(Integer.parseInt(cita));
             
             if(Representante.isSelected())
             {
@@ -469,7 +469,7 @@ public class V_Factura extends javax.swing.JPanel {
             total = Float.parseFloat(getText(txtTotal));
             cita = getIDComboSelected(cmbCitaSinCancelar);
             
-            mCita = cCita.getCita(cita);
+            mCita = cCita.getCita(Integer.parseInt(cita));
             
             if(Representante.isSelected())
             {
@@ -605,7 +605,7 @@ public class V_Factura extends javax.swing.JPanel {
         String codigoFinal = "";
         
         int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(1, guion);
+        codigoFinal = codigo.substring(0, guion);
         
 //        return Integer.parseInt(codigoFinal);
         return (codigoFinal);
