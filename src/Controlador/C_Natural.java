@@ -47,7 +47,7 @@ public class C_Natural {
     
     public M_Natural getPersona(String cedula){
         try{
-            M_Natural n = new M_Natural(null, null, null, null, cedula);
+            M_Natural n = new M_Natural(null, null, null, null,"V"+ cedula);
             ObjectSet resultado = Conexion.getInstancia().buscar(n);
             if (resultado.isEmpty())
                 return null;
@@ -59,7 +59,7 @@ public class C_Natural {
         }      
     }
     
-    public void modificarNatural(String viejaCedula, M_Natural n, String nuevaCedula){
+    public void modificarNatural(String viejaCedula, String nuevaCedula, M_Natural n){
         try{
             M_Propietario natural = new M_Natural(null, null, null, null, viejaCedula);            
             ObjectSet result = Conexion.getInstancia().buscar(natural);
@@ -183,7 +183,7 @@ public class C_Natural {
             if (p != null) {
                 for (M_Natural per : p) {
                     Object[] cli = new Object[5];
-                    cli[0] = per.getCedula();
+                    cli[0] = per.subString(1);// getCedula();
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();

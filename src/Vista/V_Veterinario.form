@@ -40,8 +40,8 @@
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jScrollPane2" alignment="2" max="32767" attributes="0"/>
-                      <Component id="jPanel4" alignment="2" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="2" min="-2" pref="666" max="-2" attributes="0"/>
+                      <Component id="jPanel4" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
@@ -244,30 +244,30 @@
                           <Component id="Nombre" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Cedula" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtEspecializacion" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtCedula" alignment="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="txtCedula" alignment="0" pref="210" max="32767" attributes="0"/>
                           <Component id="txtAniosE" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtNivelI" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtUniversidad" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNivelI" alignment="0" pref="140" max="32767" attributes="0"/>
-                          <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtEspecializacion" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtNombre" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Profesion" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Apellido" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="RIF" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Edad" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Telefono" min="-2" max="-2" attributes="0"/>
+                          <Component id="Profesion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Telefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Apellido" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtApellido" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtRIF" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtEdad" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtProfesion" alignment="0" pref="137" max="32767" attributes="0"/>
-                          <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtProfesion" alignment="1" pref="210" max="32767" attributes="0"/>
+                          <Component id="txtEdad" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtApellido" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtRIF" alignment="1" max="32767" attributes="0"/>
+                          <Component id="txtTelefono" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -287,35 +287,35 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtCedula" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Cedula" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="RIF" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtRIF" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RIF" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="aniosExperiencia" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtAniosE" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtEdad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Edad" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="aniosExperiencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtAniosE" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Edad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtEdad" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="NivelInstruccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Profesion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtProfesion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNivelI" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="Profesion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="Telefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="txtTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Universidad" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtUniversidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Telefono" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Especializacion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtEspecializacion" alignment="3" min="-2" max="-2" attributes="0"/>

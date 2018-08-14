@@ -46,5 +46,14 @@ public class M_Propietario {
     public void retirarMascota(){
         numeroMascotas--;
     }
+
+    public boolean esNumero(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException excepcion) {
+            return false;
+        }
+    }
     
 }

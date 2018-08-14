@@ -71,14 +71,14 @@ public class C_Servicio {
     
     public void cargarServicios(JComboBox servicios){
         try{
-            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
-            String aux;
-            servicios.setModel(aModel);
             M_Servicio p = new M_Servicio(null, null, null, 0);
             ObjectSet rs = Conexion.getInstancia().buscar(p);
-
-            // si hay propietarios naturales
             if(rs.size() >0){
+            
+                DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+                String aux;
+                servicios.setModel(aModel);
+                // si hay servicios
                 while(rs.hasNext() ){
                     aux = ((M_Servicio)rs.next()).getNombre();
                     aModel.addElement(aux);
