@@ -39,7 +39,7 @@ public class V_Personal extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaPersonal = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        Nombre = new javax.swing.JLabel();
+        primerNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
         Cedula = new javax.swing.JLabel();
@@ -54,10 +54,10 @@ public class V_Personal extends javax.swing.JPanel {
         txtRIF = new javax.swing.JTextField();
         Profesion = new javax.swing.JLabel();
         txtProfesion = new javax.swing.JTextField();
-        txtPK = new javax.swing.JTextField();
-        Profesion1 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         txtNivelI = new javax.swing.JTextField();
+        Telefono = new javax.swing.JLabel();
+        txtPK = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -182,8 +182,8 @@ public class V_Personal extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
 
-        Nombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Nombre.setText("Nombre");
+        primerNombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        primerNombre.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
@@ -195,7 +195,7 @@ public class V_Personal extends javax.swing.JPanel {
         });
 
         Cedula.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Cedula.setText("Cedula");
+        Cedula.setText("Cédula");
 
         Edad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Edad.setText("Edad");
@@ -209,6 +209,11 @@ public class V_Personal extends javax.swing.JPanel {
         RIF.setText("RIF");
 
         txtAniosE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtAniosE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAniosEActionPerformed(evt);
+            }
+        });
 
         txtEdad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEdad.addActionListener(new java.awt.event.ActionListener() {
@@ -226,14 +231,12 @@ public class V_Personal extends javax.swing.JPanel {
         txtRIF.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Profesion.setText("Profesion");
+        Profesion.setText("Profesión");
 
-        txtProfesion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
-        Profesion1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Profesion1.setText("Telefono");
-
-        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Telefono.setText("Teléfono");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -242,48 +245,45 @@ public class V_Personal extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aniosExperiencia)
+                    .addComponent(NivelInstruccion)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(aniosExperiencia)
-                            .addComponent(NivelInstruccion)
-                            .addComponent(Nombre)
-                            .addComponent(Cedula))
+                        .addComponent(primerNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAniosE, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNivelI, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(Profesion1)
-                        .addGap(244, 244, 244)))
+                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Cedula)
+                    .addComponent(Telefono))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNivelI, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(txtAniosE)
+                    .addComponent(txtCedula)
+                    .addComponent(txtNombre)
+                    .addComponent(txtTelefono))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Profesion)
-                    .addComponent(Apellido)
                     .addComponent(RIF)
-                    .addComponent(Edad))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtProfesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRIF, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(Edad)
+                    .addComponent(Profesion)
+                    .addComponent(Apellido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(txtRIF)
+                    .addComponent(txtProfesion)
+                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Nombre)
+                    .addComponent(primerNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Apellido)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,9 +304,8 @@ public class V_Personal extends javax.swing.JPanel {
                     .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Profesion1)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Telefono))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -317,15 +316,18 @@ public class V_Personal extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(26, 26, 26))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,14 +346,6 @@ public class V_Personal extends javax.swing.JPanel {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaActionPerformed
-
-    private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEdadActionPerformed
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
         
@@ -372,7 +366,7 @@ public class V_Personal extends javax.swing.JPanel {
             
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                modelo = new M_Trabajador(nombre, apellido,"V"+cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
                 precioTrabajo = modelo.precioSegunAnios(aniosE);
                 modelo.setPrecioTrabajo(precioTrabajo);
 
@@ -450,7 +444,7 @@ public class V_Personal extends javax.swing.JPanel {
         
         modelo = controlador.getPersona(tablaPersonal.getValueAt(tablaPersonal.getSelectedRow(), 0).toString());
         
-        auxCI = modelo.getCedula(); System.out.println(auxCI);
+        auxCI = modelo.getCedula(); //System.out.println(auxCI);
         txtNombre.setText(modelo.getNombre());
         txtApellido.setText(modelo.getApellido());
         txtTelefono.setText(modelo.getTelefono());
@@ -466,6 +460,18 @@ public class V_Personal extends javax.swing.JPanel {
         limpiarCajas();
     }//GEN-LAST:event_LimpiarMouseClicked
 
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
+
+    private void txtAniosEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAniosEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAniosEActionPerformed
+
+    private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEdadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;
@@ -476,11 +482,10 @@ public class V_Personal extends javax.swing.JPanel {
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel NivelInstruccion;
-    private javax.swing.JLabel Nombre;
     private javax.swing.JLabel Personal;
     private javax.swing.JLabel Profesion;
-    private javax.swing.JLabel Profesion1;
     private javax.swing.JLabel RIF;
+    private javax.swing.JLabel Telefono;
     private javax.swing.JLabel VerLista;
     private javax.swing.JLabel aniosExperiencia;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -488,6 +493,7 @@ public class V_Personal extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel primerNombre;
     private javax.swing.JTable tablaPersonal;
     private javax.swing.JTextField txtAniosE;
     private javax.swing.JTextField txtApellido;

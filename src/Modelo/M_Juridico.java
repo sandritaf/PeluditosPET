@@ -1,15 +1,14 @@
 package Modelo;
 
 public class M_Juridico extends M_Propietario{
-    private String nombre;
+    private String razonSocial;
     private String nombreGerente;
-    private  String RIF;
-    private  String razonSocial;
+    private String RIF;
+    private String mision;
 
-    
-    public M_Juridico(String direccion, String telefono, String nombre, String nombreGerente, String RIF, String razonSocial) {
+    public M_Juridico(String direccion, String telefono, String razonSocial, String nombreGerente, String RIF, String mision) {
         super(direccion,telefono);
-        this.nombre = nombre;
+        this.mision = mision;
         this.nombreGerente = nombreGerente;
         this.RIF = RIF;
         this.razonSocial = razonSocial;
@@ -19,12 +18,12 @@ public class M_Juridico extends M_Propietario{
         super();
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getMision() {
+        return mision;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setMision(String mision) {
+        this.mision = mision;
     }
 
     public String getNombreGerente() {
@@ -52,13 +51,17 @@ public class M_Juridico extends M_Propietario{
     }
     
     public String toString(){
-        return RIF + " - " + nombre;
+        return RIF + " - " + razonSocial;
     }
     
-    public void actualizar(String direccion, String telefono, String nombre, String nombreGerente, String RIF, String razonSocial) {
+    public String subString(int inicio){
+        return RIF.substring(inicio);
+    }
+    
+    public void actualizar(String direccion, String telefono, String razonSocial, String nombreGerente, String RIF, String mision) {
         this.direccion = direccion;
         this.telefono = telefono;
-        this.nombre = nombre;
+        this.mision = mision;
         this.nombreGerente = nombreGerente;
         this.RIF = RIF;
         this.razonSocial = razonSocial;

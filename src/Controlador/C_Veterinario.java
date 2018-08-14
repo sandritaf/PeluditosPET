@@ -111,13 +111,13 @@ public class C_Veterinario {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"Cedula","Nombre","Apellido","Teléfono"};
+            String titulos[] = {"Cédula","Nombre","Apellido","Teléfono"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Veterinario[] p = getVeterinarios();
             if (p != null) {
                 for (M_Veterinario per : p) {
                     Object[] cli = new Object[4];
-                    cli[0] = per.subString(1);
+                    cli[0] = per.getCedula();// subString(1);
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
@@ -133,7 +133,8 @@ public class C_Veterinario {
     
     public M_Veterinario getPersona(String cedula){
         try{
-            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, "V"+cedula, null, 0, null, null, 0, null, 0);
+    //        M_Veterinario veterinario = new M_Veterinario(null, null, null, null, "V"+cedula, null, 0, null, null, 0, null, 0);
+            M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(veterinario);
             if (resultado.isEmpty())
                 return null;

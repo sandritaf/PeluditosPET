@@ -249,7 +249,7 @@ public class C_Mascota {
             // si hay propietarios juridicos
             if(rs1.size() > 0){ 
                 while(rs1.hasNext() ){
-                   aux = ((M_Juridico)rs1.next()).getNombre();
+                   aux = ((M_Juridico)rs1.next()).getRazonSocial();
                    aModel.addElement(aux);
                 }
             }

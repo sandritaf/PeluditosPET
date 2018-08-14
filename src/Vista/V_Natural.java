@@ -312,30 +312,16 @@ public class V_Natural extends javax.swing.JPanel {
             cedula = getText(txtCedula); //Hay que verificar que no exista
             direccion = txtDireccion.getText();
             
-            while(!modelo.esNumero(cedula))
-            {
-                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
-                cedula = getText(txtCedula);               
-                if(modelo.esNumero(cedula))
-                    break;
+            if(modelo.esNumero(cedula) && modelo.esNumero(telefono)){
+                modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
+                controlador.guardarNatural(modelo);
+
+                reiniciarValores();
+                limpiarCajas();
+                tablaNaturales.setModel(this.controlador.cargarTabla());
             }
-            
-            while(!modelo.esNumero(telefono))
-            {
-                JOptionPane.showMessageDialog(null, "El teléfono debe constar de sólo números");
-                telefono = getText(txtTelefono);               
-                if(modelo.esNumero(telefono))
-                    break;
-            }
-            
-            cedula = "V" + cedula;
-            
-            modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
-            controlador.guardarNatural(modelo);
-            
-            reiniciarValores();
-            limpiarCajas();
-            tablaNaturales.setModel(this.controlador.cargarTabla());
+            else
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");                
         }
         
     }//GEN-LAST:event_GuardarMouseClicked
