@@ -41,23 +41,23 @@ public class C_Juridico extends C_Propietario{
             
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos del propietario "+ 
-                                                encontrado.getNombre() + " RIF: "+encontrado.getRIF());
+                                                encontrado.getRazonSocial()+ " RIF: "+encontrado.getRIF());
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
     }
     
-    public void modificarJuridico(String rif, M_Juridico j, String viejoRIF){
+    public void modificarJuridico(String viejoRIF, M_Juridico j, String rif){
         try{    
             M_Propietario juridico = new M_Juridico(null, null, null, null, viejoRIF, null);
             ObjectSet result = Conexion.getInstancia().buscar(juridico);
             if (!result.isEmpty()){
                 M_Juridico encontrado = (M_Juridico) result.next();
 
-                encontrado.setNombre(j.getNombre());
+                encontrado.setRazonSocial(j.getRazonSocial());
                 encontrado.setNombreGerente(j.getNombreGerente());
                 encontrado.setTelefono(j.getTelefono());
-                encontrado.setRazonSocial(j.getRazonSocial());
+                encontrado.setMision(j.getMision());
                 encontrado.setRIF(rif);
                 
                 if (rif.compareTo(viejoRIF)!=0){ //Si los rif son iguales no hay que modificar a la mascota
@@ -140,7 +140,7 @@ public class C_Juridico extends C_Propietario{
             
             if (!result.isEmpty()){
                 M_Juridico encontrado = (M_Juridico) result.next(); 
-                encontrado.setNombre(j.getNombre());
+                encontrado.setMision(j.getMision());
                 encontrado.setNombreGerente(j.getNombreGerente());
                 encontrado.setTelefono(j.getTelefono());
                 encontrado.setRazonSocial(j.getRazonSocial());
@@ -164,7 +164,7 @@ public class C_Juridico extends C_Propietario{
             if (!result.isEmpty()){
                 M_Juridico encontrado = (M_Juridico) result.next();
                 
-                encontrado.setNombre(j.getNombre());
+                encontrado.setMision(j.getMision());
                 encontrado.setNombreGerente(j.getNombreGerente());
                 encontrado.setTelefono(j.getTelefono());
                 encontrado.setRazonSocial(j.getRazonSocial());
@@ -183,17 +183,17 @@ public class C_Juridico extends C_Propietario{
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"RIF", "Nombre","Telefono","Gerente", "Razon Social","Mascotas"};
+            String titulos[] = {"RIF", "Razón Social","Telefono","Gerente", "Misión","Mascotas"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Juridico[] p = getJuridicos();
             if (p != null) {
                 for (M_Juridico per : p) {
                     Object[] cli = new Object[6];
-                    cli[0] = per.getRIF();
-                    cli[1] = per.getNombre();
+                    cli[0] = per.getRIF();// subString(1);
+                    cli[1] = per.getRazonSocial();
                     cli[2] = per.getTelefono();
                     cli[3] = per.getNombreGerente();
-                    cli[4] = per.getRazonSocial();
+                    cli[4] = per.getMision();
                     cli[5] = per.getNumMascotas();
                     dtm.addRow(cli);
                 }
@@ -207,6 +207,7 @@ public class C_Juridico extends C_Propietario{
     
     public M_Juridico getPersona(String rif){
         try{
+//            M_Juridico juridico = new M_Juridico(null, null, null, null, "J"+rif, null); 
             M_Juridico juridico = new M_Juridico(null, null, null, null, rif, null); 
             ObjectSet resultado = Conexion.getInstancia().buscar(juridico);
             if (resultado.isEmpty())

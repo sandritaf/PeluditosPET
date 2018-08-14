@@ -119,7 +119,7 @@ public class C_Trabajador {
                     // solo carga a los trabajadores que no son ni estilistas, ni veterinarios
                     if( !(per instanceof M_Estilista) && !(per instanceof  M_Veterinario) ){
                     Object[] cli = new Object[6];
-                    cli[0] = per.subString(1);// getCedula();
+                    cli[0] = per.getCedula(); //subString(1);
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
@@ -138,7 +138,8 @@ public class C_Trabajador {
     
     public M_Trabajador getPersona(String cedula){
         try{
-            M_Trabajador trabajador = new M_Trabajador(null, null, "V"+cedula, null, 0, null, null, 0, null, 0);
+    //        M_Trabajador trabajador = new M_Trabajador(null, null, "V"+cedula, null, 0, null, null, 0, null, 0);
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(trabajador);
             if (resultado.isEmpty())
                 return null;

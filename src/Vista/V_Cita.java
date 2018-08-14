@@ -48,7 +48,7 @@ public class V_Cita extends javax.swing.JPanel {
         cFecha = new C_Fecha();
 
         cServicio.cargarServicios(cmbServicio);
-        cTrabajador.cargarTrabajadores(cmbTrabajador);
+        cTrabajador.cargarVeterinariosEstilistas(cmbTrabajador);//  Trabajadores(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         
         reiniciarValores();

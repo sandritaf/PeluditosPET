@@ -208,19 +208,17 @@ public class V_Natural extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                             .addComponent(txtCedula))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(Apellido))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(Telefono)))
+                            .addComponent(Apellido)
+                            .addComponent(Telefono))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTelefono)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,9 +275,9 @@ public class V_Natural extends javax.swing.JPanel {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -312,30 +310,16 @@ public class V_Natural extends javax.swing.JPanel {
             cedula = getText(txtCedula); //Hay que verificar que no exista
             direccion = txtDireccion.getText();
             
-            while(!modelo.esNumero(cedula))
-            {
-                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
-                cedula = getText(txtCedula);               
-                if(modelo.esNumero(cedula))
-                    break;
+            if(modelo.esNumero(cedula) && modelo.esNumero(telefono)){
+                modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
+                controlador.guardarNatural(modelo);
+
+                reiniciarValores();
+                limpiarCajas();
+                tablaNaturales.setModel(this.controlador.cargarTabla());
             }
-            
-            while(!modelo.esNumero(telefono))
-            {
-                JOptionPane.showMessageDialog(null, "El teléfono debe constar de sólo números");
-                telefono = getText(txtTelefono);               
-                if(modelo.esNumero(telefono))
-                    break;
-            }
-            
-            cedula = "V" + cedula;
-            
-            modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
-            controlador.guardarNatural(modelo);
-            
-            reiniciarValores();
-            limpiarCajas();
-            tablaNaturales.setModel(this.controlador.cargarTabla());
+            else
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");                
         }
         
     }//GEN-LAST:event_GuardarMouseClicked

@@ -11,7 +11,7 @@ public class V_Juridico extends javax.swing.JPanel {
     
     M_Juridico modelo;
     C_Juridico controlador;
-    String nombre, nombreGerente, rif, telefono, direccion, razonSocial, auxRIF;
+    String razonSocial, nombreGerente, rif, telefono, direccion, auxRIF, mision;
     
     public V_Juridico() {
         initComponents();
@@ -36,8 +36,8 @@ public class V_Juridico extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaJuridicos = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        Nombre = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        RazonSocial = new javax.swing.JLabel();
+        txtRazonSocial = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         Cedula = new javax.swing.JLabel();
         txtRIF = new javax.swing.JTextField();
@@ -47,8 +47,9 @@ public class V_Juridico extends javax.swing.JPanel {
         txtNombreGerente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDireccion = new javax.swing.JTextArea();
-        NivelInstruccion1 = new javax.swing.JLabel();
-        txtRazonSocial = new javax.swing.JTextField();
+        Mision = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtMision = new javax.swing.JTextArea();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -178,10 +179,10 @@ public class V_Juridico extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
 
-        Nombre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Nombre.setText("Nombre");
+        RazonSocial.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        RazonSocial.setText("Razón Social");
 
-        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtRazonSocial.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +200,7 @@ public class V_Juridico extends javax.swing.JPanel {
         RIF.setText("RIF");
 
         NivelInstruccion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        NivelInstruccion.setText("Nombre del Gerente");
+        NivelInstruccion.setText("Gerente");
 
         Direccion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Direccion.setText("Dirección");
@@ -209,8 +210,13 @@ public class V_Juridico extends javax.swing.JPanel {
         txtDireccion.setRows(5);
         jScrollPane1.setViewportView(txtDireccion);
 
-        NivelInstruccion1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        NivelInstruccion1.setText("Razón Social");
+        Mision.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Mision.setText("Misión");
+
+        txtMision.setColumns(20);
+        txtMision.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtMision.setRows(5);
+        jScrollPane3.setViewportView(txtMision);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -219,50 +225,51 @@ public class V_Juridico extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NivelInstruccion)
-                    .addComponent(NivelInstruccion1)
+                    .addComponent(Mision)
                     .addComponent(Direccion)
-                    .addComponent(Cedula)
-                    .addComponent(RIF)
-                    .addComponent(Nombre))
+                    .addComponent(RazonSocial)
+                    .addComponent(Cedula))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNombreGerente, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtRazonSocial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                        .addComponent(txtRIF, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtRazonSocial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RIF)
+                            .addComponent(NivelInstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtRIF)
+                            .addComponent(txtNombreGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane3))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Nombre)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RazonSocial)
+                    .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RIF))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cedula))
+                    .addComponent(Cedula)
+                    .addComponent(txtNombreGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NivelInstruccion))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(Direccion)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NivelInstruccion)
-                    .addComponent(txtNombreGerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NivelInstruccion1)
-                    .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Mision))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -272,10 +279,10 @@ public class V_Juridico extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
                 .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
@@ -315,19 +322,26 @@ public class V_Juridico extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{            
-            nombre = getText(txtNombre);
+            
             rif = getText(txtRIF);
             telefono = getText(txtTelefono);
             nombreGerente = getText(txtNombreGerente);
             razonSocial = getText(txtRazonSocial);
             direccion = txtDireccion.getText();
+            mision = txtMision.getText();
+
+            modelo = new M_Juridico();
             
-            modelo = new M_Juridico(direccion, telefono, nombre, nombreGerente, rif, razonSocial);            
-            controlador.guardarJuridico(modelo);
-            
-            reiniciarValores();
-            limpiarCajas();
-            tablaJuridicos.setModel(this.controlador.cargarTabla());
+            if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
+                modelo = new M_Juridico(direccion, telefono, razonSocial, nombreGerente, rif, razonSocial);            
+                controlador.guardarJuridico(modelo);
+
+                reiniciarValores();
+                limpiarCajas();
+                tablaJuridicos.setModel(this.controlador.cargarTabla());
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -342,20 +356,27 @@ public class V_Juridico extends javax.swing.JPanel {
         }
         else{
             
-            nombre = getText(txtNombre);
+            rif = getText(txtRIF);
             telefono = getText(txtTelefono);
             nombreGerente = getText(txtNombreGerente);
             razonSocial = getText(txtRazonSocial);
             direccion = txtDireccion.getText();
-            auxRIF = "J"+txtRIF.getText(); //nuevo rif
+            //auxRIF = "J"+txtRIF.getText(); //nuevo rif
+            mision = txtMision.getText();
             
-            modelo.actualizar(direccion, telefono, nombre, nombreGerente, auxRIF, razonSocial);
-            //auxrif no tiene valor aquí
-            controlador.modificarJuridico(auxRIF,modelo,rif);
-            
-            reiniciarValores();
-            limpiarCajas();
-            tablaJuridicos.setModel(this.controlador.cargarTabla());
+            if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
+
+                modelo.actualizar(direccion, telefono, razonSocial, nombreGerente, rif, mision);
+                //auxrif no tiene valor aquí
+                controlador.modificarJuridico(auxRIF,modelo,"J"+rif);
+
+                reiniciarValores();
+                limpiarCajas();
+                tablaJuridicos.setModel(this.controlador.cargarTabla());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
+            }
         }
         
     }//GEN-LAST:event_ModificarMouseClicked
@@ -366,7 +387,7 @@ public class V_Juridico extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El campo de RIF debe estar lleno para realizar ésta acción");
         }
         else{                       
-            controlador.eliminarJuridico(rif);
+            controlador.eliminarJuridico(auxRIF);
             
             reiniciarValores();
             limpiarCajas();
@@ -381,15 +402,19 @@ public class V_Juridico extends javax.swing.JPanel {
         Limpiar.setEnabled(true);
         Guardar.setEnabled(false);
         
+        modelo = new M_Juridico();
+        
         modelo = controlador.getPersona(tablaJuridicos.getValueAt(tablaJuridicos.getSelectedRow(), 0).toString());
         
-        txtNombre.setText(modelo.getNombre());
-        txtRIF.setText(getRIF(modelo.getRIF()));
-        rif = modelo.getRIF();
+        //System.out.println(tablaJuridicos.getValueAt(tablaJuridicos.getSelectedRow(), 0).toString());
+        
+        auxRIF = modelo.getRIF();
+        txtRazonSocial.setText(modelo.getRazonSocial());
+        txtRIF.setText(modelo.subString(1));
         txtTelefono.setText(modelo.getTelefono());
         txtNombreGerente.setText(modelo.getNombreGerente());
         txtDireccion.setText(modelo.getDireccion());
-        txtRazonSocial.setText(modelo.getRazonSocial());
+        txtMision.setText(modelo.getMision());
     }//GEN-LAST:event_tablaJuridicosMousePressed
 
 
@@ -400,11 +425,11 @@ public class V_Juridico extends javax.swing.JPanel {
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Juridico;
     private javax.swing.JLabel Limpiar;
+    private javax.swing.JLabel Mision;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel NivelInstruccion;
-    private javax.swing.JLabel NivelInstruccion1;
-    private javax.swing.JLabel Nombre;
     private javax.swing.JLabel RIF;
+    private javax.swing.JLabel RazonSocial;
     private javax.swing.JLabel VerLista;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -412,9 +437,10 @@ public class V_Juridico extends javax.swing.JPanel {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaJuridicos;
     private javax.swing.JTextArea txtDireccion;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextArea txtMision;
     private javax.swing.JTextField txtNombreGerente;
     private javax.swing.JTextField txtRIF;
     private javax.swing.JTextField txtRazonSocial;
@@ -423,10 +449,10 @@ public class V_Juridico extends javax.swing.JPanel {
     
     // Vacia todos los txtField de la ventana
     public void limpiarCajas(){
-        txtNombre.setText(null);
+        txtRazonSocial.setText(null);
         txtRIF.setText(null);
         txtNombreGerente.setText(null);
-        txtRazonSocial.setText(null);
+        txtMision.setText(null);
         txtTelefono.setText(null);
         txtDireccion.setText(null);
     }
@@ -445,7 +471,7 @@ public class V_Juridico extends javax.swing.JPanel {
     
     //Verifica si hay txtFields sin llenar
     public boolean cajasVacias(){
-        if(txtVacio(txtNombre))
+        if(txtVacio(txtRazonSocial))
             return true;
         if(txtVacio(txtNombreGerente))
             return true;
@@ -457,12 +483,14 @@ public class V_Juridico extends javax.swing.JPanel {
             return true;
         if(txtDireccion.getText().isEmpty())
             return true;
+        if(txtMision.getText().isEmpty())
+            return true;
         return false;
     }
     
     //Coloca en null los atributos de la empresa
     public void reiniciarValores(){
-        nombre = null;
+        mision = null;
         nombreGerente = null;
         razonSocial = null;
         direccion = null;

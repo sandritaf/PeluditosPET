@@ -379,6 +379,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         if(cajasVacias()){
                 JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }else{
+            
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             cedula = getText(txtCedula);
@@ -390,6 +391,11 @@ public class V_Veterinario extends javax.swing.JPanel {
             edad = Integer.parseInt(getText(txtEdad));
             universidad = getText(txtUniversidad);
             especializacion = getText(txtEspecializacion);
+            
+            if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){                
+                modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                controlador.guardarVeterinario(modelo);
+            }
 
             while(!modelo.esNumero(cedula)){
                 JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
@@ -398,9 +404,6 @@ public class V_Veterinario extends javax.swing.JPanel {
                     break;
             }
             
-            modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-            controlador.guardarVeterinario(modelo);
-
             reiniciarValores();
             limpiarCajas();
             tablaVeterinarios.setModel(this.controlador.cargarTabla());
@@ -428,20 +431,18 @@ public class V_Veterinario extends javax.swing.JPanel {
             especializacion = getText(txtEspecializacion);
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            while(!modelo.esNumero(cedula)){
-                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
-                cedula = getText(txtCedula);               
-                if(modelo.esNumero(cedula))
-                    break;
-            }            
+            if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){
             
-            modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-            controlador.modificarVeterinario(auxCI, cedula, modelo);
-            
-            reiniciarValores();
-            limpiarCajas();
-            tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                controlador.modificarVeterinario(auxCI, "V"+cedula, modelo);
 
+                reiniciarValores();
+                limpiarCajas();
+                tablaVeterinarios.setModel(this.controlador.cargarTabla());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
+            }
         }
         
     }//GEN-LAST:event_ModificarMouseClicked
@@ -453,16 +454,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         }
         else{
             
-            cedula = getText(txtCedula);
-            
-            while(!modelo.esNumero(cedula)){
-                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
-                cedula = getText(txtCedula);               
-                if(modelo.esNumero(cedula))
-                    break;
-            }
-            
-            controlador.eliminarVeterinario("V"+cedula);
+            controlador.eliminarVeterinario(auxCI);
             
             reiniciarValores();
             limpiarCajas();
@@ -480,6 +472,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         Modificar.setEnabled(true);
         Eliminar.setEnabled(true);
         
+        modelo = new M_Veterinario();
         modelo = controlador.getPersona(tablaVeterinarios.getValueAt(tablaVeterinarios.getSelectedRow(), 0).toString());
         
         auxCI = modelo.getCedula();

@@ -2,6 +2,7 @@ package Modelo;
 
 public class M_Mascota {
     private String id;
+    private String sexo;
     private String nombre;
     private String especie;
     private String raza;
@@ -104,6 +105,14 @@ public class M_Mascota {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
     
     public void setObservaciones(String observaciones) {
