@@ -22,7 +22,6 @@ public class Conexion {
     public Conexion(){
         EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
         bd = Db4oEmbedded.openFile(config,direccionSandra2);
-//        bd = Db4oEmbedded.openFile(direccionSandra2);
     }
         
     public void cerrarConexion(){

@@ -50,8 +50,14 @@ public class M_Juridico extends M_Propietario{
         this.razonSocial = razonSocial;
     }
     
+    @Override
     public String toString(){
         return RIF + " - " + razonSocial;
+    }
+    
+    @Override
+    public String nombreCompleto(){
+        return razonSocial;
     }
     
     public String subString(int inicio){

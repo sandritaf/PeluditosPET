@@ -2,12 +2,14 @@ package Modelo;
 
 public class M_Mascota {
     private String id;
+    private String sexo;
     private String nombre;
     private String especie;
     private String raza;
     private int edad, codigo;
     private String observaciones;
     private M_Propietario dueno;
+    private static int cantidad = 0;
     
     public M_Mascota(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
         this.codigo = codigo;
@@ -60,6 +62,10 @@ public class M_Mascota {
     public void setRaza(String raza) {
         this.raza = raza;
     }
+    
+    public void setCantidad(int g){
+        cantidad = g;
+    }
 
     public int getEdad() {
         return edad;
@@ -77,6 +83,14 @@ public class M_Mascota {
         return id;
     }
 
+    public void aumentarCantidad(){
+        cantidad++;
+    }
+    
+    public int getCantidad(){
+        return cantidad;
+    }
+    
     public void setId(String id) {
         this.id = id;
     }
@@ -91,6 +105,14 @@ public class M_Mascota {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
     
     public void setObservaciones(String observaciones) {

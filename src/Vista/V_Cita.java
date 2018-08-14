@@ -48,7 +48,7 @@ public class V_Cita extends javax.swing.JPanel {
         cFecha = new C_Fecha();
 
         cServicio.cargarServicios(cmbServicio);
-        cTrabajador.cargarTrabajadores(cmbTrabajador);
+        cTrabajador.cargarVeterinariosEstilistas(cmbTrabajador);//  Trabajadores(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         reiniciarValores();
 //        controlador.listarCitas();
@@ -408,16 +408,12 @@ public class V_Cita extends javax.swing.JPanel {
                 mJuridico = cJuridico.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
-                
-            //JOptionPane.showMessageDialog(null, mServicio.toString());
-//            JOptionPane.showMessageDialog(null, controlador.getNumCitasExistentes());
             
             modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
             controlador.guardarCita(modelo);
            
             reiniciarValores();
             limpiarCajas();
-//            controlador.listarCitas();
             tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
@@ -465,13 +461,12 @@ public class V_Cita extends javax.swing.JPanel {
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
-        else{
-        
-        //    controlador.eliminarMascota(id,nombre,observaciones,obtenerDueno(cmbDueno));
+        else{        
+            controlador.eliminarCita(id);
 
             reiniciarValores();
             limpiarCajas();
-//            tablaMascotas.setModel(this.controlador.cargarTabla());
+            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_EliminarMouseClicked
 
@@ -480,7 +475,7 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
-//        controlador.listarMascotas();    // TODO add your handling code here:
+        controlador.listarCitas();    
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaCitasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCitasMousePressed
@@ -489,7 +484,8 @@ public class V_Cita extends javax.swing.JPanel {
         Modificar.setEnabled(true);
         Eliminar.setEnabled(true);
         
-        modelo = controlador.getCita(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
+       // modelo = controlador.getCita(Integer.parseInt(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString()));
+        id = Integer.parseInt(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
         
         idViejo = Integer.toString(modelo.getId());
         txtPK.setText(idViejo);
@@ -554,6 +550,8 @@ public class V_Cita extends javax.swing.JPanel {
         cmbTrabajador.setSelectedIndex(0);
         txtTratamiento.setText(null);
         txtPK.setText(null);
+        
+        Guardar.setEnabled(true);
         Modificar.setEnabled(false);
         Eliminar.setEnabled(false);
     }

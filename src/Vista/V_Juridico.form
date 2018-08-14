@@ -272,8 +272,7 @@
                           <Component id="Cedula" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtRazonSocial" alignment="0" pref="210" max="32767" attributes="0"/>
@@ -284,13 +283,14 @@
                                   <Component id="RIF" min="-2" max="-2" attributes="0"/>
                                   <Component id="NivelInstruccion" min="-2" pref="55" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtRIF" max="32767" attributes="0"/>
+                                  <Component id="txtNombreGerente" min="-2" pref="210" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="jScrollPane3" alignment="1" pref="283" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtRIF" max="32767" attributes="0"/>
-                          <Component id="txtNombreGerente" min="-2" pref="210" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
                   </Group>

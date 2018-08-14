@@ -17,12 +17,25 @@ public class C_Cita {
     public C_Cita() {
     }
     
-    public void guardarCita(M_Cita cita){
-          try{
-              cita.aumentarCantidad();
-              cita.setId(cita.getCantidad());
+    private void guardar(M_Cita cita){
+        try{
               Conexion.getInstancia().guardar(cita);
               JOptionPane.showMessageDialog(null, "Se ha almacenado la cita");
+          }catch(Exception e){
+              JOptionPane.showMessageDialog(null, "error en C_Cita->guardar: "+ e);
+          }
+    }
+    
+    public void guardarCita(M_Cita cita){
+          try{
+              //Cada nueva ejecucion del proyecto se vuelve el contador a 0
+              //Esta condicion es que cuando el contador sea 0 pero en la BDD hayan citas guardadas
+              if (cita.getCantidad() == 0 && getNumCitasExistentes() > 0){
+                  cita.setCantidad(getCitas().length);
+              }
+              cita.aumentarCantidad(); //Se aumenta la cita
+              cita.setId(cita.getCantidad()); //Se actualiza el numero de cita
+              guardar(cita);
           }catch(Exception e){
               JOptionPane.showMessageDialog(null, "error en C_Cita->guardarCita: "+ e);
           }
@@ -80,9 +93,9 @@ public class C_Cita {
         }
     }
     
-    public M_Cita getCita(String id){
+    public M_Cita getCita(int id){
         try{
-            M_Cita cita = new M_Cita(0, null, null, null, null, null, null);
+            M_Cita cita = new M_Cita(id, null, null, null, null, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(cita);
             if (resultado.isEmpty())
                 return null;
@@ -100,7 +113,7 @@ public class C_Cita {
             ObjectSet resultado = Conexion.getInstancia().buscar(c);
             System.out.println("Tengo " + resultado.size() + " citas.\n");
             while(resultado.hasNext()){
-                ((M_Cita)resultado.next()).getId();//toString();// imprimir();
+               System.out.println(((M_Cita)resultado.next()).toString());// imprimir();
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Cita->listarCitas() "+e);
@@ -129,44 +142,20 @@ public class C_Cita {
     }
     
     
-//    public DefaultTableModel cargarTabla() {
-//        try{
-//            String titulos[] = {"Codigo", "Servicio","Mascota","Dueño", "Fecha","Conclusion"};
-//            DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-//            M_Cita[] p = getCitas();
-//            if (p != null) {
-//                for (M_Cita per : p) {
-//                    Object[] cli = new Object[6];
-//                    cli[0] = per.getId();
-//                    cli[1] = per.getServicio().getNombre();
-//                    cli[2] = per.getMascota().getNombre();
-//                    cli[3] = per.getMascota().getDueno().toString();
-//                    cli[4] = per.getFecha();
-//                    cli[4] = per.getDiagnosticoFinal();
-//                    dtm.addRow(cli);
-//                }
-//            }
-//            return dtm;
-//        }catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e);
-//            return null;
-//        }
-//    }
-    
     public DefaultTableModel cargarTabla() {
         try{
-            //String titulos[] = {"ID","Mascota","Dueño","Trabajador", "Servicio"};//,"RIF", "Profesión"};
-            String titulos[] = {"ID","Trabajador", "Servicio"};//,"RIF", "Profesión"};
+            String titulos[] = {"ID","Mascota","Propietario","Trabajador", "Servicio", "Fecha"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Cita[] p = getCitas();
             if (p != null) {
                 for (M_Cita per : p) {
-                    Object[] cli = new Object[3];
+                    Object[] cli = new Object[6];
                     cli[0] = per.getId();
-    //                cli[1] = per.getMascota().printNombreID();
-    //                cli[2] = per.getMascota().getDueno().toString();
-                    cli[1] = per.getTrabajador().nombreApellido();// toString();
-                    cli[2] = per.getServicio().toString();
+                    cli[1] = per.getMascota().getNombre();
+                    cli[2] = per.getMascota().getDueno().nombreCompleto();
+                    cli[3] = per.getTrabajador().nombreApellido();
+                    cli[4] = per.getServicio().toString();
+                    cli[5] = per.getFecha();
                     dtm.addRow(cli);
                 }
             }
@@ -188,6 +177,26 @@ public class C_Cita {
             if(resultados.size() >0){
                 while(resultados.hasNext() ){
                     aux = ((M_Mascota)resultados.next()).toString();
+                    aModel.addElement(aux);
+                }
+            }
+            
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
+        }
+    }
+    
+    public void cargarCitas(JComboBox combito){
+        try {
+            M_Cita m = new M_Cita(0,null, null, null, null, null, null,false);
+            ObjectSet resultados = Conexion.getInstancia().buscar(m);
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux = "";
+            combito.setModel(aModel);
+            
+            if(resultados.size() >0){
+                while(resultados.hasNext() ){
+                    aux = ((M_Cita)resultados.next()).toString();
                     aModel.addElement(aux);
                 }
             }

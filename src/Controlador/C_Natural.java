@@ -47,7 +47,8 @@ public class C_Natural {
     
     public M_Natural getPersona(String cedula){
         try{
-            M_Natural n = new M_Natural(null, null, null, null,"V"+ cedula);
+    //        M_Natural n = new M_Natural(null, null, null, null,"V"+ cedula);
+            M_Natural n = new M_Natural(null, null, null, null,cedula);
             ObjectSet resultado = Conexion.getInstancia().buscar(n);
             if (resultado.isEmpty())
                 return null;
@@ -177,13 +178,13 @@ public class C_Natural {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"Cedula", "Nombre","Apellido","Telefono","Mascotas"};
+            String titulos[] = {"Cédula", "Nombre","Apellido","Telefono","Mascotas"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Natural[] p = getNaturales();
             if (p != null) {
                 for (M_Natural per : p) {
                     Object[] cli = new Object[5];
-                    cli[0] = per.subString(1);// getCedula();
+                    cli[0] = per.getCedula();//subString(1);
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();

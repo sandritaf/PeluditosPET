@@ -35,6 +35,19 @@ public class M_Cita {
         this.cancelado = false;
     }
 
+    public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento, M_Mascota mascota, boolean cancelado) {
+        this.id = id;
+        this.trabajador = trabajador;
+        this.servicio = servicio;
+        this.fecha = fecha;
+        this.diagnosticoFinal = diagnosticoFinal;
+        this.tratamiento = tratamiento;
+        this.mascota = mascota;
+        this.cancelado = cancelado;
+    }
+    
+    
+
     public M_Trabajador getTrabajador() {
         return trabajador;
     }
@@ -94,6 +107,10 @@ public class M_Cita {
     public int getId() {
         return id;
     }
+    
+    public void setCantidad(int g){
+        cantidad = g;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -126,7 +143,12 @@ public class M_Cita {
     }
     
     public String toString(){
-       return id + " " + mascota.getNombre() + " " + fecha + " " ;
+        try{
+            return id + " - " + mascota.getNombre() + " - " + fecha + " - " + servicio.getNombre();
+        } catch(Exception e){
+            System.out.println("Error en M_Cita: toString: "+e);
+        }
+        return "Hola";
     }
-        
+               
 }

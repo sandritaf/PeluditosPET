@@ -19,13 +19,27 @@ public class C_Mascota {
     
     public C_Mascota() {
     }    
+    
+    private void guardar(M_Mascota mascota){
+        try{
+            Conexion.getInstancia().guardar(mascota);        
+            JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->guardar: "+e);
+        }        
+    }
 
     public void guardarMascota(M_Mascota mascota, M_Propietario dueno){
         try{
-            
+            if(mascota.getCantidad()==0 && getNumMascotasExistentes() > 0){
+                mascota.setCantidad(getMascotas(null).length);
+            }
+            mascota.aumentarCantidad();
+            mascota.setCodigo(mascota.getCantidad());
             if (agregarMascotaCliente(dueno,mascota)){
-                Conexion.getInstancia().guardar(mascota);        
-                JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del animal");
+                mascota.setDueno(dueno);
+                System.out.println(dueno.toString());
+                guardar(mascota);
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "GuardarMascota: "+e);
@@ -82,7 +96,7 @@ public class C_Mascota {
     
     public boolean agregarMascotaCliente(M_Propietario dueno, M_Mascota mascota){
         try{
-            System.out.print("Mascotas de: ");
+            System.out.print("Mascota de: ");
             if (dueno instanceof M_Natural){ //Si su nuevo dueño es un cliente Natural se le agrega 
                 C_Natural c1 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
@@ -231,9 +245,18 @@ public class C_Mascota {
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
             String aux;
             duenos.setModel(aModel);
+            
+            M_Propietario p = new M_Propietario(null,null);
+            ObjectSet rs = Conexion.getInstancia().buscar(p);
+            if(rs.size() > 0){
+                while(rs.hasNext() ){
+                    aux = ((M_Propietario)rs.next()).nombreCompleto();
+                    aModel.addElement(aux);
+                }
+            }
 
     
-            M_Natural p = new M_Natural(null, null, null, null, null);
+            /*M_Natural p = new M_Natural(null, null, null, null, null);
             M_Juridico p1 = new M_Juridico(null, null, null, null, null, null); 
 
             ObjectSet rs = Conexion.getInstancia().buscar(p);
@@ -252,7 +275,7 @@ public class C_Mascota {
                    aux = ((M_Juridico)rs1.next()).getRazonSocial();
                    aModel.addElement(aux);
                 }
-            }
+            }*/
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
         }
@@ -369,7 +392,7 @@ public class C_Mascota {
     
     //Selecciona en un combo box la opcion que corresponde a un codigo PK dado.
     public void setComboSelected(String string, JComboBox combito){
-        String textoCombo = "";
+        String textoCombo;
         for (int i = 0; i < combito.getItemCount(); i++) {
             textoCombo = combito.getItemAt(i).toString();
            //Comparo los objetos de mi combo con el codigo del item que buscaba
@@ -385,7 +408,7 @@ public class C_Mascota {
     public void setCodigoComboSelected(String codigoPK, JComboBox combito){
         //Obtengo la longitud de mi combo
         int largoCombo = combito.getItemCount();
-        String textoCombo = "";
+        String textoCombo;
         //Recorro el arraycollection
         for (int i = 0; i < largoCombo; i++) {
             textoCombo = combito.getItemAt(i).toString();
@@ -427,7 +450,7 @@ public class C_Mascota {
             String[] x = getRazas(especie);
             if (x != null) {
                 for (String per : x) {
-                    aux = per.toString();
+                    aux = per;
                     aModel.addElement(aux);
                 }
             }
