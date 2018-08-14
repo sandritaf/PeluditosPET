@@ -392,7 +392,7 @@ public class C_Mascota {
     
     //Selecciona en un combo box la opcion que corresponde a un codigo PK dado.
     public void setComboSelected(String string, JComboBox combito){
-        String textoCombo = "";
+        String textoCombo;
         for (int i = 0; i < combito.getItemCount(); i++) {
             textoCombo = combito.getItemAt(i).toString();
            //Comparo los objetos de mi combo con el codigo del item que buscaba
@@ -408,7 +408,7 @@ public class C_Mascota {
     public void setCodigoComboSelected(String codigoPK, JComboBox combito){
         //Obtengo la longitud de mi combo
         int largoCombo = combito.getItemCount();
-        String textoCombo = "";
+        String textoCombo;
         //Recorro el arraycollection
         for (int i = 0; i < largoCombo; i++) {
             textoCombo = combito.getItemAt(i).toString();
@@ -450,7 +450,7 @@ public class C_Mascota {
             String[] x = getRazas(especie);
             if (x != null) {
                 for (String per : x) {
-                    aux = per.toString();
+                    aux = per;
                     aModel.addElement(aux);
                 }
             }
