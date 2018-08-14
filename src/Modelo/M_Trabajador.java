@@ -129,4 +129,16 @@ public class M_Trabajador {
         return nombre + " " + apellido;
     }
     
+    public String subString(int inicio){
+        return cedula.substring(inicio);
+    }
+    
+    public boolean esNumero(String cadena){
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException excepcion) {
+            return false;
+        }
+    }
 }
