@@ -13,6 +13,7 @@ public class M_Factura {
     private float total;
     private String modoPago;
     private String nombreCliente;
+    private static int cantidad = 0;
     
     public M_Factura(int id, M_Cita cita, String fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
         this.id = id;
@@ -67,6 +68,18 @@ public class M_Factura {
 
     public M_Cita getCita() {
         return cita;
+    }
+    
+    public void aumentarCantidad(){
+        cantidad++;
+    }
+    
+    public void setCantidad(int x){
+        cantidad = x;
+    }
+    
+    public int getCantidad(){
+        return cantidad;
     }
 
     public void setCita(M_Cita cita) {

@@ -1,6 +1,6 @@
-
 package Vista;
 
+import Conexion.Conexion;
 import Controlador.C_Cita;
 import Controlador.C_Fecha;
 import Controlador.C_Juridico;
@@ -32,9 +32,9 @@ public class V_Cita extends javax.swing.JPanel {
     C_Trabajador cTrabajador; M_Trabajador mTrabajador;
     C_Mascota cMascota; M_Mascota mMascota;
     C_Fecha cFecha; 
-    String idViejo, servicio, dueño, trabajador, mascota, fecha, diagnosticoFinal, tratamiento;
+    String servicio, dueño, trabajador, mascota, diagnosticoFinal, tratamiento;
     int id;
-    Date date;
+    Date fecha;
     
     public V_Cita() {
         initComponents();
@@ -50,8 +50,8 @@ public class V_Cita extends javax.swing.JPanel {
         cServicio.cargarServicios(cmbServicio);
         cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
+        
         reiniciarValores();
-//        controlador.listarCitas();
         limpiarCajas();
         
         tablaCitas.setModel(controlador.cargarTabla());
@@ -86,7 +86,6 @@ public class V_Cita extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtTratamiento = new javax.swing.JTextArea();
         cmbDueño = new javax.swing.JComboBox<>();
-        txtPK = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCitas = new javax.swing.JTable();
 
@@ -287,7 +286,6 @@ public class V_Cita extends javax.swing.JPanel {
                             .addComponent(Dueño))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbMascota, 0, 220, Short.MAX_VALUE)
                             .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -319,8 +317,7 @@ public class V_Cita extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Fecha)
-                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Fecha))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(DiagnosticoFinal)
@@ -393,14 +390,14 @@ public class V_Cita extends javax.swing.JPanel {
             dueño = getID(cmbDueño);
             mascota = getID(cmbMascota); 
             trabajador = getIDComboSelected(cmbTrabajador); 
-            fecha = getText(txtFecha); 
+            fecha = C_Fecha.deStringToDate(txtFecha.getText()); 
             diagnosticoFinal = txtDiagnosticoFinal.getText(); 
             tratamiento = txtTratamiento.getText(); 
             
             mTrabajador = cTrabajador.getPersona(trabajador);
             mServicio = cServicio.getServicio(servicio); 
             
-            if(tipoDueño(cmbDueño).compareTo("V") == 0){
+            if(tipoDueño(cmbDueño).equals("J")){
                 mNatural = cNatural.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota,mNatural.getCedula());                 
             }
@@ -428,7 +425,7 @@ public class V_Cita extends javax.swing.JPanel {
             dueño = getIDComboSelected(cmbDueño);
             mascota = getID(cmbMascota);
             trabajador = getIDComboSelected(cmbTrabajador);
-            fecha = getText(txtFecha);
+            fecha = C_Fecha.deStringToDate(getText(txtFecha));
             diagnosticoFinal = txtDiagnosticoFinal.getText();
             tratamiento = txtTratamiento.getText();
             
@@ -441,14 +438,13 @@ public class V_Cita extends javax.swing.JPanel {
                 mJuridico = cJuridico.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
-            mServicio = cServicio.getServicio(servicio);      
-            id = Integer.parseInt(getText(txtPK));
-            
+            mServicio = cServicio.getServicio(servicio);   
+                        
             modelo.actualizar(id, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
 
             controlador.modificarCita(id, modelo);
             
-//            controlador.modificarMascota(idViejo,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
+//            controlador.modificarMascota(?,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
 
             reiniciarValores();
             limpiarCajas();
@@ -457,9 +453,10 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
-
-        if(cajasVacias()){
-            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
+        
+        //Si esta vacio ... (No encontre forma de verificar que un int <id> estuviese vacio o fuese igual a null) :c
+        if(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString().compareTo("") == 0){
+            JOptionPane.showMessageDialog(null, "Debe haber seleccionado una cita");
         }
         else{        
             controlador.eliminarCita(id);
@@ -484,11 +481,9 @@ public class V_Cita extends javax.swing.JPanel {
         Modificar.setEnabled(true);
         Eliminar.setEnabled(true);
         
-       // modelo = controlador.getCita(Integer.parseInt(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString()));
+        modelo = controlador.getCita(Integer.parseInt(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString()));
         id = Integer.parseInt(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
         
-        idViejo = Integer.toString(modelo.getId());
-        txtPK.setText(idViejo);
         cmbServicio.setSelectedItem(modelo.getServicio().toString());
         cmbDueño.setSelectedItem(modelo.getMascota().getDueno().toString());
         cmbMascota.setSelectedItem(modelo.getMascota().toString());
@@ -504,11 +499,11 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFechaActionPerformed
 
     private void CitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CitaMouseClicked
-        // TODO add your handling code here:
+        Conexion.getInstancia().buscarResultadosSODA(C_Fecha.deStringToDate("2017-01-01"), C_Fecha.deStringToDate("2018-01-01"));
     }//GEN-LAST:event_CitaMouseClicked
 
     private void cmbDueñoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDueñoItemStateChanged
-    controlador.cargarMascotas(cmbMascota, getID(cmbDueño));
+        controlador.cargarMascotas(cmbMascota, getID(cmbDueño));
     }//GEN-LAST:event_cmbDueñoItemStateChanged
 
 
@@ -539,7 +534,6 @@ public class V_Cita extends javax.swing.JPanel {
     private javax.swing.JTable tablaCitas;
     private javax.swing.JTextArea txtDiagnosticoFinal;
     private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtPK;
     private javax.swing.JTextArea txtTratamiento;
     // End of variables declaration//GEN-END:variables
 
@@ -549,7 +543,6 @@ public class V_Cita extends javax.swing.JPanel {
         cmbServicio.setSelectedIndex(0);
         cmbTrabajador.setSelectedIndex(0);
         txtTratamiento.setText(null);
-        txtPK.setText(null);
         
         Guardar.setEnabled(true);
         Modificar.setEnabled(false);
@@ -600,7 +593,6 @@ public class V_Cita extends javax.swing.JPanel {
     }
     
     public void reiniciarValores(){
-        idViejo = null;
         servicio = null;
         dueño = null; 
         trabajador = null;

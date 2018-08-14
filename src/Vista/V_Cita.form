@@ -262,7 +262,6 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtPK" min="-2" pref="89" max="-2" attributes="0"/>
                                   <Component id="cmbMascota" alignment="0" pref="220" max="32767" attributes="0"/>
                                   <Component id="cmbDueño" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -305,7 +304,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Fecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPK" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
@@ -483,8 +481,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtPK">
             </Component>
           </SubComponents>
         </Container>

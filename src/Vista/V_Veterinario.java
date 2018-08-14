@@ -9,10 +9,10 @@ import javax.swing.JTextField;
 
 public class V_Veterinario extends javax.swing.JPanel {
 
-    M_Veterinario modelo;
-    C_Veterinario controlador;
-    String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCI;
-    int edad, aniosE, precioTrabajo;
+    private M_Veterinario modelo;
+    private C_Veterinario controlador;
+    private String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCI;
+    private int edad, aniosE, precioTrabajo;
     
     public V_Veterinario() {
         initComponents();
@@ -363,11 +363,11 @@ public class V_Veterinario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void txtEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdadActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtEdadActionPerformed
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
@@ -391,15 +391,12 @@ public class V_Veterinario extends javax.swing.JPanel {
             universidad = getText(txtUniversidad);
             especializacion = getText(txtEspecializacion);
 
-            while(!modelo.esNumero(cedula))
-            {
+            while(!modelo.esNumero(cedula)){
                 JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
                 cedula = getText(txtCedula);               
                 if(modelo.esNumero(cedula))
                     break;
             }
-            
-            cedula = "V" + cedula;
             
             modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.guardarVeterinario(modelo);
@@ -431,15 +428,12 @@ public class V_Veterinario extends javax.swing.JPanel {
             especializacion = getText(txtEspecializacion);
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            while(!modelo.esNumero(cedula))
-            {
+            while(!modelo.esNumero(cedula)){
                 JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
                 cedula = getText(txtCedula);               
                 if(modelo.esNumero(cedula))
                     break;
-            }
-            
-            cedula = "V" + cedula;
+            }            
             
             modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.modificarVeterinario(auxCI, cedula, modelo);
@@ -461,8 +455,7 @@ public class V_Veterinario extends javax.swing.JPanel {
             
             cedula = getText(txtCedula);
             
-            while(!modelo.esNumero(cedula))
-            {
+            while(!modelo.esNumero(cedula)){
                 JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
                 cedula = getText(txtCedula);               
                 if(modelo.esNumero(cedula))
@@ -614,6 +607,10 @@ public class V_Veterinario extends javax.swing.JPanel {
         especializacion = null;
         precioTrabajo = 0;
         auxCI = null;
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+        
     }
     
     //Devuelve el valor de un txtField

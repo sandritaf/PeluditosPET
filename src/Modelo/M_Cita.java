@@ -1,19 +1,21 @@
 package Modelo;
 
+import java.util.Date;
+
 
 public class M_Cita {
 
     private int id;
     private M_Trabajador trabajador;
     private M_Servicio servicio;
-    private String fecha;
+    private Date fecha;
     private String diagnosticoFinal;
     private String tratamiento;
     private  M_Mascota mascota;
     private boolean cancelado;
     private static int cantidad = 0;
 
-    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento) {
+    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento) {
         this.id = id;
         this.mascota = mascota;
         this.trabajador = trabajador;
@@ -25,7 +27,7 @@ public class M_Cita {
     }
     
     // Si el servicio no es médico, entonces si usaría este constructor, ya que no aplica tratamiento
-    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal) {
+    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal) {
         this.id = id;
         this.mascota = mascota;
         this.trabajador = trabajador;
@@ -35,7 +37,7 @@ public class M_Cita {
         this.cancelado = false;
     }
 
-    public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento, M_Mascota mascota, boolean cancelado) {
+    public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento, M_Mascota mascota, boolean cancelado) {
         this.id = id;
         this.trabajador = trabajador;
         this.servicio = servicio;
@@ -72,11 +74,11 @@ public class M_Cita {
         this.servicio = servicio;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -131,7 +133,7 @@ public class M_Cita {
                         + "recomendado fue: "+tratamiento+"\nSe prestó el servicio: "+servicio.getNombre()+"\n");
     }
     
-    public void actualizar(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento) {
+    public void actualizar(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento) {
         this.id = id;
         this.mascota = mascota;
         this.trabajador = trabajador;

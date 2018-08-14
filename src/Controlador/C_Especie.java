@@ -60,9 +60,7 @@ public class C_Especie {
                     x.setNombre(nombre);
                     x.agregarRaza(razaNueva);
                     Conexion.getInstancia().guardar(x);
-                    x.imprimir();
-                    Conexion.getInstancia().soda(nombre);
-                    JOptionPane.showMessageDialog(null, "Se han almacenado la raza nuevaaaa");
+                    JOptionPane.showMessageDialog(null, "Se han almacenado la raza nueva");
                 }
             }
          }catch(Exception ex){

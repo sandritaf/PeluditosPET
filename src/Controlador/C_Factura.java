@@ -1,6 +1,7 @@
 package Controlador;
 
 import Conexion.Conexion;
+import Modelo.M_Cita;
 import Modelo.M_Factura;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
@@ -13,13 +14,27 @@ public class C_Factura {
     public C_Factura() {
     }
     
-        public void guardarFactura(M_Factura factura){
+    private void guardar(M_Factura factura){
         try{
-            //estilista.setCedula("V"+factura.getCedula());
-            Conexion.getInstancia().guardar(factura);
-            JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos de la factura");
+              Conexion.getInstancia().guardar(factura);
+              JOptionPane.showMessageDialog(null, "Se ha almacenado la factura");
+          }catch(Exception e){
+              JOptionPane.showMessageDialog(null, "error en C_Factura->guardar: "+ e);
+          }
+    }
+    
+    public void guardarFactura(M_Factura factura){
+        try{
+            //Cada nueva ejecucion del proyecto se vuelve el contador a 0
+              //Esta condicion es que cuando el contador sea 0 pero en la BDD hayan facturas guardadas
+              if (factura.getCantidad() == 0 && getNumFacturasExistentes() > 0){
+                  factura.setCantidad(getFacturas().length);
+              }
+              factura.aumentarCantidad(); //Se aumenta la cita
+              factura.setId(factura.getCantidad()); //Se actualiza el numero de cita
+              guardar(factura);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en GuardarFactura: "+e);
         }
     }
     

@@ -1,10 +1,7 @@
 package Controlador;
 
 import Conexion.Conexion;
-import Modelo.M_Estilista;
-import Modelo.M_Natural;
 import Modelo.M_Veterinario;
-import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
@@ -39,8 +36,7 @@ public class C_Veterinario {
     }
     
     public void modificarVeterinario(String cedulaVieja, String cedula, M_Veterinario v){
-        try{
-        
+        try{        
             M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedulaVieja, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(veterinario);
             M_Veterinario encontrado = (M_Veterinario) result.next();
@@ -65,7 +61,7 @@ public class C_Veterinario {
         }
     }
     
-    public void verVeterinario(String cedula){
+    /*public void verVeterinario(String cedula){
         try{
             M_Veterinario veterinario = new M_Veterinario(null, null, null, null, cedula, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(veterinario);
@@ -73,7 +69,7 @@ public class C_Veterinario {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-    }
+    }*/
     
     public M_Veterinario[] getVeterinarios(){
         try {
@@ -111,16 +107,18 @@ public class C_Veterinario {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"Cedula","Nombre","Apellido","Teléfono"};
+            String titulos[] = {"Cedula","Nombre","Apellido","Teléfono","Profesion","Egresado de"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Veterinario[] p = getVeterinarios();
             if (p != null) {
                 for (M_Veterinario per : p) {
-                    Object[] cli = new Object[4];
+                    Object[] cli = new Object[6];
                     cli[0] = per.subString(1);
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
+                    cli[4] = per.getProfesion();
+                    cli[5] = per.getUniversidad();
                     dtm.addRow(cli);
                 }
             }
