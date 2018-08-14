@@ -225,6 +225,39 @@ public class C_Mascota {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
         }
     }
+  
+    public void cargarDuenosSinID(JComboBox duenos/*, String opc*/){
+        try{
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux;
+            duenos.setModel(aModel);
+
+    
+            M_Natural p = new M_Natural(null, null, null, null, null);
+            M_Juridico p1 = new M_Juridico(null, null, null, null, null, null); 
+
+            ObjectSet rs = Conexion.getInstancia().buscar(p);
+            ObjectSet rs1 = Conexion.getInstancia().buscar(p1);
+
+            // si hay propietarios naturales
+            if(rs.size() > 0){
+                while(rs.hasNext() ){
+                    aux = ((M_Natural)rs.next()).nombreApellido();
+                    aModel.addElement(aux);
+                }
+            }
+            // si hay propietarios juridicos
+            if(rs1.size() > 0){ 
+                while(rs1.hasNext() ){
+                   aux = ((M_Juridico)rs1.next()).getNombre();
+                   aModel.addElement(aux);
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
+        }
+    }
+    
     
     
     public void recorrerMascotasParaEliminarlas(int codigo,String id,M_Propietario dueno) {

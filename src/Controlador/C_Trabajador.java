@@ -3,6 +3,7 @@ package Controlador;
 
 import Conexion.Conexion;
 import Modelo.M_Especie;
+import Modelo.M_Estilista;
 import Modelo.M_Trabajador;
 import Modelo.M_Veterinario;
 import com.db4o.ObjectSet;
@@ -166,25 +167,35 @@ public class C_Trabajador {
         }
     }
     
-    public void cargarTrabajadoresNoVet(JComboBox trabajadores){
+    public void cargarVeterinariosEstilistas(JComboBox trabajadores){
         try{
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
             String aux;
             trabajadores.setModel(aModel);
-            M_Trabajador p = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
-            ObjectSet rs = Conexion.getInstancia().buscar(p);
+            M_Estilista e = new M_Estilista(null, null, null, null, 0, null, null, 0, null, 0, false);
+            M_Veterinario v = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null, 0);
+            M_Trabajador t = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);//, null, null, 0);//, null, 0);
+            ObjectSet rs = Conexion.getInstancia().buscar(v);
+            ObjectSet rs1 = Conexion.getInstancia().buscar(e);
+            ObjectSet rs2 = Conexion.getInstancia().buscar(t);
 
-            // si hay propietarios naturales
+            // si hay veterinarios
             if(rs.size() >0){
                 while(rs.hasNext() ){
-                    if (!(rs instanceof M_Veterinario)){
-                    aux = ((M_Trabajador)rs.next()).toString();
+                    aux = ((M_Veterinario)rs.next()).toString();
                     aModel.addElement(aux);
-                    }
                 }
             }
+            //si hay estilistas
+            if(rs1.size() > 0){
+                while(rs1.hasNext() ){
+                    aux = ((M_Estilista)rs1.next()).toString();
+                    aModel.addElement(aux);                        
+                }
+            }
+            
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error en C_Trabajador->CargarTrabajadores: "+e);
+            JOptionPane.showMessageDialog(null, "Error en C_Trabajador->CargarVetEst: "+e);
         }
     }
     

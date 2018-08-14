@@ -1,10 +1,13 @@
 
 package Vista;
 
+import Controlador.C_Cita;
 import Controlador.C_Factura;
 import Controlador.C_Juridico;
+import Controlador.C_Mascota;
 import Controlador.C_Natural;
 import Controlador.C_Trabajador;
+import Modelo.M_Cita;
 import Modelo.M_Factura;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -14,11 +17,15 @@ public class V_Factura extends javax.swing.JPanel {
 
     M_Factura modelo;
     C_Factura controlador;
+    C_Mascota cMascota;
     C_Juridico cJuridico;
     C_Natural cNatural;
     C_Trabajador cTrabajador;
+    C_Cita cCita;
+    M_Cita mCita;
     String cita, cliente, modoPago, fecha, trabajador;
     float iva, subtotal, total;
+    int id;
     
     public V_Factura() {
         initComponents();
@@ -26,12 +33,17 @@ public class V_Factura extends javax.swing.JPanel {
         cNatural = new C_Natural();
         cJuridico = new C_Juridico();
         cTrabajador = new C_Trabajador();
+        cMascota = new C_Mascota();
+        cCita = new C_Cita();
         
-        cTrabajador.cargarTrabajadoresNoVet(cmbTrabajador);
+        cTrabajador.cargarVeterinariosEstilistas(cmbTrabajador);
+        cMascota.cargarDuenosSinID(cmbDueño);
+        //cCita.cargarCitas(cmbCitas);
         
         tablaFacturas.setModel(controlador.cargarTabla());
         reiniciarValores();
 //        txtPK.setVisible(false);
+        limpiarCajas();
     }
 
     @SuppressWarnings("unchecked")
@@ -277,63 +289,55 @@ public class V_Factura extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Total)
+                    .addComponent(Subtotal)
+                    .addComponent(ModoPago))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbModoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 21, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IVA)
+                    .addComponent(Fecha))
+                .addGap(18, 22, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(Cita)
+                .addGap(96, 96, 96)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(NombreCliente)
-                                            .addComponent(ModoPago)))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(Trabajador)))
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbModoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Subtotal)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(126, 126, 126)
-                                        .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(Representante)
+                            .addComponent(Dueño))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(IVA)
-                            .addComponent(Fecha))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtRepresentante)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbCitaSinCancelar, 0, 240, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(101, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Trabajador))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(Total)
-                                .addGap(94, 94, 94)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(Cita)
-                                .addGap(96, 96, 96)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Representante)
-                                            .addComponent(Dueño))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtRepresentante)))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(cmbTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmbCitaSinCancelar, 0, 240, Short.MAX_VALUE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))))
-                .addContainerGap())
+                        .addComponent(NombreCliente)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,11 +421,33 @@ public class V_Factura extends javax.swing.JPanel {
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
         
-        if(cajasVacias()){
+        if(cajasVacias() || fechaVacia(getText(txtFecha))){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
         
+            fecha = getText(txtFecha);
+            modoPago = getComboSelected(cmbModoPago);
+            subtotal =  Float.parseFloat(getText(txtSubtotal));
+            iva = Float.parseFloat(getText(txtIVA));
+            total = Float.parseFloat(getText(txtTotal));
+            cita = getIDComboSelected(cmbCitaSinCancelar);
+            
+            mCita = cCita.getCita(cita);
+            
+            if(Representante.isSelected())
+            {
+                cliente = getText(txtRepresentante);
+            }
+            if(Dueño.isSelected())
+            {
+                cliente = getComboSelected(cmbDueño);
+            }
+            
+            id = controlador.getNumFacturasExistentes() +1;
+            
+            modelo = new M_Factura(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
+            
             reiniciarValores();
             limpiarCajas();        
             tablaFacturas.setModel(controlador.cargarTabla());
@@ -431,10 +457,33 @@ public class V_Factura extends javax.swing.JPanel {
 
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
 
-        if(cajasVacias()){
+        if(cajasVacias() || fechaVacia(getText(txtFecha))){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
+            
+            fecha = getText(txtFecha);
+            modoPago = getComboSelected(cmbModoPago);
+            subtotal =  Float.parseFloat(getText(txtSubtotal));
+            iva = Float.parseFloat(getText(txtIVA));
+            total = Float.parseFloat(getText(txtTotal));
+            cita = getIDComboSelected(cmbCitaSinCancelar);
+            
+            mCita = cCita.getCita(cita);
+            
+            if(Representante.isSelected())
+            {
+                cliente = getText(txtRepresentante);
+            }
+            if(Dueño.isSelected())
+            {
+                cliente = getComboSelected(cmbDueño);
+            }
+            
+            id = Integer.parseInt(getText(txtPK));
+            
+            modelo = null;
+            modelo.actualizar(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
             
             reiniciarValores();
             limpiarCajas();        
@@ -538,17 +587,32 @@ public class V_Factura extends javax.swing.JPanel {
         Guardar.setEnabled(true);
         Modificar.setEnabled(false);
         Eliminar.setEnabled(false);
+        cmbDueño.setEnabled(false);
+        txtRepresentante.setEnabled(false);
+        txtTotal.setEnabled(false);
     }
     
+    private boolean fechaVacia(String fecha){
+        if(fecha.equals("yyyy-mm-dd"))
+            return true;
+        return false;
+    }
+            
+    
     //Devuelve el codigo de la opcion seleccionada en un combo
-    public int getComboSelected(JComboBox combito){
+    public String getIDComboSelected(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
         int guion = codigo.indexOf(" -");
         codigoFinal = codigo.substring(1, guion);
         
-        return Integer.parseInt(codigoFinal);
+//        return Integer.parseInt(codigoFinal);
+        return (codigoFinal);
+    }
+    
+    public String getComboSelected(JComboBox combito){
+        return combito.getSelectedItem().toString();
     }
     
     public boolean txtVacio(JTextField txt){
@@ -574,6 +638,7 @@ public class V_Factura extends javax.swing.JPanel {
     
     //Coloca en null los atributos de la empresa
     public void reiniciarValores(){
+        id = 0; 
         cita = null;
         cliente = null; 
         modoPago = null; 
@@ -588,5 +653,11 @@ public class V_Factura extends javax.swing.JPanel {
     public String getText(JTextField txt){
         return txt.getText();
     }    
+    
+    public String tipoDueño(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = codigo.substring(0,1);
+        return codigoFinal;
+    }
     
 }

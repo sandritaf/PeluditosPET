@@ -23,9 +23,9 @@ public class C_Factura {
         }
     }
     
-    public void eliminarFactura(String cedula){
+    public void eliminarFactura(int id){
         try{
-            M_Factura factura = new M_Factura(null, 0, 0, 0, null, null);
+            M_Factura factura = new M_Factura(id, null, null, 0, 0, 0, null, null);
             ObjectSet result = Conexion.getInstancia().buscar(factura);
             M_Factura encontrado = (M_Factura) result.next();
             Conexion.getInstancia().eliminar(encontrado);
@@ -35,9 +35,9 @@ public class C_Factura {
         }
     }
     
-    public void modificarFactura(String cedula, M_Factura f){
+    public void modificarFactura(int id, M_Factura f){
         try{
-            M_Factura factura = new M_Factura(null, 0, 0, 0, null, null);
+            M_Factura factura = new M_Factura(id, null, null, 0, 0, 0, null, null);
             ObjectSet result = Conexion.getInstancia().buscar(factura);
             M_Factura encontrado = (M_Factura) result.next();
 
@@ -56,9 +56,9 @@ public class C_Factura {
         }
     }
     
-    public void verFactura(String cedula){
+    public void verFactura(int id){
         try{
-            M_Factura factura = new M_Factura(null, 0, 0, 0, null, null);
+            M_Factura factura = new M_Factura(id, null, null, 0, 0, 0, null, null);
             ObjectSet result = Conexion.getInstancia().buscar(factura);
             JOptionPane.showMessageDialog(null, result.next());
         }catch(Exception e){
@@ -68,7 +68,7 @@ public class C_Factura {
     
     public void listarFacturas(){
        try{
-            M_Factura factura = new M_Factura(null, 0, 0, 0, null, null);
+            M_Factura factura = new M_Factura(0, null, null, 0, 0, 0, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(factura);
             System.out.println("Tengo " + resultado.size() + " facturas");
             while(resultado.hasNext()){
@@ -82,7 +82,7 @@ public class C_Factura {
     public M_Factura[] getFacturas(){
         try {
             M_Factura[] personas = null;
-            M_Factura factura = new M_Factura(null, 0, 0, 0, null, null);
+            M_Factura factura = new M_Factura(0, null, null, 0, 0, 0, null, null);
             ObjectSet resultados = Conexion.getInstancia().buscar(factura);
             int i = 0;
             if (resultados.hasNext()) {
@@ -121,5 +121,17 @@ public class C_Factura {
         }
     }
 
+    public int getNumFacturasExistentes(){
+       try{
+            M_Factura factura = new M_Factura(0, null, null, 0, 0, 0, null, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(factura);
+            if(!resultado.isEmpty())
+                return resultado.size();
+            return 0;
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e);
+           return 0;
+        } 
+    }
     
 }

@@ -5,15 +5,18 @@ import java.util.Date;
 
 public class M_Factura {
     
+    private int id;
     private M_Cita cita;
-    private Date fecha;
+    private String fecha;
     private float iva;
     private float subtotal;
-    private   float total;
-    private   String modoPago;
-    private   String nombreCliente;
-
-    public M_Factura(Date fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
+    private float total;
+    private String modoPago;
+    private String nombreCliente;
+    
+    public M_Factura(int id, M_Cita cita, String fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
+        this.id = id;
+        this.cita = cita;
         this.fecha = fecha;
         this.iva = iva;
         this.subtotal = subtotal;
@@ -21,12 +24,12 @@ public class M_Factura {
         this.modoPago = modoPago;
         this.nombreCliente = nombreCliente;
     }
-
-    public Date getFecha() {
+    
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -77,6 +80,14 @@ public class M_Factura {
     public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public String toString(){
         return "IVA: " + iva + " SUBTOTAL: " + subtotal + " TOTAL: " + total + " CLIENTE: " + nombreCliente;
@@ -84,6 +95,17 @@ public class M_Factura {
     
     public String toString(Date fecha){
         return fecha.toString();
+    }
+    
+    public void actualizar(int id, M_Cita cita, String fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
+        this.id = id;
+        this.cita = cita;
+        this.fecha = fecha;
+        this.iva = iva;
+        this.subtotal = subtotal;
+        this.total = total;
+        this.modoPago = modoPago;
+        this.nombreCliente = nombreCliente;
     }
     
 }
