@@ -467,5 +467,5 @@ public class C_Mascota {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenoConMascota: "+e);
         }
     }
-    
+       
 }

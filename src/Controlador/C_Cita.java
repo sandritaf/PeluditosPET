@@ -2,11 +2,14 @@ package Controlador;
 
 import Modelo.M_Cita;
 import Conexion.Conexion;
+import Modelo.M_Mascota;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 
 public class C_Cita {
@@ -169,6 +172,27 @@ public class C_Cita {
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en C_Cita->cargarTabla: "+e);
             return null;
+        }
+    }
+
+    public void cargarMascotas(JComboBox combito, String dueno){
+        try {
+            M_Mascota mascotica = new M_Mascota(0,dueno, null, null, null, 0, null, null);
+            ObjectSet resultados = Conexion.getInstancia().buscar(mascotica);
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux = "";
+            combito.setModel(aModel);
+            int i = 0;
+            
+            if(resultados.size() >0){
+                while(resultados.hasNext() ){
+                    aux = ((M_Mascota)resultados.next()).toString();
+                    aModel.addElement(aux);
+                }
+            }
+            
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
         }
     }
     

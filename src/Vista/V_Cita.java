@@ -532,9 +532,9 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_CitaMouseClicked
 
     private void cmbDueñoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDueñoItemStateChanged
-        
+    controlador.cargarMascotas(cmbMascota, getIDComboSelected(cmbDueño));
         //if(tipoDueño(cmbDueño).equals("J"))
-        cMascota.cargarDuenoConMascota(cmbMascota, getID(cmbDueño));
+//        cMascota.cargarDuenoConMascota(cmbMascota, getID(cmbDueño));
         //JOptionPane.showMessageDialog(null, getIDComboSelected(cmbDueño)); 
         //cMascota.cargarDuenos(cmbDueño);
         
