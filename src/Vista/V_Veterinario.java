@@ -11,13 +11,14 @@ public class V_Veterinario extends javax.swing.JPanel {
 
     M_Veterinario modelo;
     C_Veterinario controlador;
-    String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCedula;
+    String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCI;
     int edad, aniosE, precioTrabajo;
     
     public V_Veterinario() {
         initComponents();
         controlador = new C_Veterinario();
         tablaVeterinarios.setModel(this.controlador.cargarTabla());
+        limpiarCajas();
         reiniciarValores();
     }
     
@@ -244,27 +245,27 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(Especializacion)
                     .addComponent(Nombre)
                     .addComponent(Cedula))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtEspecializacion)
-                    .addComponent(txtCedula)
-                    .addComponent(txtAniosE)
-                    .addComponent(txtUniversidad)
-                    .addComponent(txtNivelI, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(txtAniosE, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNivelI, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUniversidad, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEspecializacion, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Profesion)
-                    .addComponent(Apellido)
                     .addComponent(RIF)
                     .addComponent(Edad)
-                    .addComponent(Telefono))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtApellido)
-                    .addComponent(txtRIF)
-                    .addComponent(txtEdad)
-                    .addComponent(txtProfesion, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                    .addComponent(Profesion)
+                    .addComponent(Telefono)
+                    .addComponent(Apellido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtProfesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtRIF, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTelefono))
                 .addContainerGap())
         );
@@ -281,29 +282,29 @@ public class V_Veterinario extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cedula)
-                    .addComponent(RIF)
-                    .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aniosExperiencia)
-                    .addComponent(txtAniosE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Edad))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NivelInstruccion)
-                    .addComponent(Profesion)
-                    .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RIF))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Telefono)
-                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(aniosExperiencia)
+                        .addComponent(txtAniosE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Edad))
+                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NivelInstruccion)
+                    .addComponent(txtProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNivelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Profesion))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Universidad)
-                        .addComponent(txtUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 19, Short.MAX_VALUE)
+                        .addComponent(txtUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Telefono)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Especializacion)
                     .addComponent(txtEspecializacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -334,8 +335,8 @@ public class V_Veterinario extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
@@ -390,6 +391,16 @@ public class V_Veterinario extends javax.swing.JPanel {
             universidad = getText(txtUniversidad);
             especializacion = getText(txtEspecializacion);
 
+            while(!modelo.esNumero(cedula))
+            {
+                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
+                cedula = getText(txtCedula);               
+                if(modelo.esNumero(cedula))
+                    break;
+            }
+            
+            cedula = "V" + cedula;
+            
             modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
             controlador.guardarVeterinario(modelo);
 
@@ -420,8 +431,18 @@ public class V_Veterinario extends javax.swing.JPanel {
             especializacion = getText(txtEspecializacion);
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             
+            while(!modelo.esNumero(cedula))
+            {
+                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
+                cedula = getText(txtCedula);               
+                if(modelo.esNumero(cedula))
+                    break;
+            }
+            
+            cedula = "V" + cedula;
+            
             modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-            controlador.guardarVeterinario(modelo);
+            controlador.modificarVeterinario(auxCI, cedula, modelo);
             
             reiniciarValores();
             limpiarCajas();
@@ -440,14 +461,15 @@ public class V_Veterinario extends javax.swing.JPanel {
             
             cedula = getText(txtCedula);
             
-            char valor = cedula.charAt(0);
-            char v = 'V';            
-            
-            if(!(valor == v) ){
-                cedula = "V"+cedula;
+            while(!modelo.esNumero(cedula))
+            {
+                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
+                cedula = getText(txtCedula);               
+                if(modelo.esNumero(cedula))
+                    break;
             }
             
-            controlador.eliminarVeterinario(cedula);
+            controlador.eliminarVeterinario("V"+cedula);
             
             reiniciarValores();
             limpiarCajas();
@@ -461,9 +483,13 @@ public class V_Veterinario extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaVeterinariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaVeterinariosMousePressed
+        Guardar.setEnabled(false);
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
+        
         modelo = controlador.getPersona(tablaVeterinarios.getValueAt(tablaVeterinarios.getSelectedRow(), 0).toString());
         
-        auxCedula = modelo.getCedula();
+        auxCI = modelo.getCedula();
         txtNombre.setText(modelo.getNombre());
         txtRIF.setText(modelo.getRIF());
         txtTelefono.setText(modelo.getTelefono());
@@ -474,7 +500,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtEdad.setText(Integer.toString(modelo.getEdad()));
         txtNivelI.setText(modelo.getNivelInstruccion());
         txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
-        txtCedula.setText(modelo.getCedula());
+        txtCedula.setText(modelo.subString(1));
     }//GEN-LAST:event_tablaVeterinariosMousePressed
 
 
@@ -515,6 +541,9 @@ public class V_Veterinario extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     
     private void limpiarCajas(){
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
         txtAniosE.setText(null);
         txtCedula.setText(null);
         txtEdad.setText(null);
@@ -584,7 +613,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         universidad = null;
         especializacion = null;
         precioTrabajo = 0;
-        auxCedula = null;
+        auxCI = null;
     }
     
     //Devuelve el valor de un txtField

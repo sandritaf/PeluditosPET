@@ -42,15 +42,15 @@ public class C_Trabajador {
         }
     }
     
-    public void modificarTrabajador(String cedula, M_Trabajador t){
+    public void modificarTrabajador(String cedulaVieja, String cedula, M_Trabajador t){
         try{
-            M_Trabajador trabajador = new M_Trabajador(null, null, cedula, null, 0, null, null, 0, null, 0);
+            M_Trabajador trabajador = new M_Trabajador(null, null, cedulaVieja, null, 0, null, null, 0, null, 0);
             ObjectSet result = Conexion.getInstancia().buscar(trabajador);
-            M_Veterinario encontrado = (M_Veterinario) result.next();
+            M_Trabajador encontrado = (M_Trabajador) result.next();
 
             encontrado.setNombre(t.getNombre());
             encontrado.setApellido(t.getApellido());
-            encontrado.setCedula(t.getCedula());
+            encontrado.setCedula(cedula);
             encontrado.setEdad(t.getEdad());
             encontrado.setAniosExperiencia(t.getAniosExperiencia());
             encontrado.setProfesion(t.getProfesion());
@@ -116,14 +116,17 @@ public class C_Trabajador {
             M_Trabajador[] p = getTrabajadores();
             if (p != null) {
                 for (M_Trabajador per : p) {
+                    // solo carga a los trabajadores que no son ni estilistas, ni veterinarios
+                    if( !(per instanceof M_Estilista) && !(per instanceof  M_Veterinario) ){
                     Object[] cli = new Object[6];
-                    cli[0] = per.getCedula();
+                    cli[0] = per.subString(1);// getCedula();
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
                     cli[4] = per.getRIF();
                     cli[5] = per.getProfesion();
                     dtm.addRow(cli);
+                    }
                 }
             }
             return dtm;
@@ -135,7 +138,7 @@ public class C_Trabajador {
     
     public M_Trabajador getPersona(String cedula){
         try{
-            M_Trabajador trabajador = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
+            M_Trabajador trabajador = new M_Trabajador(null, null, "V"+cedula, null, 0, null, null, 0, null, 0);
             ObjectSet resultado = Conexion.getInstancia().buscar(trabajador);
             if (resultado.isEmpty())
                 return null;

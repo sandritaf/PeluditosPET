@@ -19,6 +19,7 @@ public class V_Personal extends javax.swing.JPanel {
         txtPK.setVisible(false);
         controlador = new C_Trabajador();
         reiniciarValores();
+        limpiarCajas();
         tablaPersonal.setModel(controlador.cargarTabla());
     }
 
@@ -117,6 +118,11 @@ public class V_Personal extends javax.swing.JPanel {
         Limpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Limpiar.setVerifyInputWhenFocusTarget(false);
         Limpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Limpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LimpiarMouseClicked(evt);
+            }
+        });
 
         VerLista.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         VerLista.setForeground(new java.awt.Color(255, 255, 255));
@@ -364,15 +370,21 @@ public class V_Personal extends javax.swing.JPanel {
             nivelI = getText(txtNivelI);
             edad = Integer.parseInt(getText(txtEdad));
             
-            
-            modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-            precioTrabajo = modelo.precioSegunAnios(aniosE);
-            modelo.setPrecioTrabajo(precioTrabajo);
-            controlador.guardarTrabajador(modelo);
-            
-            reiniciarValores();
-            limpiarCajas();
-            tablaPersonal.setModel(this.controlador.cargarTabla());
+            if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
+
+                modelo = new M_Trabajador(nombre, apellido,"V"+cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                precioTrabajo = modelo.precioSegunAnios(aniosE);
+                modelo.setPrecioTrabajo(precioTrabajo);
+
+                controlador.guardarTrabajador(modelo);
+
+                reiniciarValores();
+                limpiarCajas();
+                tablaPersonal.setModel(this.controlador.cargarTabla());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
+            }
         }        
         
         
@@ -397,17 +409,22 @@ public class V_Personal extends javax.swing.JPanel {
             edad = Integer.parseInt(getText(txtEdad));
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             
-            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-            precioTrabajo = modelo.precioSegunAnios(aniosE);
-            modelo.setPrecioTrabajo(precioTrabajo);
-            
-            controlador.modificarTrabajador(cedula,modelo);
-            
-            reiniciarValores();
-            limpiarCajas();
-            tablaPersonal.setModel(this.controlador.cargarTabla());
+            if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
+
+                modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                precioTrabajo = modelo.precioSegunAnios(aniosE);
+                modelo.setPrecioTrabajo(precioTrabajo);
+
+                controlador.modificarTrabajador(auxCI,"V"+cedula,modelo);
+
+                reiniciarValores();
+                limpiarCajas();
+                tablaPersonal.setModel(this.controlador.cargarTabla());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
+            }
         }
-        
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
@@ -417,16 +434,7 @@ public class V_Personal extends javax.swing.JPanel {
         }
         else{
             
-//            cedula = getText(txtCedula);
-//            
-//            char valor = cedula.charAt(0);
-//            char v = 'V';            
-//            
-//            if(!(valor == v) ){
-//                cedula = "V"+cedula;
-//            }
-            
-            controlador.eliminarTrabajador(cedula);
+            controlador.eliminarTrabajador(auxCI);
             
             reiniciarValores();
             limpiarCajas();
@@ -436,19 +444,27 @@ public class V_Personal extends javax.swing.JPanel {
     }//GEN-LAST:event_EliminarMouseClicked
 
     private void tablaPersonalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPersonalMousePressed
+        Guardar.setEnabled(false);
+        Modificar.setEnabled(true);
+        Eliminar.setEnabled(true);
+        
         modelo = controlador.getPersona(tablaPersonal.getValueAt(tablaPersonal.getSelectedRow(), 0).toString());
         
-        auxCI = modelo.getCedula();
+        auxCI = modelo.getCedula(); System.out.println(auxCI);
         txtNombre.setText(modelo.getNombre());
         txtApellido.setText(modelo.getApellido());
         txtTelefono.setText(modelo.getTelefono());
-        txtCedula.setText(modelo.getCedula());
+        txtCedula.setText(modelo.subString(1));
         txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
         txtEdad.setText(Integer.toString(modelo.getEdad()));
         txtRIF.setText(modelo.getRIF());
         txtProfesion.setText(modelo.getProfesion());
         txtNivelI.setText(modelo.getNivelInstruccion());
     }//GEN-LAST:event_tablaPersonalMousePressed
+
+    private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
+        limpiarCajas();
+    }//GEN-LAST:event_LimpiarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -486,6 +502,10 @@ public class V_Personal extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCajas(){
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+        
         txtPK.setText(null);
         txtAniosE.setText(null);
         txtCedula.setText(null);
@@ -550,6 +570,7 @@ public class V_Personal extends javax.swing.JPanel {
         edad = 0;
         telefono = null;
         rif = null;
+        auxCI = null;
     }
     
     //Devuelve el valor de un txtField
