@@ -436,9 +436,9 @@ public class C_Mascota {
         }
     }
 
-    public M_Mascota getMascota(String nombre, M_Propietario dueno){
+    public M_Mascota getMascota(String id, String dueno){
         try{
-            M_Mascota mascota = new M_Mascota(0, null, nombre, null, null, 0, null, dueno);//(null, null, null, null, rif, null); 
+            M_Mascota mascota = new M_Mascota(Integer.parseInt(id), dueno, null, null, null, 0, null, null);//(null, null, null, null, rif, null); 
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             if (resultado.isEmpty())
                 return null;

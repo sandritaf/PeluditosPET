@@ -1,6 +1,5 @@
 package Modelo;
 
-import java.util.Date;
 
 public class M_Cita {
 
@@ -12,6 +11,7 @@ public class M_Cita {
     private String tratamiento;
     private  M_Mascota mascota;
     private boolean cancelado;
+    private static int cantidad = 0;
 
     public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento) {
         this.id = id;
@@ -81,6 +81,14 @@ public class M_Cita {
 
     public void setTratamiento(String tratamiento) {
         this.tratamiento = tratamiento;
+    }
+ 
+    public int getCantidad(){
+        return cantidad;
+    }
+    
+    public void aumentarCantidad(){
+        cantidad++;
     }
 
     public int getId() {

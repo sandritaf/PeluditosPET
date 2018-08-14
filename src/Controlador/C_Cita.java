@@ -19,6 +19,8 @@ public class C_Cita {
     
     public void guardarCita(M_Cita cita){
           try{
+              cita.aumentarCantidad();
+              cita.setId(cita.getCantidad());
               Conexion.getInstancia().guardar(cita);
               JOptionPane.showMessageDialog(null, "Se ha almacenado la cita");
           }catch(Exception e){

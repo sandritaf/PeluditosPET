@@ -395,50 +395,36 @@ public class V_Cita extends javax.swing.JPanel {
         }
         else{
             
-            servicio = getComboSelected(cmbServicio); //JOptionPane.showMessageDialog(null, "Servicio: "+servicio);
-            dueño = getIDComboSelected(cmbDueño);//JOptionPane.showMessageDialog(null, "Dueño: "+dueño);
-            //mascota = getID(cmbMascota); //JOptionPane.showMessageDialog(null, "Mascota: "+mascota);
-            mascota = getComboSelected(cmbMascota); //JOptionPane.showMessageDialog(null, "Mascota: "+mascota);
-            trabajador = getIDComboSelected(cmbTrabajador); //JOptionPane.showMessageDialog(null, "Trabajador: "+trabajador);
-            fecha = getText(txtFecha); //JOptionPane.showMessageDialog(null, "Fecha: "+fecha);
-            diagnosticoFinal = txtDiagnosticoFinal.getText(); //JOptionPane.showMessageDialog(null, "D. final: "+diagnosticoFinal);
-            tratamiento = txtTratamiento.getText(); //JOptionPane.showMessageDialog(null, "Trat: "+tratamiento);
+            servicio = getComboSelected(cmbServicio);
+            dueño = getID(cmbDueño);
+            mascota = getID(cmbMascota); 
+            trabajador = getIDComboSelected(cmbTrabajador); 
+            fecha = getText(txtFecha); 
+            diagnosticoFinal = txtDiagnosticoFinal.getText(); 
+            tratamiento = txtTratamiento.getText(); 
             
             mTrabajador = cTrabajador.getPersona(trabajador);
-            //JOptionPane.showMessageDialog(null, mTrabajador.nombreApellido());
-            if(tipoDueño(cmbDueño).equals("V")){
-                mNatural = cNatural.getPersona("V"+dueño);
-                JOptionPane.showMessageDialog(null, mNatural.getCedula() + " " + mNatural.nombreApellido());
-                //mMascota = cMascota.getMascota(Integer.parseInt(mascota),mNatural);
-                mMascota = cMascota.getMascota(mascota, mNatural); //getMascota(mascota,mNatural);
-                if(mMascota != null)
-                    JOptionPane.showMessageDialog(null, mMascota.printNombreID());
-                else
-                    JOptionPane.showMessageDialog(null, "chama soy null");
-                
-                //JOptionPane.showMessageDialog(null, mNatural.nombreApellido() + mMascota.printNombreID());
+            mServicio = cServicio.getServicio(servicio); 
+            
+            if(tipoDueño(cmbDueño).compareTo("V") == 0){
+                mNatural = cNatural.getPersona(dueño);
+                mMascota = cMascota.getMascota(mascota,mNatural.getCedula());                 
             }
             else if(tipoDueño(cmbDueño).equals("J")){
-                mJuridico = cJuridico.getPersona("J"+dueño);
-                JOptionPane.showMessageDialog(null, mJuridico.getRIF() + " " + mJuridico.getNombre());
-                mMascota = cMascota.getMascota(mascota, mJuridico);
-//                JOptionPane.showMessageDialog(null, mJuridico.toString() + mMascota.printNombreID());
-                if(mMascota != null)
-                    JOptionPane.showMessageDialog(null, mMascota.printNombreID());
-                else
-                    JOptionPane.showMessageDialog(null, "chama soy null");
+                mJuridico = cJuridico.getPersona(dueño);
+                mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
-            mServicio = cServicio.getServicio(servicio);     
+                
             //JOptionPane.showMessageDialog(null, mServicio.toString());
 //            JOptionPane.showMessageDialog(null, controlador.getNumCitasExistentes());
             
-//            modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
-//            controlador.guardarCita(modelo);
+            modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
+            controlador.guardarCita(modelo);
            
             reiniciarValores();
             limpiarCajas();
 //            controlador.listarCitas();
-//            tablaCitas.setModel(this.controlador.cargarTabla());
+            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -459,11 +445,11 @@ public class V_Cita extends javax.swing.JPanel {
             mTrabajador = cTrabajador.getPersona(trabajador);
             if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota, mNatural);
+                mMascota = cMascota.getMascota(mascota, mNatural.getCedula());
             }
             else if(tipoDueño(cmbDueño).equals("J")){
                 mJuridico = cJuridico.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota, mJuridico);
+                mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
             mServicio = cServicio.getServicio(servicio);      
             id = Integer.parseInt(getText(txtPK));
