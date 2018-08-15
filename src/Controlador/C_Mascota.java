@@ -509,7 +509,7 @@ public class C_Mascota {
                         cli[1] = per.getTratamiento();
                         cli[2] = per.getTrabajador().nombreApellido();
                         cli[3] = per.getServicio().getNombre();
-                        cli[4] = per.getFecha();
+                        cli[4] = C_Fecha.deDateToString(per.getFecha());
                         dtm.addRow(cli);
                     }
                 }

@@ -7,6 +7,9 @@ package Vista;
 
 import Conexion.Conexion;
 import Controlador.C_Mascota;
+import Controlador.C_Cita;
+import Controlador.C_Fecha;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -17,12 +20,28 @@ import javax.swing.JOptionPane;
 public class vista extends javax.swing.JFrame {
 
     C_Mascota c;
+    C_Cita cita;
     Conexion con;
+    Date fecha;
+    C_Fecha cfecha;
     
     public vista() {
         initComponents();
         c = new C_Mascota();
+        cita = new C_Cita();
+        cfecha = new C_Fecha();
+        
         String opc = "Juridico";
+        
+        fecha = cfecha.deStringToDate(jTextField1.getText());
+        
+        String f = cfecha.deDateToString(fecha);
+        System.out.println(f);
+        
+        cita.eliminarCita(2);
+        cita.eliminarCita(3);
+        
+        cita.listarCitas();
         getIDComboSelected(jComboBox1);
     //    c.cargarDuenos(jComboBox1/*, opc*/);
     }
@@ -33,6 +52,7 @@ public class vista extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         Cargar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +65,8 @@ public class vista extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setText("2018-01-01");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,13 +78,18 @@ public class vista extends javax.swing.JFrame {
                         .addComponent(Cargar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
+                .addGap(33, 33, 33)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addComponent(Cargar)
@@ -114,6 +141,7 @@ public class vista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cargar;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     //Devuelve el string de la opcion seleccionada en un combo

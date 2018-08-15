@@ -16,7 +16,7 @@ public class V_Historial extends javax.swing.JPanel {
         controladorCita = new C_Cita();
         
         controlador.cargarDuenos(cmbDueño);
-//        controlador.cargarHistorial(tablaHistorial);
+//        tablaHistorial.setModel(controlador.cargarHistorial(tablaHistorial));
     }
 
     @SuppressWarnings("unchecked")
@@ -112,7 +112,7 @@ public class V_Historial extends javax.swing.JPanel {
                 .addComponent(Limpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(VerLista)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel8.setBackground(new java.awt.Color(153, 204, 255));
@@ -162,9 +162,17 @@ public class V_Historial extends javax.swing.JPanel {
 
             },
             new String [] {
-
+                "Diagnóstico Final", "Tratamiento", "Veterinario", "Servicio", "Fecha"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tablaHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaHistorialMousePressed(evt);
@@ -186,7 +194,7 @@ public class V_Historial extends javax.swing.JPanel {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,8 +238,6 @@ public class V_Historial extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Dueno;
-    private javax.swing.JLabel Guardar;
-    private javax.swing.JLabel Guardar1;
     private javax.swing.JLabel Historial;
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Mascota;
@@ -239,10 +245,6 @@ public class V_Historial extends javax.swing.JPanel {
     private javax.swing.JLabel VerLista;
     private javax.swing.JComboBox<String> cmbDueño;
     private javax.swing.JComboBox<String> cmbMascota;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;

@@ -32,9 +32,9 @@ public class V_Cita extends javax.swing.JPanel {
     C_Trabajador cTrabajador; M_Trabajador mTrabajador;
     C_Mascota cMascota; M_Mascota mMascota;
     C_Fecha cFecha; 
-    String servicio, fecha, dueño, trabajador, mascota, diagnosticoFinal, tratamiento;
+    String servicio, dueño, trabajador, mascota, diagnosticoFinal, tratamiento;
     int id;
-//    Date fecha;
+    Date fecha;
     
     public V_Cita() {
         initComponents();
@@ -391,7 +391,7 @@ public class V_Cita extends javax.swing.JPanel {
             dueño = getID(cmbDueño);
             mascota = getID(cmbMascota); 
             trabajador = getID(cmbTrabajador); 
-            fecha = getText(txtFecha);//C_Fecha.deStringToDate(txtFecha.getText()); 
+            fecha = C_Fecha.deStringToDate(txtFecha.getText()); 
             diagnosticoFinal = txtDiagnosticoFinal.getText(); 
             tratamiento = txtTratamiento.getText();
             mTrabajador = cTrabajador.getPersona(trabajador);
@@ -428,7 +428,7 @@ public class V_Cita extends javax.swing.JPanel {
            
             reiniciarValores();
             limpiarCajas();
-//            tablaCitas.setModel(this.controlador.cargarTabla());
+            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -442,7 +442,7 @@ public class V_Cita extends javax.swing.JPanel {
             dueño = getIDComboSelected(cmbDueño);
             mascota = getID(cmbMascota);
             trabajador = getIDComboSelected(cmbTrabajador);
-            fecha = getText(txtFecha);//C_Fecha.deStringToDate(getText(txtFecha));
+            fecha = C_Fecha.deStringToDate(getText(txtFecha));
             diagnosticoFinal = txtDiagnosticoFinal.getText();
             tratamiento = txtTratamiento.getText();
             
@@ -471,6 +471,7 @@ public class V_Cita extends javax.swing.JPanel {
             reiniciarValores();
             limpiarCajas();
 //            tablaMascotas.setModel(this.controlador.cargarTabla());
+            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_ModificarMouseClicked
 
@@ -511,6 +512,7 @@ public class V_Cita extends javax.swing.JPanel {
         cmbDueño.setSelectedItem(modelo.getMascota().getDueno().toString());
         cmbMascota.setSelectedItem(modelo.getMascota().toString());
         cmbTrabajador.setSelectedItem(modelo.getTrabajador().toString());
+        txtFecha.setText(C_Fecha.deDateToString(modelo.getFecha()));
     }//GEN-LAST:event_tablaCitasMousePressed
 
     private void cmbMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMascotaActionPerformed

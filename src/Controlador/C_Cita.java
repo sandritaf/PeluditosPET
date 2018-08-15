@@ -177,7 +177,7 @@ public class C_Cita {
                     cli[2] = per.getMascota().getDueno().nombreCompleto();
                     cli[3] = per.getTrabajador().nombreApellido();
                     cli[4] = per.getServicio().toString();
-                    cli[5] = per.getFecha();
+                    cli[5] = C_Fecha.deDateToString(per.getFecha());//getFecha().toString());
                     dtm.addRow(cli);
                 }
             }
@@ -227,7 +227,4 @@ public class C_Cita {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
         }
     }
-
-    
-    
 }

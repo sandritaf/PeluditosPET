@@ -94,19 +94,19 @@ public class C_Fecha {
         }
     }
     
-    public String fechaToString(String fecha){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-        String dateInString = fecha;
-        String cadena = "";
-
-        try {
-            Date date = formatter.parse(dateInString);
-            cadena = (formatter.format(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return cadena;
-    }
+//    public String fechaToString(String fecha){
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+//        String dateInString = fecha;
+//        String cadena = "";
+//
+//        try {
+//            Date date = formatter.parse(dateInString);
+//            cadena = (formatter.format(date));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        return cadena;
+//    }
     
     public boolean fechasCorrectas(String finicio, String ffin){
         Date fechainicio = deStringToDate(finicio);
@@ -130,4 +130,9 @@ public class C_Fecha {
         return false;
     }
     
+    public static synchronized String deDateToString(Date fecha){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaComoCadena = sdf.format(fecha);
+        return fechaComoCadena;
+    }
 }
