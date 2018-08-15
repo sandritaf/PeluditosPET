@@ -1,5 +1,6 @@
 package Modelo;
 
+import Controlador.C_Fecha;
 import java.util.Date;
 
 public class M_Cita {
@@ -143,7 +144,7 @@ public class M_Cita {
     
     public String toString(){
         try{
-            return id + " - " + mascota.getNombre() + " - " + fecha + " - " + servicio.getNombre();
+            return id + " - " + mascota.getNombre() + " - " + servicio.getNombre();
         } catch(Exception e){
             System.out.println("Error en M_Cita: toString: "+e);
         }

@@ -159,11 +159,16 @@ public class C_Trabajador {
             M_Trabajador p = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet rs = Conexion.getInstancia().buscar(p);
 
-            // si hay propietarios naturales
+            // si hay trabajadores
             if(rs.size() >0){
                 while(rs.hasNext() ){
-                    aux = ((M_Trabajador)rs.next()).toString();
-                    aModel.addElement(aux);
+                    
+                    if( !(rs instanceof M_Estilista) && !(rs instanceof M_Veterinario) ){
+                    
+                        aux = ((M_Trabajador)rs.next()).toString();
+                        aModel.addElement(aux);
+                    
+                    }
                 }
             }
         }catch(Exception e){

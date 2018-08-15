@@ -19,7 +19,9 @@ public class V_Servicio extends javax.swing.JPanel {
         controlador = new C_Servicio();
         reiniciarValores();
         limpiarCajas();
-        tablaServicios.setModel(controlador.cargarTabla());
+        
+        if(controlador.getServicios() != null)
+            tablaServicios.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -291,7 +293,7 @@ public class V_Servicio extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
-            
+    
             nombre = getText(txtNombre);
             observaciones = txtObservaciones.getText();
             descripcion = txtDescripcion.getText();

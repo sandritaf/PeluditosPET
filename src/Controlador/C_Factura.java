@@ -46,7 +46,23 @@ public class C_Factura {
             Conexion.getInstancia().eliminar(encontrado);
             JOptionPane.showMessageDialog(null, "Se han eliminado correctamente los datos de la factura");
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Factura->eliminarFactura "+e);
+        }
+    }
+    
+    public void eliminarTodas(){
+        try{
+            M_Factura factura = new M_Factura(0, null, null, 0, 0, 0, null, null);
+            ObjectSet result = Conexion.getInstancia().buscar(factura);
+            M_Factura encontrado = (M_Factura) result.next();
+            
+            while(result.hasNext()){
+                Conexion.getInstancia().eliminar(encontrado);
+            }
+            
+            JOptionPane.showMessageDialog(null, "Se han eliminado correctamente todas las facturas");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Factura->eliminarTodas()"+ e);
         }
     }
     
@@ -67,7 +83,7 @@ public class C_Factura {
             JOptionPane.showMessageDialog(null, "Se ha modificado correctamente la factura" );
 
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null, "Error en C_Factura->modificarFactura()"+ex);
         }
     }
     
@@ -90,9 +106,10 @@ public class C_Factura {
                 System.out.println(resultado.next());
             }
        }catch(Exception e){
-           JOptionPane.showMessageDialog(null, e);
+           JOptionPane.showMessageDialog(null, "Error en C_Factura->listarFacturas() "+e);
        }
     }
+    
     
     public M_Factura[] getFacturas(){
         try {
@@ -116,22 +133,23 @@ public class C_Factura {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"Fecha","Cliente","Modo de Pago","Total"};
+            String titulos[] = {"ID","Fecha","Cliente","Modo de Pago","Total"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Factura[] p = getFacturas();
             if (p != null) {
                 for (M_Factura per : p) {
-                    Object[] cli = new Object[4];
-                    cli[0] = per.getFecha();
-                    cli[1] = per.getNombreCliente();
-                    cli[2] = per.getModoPago();
-                    cli[3] = per.getTotal();
+                    Object[] cli = new Object[5];
+                    cli[0] = per.getId();
+                    cli[1] = C_Fecha.deDateToString(per.getFecha());
+                    cli[2] = per.getNombreCliente();
+                    cli[3] = per.getModoPago();
+                    cli[4] = per.getTotal();
                     dtm.addRow(cli);
                 }
             }
             return dtm;
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error en C_Factura->cargarTabla() "+e);
             return null;
         }
     }
@@ -144,7 +162,7 @@ public class C_Factura {
                 return resultado.size();
             return 0;
        }catch(Exception e){
-           JOptionPane.showMessageDialog(null, e);
+           JOptionPane.showMessageDialog(null, "Error en C_Factura->getNumFacturasExistentes "+ e);
            return 0;
         } 
     }

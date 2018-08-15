@@ -16,7 +16,10 @@ public class V_Juridico extends javax.swing.JPanel {
     public V_Juridico() {
         initComponents();
         controlador = new C_Juridico();
-        tablaJuridicos.setModel(this.controlador.cargarTabla());
+        
+        if(controlador.getJuridicos() != null)
+            tablaJuridicos.setModel(this.controlador.cargarTabla());
+        
         reiniciarValores();
     }
     
@@ -323,6 +326,8 @@ public class V_Juridico extends javax.swing.JPanel {
         }
         else{            
             
+            modelo = new M_Juridico();
+            
             rif = getText(txtRIF);
             telefono = getText(txtTelefono);
             nombreGerente = getText(txtNombreGerente);
@@ -355,6 +360,8 @@ public class V_Juridico extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
+            
+            modelo = new M_Juridico();
             
             rif = getText(txtRIF);
             telefono = getText(txtTelefono);

@@ -18,7 +18,10 @@ public class V_Especie extends javax.swing.JPanel {
         controlador = new C_Especie();
         reiniciarValores();
         limpiarCajas();
-        tablaEspecies.setModel(controlador.cargarTabla());
+        
+        if(controlador.getEspecies() != null)
+            tablaEspecies.setModel(controlador.cargarTabla());
+        
         controlador.cargarEspecies(cmbEspecieExistente);
         //setSize(m.getSize());
     }
@@ -243,9 +246,17 @@ public class V_Especie extends javax.swing.JPanel {
 
             },
             new String [] {
-
+                "Especie", "Razas Existentes"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tablaEspecies.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaEspeciesMousePressed(evt);

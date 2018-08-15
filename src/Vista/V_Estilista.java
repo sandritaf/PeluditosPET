@@ -20,7 +20,10 @@ public class V_Estilista extends javax.swing.JPanel {
         initComponents();
         txtPK.setVisible(false);
         controlador = new C_Estilista();
-        tablaEstilistas.setModel(this.controlador.cargarTabla());
+        
+        if(controlador.getEstilistas() !=null)
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
+        
         reiniciarValores();
         limpiarCajas();
     }
@@ -448,7 +451,6 @@ public class V_Estilista extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
-            modelo = null;
             modelo = new M_Estilista();
             
             nombre = getText(txtNombre);

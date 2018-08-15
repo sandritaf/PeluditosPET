@@ -7,17 +7,21 @@ public class M_Factura {
     
     private int id;
     private M_Cita cita;
-    private String fecha;
+    private Date fecha;
     private float iva;
     private float subtotal;
     private float total;
     private String modoPago;
     private String nombreCliente;
     private static int cantidad = 0;
+
+    public M_Factura() {
+    }
     
-    public M_Factura(int id, M_Cita cita, String fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
+    public M_Factura(int id, M_Cita cita, Date fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
         this.id = id;
         this.cita = cita;
+//        cita.setCancelado(true);
         this.fecha = fecha;
         this.iva = iva;
         this.subtotal = subtotal;
@@ -26,11 +30,11 @@ public class M_Factura {
         this.nombreCliente = nombreCliente;
     }
     
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -110,9 +114,10 @@ public class M_Factura {
         return fecha.toString();
     }
     
-    public void actualizar(int id, M_Cita cita, String fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
+    public void actualizar(int id, M_Cita cita, Date fecha, float iva, float subtotal, float total, String modoPago, String nombreCliente) {
         this.id = id;
         this.cita = cita;
+//        cita.setCancelado(true);
         this.fecha = fecha;
         this.iva = iva;
         this.subtotal = subtotal;
@@ -128,9 +133,9 @@ public class M_Factura {
         float t_iva = (float) (t * 0.12);
         float s_iva = (float) (s * 0.12);
         
-        float subtotal = t + s;
-        float iva = t_iva + s_iva;
-        float total = subtotal + iva;
+        subtotal = t + s;
+        iva = t_iva + s_iva;
+        total = subtotal + iva;
         
         System.out.println("Subtotal: "+subtotal);
         System.out.println("IVA: "+iva);

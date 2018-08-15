@@ -54,7 +54,8 @@ public class V_Cita extends javax.swing.JPanel {
         reiniciarValores();
         limpiarCajas();
         
-        tablaCitas.setModel(controlador.cargarTabla());
+        if(controlador.getCitas() != null)
+            tablaCitas.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")

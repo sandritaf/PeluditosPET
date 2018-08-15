@@ -20,7 +20,9 @@ public class V_Personal extends javax.swing.JPanel {
         controlador = new C_Trabajador();
         reiniciarValores();
         limpiarCajas();
-        tablaPersonal.setModel(controlador.cargarTabla());
+        
+        if(controlador.getTrabajadores() != null)
+            tablaPersonal.setModel(controlador.cargarTabla());
     }
 
     @SuppressWarnings("unchecked")
@@ -353,6 +355,8 @@ public class V_Personal extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
+    
+            modelo = new M_Trabajador();
             
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
@@ -391,6 +395,8 @@ public class V_Personal extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
+            
+            modelo = new M_Trabajador();
             
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);

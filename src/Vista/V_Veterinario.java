@@ -17,7 +17,10 @@ public class V_Veterinario extends javax.swing.JPanel {
     public V_Veterinario() {
         initComponents();
         controlador = new C_Veterinario();
-        tablaVeterinarios.setModel(this.controlador.cargarTabla());
+        
+        if(controlador.getVeterinarios() != null)
+            tablaVeterinarios.setModel(this.controlador.cargarTabla());
+        
         limpiarCajas();
         reiniciarValores();
     }
@@ -379,6 +382,8 @@ public class V_Veterinario extends javax.swing.JPanel {
         if(cajasVacias()){
                 JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }else{
+    
+            modelo = new M_Veterinario();
             
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
@@ -417,6 +422,8 @@ public class V_Veterinario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
         else{
+            
+            modelo = new M_Veterinario();
             
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);

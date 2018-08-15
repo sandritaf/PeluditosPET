@@ -3,29 +3,33 @@ package Vista;
 
 import Controlador.C_Cita;
 import Controlador.C_Factura;
+import Controlador.C_Fecha;
 import Controlador.C_Juridico;
 import Controlador.C_Mascota;
 import Controlador.C_Natural;
 import Controlador.C_Trabajador;
 import Modelo.M_Cita;
 import Modelo.M_Factura;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class V_Factura extends javax.swing.JPanel {
 
-    M_Factura modelo;
+    M_Factura modelo, modeloAux;
     C_Factura controlador;
     C_Mascota cMascota;
     C_Juridico cJuridico;
     C_Natural cNatural;
     C_Trabajador cTrabajador;
     C_Cita cCita;
+    C_Fecha cFecha;
     M_Cita mCita;
-    String cita, cliente, modoPago, fecha, trabajador;
+    String cita, cliente, modoPago, trabajador;
     float iva, subtotal, total;
     int id;
+    Date fecha, fechaCita;
     
     public V_Factura() {
         initComponents();
@@ -35,15 +39,21 @@ public class V_Factura extends javax.swing.JPanel {
         cTrabajador = new C_Trabajador();
         cMascota = new C_Mascota();
         cCita = new C_Cita();
-        
-        cTrabajador.cargarVeterinariosEstilistas(cmbTrabajador);
+        cFecha = new C_Fecha();
+  
+        cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenosSinID(cmbDueño);
         cCita.cargarCitas(cmbCitaSinCancelar);
         
-        tablaFacturas.setModel(controlador.cargarTabla());
+        if(controlador.getFacturas() != null){
+            tablaFacturas.setModel(controlador.cargarTabla());
+        }
+        
         reiniciarValores();
-//        txtPK.setVisible(false);
+        txtPK.setVisible(false);
         limpiarCajas();
+        cargarValores();
+    //    controlador.eliminarFactura(1);
     }
 
     @SuppressWarnings("unchecked")
@@ -68,7 +78,6 @@ public class V_Factura extends javax.swing.JPanel {
         txtSubtotal = new javax.swing.JTextField();
         Subtotal = new javax.swing.JLabel();
         Total = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
         IVA = new javax.swing.JLabel();
         txtIVA = new javax.swing.JTextField();
         cmbModoPago = new javax.swing.JComboBox<>();
@@ -79,9 +88,12 @@ public class V_Factura extends javax.swing.JPanel {
         cmbCitaSinCancelar = new javax.swing.JComboBox<>();
         Trabajador = new javax.swing.JLabel();
         Fecha = new javax.swing.JLabel();
-        txtPK = new javax.swing.JTextField();
         txtFecha = new javax.swing.JTextField();
+        FechaCita = new javax.swing.JLabel();
+        txtFechaCita = new javax.swing.JTextField();
+        txtPK = new javax.swing.JTextField();
         cmbTrabajador = new javax.swing.JComboBox<>();
+        txtTotal = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
         jPanel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -220,6 +232,7 @@ public class V_Factura extends javax.swing.JPanel {
         ModoPago.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         ModoPago.setText("Modo de Pago");
 
+        txtSubtotal.setEditable(false);
         txtSubtotal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         Subtotal.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -228,13 +241,13 @@ public class V_Factura extends javax.swing.JPanel {
         Total.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Total.setText("Total");
 
-        txtTotal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-
         IVA.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         IVA.setText("IVA");
 
+        txtIVA.setEditable(false);
         txtIVA.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
+        cmbModoPago.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbModoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta de Crédito", "Tarjeta de Débito", "Cheque", "Transferencia" }));
 
         Representante.setBackground(new java.awt.Color(153, 204, 255));
@@ -258,6 +271,11 @@ public class V_Factura extends javax.swing.JPanel {
         });
 
         cmbDueño.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbDueño.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbDueñoItemStateChanged(evt);
+            }
+        });
         cmbDueño.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDueñoActionPerformed(evt);
@@ -268,6 +286,11 @@ public class V_Factura extends javax.swing.JPanel {
         Cita.setText("Cita");
 
         cmbCitaSinCancelar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbCitaSinCancelar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbCitaSinCancelarItemStateChanged(evt);
+            }
+        });
 
         Trabajador.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Trabajador.setText("Trabajador");
@@ -284,60 +307,98 @@ public class V_Factura extends javax.swing.JPanel {
             }
         });
 
+        FechaCita.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        FechaCita.setText("Fecha de la Cita");
+
+        txtFechaCita.setEditable(false);
+        txtFechaCita.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        txtFechaCita.setText("yyyy-mm-dd");
+        txtFechaCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaCitaActionPerformed(evt);
+            }
+        });
+
+        cmbTrabajador.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbTrabajador.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTrabajadorItemStateChanged(evt);
+            }
+        });
+        cmbTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTrabajadorActionPerformed(evt);
+            }
+        });
+
+        txtTotal.setEditable(false);
+        txtTotal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtTotal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Total)
-                    .addComponent(Subtotal)
-                    .addComponent(ModoPago))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbModoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 21, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(IVA)
-                    .addComponent(Fecha))
-                .addGap(18, 22, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(Cita)
-                .addGap(96, 96, 96)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Representante)
-                            .addComponent(Dueño))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbDueño, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRepresentante)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cmbTrabajador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbCitaSinCancelar, 0, 240, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(101, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Trabajador))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(Trabajador))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(NombreCliente)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(NombreCliente)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Total)
+                                    .addComponent(Subtotal)
+                                    .addComponent(ModoPago))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbModoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FechaCita)
+                                    .addComponent(IVA)
+                                    .addComponent(Fecha))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIVA))
+                                    .addComponent(txtFechaCita, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(Cita)
+                                .addGap(96, 96, 96)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Representante)
+                                            .addComponent(Dueño))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtRepresentante)
+                                            .addComponent(cmbDueño, 0, 240, Short.MAX_VALUE)))
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(cmbCitaSinCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +406,8 @@ public class V_Factura extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cita)
-                    .addComponent(cmbCitaSinCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCitaSinCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Trabajador)
@@ -363,8 +425,8 @@ public class V_Factura extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbModoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ModoPago)
-                    .addComponent(Fecha)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FechaCita))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,8 +437,9 @@ public class V_Factura extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Total)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Fecha)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -386,15 +449,11 @@ public class V_Factura extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane2)
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(38, Short.MAX_VALUE))))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,35 +485,47 @@ public class V_Factura extends javax.swing.JPanel {
         }
         else{
         
-            fecha = getText(txtFecha);
-            modoPago = getComboSelected(cmbModoPago);
-//            subtotal =  Float.parseFloat(getText(txtSubtotal));
-//            iva = Float.parseFloat(getText(txtIVA));
-//            total = Float.parseFloat(getText(txtTotal));
-            cita = getIDComboSelected(cmbCitaSinCancelar);
-            
-            mCita = cCita.getCita(Integer.parseInt(cita));
+            fecha = C_Fecha.deStringToDate(getText(txtFecha));  System.out.println("fecha "+fecha);
+            fechaCita = C_Fecha.deStringToDate(getText(txtFechaCita));  System.out.println("fechacita "+fechaCita);
+            modoPago = getComboSelected(cmbModoPago); System.out.println("modopago "+modoPago);
+            subtotal =  Float.parseFloat(getText(txtSubtotal)); System.out.println("subtotal "+subtotal);
+            iva = Float.parseFloat(getText(txtIVA)); System.out.println("iva "+iva);
+            total = Float.parseFloat(getText(txtTotal)); System.out.println("total "+total);
+            cita = getIDComboSelected(cmbCitaSinCancelar); System.out.println("cita "+cita);
             
             if(Representante.isSelected())
-            {
-                cliente = getText(txtRepresentante);
-            }
+                cliente = getText(txtRepresentante); 
             if(Dueño.isSelected())
-            {
                 cliente = getComboSelected(cmbDueño);
-            }
             
-            id = controlador.getNumFacturasExistentes() +1;
+            System.out.println("cliente "+cliente);
             
-            modelo = new M_Factura(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
+            if(fechaCita == null)
+                System.out.println("la fecha cita es null");
+            if(fecha == null)
+                System.out.println("la fecha es null");
+            
+            if(cFecha.fechasCorrectas(getText(txtFechaCita), getText(txtFecha))){
+                
+                mCita = cCita.getCita(Integer.parseInt(cita));
+                
+                id = controlador.getNumFacturasExistentes() +1; System.out.println("id "+id);
+//              id = 70; System.out.println("id "+id);
 
-            modelo.calcularTotal();
+                modelo = new M_Factura(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
+
+                controlador.guardarFactura(modelo);
+
+                reiniciarValores();
+                limpiarCajas();
             
-            reiniciarValores();
-            limpiarCajas();        
-            tablaFacturas.setModel(controlador.cargarTabla());
+                if(controlador.getFacturas() != null)
+                tablaFacturas.setModel(controlador.cargarTabla());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "La fecha de la factura debe ser igual o luego de la fecha de la cita. Por favor ingrese una fecha válida");
+            }
         }
-        
     }//GEN-LAST:event_GuardarMouseClicked
 
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
@@ -464,32 +535,39 @@ public class V_Factura extends javax.swing.JPanel {
         }
         else{
             
-            fecha = getText(txtFecha);
+            fecha = cFecha.deStringToDate(getText(txtFecha));
+            fechaCita = cFecha.deStringToDate(getText(txtFechaCita));
             modoPago = getComboSelected(cmbModoPago);
             subtotal =  Float.parseFloat(getText(txtSubtotal));
             iva = Float.parseFloat(getText(txtIVA));
             total = Float.parseFloat(getText(txtTotal));
             cita = getIDComboSelected(cmbCitaSinCancelar);
             
-            mCita = cCita.getCita(Integer.parseInt(cita));
+            if(cFecha.fechasCorrectas(getText(txtFechaCita), getText(txtFecha))){
             
-            if(Representante.isSelected())
-            {
-                cliente = getText(txtRepresentante);
+                mCita = cCita.getCita(Integer.parseInt(cita));
+                
+                if(mCita == null)
+                    System.out.println("la cita es null");
+                
+                if(Representante.isSelected())
+                {
+                    cliente = getText(txtRepresentante);
+                }
+                if(Dueño.isSelected())
+                {
+                    cliente = getComboSelected(cmbDueño);
+                }
+
+                id = Integer.parseInt(getText(txtPK));
+
+                modelo = null;
+                modelo.actualizar(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
+
+                reiniciarValores();
+                limpiarCajas();        
+//                tablaFacturas.setModel(controlador.cargarTabla());
             }
-            if(Dueño.isSelected())
-            {
-                cliente = getComboSelected(cmbDueño);
-            }
-            
-            id = Integer.parseInt(getText(txtPK));
-            
-            modelo = null;
-            modelo.actualizar(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
-            
-            reiniciarValores();
-            limpiarCajas();        
-            tablaFacturas.setModel(controlador.cargarTabla());
         }
 
     }//GEN-LAST:event_ModificarMouseClicked
@@ -503,7 +581,7 @@ public class V_Factura extends javax.swing.JPanel {
             
             reiniciarValores();
             limpiarCajas();
-            tablaFacturas.setModel(controlador.cargarTabla());
+//            tablaFacturas.setModel(controlador.cargarTabla());
         }
 
     }//GEN-LAST:event_EliminarMouseClicked
@@ -514,16 +592,13 @@ public class V_Factura extends javax.swing.JPanel {
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
         controlador.listarFacturas();
-        tablaFacturas.setModel(controlador.cargarTabla());
+        //controlador.eliminarTodas();
+        //tablaFacturas.setModel(controlador.cargarTabla());
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturasMousePressed
         
     }//GEN-LAST:event_tablaFacturasMousePressed
-
-    private void cmbDueñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDueñoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbDueñoActionPerformed
 
     private void RepresentanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RepresentanteMouseClicked
         cmbDueño.setEnabled(false);
@@ -539,12 +614,41 @@ public class V_Factura extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtFechaActionPerformed
 
+    private void txtFechaCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaCitaActionPerformed
+
+    private void cmbCitaSinCancelarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCitaSinCancelarItemStateChanged
+        cargarValores();
+    }//GEN-LAST:event_cmbCitaSinCancelarItemStateChanged
+
+    private void cmbDueñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDueñoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDueñoActionPerformed
+
+    private void cmbDueñoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDueñoItemStateChanged
+        //hay que cargar las citas segun dueño
+    }//GEN-LAST:event_cmbDueñoItemStateChanged
+
+    private void cmbTrabajadorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTrabajadorItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTrabajadorItemStateChanged
+
+    private void cmbTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTrabajadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTrabajadorActionPerformed
+
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Cita;
     private javax.swing.JRadioButton Dueño;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Fecha;
+    private javax.swing.JLabel FechaCita;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel IVA;
     private javax.swing.JLabel Juridico;
@@ -568,6 +672,7 @@ public class V_Factura extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaFacturas;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtFechaCita;
     private javax.swing.JTextField txtIVA;
     private javax.swing.JTextField txtPK;
     private javax.swing.JTextField txtRepresentante;
@@ -625,15 +730,18 @@ public class V_Factura extends javax.swing.JPanel {
     
     //Verifica si hay txtFields sin llenar
     public boolean cajasVacias(){
-        if(txtVacio(txtRepresentante))
-            return true;
-        if(txtVacio(txtSubtotal))
-            return true;
-        if(txtVacio(txtTotal))
-            return true;
-        if(txtVacio(txtIVA))
-            return true;
+//        if(txtVacio(txtSubtotal))
+//            return true;
+//        if(txtVacio(txtTotal))
+//            return true;
+//        if(txtVacio(txtIVA))
+//            return true;
         if(txtVacio(txtFecha))
+            return true;
+        if(Representante.isSelected())
+            if(txtVacio(txtRepresentante))
+                return true;
+        if(!Representante.isSelected() && !Dueño.isSelected())
             return true;
         return false;
     }
@@ -649,6 +757,7 @@ public class V_Factura extends javax.swing.JPanel {
         subtotal = 0;
         total = 0;
         trabajador = null;
+        modeloAux = null;
     }
     
     //Devuelve el valor de un txtField
@@ -660,6 +769,29 @@ public class V_Factura extends javax.swing.JPanel {
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = codigo.substring(0,1);
         return codigoFinal;
+    }
+    
+    public void cargarValores(){
+        
+        if(cCita.getCitas() != null){
+            
+            mCita = cCita.getCita(Integer.parseInt(getIDComboSelected(cmbCitaSinCancelar)));
+
+            txtFechaCita.setText(C_Fecha.deDateToString(mCita.getFecha()));
+
+            if(modeloAux == null)
+                modeloAux = new M_Factura();
+
+            modeloAux.setCita(mCita);
+
+            modeloAux.calcularTotal();
+
+            txtIVA.setText(Float.toString(modeloAux.getIva()));
+            txtSubtotal.setText(Float.toString(modeloAux.getSubtotal()));
+            txtTotal.setText(Float.toString(modeloAux.getTotal()));
+            //txtTrabajador.setText(modeloAux.getCita().getTrabajador().nombreApellido());
+            //cm.setText(modeloAux.getCita().getMascota().getDueno().nombreCompleto());
+        }
     }
     
 }

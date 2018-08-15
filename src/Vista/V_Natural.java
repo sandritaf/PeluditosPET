@@ -303,7 +303,10 @@ public class V_Natural extends javax.swing.JPanel {
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
-        else{            
+        else{      
+            
+            modelo = new M_Natural();
+            
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             telefono = getText(txtTelefono);
@@ -329,7 +332,10 @@ public class V_Natural extends javax.swing.JPanel {
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para realizar ésta acción");
         }
-        else{            
+        else{      
+            
+            modelo = new M_Natural();
+            
             nombre = getText(txtNombre);
             apellido = getText(txtApellido);
             telefono = getText(txtTelefono);
