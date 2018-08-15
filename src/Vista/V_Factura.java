@@ -428,9 +428,9 @@ public class V_Factura extends javax.swing.JPanel {
         
             fecha = getText(txtFecha);
             modoPago = getComboSelected(cmbModoPago);
-            subtotal =  Float.parseFloat(getText(txtSubtotal));
-            iva = Float.parseFloat(getText(txtIVA));
-            total = Float.parseFloat(getText(txtTotal));
+//            subtotal =  Float.parseFloat(getText(txtSubtotal));
+//            iva = Float.parseFloat(getText(txtIVA));
+//            total = Float.parseFloat(getText(txtTotal));
             cita = getIDComboSelected(cmbCitaSinCancelar);
             
             mCita = cCita.getCita(Integer.parseInt(cita));
@@ -447,6 +447,8 @@ public class V_Factura extends javax.swing.JPanel {
             id = controlador.getNumFacturasExistentes() +1;
             
             modelo = new M_Factura(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
+
+            modelo.calcularTotal();
             
             reiniciarValores();
             limpiarCajas();        

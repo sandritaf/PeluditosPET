@@ -11,7 +11,7 @@ public class M_Mascota {
     private M_Propietario dueno;
     private static int cantidad = 0;
     
-    public M_Mascota(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+    public M_Mascota(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno, String sexo) {
         this.codigo = codigo;
         this.id = id;
         this.nombre = nombre;
@@ -20,9 +20,10 @@ public class M_Mascota {
         this.edad = edad;
         this.observaciones = observaciones;
         this.dueno = dueno;
+        this.sexo = sexo;
     }
     
-    public M_Mascota(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones) {
+    public M_Mascota(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, String sexo) {
         this.codigo = codigo;
         this.id = id;
         this.nombre = nombre;
@@ -30,6 +31,7 @@ public class M_Mascota {
         this.raza = raza;
         this.edad = edad;
         this.observaciones = observaciones;
+        this.sexo = sexo;
     }
     
     public M_Mascota() {
@@ -127,7 +129,7 @@ public class M_Mascota {
         return codigo + " - " +nombre;
     }
     
-     public void actualizar(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno) {
+    public void actualizar(int codigo, String id, String nombre, String especie, String raza, int edad, String observaciones, M_Propietario dueno, String sexo) {
         this.codigo = codigo;
         this.id = id;
         this.nombre = nombre;
@@ -136,5 +138,6 @@ public class M_Mascota {
         this.edad = edad;
         this.observaciones = observaciones;
         this.dueno = dueno;
+        this.sexo = sexo;
     }
 }

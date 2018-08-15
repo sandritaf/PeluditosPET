@@ -8,14 +8,14 @@ public class M_Cita {
     private int id;
     private M_Trabajador trabajador;
     private M_Servicio servicio;
-    private Date fecha;
+    private String fecha;
     private String diagnosticoFinal;
     private String tratamiento;
-    private  M_Mascota mascota;
+    private M_Mascota mascota;
     private boolean cancelado;
     private static int cantidad = 0;
 
-    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento) {
+    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento) {
         this.id = id;
         this.mascota = mascota;
         this.trabajador = trabajador;
@@ -26,18 +26,18 @@ public class M_Cita {
         this.cancelado = false;
     }
     
-    // Si el servicio no es médico, entonces si usaría este constructor, ya que no aplica tratamiento
-    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal) {
-        this.id = id;
-        this.mascota = mascota;
-        this.trabajador = trabajador;
-        this.servicio = servicio;
-        this.fecha = fecha;
-        this.diagnosticoFinal = diagnosticoFinal;
-        this.cancelado = false;
-    }
+//    // Si el servicio no es médico, entonces si usaría este constructor, ya que no aplica tratamiento
+//    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal) {
+//        this.id = id;
+//        this.mascota = mascota;
+//        this.trabajador = trabajador;
+//        this.servicio = servicio;
+//        this.fecha = fecha;
+//        this.diagnosticoFinal = diagnosticoFinal;
+//        this.cancelado = false;
+//    }
 
-    public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento, M_Mascota mascota, boolean cancelado) {
+    public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento, M_Mascota mascota, boolean cancelado) {
         this.id = id;
         this.trabajador = trabajador;
         this.servicio = servicio;
@@ -48,8 +48,6 @@ public class M_Cita {
         this.cancelado = cancelado;
     }
     
-    
-
     public M_Trabajador getTrabajador() {
         return trabajador;
     }
@@ -74,11 +72,11 @@ public class M_Cita {
         this.servicio = servicio;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -133,7 +131,7 @@ public class M_Cita {
                         + "recomendado fue: "+tratamiento+"\nSe prestó el servicio: "+servicio.getNombre()+"\n");
     }
     
-    public void actualizar(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento) {
+    public void actualizar(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal, String tratamiento) {
         this.id = id;
         this.mascota = mascota;
         this.trabajador = trabajador;
@@ -152,5 +150,14 @@ public class M_Cita {
         }
         return "Hola";
     }
-               
+    
+    public String imprimirT(){
+        try{
+            return id + " - " + mascota.getNombre() + " - " + fecha + " - " + servicio.getNombre() + " - " +
+                    trabajador.nombreApellido();
+        } catch(Exception e){
+            System.out.println("Error en M_Cita: toString: "+e);
+        }
+        return "Hola";
+    }
 }

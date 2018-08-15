@@ -32,6 +32,7 @@ public class Menu extends javax.swing.JFrame {
         btnEspecie = new javax.swing.JLabel();
         btnCita = new javax.swing.JLabel();
         btnFactura = new javax.swing.JLabel();
+        btnHistorial = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,30 +183,37 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnHistorial.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnHistorial.setForeground(new java.awt.Color(255, 255, 255));
+        btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/historial48.png"))); // NOI18N
+        btnHistorial.setText("Historial");
+        btnHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHistorialMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout pLateralLayout = new javax.swing.GroupLayout(pLateral);
         pLateral.setLayout(pLateralLayout);
         pLateralLayout.setHorizontalGroup(
             pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pLateralLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pLateralLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMascota)
-                            .addComponent(btnVeterinario)
-                            .addComponent(btnPersonal)
-                            .addComponent(btnEstilista)
-                            .addComponent(btnEspecie))
-                        .addGap(18, 18, 18)
-                        .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnServicio)
-                            .addComponent(btnJuridico)
-                            .addComponent(btnNatural)
-                            .addComponent(btnCita)
-                            .addComponent(btnFactura)))
-                    .addGroup(pLateralLayout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btnSalir)))
+                    .addComponent(btnMascota)
+                    .addComponent(btnVeterinario)
+                    .addComponent(btnPersonal)
+                    .addComponent(btnEstilista)
+                    .addComponent(btnEspecie)
+                    .addComponent(btnHistorial))
+                .addGap(18, 18, 18)
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalir)
+                    .addComponent(btnServicio)
+                    .addComponent(btnJuridico)
+                    .addComponent(btnNatural)
+                    .addComponent(btnCita)
+                    .addComponent(btnFactura))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pLateralLayout.setVerticalGroup(
@@ -232,7 +240,9 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btnEstilista)
                     .addComponent(btnFactura))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(btnSalir)
+                .addGroup(pLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalir)
+                    .addComponent(btnHistorial))
                 .addContainerGap())
         );
 
@@ -388,6 +398,17 @@ public class Menu extends javax.swing.JFrame {
         PanelPrincipal.updateUI();
     }//GEN-LAST:event_btnFacturaMouseClicked
 
+    private void btnHistorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHistorialMouseClicked
+        V_Historial panel = new V_Historial();
+        panel.setVisible(true);
+        panel.setLocation(0,0);
+        panel.setSize(PanelPrincipal.getSize());
+        System.out.println("Añadido Panel: Historial");
+        PanelPrincipal.removeAll();
+        PanelPrincipal.add(panel,BorderLayout.CENTER);
+        PanelPrincipal.updateUI();
+    }//GEN-LAST:event_btnHistorialMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -431,6 +452,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel btnEspecie;
     private javax.swing.JLabel btnEstilista;
     private javax.swing.JLabel btnFactura;
+    private javax.swing.JLabel btnHistorial;
     private javax.swing.JLabel btnJuridico;
     private javax.swing.JLabel btnMascota;
     private javax.swing.JLabel btnNatural;

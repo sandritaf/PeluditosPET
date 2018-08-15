@@ -19,7 +19,7 @@ public class V_Mascota extends javax.swing.JPanel {
     M_Mascota modelo;
     C_Mascota controlador;
     C_Propietario controladorDueno;
-    String id, nombre, raza, especie, observaciones, auxID, auxNombre, auxObservaciones;
+    String id, nombre, raza, especie, observaciones, auxID, auxNombre, auxObservaciones, sexo;
     int edad, codigo;
     
     public V_Mascota() {
@@ -62,6 +62,9 @@ public class V_Mascota extends javax.swing.JPanel {
         txtObservaciones = new javax.swing.JTextArea();
         Dueno = new javax.swing.JLabel();
         cmbDueno = new javax.swing.JComboBox<>();
+        Dueno1 = new javax.swing.JLabel();
+        Femenino = new javax.swing.JRadioButton();
+        Masculino = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaMascotas = new javax.swing.JTable();
         txtPK = new javax.swing.JTextField();
@@ -215,6 +218,17 @@ public class V_Mascota extends javax.swing.JPanel {
         Dueno.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Dueno.setText("Dueño");
 
+        Dueno1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Dueno1.setText("Sexo");
+
+        Femenino.setBackground(new java.awt.Color(153, 204, 255));
+        Femenino.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Femenino.setText("F");
+
+        Masculino.setBackground(new java.awt.Color(153, 204, 255));
+        Masculino.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Masculino.setText("M");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -227,16 +241,24 @@ public class V_Mascota extends javax.swing.JPanel {
                     .addComponent(Edad)
                     .addComponent(Nombre)
                     .addComponent(Observaciones)
-                    .addComponent(Dueno))
+                    .addComponent(Dueno)
+                    .addComponent(Dueno1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(cmbRaza, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbEspecie, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cmbDueno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(cmbRaza, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbEspecie, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmbDueno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(Femenino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Masculino)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +287,12 @@ public class V_Mascota extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Dueno)
                     .addComponent(cmbDueno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Dueno1)
+                    .addComponent(Femenino)
+                    .addComponent(Masculino))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tablaMascotas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -311,20 +338,20 @@ public class V_Mascota extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(125, 125, 125)
                         .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -357,8 +384,12 @@ public class V_Mascota extends javax.swing.JPanel {
             raza = getTextCombo(cmbRaza);
             observaciones = txtObservaciones.getText();
             
+            if(Femenino.isSelected())
+                sexo = "F";
+            if(Masculino.isSelected())
+                sexo = "M";
             
-            modelo = new M_Mascota(controlador.getNumMascotasExistentes()+1,id, nombre, especie, raza, edad, observaciones);
+            modelo = new M_Mascota(controlador.getNumMascotasExistentes()+1,id, nombre, especie, raza, edad, observaciones, sexo);
             controlador.guardarMascota(modelo,obtenerDueno(cmbDueno));
             
             reiniciarValores();
@@ -383,7 +414,12 @@ public class V_Mascota extends javax.swing.JPanel {
             raza = getTextCombo(cmbRaza);
             observaciones = txtObservaciones.getText();
             
-            modelo = new M_Mascota(codigo,id, nombre, especie, raza, edad, observaciones,obtenerDueno(cmbDueno));
+            if(Femenino.isSelected())
+                sexo = "F";
+            if(Masculino.isSelected())
+                sexo = "M";
+            
+            modelo.actualizar(codigo,id, nombre, especie, raza, edad, observaciones,obtenerDueno(cmbDueno), sexo);
             
             controlador.modificarMascota(codigo,auxID,auxNombre, modelo,id,controlador.buscarDueno(auxID,auxNombre));
             
@@ -414,6 +450,18 @@ public class V_Mascota extends javax.swing.JPanel {
         auxNombre = txtNombre.getText();
         auxObservaciones = txtObservaciones.getText();
         
+        modelo = new M_Mascota();
+        modelo = controlador.getMascota(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString(), getIDComboSelected(cmbDueno));
+        
+//        if(modelo.getSexo().equals("F")){
+//            Femenino.setSelected(true);
+//            Masculino.setSelected(false);
+//        }
+//        if(modelo.getSexo().equals("M")){
+//            Masculino.setSelected(true);
+//            Femenino.setSelected(false);
+//        }
+        
         Guardar.setEnabled(false);
         Modificar.setEnabled(true);
         Eliminar.setEnabled(true);
@@ -443,12 +491,15 @@ public class V_Mascota extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Dueno;
+    private javax.swing.JLabel Dueno1;
     private javax.swing.JLabel Edad;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Especie;
+    private javax.swing.JRadioButton Femenino;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Mascota;
+    private javax.swing.JRadioButton Masculino;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel Observaciones;
@@ -533,6 +584,8 @@ public class V_Mascota extends javax.swing.JPanel {
             return true;
         if(txtObservaciones.getText().isEmpty())
             return true;
+        if(!Femenino.isSelected() && !Masculino.isSelected())
+            return true;
         return false;
     }
     
@@ -547,6 +600,7 @@ public class V_Mascota extends javax.swing.JPanel {
         auxNombre = null;
         auxObservaciones = null;
         codigo = 0;
+        sexo = null;
         Guardar.setEnabled(true);
         Modificar.setEnabled(false);
         Eliminar.setEnabled(false);

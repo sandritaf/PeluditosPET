@@ -134,30 +134,24 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnMascota" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnVeterinario" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnPersonal" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnEstilista" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnEspecie" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnServicio" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnJuridico" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnNatural" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnCita" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                              <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnMascota" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVeterinario" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnPersonal" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEstilista" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEspecie" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnHistorial" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnServicio" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnJuridico" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnNatural" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCita" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -192,7 +186,10 @@
                           <Component id="btnFactura" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="28" max="32767" attributes="0"/>
-                      <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnHistorial" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -384,6 +381,23 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFacturaMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="btnHistorial">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Recursos/historial48.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Historial"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnHistorialMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

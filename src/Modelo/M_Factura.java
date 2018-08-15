@@ -120,5 +120,21 @@ public class M_Factura {
         this.modoPago = modoPago;
         this.nombreCliente = nombreCliente;
     }
+
+    public void calcularTotal(){
+        //float total = 0;
+        float t = cita.getTrabajador().precioTrabajo;
+        float s = cita.getServicio().getPrecio();
+        float t_iva = (float) (t * 0.12);
+        float s_iva = (float) (s * 0.12);
+        
+        float subtotal = t + s;
+        float iva = t_iva + s_iva;
+        float total = subtotal + iva;
+        
+        System.out.println("Subtotal: "+subtotal);
+        System.out.println("IVA: "+iva);
+        System.out.println("Total: "+total);
+    }
     
 }

@@ -113,7 +113,8 @@ public class C_Cita {
             ObjectSet resultado = Conexion.getInstancia().buscar(c);
             System.out.println("Tengo " + resultado.size() + " citas.\n");
             while(resultado.hasNext()){
-               System.out.println(((M_Cita)resultado.next()).toString());// imprimir();
+               //System.out.println(((M_Cita)resultado.next()).toString());// imprimir();
+               System.out.println(((M_Cita)resultado.next()).imprimirT());// toString());// imprimir();
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Cita->listarCitas() "+e);
@@ -137,6 +138,27 @@ public class C_Cita {
             return c;
         } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             JOptionPane.showMessageDialog(null, "Error en C_Citas->getCitas: "+e);
+            return null;
+        }
+    }
+    
+    public M_Cita[] getCitas(String dueno, String mascota){
+        try {
+            C_Mascota cmascota = new C_Mascota();
+            M_Cita[] c = null;
+            M_Cita j = new M_Cita(0, cmascota.getMascota(mascota, dueno), null, null, null, null, null);
+            ObjectSet resultados = Conexion.getInstancia().buscar(j);
+            int i = 0;
+            if (resultados.hasNext()) {
+                c = new M_Cita[resultados.size()];
+                while (resultados.hasNext()) {
+                    c[i] = (M_Cita) resultados.next();
+                    i++;
+                }
+            }
+            return c;
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Citas->getCitas(dueno,mascota): "+e);
             return null;
         }
     }
@@ -205,5 +227,7 @@ public class C_Cita {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
         }
     }
+
+    
     
 }

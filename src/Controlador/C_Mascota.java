@@ -2,11 +2,13 @@
 package Controlador;
 
 import Conexion.Conexion;
+import Modelo.M_Cita;
 import Modelo.M_Especie;
 import Modelo.M_Juridico;
 import Modelo.M_Mascota;
 import Modelo.M_Natural;
 import Modelo.M_Propietario;
+import Modelo.M_Veterinario;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
@@ -48,7 +50,7 @@ public class C_Mascota {
       
     public void eliminarMascota(int codigo,String pk, String nombre, M_Propietario dueno){
         try{
-            M_Mascota mascota = new M_Mascota(codigo,pk, nombre, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(codigo,pk, nombre, null, null, 0, null, null);
             ObjectSet result = Conexion.getInstancia().buscar(mascota); 
             if(!result.isEmpty()){
                 
@@ -65,7 +67,7 @@ public class C_Mascota {
     
     public void modificarMascota(int codigo, String viejaID, String nombreViejo, M_Mascota m, String nuevaID, M_Propietario p){
         try{
-            M_Mascota mascota = new M_Mascota(codigo,viejaID, nombreViejo, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(codigo,viejaID, nombreViejo, null, null, 0, null, null);
             ObjectSet result = Conexion.getInstancia().buscar(mascota);
             ObjectSet result2 = Conexion.getInstancia().buscar(mascota);            
             
@@ -81,6 +83,7 @@ public class C_Mascota {
                 encontrado.setDueno(m.getDueno());
                 encontrado.setId(nuevaID);
                 encontrado.setCodigo(codigo);
+                encontrado.setSexo(m.getSexo());
                 
                 if (viejaID.compareTo(nuevaID)!=0){ //Si los id son diferentes, hubo cambio de dueño
                     agregarMascotaCliente(m.getDueno(),encontrado); //Se le agrega a un nuevo cliente
@@ -132,7 +135,7 @@ public class C_Mascota {
     
     public void modificarDuenoMascota(int codigo, String viejoID, M_Propietario m, String nuevoID){
         try{
-            M_Mascota mascota = new M_Mascota(codigo, viejoID, null, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(codigo, viejoID, null, null, null, 0, null, null);
             ObjectSet result = Conexion.getInstancia().buscar(mascota);
             M_Mascota encontrado = (M_Mascota) result.next();
 
@@ -150,7 +153,7 @@ public class C_Mascota {
     
     public int getNumMascotasExistentes(){
         try{
-            M_Mascota c = new M_Mascota(0,null, null, null, null, 0, null);            
+            M_Mascota c = new M_Mascota(0,null, null, null, null, 0, null, null);            
             ObjectSet result = Conexion.getInstancia().buscar(c);
             if (!result.isEmpty()){
                 return result.size();
@@ -164,7 +167,7 @@ public class C_Mascota {
     
     public void verMascota(int cod, String id, M_Propietario p){
         try{
-            M_Mascota mascota = new M_Mascota(cod, id, null, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(cod, id, null, null, null, 0, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             JOptionPane.showMessageDialog(null, resultado.next());
         } catch (Exception e){
@@ -174,7 +177,7 @@ public class C_Mascota {
     
     public M_Mascota verMascota(String cod, M_Propietario p){
         try{
-            M_Mascota mascota = new M_Mascota(0, cod, null, null, null, 0,null, p);
+            M_Mascota mascota = new M_Mascota(0, cod, null, null, null, 0,null, p, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             return (M_Mascota) resultado;
 //            JOptionPane.showMessageDialog(null, resultado.next());
@@ -186,7 +189,7 @@ public class C_Mascota {
     
     public M_Propietario buscarDueno(String id, String nombre){
         try{
-            M_Mascota mascota = new M_Mascota(0,id, nombre, null, null, 0, null);
+            M_Mascota mascota = new M_Mascota(0,id, nombre, null, null, 0, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
             return ((M_Mascota)resultado.next()).getDueno();
         } catch (Exception e){
@@ -197,7 +200,7 @@ public class C_Mascota {
     
     public void listarMascotas(){
         try{
-            M_Mascota m = new M_Mascota(0,null, null, null, null, 0, null);
+            M_Mascota m = new M_Mascota(0,null, null, null, null, 0, null, null);
             ObjectSet resultado = Conexion.getInstancia().buscar(m);
             System.out.println("Tengo " + resultado.size() + " mascotas");
             while(resultado.hasNext()){
@@ -468,7 +471,7 @@ public class C_Mascota {
             M_Mascota encontrado = (M_Mascota) resultado.next();
             return encontrado;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascota"+ e);
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascota(id,dueno) "+ e);
             return null;  
         }      
     }
@@ -482,7 +485,7 @@ public class C_Mascota {
             if (x != null) {
                 for (M_Mascota per : x) {
                     //aux = per.printNombreID();// toString();
-                    aux = per.getNombre();
+                    aux = per.printNombreID();// getNombre();
                     aModel.addElement(aux);
                 }
             }
@@ -490,5 +493,31 @@ public class C_Mascota {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenoConMascota: "+e);
         }
     }
-       
+
+    public DefaultTableModel cargarHistorial(String dueno, String mascota){
+        try{
+            String titulos[] = {"Diagnóstico Final","Tratamiento", "Veterinario","Servicio","Fecha"};//, "Edad","Observaciones"};
+            DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+            C_Cita c = new C_Cita(); 
+            M_Cita[] p = c.getCitas(dueno,mascota);
+            if (p != null) {
+                for (M_Cita per : p) {
+                    Object[] cli = new Object[5];
+                    
+                    if(per.getTrabajador() instanceof M_Veterinario){                        
+                        cli[0] = per.getDiagnosticoFinal();// getCodigo();
+                        cli[1] = per.getTratamiento();
+                        cli[2] = per.getTrabajador().nombreApellido();
+                        cli[3] = per.getServicio().getNombre();
+                        cli[4] = per.getFecha();
+                        dtm.addRow(cli);
+                    }
+                }
+            }
+            return dtm;
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarTabla: " +e);
+            return null;
+        }
+    }    
 }

@@ -32,9 +32,9 @@ public class V_Cita extends javax.swing.JPanel {
     C_Trabajador cTrabajador; M_Trabajador mTrabajador;
     C_Mascota cMascota; M_Mascota mMascota;
     C_Fecha cFecha; 
-    String servicio, dueño, trabajador, mascota, diagnosticoFinal, tratamiento;
+    String servicio, fecha, dueño, trabajador, mascota, diagnosticoFinal, tratamiento;
     int id;
-    Date fecha;
+//    Date fecha;
     
     public V_Cita() {
         initComponents();
@@ -381,6 +381,7 @@ public class V_Cita extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
+        //controlador.eliminarCita(2);
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
@@ -389,15 +390,28 @@ public class V_Cita extends javax.swing.JPanel {
             servicio = getComboSelected(cmbServicio);
             dueño = getID(cmbDueño);
             mascota = getID(cmbMascota); 
-            trabajador = getIDComboSelected(cmbTrabajador); 
-            fecha = C_Fecha.deStringToDate(txtFecha.getText()); 
+            trabajador = getID(cmbTrabajador); 
+            fecha = getText(txtFecha);//C_Fecha.deStringToDate(txtFecha.getText()); 
             diagnosticoFinal = txtDiagnosticoFinal.getText(); 
-            tratamiento = txtTratamiento.getText(); 
-            
+            tratamiento = txtTratamiento.getText();
             mTrabajador = cTrabajador.getPersona(trabajador);
             mServicio = cServicio.getServicio(servicio); 
             
-            if(tipoDueño(cmbDueño).equals("J")){
+            
+            if(fecha == null){
+                JOptionPane.showMessageDialog(null, "Fecha null");
+                //break;
+            }
+            if(mTrabajador == null){
+                JOptionPane.showMessageDialog(null, "Trabajador null");
+                //break;
+            }
+            if(mServicio == null){
+                JOptionPane.showMessageDialog(null, "Servicio null");
+                //break;
+            }
+            
+            if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota,mNatural.getCedula());                 
             }
@@ -406,12 +420,15 @@ public class V_Cita extends javax.swing.JPanel {
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
             
+            if(mMascota == null)
+                JOptionPane.showMessageDialog(null, "Nulisima");
+            
             modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
             controlador.guardarCita(modelo);
            
             reiniciarValores();
             limpiarCajas();
-            tablaCitas.setModel(this.controlador.cargarTabla());
+//            tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -425,11 +442,16 @@ public class V_Cita extends javax.swing.JPanel {
             dueño = getIDComboSelected(cmbDueño);
             mascota = getID(cmbMascota);
             trabajador = getIDComboSelected(cmbTrabajador);
-            fecha = C_Fecha.deStringToDate(getText(txtFecha));
+            fecha = getText(txtFecha);//C_Fecha.deStringToDate(getText(txtFecha));
             diagnosticoFinal = txtDiagnosticoFinal.getText();
             tratamiento = txtTratamiento.getText();
             
             mTrabajador = cTrabajador.getPersona(trabajador);
+            
+            if(mTrabajador == null){
+                JOptionPane.showMessageDialog(null, "Trabajador null");
+                //break;
+            }
             if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota, mNatural.getCedula());
@@ -465,6 +487,7 @@ public class V_Cita extends javax.swing.JPanel {
             limpiarCajas();
             tablaCitas.setModel(this.controlador.cargarTabla());
         }
+
     }//GEN-LAST:event_EliminarMouseClicked
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
