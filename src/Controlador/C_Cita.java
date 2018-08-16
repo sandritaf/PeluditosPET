@@ -228,5 +228,5 @@ public class C_Cita {
         } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
         }
-    }
+    }   
 }

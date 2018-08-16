@@ -5,6 +5,8 @@ import Modelo.M_Veterinario;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -143,5 +145,33 @@ public class C_Veterinario {
             return null;  
         }      
     }
+    
+    public void cargarVeterinarios(JComboBox veterinarios){
+        try{
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux = null;
+            M_Veterinario modelo = null;
+            veterinarios.setModel(aModel);
+            M_Veterinario t = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null, 0);
+            ObjectSet rs = Conexion.getInstancia().buscar(t);
+
+            if(rs.size() >0){
+                
+                veterinarios.setEnabled(true);
+                
+                while(rs.hasNext() ){
+                    modelo = (M_Veterinario)rs.next();
+                    aux = modelo.nombreApellido();// toString();
+                    aModel.addElement(aux);
+                }
+                
+            } else veterinarios.setEnabled(false);
+
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Veterinario->CargarVeterinarios: "+e);
+        }
+    }
+    
     
 }
