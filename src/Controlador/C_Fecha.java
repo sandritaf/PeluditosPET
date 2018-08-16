@@ -119,17 +119,6 @@ public class C_Fecha {
         return false;
     }
     
-    public boolean rangoCorrectoTesis(String finicio, String ffin){
-        Date fechainicio = deStringToDate(finicio);
-        Date fechafin = deStringToDate(ffin);
-        
-        int n = diferenciasDeFechas(fechainicio, fechafin);
-        
-        if(n>=120 && n<=180)
-            return true;
-        return false;
-    }
-    
     public static synchronized String deDateToString(Date fecha){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fechaComoCadena = sdf.format(fecha);

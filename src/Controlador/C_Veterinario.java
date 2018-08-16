@@ -161,7 +161,7 @@ public class C_Veterinario {
                 
                 while(rs.hasNext() ){
                     modelo = (M_Veterinario)rs.next();
-                    aux = modelo.nombreApellido();// toString();
+                    aux = modelo.toString();// nombreApellido();// toString();
                     aModel.addElement(aux);
                 }
                 

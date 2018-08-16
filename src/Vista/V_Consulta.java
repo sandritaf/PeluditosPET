@@ -2,22 +2,34 @@
 package Vista;
 
 import Controlador.C_Cita;
+import Controlador.C_Fecha;
 import Controlador.C_Veterinario;
+import Modelo.M_Veterinario;
+import java.util.Date;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class V_Consulta extends javax.swing.JPanel {
 
     C_Cita cCita;
     C_Veterinario cVeterinario;
+    C_Fecha cFecha;
+    M_Veterinario mVeterinario;
+    Date inicio, fin;
+    String idVeterinario;
     
     public V_Consulta() {
         initComponents();
         
         cCita = new C_Cita();
         cVeterinario = new C_Veterinario();
+        cFecha = new C_Fecha();
         
         cVeterinario.cargarVeterinarios(cmbVeterinario);
         
         limpiarCajas();
+        reiniciarValores();
         
     }
 
@@ -27,7 +39,7 @@ public class V_Consulta extends javax.swing.JPanel {
 
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        Modificar = new javax.swing.JLabel();
+        Buscar = new javax.swing.JLabel();
         Historial = new javax.swing.JLabel();
         Limpiar = new javax.swing.JLabel();
         VerLista = new javax.swing.JLabel();
@@ -40,23 +52,23 @@ public class V_Consulta extends javax.swing.JPanel {
         Hasta = new javax.swing.JLabel();
         txtHasta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaHistorial = new javax.swing.JTable();
+        tablaConsultas = new javax.swing.JTable();
 
         jPanel6.setBackground(new java.awt.Color(153, 204, 255));
 
         jPanel7.setBackground(new java.awt.Color(102, 102, 102));
         jPanel7.setPreferredSize(new java.awt.Dimension(145, 498));
 
-        Modificar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Modificar.setForeground(new java.awt.Color(255, 255, 255));
-        Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscar48.png"))); // NOI18N
-        Modificar.setText("Buscar");
-        Modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Modificar.setVerifyInputWhenFocusTarget(false);
-        Modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+        Buscar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        Buscar.setForeground(new java.awt.Color(255, 255, 255));
+        Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscar48.png"))); // NOI18N
+        Buscar.setText("Buscar");
+        Buscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Buscar.setVerifyInputWhenFocusTarget(false);
+        Buscar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ModificarMouseClicked(evt);
+                BuscarMouseClicked(evt);
             }
         });
 
@@ -104,7 +116,7 @@ public class V_Consulta extends javax.swing.JPanel {
                     .addComponent(VerLista)
                     .addComponent(Limpiar)
                     .addComponent(Historial)
-                    .addComponent(Modificar))
+                    .addComponent(Buscar))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -112,7 +124,7 @@ public class V_Consulta extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(Historial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Modificar)
+                .addComponent(Buscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Limpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,29 +209,29 @@ public class V_Consulta extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tablaHistorial.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
+        tablaConsultas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Diagnóstico Final", "Tratamiento", "Servicio", "Fecha"
+                "Mascota", "Diagnóstico Final", "Tratamiento", "Servicio", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        tablaHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tablaHistorialMousePressed(evt);
+                tablaConsultasMousePressed(evt);
             }
         });
-        jScrollPane2.setViewportView(tablaHistorial);
+        jScrollPane2.setViewportView(tablaConsultas);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -256,9 +268,27 @@ public class V_Consulta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
-        //tablaHistorial.setModel(controlador.cargarHistorial(getID(cmbDueño), getID(cmbMascota)));
-    }//GEN-LAST:event_ModificarMouseClicked
+    private void BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMouseClicked
+     
+        
+        if(cajasVacias()){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");    
+        }
+        else if(!cFecha.fechasCorrectas(getText(txtDesde), getText(txtHasta))){
+            JOptionPane.showMessageDialog(null, "El rango de fechas ingresado es incorrecto. Intente de nuevo");
+        }
+        else{
+            
+            inicio = C_Fecha.deStringToDate(getText(txtDesde));
+            fin = C_Fecha.deStringToDate(getText(txtHasta));
+            mVeterinario = cVeterinario.getPersona(getID(cmbVeterinario));
+            
+            if(mVeterinario != null){
+                idVeterinario = getID(cmbVeterinario);
+                tablaConsultas.setModel(cCita.cargarCitasCanceladas(idVeterinario, inicio, fin));            
+            }
+        }
+    }//GEN-LAST:event_BuscarMouseClicked
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
 
@@ -273,9 +303,9 @@ public class V_Consulta extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cmbVeterinarioItemStateChanged
 
-    private void tablaHistorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHistorialMousePressed
+    private void tablaConsultasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaConsultasMousePressed
 
-    }//GEN-LAST:event_tablaHistorialMousePressed
+    }//GEN-LAST:event_tablaConsultasMousePressed
 
     private void txtDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDesdeActionPerformed
         // TODO add your handling code here:
@@ -287,11 +317,11 @@ public class V_Consulta extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Buscar;
     private javax.swing.JLabel Desde;
     private javax.swing.JLabel Hasta;
     private javax.swing.JLabel Historial;
     private javax.swing.JLabel Limpiar;
-    private javax.swing.JLabel Modificar;
     private javax.swing.JLabel Periodo;
     private javax.swing.JLabel VerLista;
     private javax.swing.JLabel Veterinario;
@@ -300,7 +330,7 @@ public class V_Consulta extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaHistorial;
+    private javax.swing.JTable tablaConsultas;
     private javax.swing.JTextField txtDesde;
     private javax.swing.JTextField txtHasta;
     // End of variables declaration//GEN-END:variables
@@ -310,4 +340,34 @@ public class V_Consulta extends javax.swing.JPanel {
         txtHasta.setText("yyyy-mm-dd");
     }
     
+    public boolean cajasVacias(){
+        
+        if(getText(txtDesde).equals("yyyy-mm-dd") || getText(txtDesde).isEmpty())
+            return true;
+        if(getText(txtHasta).equals("yyyy-mm-dd") || getText(txtHasta).isEmpty())
+            return true;
+//        if(cmbVeterinario.getSelectedItem().equals(null))
+        return false;
+    }
+    
+    public String getID(JComboBox combito){
+        String codigo = combito.getSelectedItem().toString(); 
+        String codigoFinal = "";
+        
+        int guion = codigo.indexOf(" - ");
+        codigoFinal = codigo.substring(0, guion);
+        
+        return codigoFinal;
+    }
+
+    //Devuelve el valor de un txtField
+    public String getText(JTextField txt){
+        return txt.getText();
+    }
+    
+    public void reiniciarValores(){
+        inicio = null;
+        fin = null;
+        idVeterinario = null;
+    }
 }

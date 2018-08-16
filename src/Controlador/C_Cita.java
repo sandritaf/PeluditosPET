@@ -3,11 +3,13 @@ package Controlador;
 import Modelo.M_Cita;
 import Conexion.Conexion;
 import Modelo.M_Mascota;
+import Modelo.M_Natural;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
@@ -247,5 +249,35 @@ public class C_Cita {
         } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);
         }
-    }   
+    }
+    
+    public DefaultTableModel cargarCitasCanceladas(String idVeterinario, Date fechai, Date fechaf){
+        try{
+            C_Fecha cFecha = new C_Fecha();
+            
+            String titulos[] = {"Mascota","Diagnóstico Final","Tratamiento","Servicio", "Fecha"};
+            DefaultTableModel dtm = new DefaultTableModel(null, titulos);
+            M_Cita[] p = getCitas();
+            
+            
+            if (p != null) {
+                for (M_Cita per : p) {
+                    Object[] cli = new Object[5];
+                    
+                    if(per.isCancelado() && per.getTrabajador().getCedula().equals(idVeterinario)){
+                        cli[0] = per.getMascota().getNombre();
+                        cli[1] = per.getDiagnosticoFinal();
+                        cli[2] = per.getTratamiento();
+                        cli[3] = per.getServicio().toString();
+                        cli[4] = C_Fecha.deDateToString(per.getFecha());
+                        dtm.addRow(cli);
+                    }
+                }
+            }
+            return dtm;
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Cita->cargarTabla: "+e);
+            return null;
+        }
+    }
 }
