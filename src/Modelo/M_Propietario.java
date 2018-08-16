@@ -49,9 +49,10 @@ public class M_Propietario {
 
     public boolean esNumero(String cadena){
         try {
-            Integer.parseInt(cadena);
+            Long.parseLong(cadena);
             return true;
-        } catch (NumberFormatException excepcion) {
+        } catch (NumberFormatException e) {
+            System.out.println("Casteando la cadena "+cadena+" a int: "+e);
             return false;
         }
     }

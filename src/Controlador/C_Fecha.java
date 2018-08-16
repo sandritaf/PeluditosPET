@@ -89,7 +89,7 @@ public class C_Fecha {
             fechaEnviar = formatoDelTexto.parse(fecha);
             return fechaEnviar;
         } catch (ParseException ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: "+ex);
             return null;
         }
     }

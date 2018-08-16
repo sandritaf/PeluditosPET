@@ -6,16 +6,15 @@ import Controlador.C_Fecha;
 import Controlador.C_Juridico;
 import Controlador.C_Mascota;
 import Controlador.C_Natural;
-import Controlador.C_Propietario;
 import Controlador.C_Servicio;
 import Controlador.C_Trabajador;
 import Modelo.M_Cita;
 import Modelo.M_Juridico;
 import Modelo.M_Mascota;
 import Modelo.M_Natural;
-import Modelo.M_Propietario;
 import Modelo.M_Trabajador;
 import Modelo.M_Servicio;
+import java.text.ParseException;
 import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -25,7 +24,6 @@ public class V_Cita extends javax.swing.JPanel {
     
     M_Cita modelo;
     C_Cita controlador;
-//    C_Propietario cPropietario; M_Propietario mPropietario;
     C_Natural cNatural; M_Natural mNatural;
     C_Juridico cJuridico; M_Juridico mJuridico;
     C_Servicio cServicio; M_Servicio mServicio;
@@ -42,19 +40,17 @@ public class V_Cita extends javax.swing.JPanel {
         cServicio = new C_Servicio();
         cTrabajador = new C_Trabajador();
         cMascota = new C_Mascota();
-//        cPropietario = new C_Propietario();
         cNatural = new C_Natural();
         cJuridico = new C_Juridico();
         cFecha = new C_Fecha();
 
-        cServicio.cargarServicios(cmbServicio);
-        cTrabajador.cargarVeterinariosEstilistas(cmbTrabajador);//  Trabajadores(cmbTrabajador);
+        cServicio.cargarServicios(cmbServicio);        
+        cTrabajador.cargarTrabajador(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         
         reiniciarValores();
-        limpiarCajas();
         
-        if(controlador.getCitas() != null)
+        if(controlador.getNumCitasExistentes() > 0)
             tablaCitas.setModel(controlador.cargarTabla());
     }
 
@@ -382,72 +378,40 @@ public class V_Cita extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseClicked
-        //controlador.eliminarCita(2);
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
-        else{
-            
-            servicio = getComboSelected(cmbServicio);
-            dueño = getID(cmbDueño);
-            mascota = getID(cmbMascota); 
-            trabajador = getID(cmbTrabajador); 
-            fecha = C_Fecha.deStringToDate(txtFecha.getText()); 
-            diagnosticoFinal = txtDiagnosticoFinal.getText(); 
-            tratamiento = txtTratamiento.getText();
-            mTrabajador = cTrabajador.getPersona(trabajador);
-            mServicio = cServicio.getServicio(servicio); 
-            
-            
-            if(fecha == null){
-                JOptionPane.showMessageDialog(null, "Fecha null");
-                //break;
-            }
-            if(mTrabajador == null){
-                JOptionPane.showMessageDialog(null, "Trabajador null");
-                //break;
-            }
-            if(mServicio == null){
-                JOptionPane.showMessageDialog(null, "Servicio null");
-                //break;
-            }
+        else{           
             
             if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota,mNatural.getCedula());                 
+                mMascota = cMascota.getMascota(mascota,mNatural.getCedula());   
+                JOptionPane.showMessageDialog(null, mMascota.toString());
             }
             else if(tipoDueño(cmbDueño).equals("J")){
                 mJuridico = cJuridico.getPersona(dueño);
+                JOptionPane.showMessageDialog(null, mMascota.toString());
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
-            
-            if(mMascota == null)
-                JOptionPane.showMessageDialog(null, "Nulisima");
-            
+
             modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
             controlador.guardarCita(modelo);
-           
+
             reiniciarValores();
             limpiarCajas();
             tablaCitas.setModel(this.controlador.cargarTabla());
-        }
+                
+        } 
     }//GEN-LAST:event_GuardarMouseClicked
 
     private void ModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarMouseClicked
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
-        else{
-
-            servicio = getComboSelected(cmbServicio);
-            dueño = getIDComboSelected(cmbDueño);
-            mascota = getID(cmbMascota);
-            trabajador = getIDComboSelected(cmbTrabajador);
-            fecha = C_Fecha.deStringToDate(getText(txtFecha));
-            diagnosticoFinal = txtDiagnosticoFinal.getText();
-            tratamiento = txtTratamiento.getText();
+        else{            
             
             mTrabajador = cTrabajador.getPersona(trabajador);
+            mServicio = cServicio.getServicio(servicio);   
             
             if(mTrabajador == null){
                 JOptionPane.showMessageDialog(null, "Trabajador null");
@@ -461,7 +425,7 @@ public class V_Cita extends javax.swing.JPanel {
                 mJuridico = cJuridico.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
-            mServicio = cServicio.getServicio(servicio);   
+            
                         
             modelo.actualizar(id, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
 
@@ -501,13 +465,12 @@ public class V_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaCitasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCitasMousePressed
-        
         Guardar.setEnabled(false);
         Modificar.setEnabled(true);
         Eliminar.setEnabled(true);
         
-        modelo = controlador.getCita(Integer.parseInt(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString()));
         id = Integer.parseInt(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
+        modelo = controlador.getCita(id);        
         
         cmbServicio.setSelectedItem(modelo.getServicio().toString());
         cmbDueño.setSelectedItem(modelo.getMascota().getDueno().toString());
@@ -568,29 +531,39 @@ public class V_Cita extends javax.swing.JPanel {
         txtDiagnosticoFinal.setText(null);
         cmbServicio.setSelectedIndex(0);
         cmbTrabajador.setSelectedIndex(0);
-        txtTratamiento.setText(null);
-        
-        Guardar.setEnabled(true);
-        Modificar.setEnabled(false);
-        Eliminar.setEnabled(false);
+        txtTratamiento.setText(null);  
+    }
+    
+    public boolean entradaUsuarioValida(){
+        try{            
+            servicio = getComboSelected(cmbServicio);
+            dueño = getID(cmbDueño);
+            mascota = getID(cmbMascota);
+            trabajador = getID(cmbTrabajador);
+            fecha = C_Fecha.deStringToDate(getText(txtFecha));
+            diagnosticoFinal = txtDiagnosticoFinal.getText();
+            tratamiento = txtTratamiento.getText();
+            
+            mTrabajador = cTrabajador.getPersona(trabajador);
+            mServicio = cServicio.getServicio(servicio); 
+
+            if (mServicio!=null && dueño!=null && mascota!=null && mTrabajador!=null 
+                    && fecha!=null && diagnosticoFinal!=null && tratamiento!=null){     
+                 
+                return true;
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: "+e);
+        }
+        return false;
     }
     
     //Devuelve el string de la opcion seleccionada en un combo
     public String getComboSelected(JComboBox combito){
         return combito.getSelectedItem().toString(); 
-    }
-
-    //Devuelve el string de la opcion seleccionada en un combo
-    public String getNombreComboSelected(JComboBox combito){
-        String codigo = combito.getSelectedItem().toString(); 
-        String codigoFinal = "";
+    }    
         
-        int guion = codigo.indexOf("- ");
-        codigoFinal = codigo.substring(0, guion);
-        
-        return codigoFinal;
-    }
-    
     //Devuelve el codigo de la opcion seleccionada en un combo
     public String getIDComboSelected(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
@@ -609,13 +582,16 @@ public class V_Cita extends javax.swing.JPanel {
     }
     
     public boolean cajasVacias(){
-        if(txtVacio(txtFecha))
-            return true;
-        if(txtDiagnosticoFinal.getText().isEmpty())
-            return true;
-        if(txtTratamiento.getText().isEmpty())
-            return true;
-        return false;
+//        if(txtVacio(txtFecha))
+//            return true;
+//        if(txtDiagnosticoFinal.getText().isEmpty())
+//            return true;
+//        if(txtTratamiento.getText().isEmpty())
+//            return true;
+//        return false;
+
+        return !entradaUsuarioValida();
+
     }
     
     public void reiniciarValores(){
@@ -627,15 +603,16 @@ public class V_Cita extends javax.swing.JPanel {
         diagnosticoFinal = null;
         tratamiento = null;
         id = 0;
+        
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
     }
     
     public String getText(JTextField txt){
         return txt.getText();
     }
     
-    public String getTextCombo(JComboBox cmb){
-        return (String) cmb.getSelectedItem();
-    }
     
     public String tipoDueño(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 

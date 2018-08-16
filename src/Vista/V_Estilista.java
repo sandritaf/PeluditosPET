@@ -246,6 +246,7 @@ public class V_Estilista extends javax.swing.JPanel {
         No.setBackground(new java.awt.Color(153, 204, 255));
         buttonGroup1.add(No);
         No.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        No.setSelected(true);
         No.setText("No");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -410,7 +411,7 @@ public class V_Estilista extends javax.swing.JPanel {
             cedula = getText(txtCedula);
             
             if(Si.isSelected()) stripping = true;
-            if(No.isSelected()) stripping = false;
+            else stripping = false;
 
             if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
                 

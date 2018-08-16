@@ -197,11 +197,12 @@ public class C_Cita {
             combito.setModel(aModel);
             
             if(resultados.size() >0){
+                combito.setEnabled(true);
                 while(resultados.hasNext() ){
                     aux = ((M_Mascota)resultados.next()).toString();
                     aModel.addElement(aux);
                 }
-            }
+            } else combito.setEnabled(false);
             
         } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->getMascotas(M_Propietario): "+e);

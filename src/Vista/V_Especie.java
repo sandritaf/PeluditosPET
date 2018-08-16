@@ -23,7 +23,6 @@ public class V_Especie extends javax.swing.JPanel {
             tablaEspecies.setModel(controlador.cargarTabla());
         
         controlador.cargarEspecies(cmbEspecieExistente);
-        //setSize(m.getSize());
     }
 
     @SuppressWarnings("unchecked")
@@ -175,6 +174,7 @@ public class V_Especie extends javax.swing.JPanel {
         AgregarEspecie.setBackground(new java.awt.Color(153, 204, 255));
         buttonGroup1.add(AgregarEspecie);
         AgregarEspecie.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        AgregarEspecie.setSelected(true);
         AgregarEspecie.setText("Agregar Especie");
         AgregarEspecie.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -388,23 +388,19 @@ public class V_Especie extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void AgregarEspecieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarEspecieMouseClicked
-        cmbEspecieExistente.setEnabled(false);
         txtEspecie.setEnabled(true);
     }//GEN-LAST:event_AgregarEspecieMouseClicked
 
     private void ExistenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExistenteMouseClicked
         txtEspecie.setEnabled(false);
-        cmbEspecieExistente.setEnabled(true);
     }//GEN-LAST:event_ExistenteMouseClicked
 
     private void AgregarEspecieMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AgregarEspecieMousePressed
-       cmbEspecieExistente.setEnabled(false);
-        txtEspecie.setEnabled(true);
+       txtEspecie.setEnabled(true);
     }//GEN-LAST:event_AgregarEspecieMousePressed
 
     private void ExistenteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExistenteMousePressed
-        txtEspecie.setEnabled(false);
-        cmbEspecieExistente.setEnabled(true);
+       
     }//GEN-LAST:event_ExistenteMousePressed
 
     private void tablaEspeciesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEspeciesMousePressed
@@ -451,7 +447,6 @@ public class V_Especie extends javax.swing.JPanel {
         txtRaza.setText(null);
         controlador.cargarEspecies(cmbEspecieExistente);
         cmbEspecieExistente.setSelectedItem(0);
-        cmbEspecieExistente.setEnabled(false);
         txtEspecie.setEnabled(false);
         Guardar.setEnabled(true);
         Eliminar.setEnabled(false);
@@ -482,14 +477,11 @@ public class V_Especie extends javax.swing.JPanel {
         if(txtVacio(txtRaza))      
             return true;
         // si se seleccionó especie pero no se escribió nada en el txtField
-        if(AgregarEspecie.isSelected() && !Existente.isSelected()){
-            if(txtVacio(txtEspecie))
-                return true;
-        }
-        // si no se seleccionó ninguna opción
-        if(!AgregarEspecie.isSelected() && !Existente.isSelected()){
+        else if(AgregarEspecie.isSelected() && txtVacio(txtEspecie))
             return true;
-        }
+        else if (Existente.isSelected() && !cmbEspecieExistente.isEnabled())
+            return true;
+        
         return false;
     }
     

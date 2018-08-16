@@ -118,14 +118,14 @@ public class C_Trabajador {
                 for (M_Trabajador per : p) {
                     // solo carga a los trabajadores que no son ni estilistas, ni veterinarios
                     if( !(per instanceof M_Estilista) && !(per instanceof  M_Veterinario) ){
-                    Object[] cli = new Object[6];
-                    cli[0] = per.getCedula(); //subString(1);
-                    cli[1] = per.getNombre();
-                    cli[2] = per.getApellido();
-                    cli[3] = per.getTelefono();
-                    cli[4] = per.getRIF();
-                    cli[5] = per.getProfesion();
-                    dtm.addRow(cli);
+                        Object[] cli = new Object[6];
+                        cli[0] = per.getCedula(); //subString(1);
+                        cli[1] = per.getNombre();
+                        cli[2] = per.getApellido();
+                        cli[3] = per.getTelefono();
+                        cli[4] = per.getRIF();
+                        cli[5] = per.getProfesion();
+                        dtm.addRow(cli);
                     }
                 }
             }
@@ -176,32 +176,29 @@ public class C_Trabajador {
         }
     }
     
-    public void cargarVeterinariosEstilistas(JComboBox trabajadores){
+    public void cargarTrabajador(JComboBox trabajadores){
         try{
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
-            String aux;
+            String aux = null;
+            M_Trabajador modelo = null;
             trabajadores.setModel(aModel);
-            M_Estilista e = new M_Estilista(null, null, null, null, 0, null, null, 0, null, 0, false);
-            M_Veterinario v = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null, 0);
-            M_Trabajador t = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);//, null, null, 0);//, null, 0);
-            ObjectSet rs = Conexion.getInstancia().buscar(v);
-            ObjectSet rs1 = Conexion.getInstancia().buscar(e);
+            M_Trabajador t = new M_Trabajador(null, null, null, null, 0, null, null, 0, null, 0);
             ObjectSet rs2 = Conexion.getInstancia().buscar(t);
 
-            // si hay veterinarios
-            if(rs.size() >0){
-                while(rs.hasNext() ){
-                    aux = ((M_Veterinario)rs.next()).toString();
-                    aModel.addElement(aux);
+            if(rs2.size() >0){
+                trabajadores.setEnabled(true);
+                while(rs2.hasNext() ){
+                    modelo = ((M_Trabajador)rs2.next());
+                    if (modelo instanceof M_Veterinario){
+                        aux = modelo.toString();
+                        aModel.addElement(aux);
+                    }else if (modelo instanceof M_Estilista){
+                        aux = modelo.toString();
+                        aModel.addElement(aux);
+                    }
                 }
-            }
-            //si hay estilistas
-            if(rs1.size() > 0){
-                while(rs1.hasNext() ){
-                    aux = ((M_Estilista)rs1.next()).toString();
-                    aModel.addElement(aux);                        
-                }
-            }
+            } else trabajadores.setEnabled(false);
+
             
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Trabajador->CargarVetEst: "+e);

@@ -211,39 +211,60 @@ public class C_Mascota {
         }
     }
     
-    public void cargarDuenos(JComboBox duenos/*, String opc*/){
+    public void cargarDuenos(JComboBox duenos){
         try{
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
             String aux;
             duenos.setModel(aModel);
-
+            M_Propietario modelo = null;
+            
+            M_Propietario x = new M_Propietario(null,null);
+            ObjectSet result = Conexion.getInstancia().buscar(x);
+            
+            
+            if(result.size() >0){
+                duenos.setEnabled(true);
+                while(result.hasNext() ){
+                    modelo = ((M_Propietario)result.next());
+                    if (modelo instanceof M_Natural){
+                        aux = modelo.toString();
+                        aModel.addElement(aux);
+                    }else if (modelo instanceof M_Juridico){
+                        aux = modelo.toString();
+                        aModel.addElement(aux);
+                    }
+                }
+            } else duenos.setEnabled(false);
     
-        M_Natural p = new M_Natural(null, null, null, null, null);
-        M_Juridico p1 = new M_Juridico(null, null, null, null, null, null); 
+//            M_Natural p = new M_Natural(null, null, null, null, null);
+//            M_Juridico p1 = new M_Juridico(null, null, null, null, null, null); 
+//
+//            ObjectSet rs = Conexion.getInstancia().buscar(p);
+//            ObjectSet rs1 = Conexion.getInstancia().buscar(p1);
 
-            ObjectSet rs = Conexion.getInstancia().buscar(p);
-            ObjectSet rs1 = Conexion.getInstancia().buscar(p1);
+//            // si hay propietarios naturales
+//            if(rs.size() > 0){
+//                while(rs.hasNext() ){
+//                    aux = rs.next().toString();
+//                    aModel.addElement(aux);
+//                }
+//            }
+//            // si hay propietarios juridicos
+//            if(rs1.size() > 0){ 
+//                while(rs1.hasNext() ){
+//                   aux = rs1.next().toString();
+//                   aModel.addElement(aux);
+//                }
+//            }
 
-            // si hay propietarios naturales
-            if(rs.size() > 0){
-                while(rs.hasNext() ){
-                    aux = rs.next().toString();
-                    aModel.addElement(aux);
-                }
-            }
-            // si hay propietarios juridicos
-            if(rs1.size() > 0){ 
-                while(rs1.hasNext() ){
-                   aux = rs1.next().toString();
-                   aModel.addElement(aux);
-                }
-            }
+
+
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
         }
     }
   
-    public void cargarDuenosSinID(JComboBox duenos/*, String opc*/){
+    public void cargarDuenosSinID(JComboBox duenos){
         try{
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
             String aux;
@@ -252,33 +273,12 @@ public class C_Mascota {
             M_Propietario p = new M_Propietario(null,null);
             ObjectSet rs = Conexion.getInstancia().buscar(p);
             if(rs.size() > 0){
+                duenos.setEnabled(true);
                 while(rs.hasNext() ){
                     aux = ((M_Propietario)rs.next()).nombreCompleto();
                     aModel.addElement(aux);
                 }
-            }
-
-    
-            /*M_Natural p = new M_Natural(null, null, null, null, null);
-            M_Juridico p1 = new M_Juridico(null, null, null, null, null, null); 
-
-            ObjectSet rs = Conexion.getInstancia().buscar(p);
-            ObjectSet rs1 = Conexion.getInstancia().buscar(p1);
-
-            // si hay propietarios naturales
-            if(rs.size() > 0){
-                while(rs.hasNext() ){
-                    aux = ((M_Natural)rs.next()).nombreApellido();
-                    aModel.addElement(aux);
-                }
-            }
-            // si hay propietarios juridicos
-            if(rs1.size() > 0){ 
-                while(rs1.hasNext() ){
-                   aux = ((M_Juridico)rs1.next()).getRazonSocial();
-                   aModel.addElement(aux);
-                }
-            }*/
+            } else duenos.setEnabled(false);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
         }

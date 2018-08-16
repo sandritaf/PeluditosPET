@@ -135,9 +135,10 @@ public class M_Trabajador {
     
     public boolean esNumero(String cadena){
         try {
-            Integer.parseInt(cadena);
+            Long.parseLong(cadena);
             return true;
         } catch (NumberFormatException excepcion) {
+            System.out.println("Tratando de averiguar si es numero: "+cadena+", capturada excepcion: "+excepcion);
             return false;
         }
     }

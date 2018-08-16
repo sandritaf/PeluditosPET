@@ -168,11 +168,12 @@ public class C_Especie {
 
             // si hay propietarios naturales
             if(rs.size() >0){
+                especies.setEnabled(true);
                 while(rs.hasNext() ){
                     aux = ((M_Especie)rs.next()).getNombre();
                     aModel.addElement(aux);
                 }
-            }
+            } else especies.setEnabled(false);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }

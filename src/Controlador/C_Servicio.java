@@ -73,17 +73,18 @@ public class C_Servicio {
         try{
             M_Servicio p = new M_Servicio(null, null, null, 0);
             ObjectSet rs = Conexion.getInstancia().buscar(p);
-            if(rs.size() >0){
-            
-                DefaultComboBoxModel aModel = new DefaultComboBoxModel();
-                String aux;
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            if(rs.size() >0){ 
+                servicios.setEnabled(true);
+                String aux = null;
                 servicios.setModel(aModel);
                 // si hay servicios
-                while(rs.hasNext() ){
+                while(rs.hasNext()){
                     aux = ((M_Servicio)rs.next()).getNombre();
                     aModel.addElement(aux);
                 }
             }
+            else servicios.setEnabled(false);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Servicio->CargarServicios: "+e);
         }

@@ -1,4 +1,3 @@
-
 package Vista;
 
 import Controlador.C_Juridico;
@@ -9,7 +8,6 @@ import Modelo.M_Juridico;
 import Modelo.M_Mascota;
 import Modelo.M_Natural;
 import Modelo.M_Propietario;
-import javafx.scene.control.ComboBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -24,13 +22,12 @@ public class V_Mascota extends javax.swing.JPanel {
     
     public V_Mascota() {
         initComponents();
-        txtPK.setVisible(false);
         
         controlador = new C_Mascota();
         controlador.cargarDuenos(cmbDueno/*, "Natural"*/);
         controlador.cargarEspecies(cmbEspecie);
 
-//        if(controlador.getMascotas(dueno) != null))
+        if(controlador.getNumMascotasExistentes() > 0)
             tablaMascotas.setModel(this.controlador.cargarTabla());
 
         reiniciarValores();
@@ -67,8 +64,6 @@ public class V_Mascota extends javax.swing.JPanel {
         Masculino = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaMascotas = new javax.swing.JTable();
-        txtPK = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -227,6 +222,7 @@ public class V_Mascota extends javax.swing.JPanel {
 
         Masculino.setBackground(new java.awt.Color(153, 204, 255));
         Masculino.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Masculino.setSelected(true);
         Masculino.setText("M");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -311,13 +307,6 @@ public class V_Mascota extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tablaMascotas);
 
-        jButton1.setText("jButton1");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -327,10 +316,7 @@ public class V_Mascota extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
-                        .addGap(18, 18, 18)
+                        .addGap(91, 91, 91)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 78, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
@@ -340,15 +326,8 @@ public class V_Mascota extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -429,12 +408,6 @@ public class V_Mascota extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ModificarMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        System.out.println("Este es la raza: " + getTextCombo(cmbRaza));        // TODO add your handling code here:
-        System.out.println("Esta es la especie: " + getTextCombo(cmbEspecie));        // TODO add your handling code here:
-        System.out.println("Esta es la id: " + getComboSelected(cmbDueno));        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
-
     private void tablaMascotasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMascotasMousePressed
         txtNombre.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 2).toString());
         txtEdad.setText(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 5).toString());
@@ -508,7 +481,6 @@ public class V_Mascota extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbDueno;
     private javax.swing.JComboBox<String> cmbEspecie;
     private javax.swing.JComboBox<String> cmbRaza;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -518,7 +490,6 @@ public class V_Mascota extends javax.swing.JPanel {
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextArea txtObservaciones;
-    private javax.swing.JTextField txtPK;
     // End of variables declaration//GEN-END:variables
 
     
@@ -540,7 +511,6 @@ public class V_Mascota extends javax.swing.JPanel {
     }
     
     private void limpiarCajas(){
-        txtPK.setText(null);
         txtNombre.setText(null);
         txtEdad.setText(null);
         txtObservaciones.setText(null);
