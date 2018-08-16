@@ -10,7 +10,7 @@ public class V_Servicio extends javax.swing.JPanel {
 
     C_Servicio controlador;
     M_Servicio modelo;
-    String nombre, viejoNombre, descripcion, observaciones;
+    String nombre, viejoNombre, descripcion, observaciones, tipo;
     int precio;
     
     public V_Servicio() {
@@ -51,6 +51,9 @@ public class V_Servicio extends javax.swing.JPanel {
         txtObservaciones = new javax.swing.JTextArea();
         txtPrecio = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
+        TipoTrabajador = new javax.swing.JLabel();
+        Veterinario = new javax.swing.JRadioButton();
+        Estilista = new javax.swing.JRadioButton();
 
         PanelFondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -203,6 +206,17 @@ public class V_Servicio extends javax.swing.JPanel {
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
+        TipoTrabajador.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        TipoTrabajador.setText("Trabajador");
+
+        Veterinario.setBackground(new java.awt.Color(153, 204, 255));
+        Veterinario.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Veterinario.setText("Veterinario");
+
+        Estilista.setBackground(new java.awt.Color(153, 204, 255));
+        Estilista.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Estilista.setText("Estilista");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -213,13 +227,19 @@ public class V_Servicio extends javax.swing.JPanel {
                     .addComponent(Descripcion)
                     .addComponent(Nombre)
                     .addComponent(Precio)
-                    .addComponent(Observaciones))
+                    .addComponent(Observaciones)
+                    .addComponent(TipoTrabajador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDescripcion)
-                    .addComponent(txtNombre)
-                    .addComponent(txtPrecio)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(Veterinario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Estilista))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtDescripcion)
+                        .addComponent(txtNombre)
+                        .addComponent(txtPrecio)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -241,7 +261,12 @@ public class V_Servicio extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(Observaciones)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TipoTrabajador)
+                    .addComponent(Veterinario)
+                    .addComponent(Estilista))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelFondoLayout = new javax.swing.GroupLayout(PanelFondo);
@@ -266,8 +291,8 @@ public class V_Servicio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(PanelLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -301,8 +326,13 @@ public class V_Servicio extends javax.swing.JPanel {
             observaciones = txtObservaciones.getText();
             descripcion = txtDescripcion.getText();
             precio = Integer.parseInt(txtPrecio.getText());
-        
-            modelo = new M_Servicio(nombre, descripcion, observaciones, precio);
+            
+            if(Veterinario.isSelected())
+                tipo = "Veterinario";
+            if(Estilista.isSelected())
+                tipo = "Estilista";
+            
+            modelo = new M_Servicio(nombre, descripcion, observaciones, precio, tipo);
             controlador.guardarServicio(modelo);
             
             reiniciarValores();
@@ -323,8 +353,12 @@ public class V_Servicio extends javax.swing.JPanel {
             observaciones = txtObservaciones.getText();
             descripcion = txtDescripcion.getText();
             precio = Integer.parseInt(txtPrecio.getText());
-        
-            modelo.actualizar(nombre, descripcion, observaciones, precio);
+            if(Veterinario.isSelected())
+                tipo = "Veterinario";
+            if(Estilista.isSelected())
+                tipo = "Estilista";
+            
+            modelo.actualizar(nombre, descripcion, observaciones, precio, tipo);
             if(viejoNombre!=null)
                 controlador.modificarServicio(nombre, viejoNombre, modelo);
             else
@@ -335,7 +369,6 @@ public class V_Servicio extends javax.swing.JPanel {
             limpiarCajas();
             tablaServicios.setModel(controlador.cargarTabla());
         }
-        
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void tablaServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaServiciosMousePressed
@@ -347,6 +380,11 @@ public class V_Servicio extends javax.swing.JPanel {
             txtObservaciones.setText(modelo.getObservaciones());
             txtDescripcion.setText(modelo.getDescripción());
             txtPrecio.setText(Integer.toString(modelo.getPrecio()));
+            
+            if(modelo.getTipoTrabajador().equals("Veterinario"))
+                Veterinario.setSelected(true);
+            if(modelo.getTipoTrabajador().equals("Estilista"))
+                Estilista.setSelected(true);
             
             Guardar.setEnabled(false);
             Modificar.setEnabled(true);
@@ -378,6 +416,7 @@ public class V_Servicio extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Descripcion;
     private javax.swing.JLabel Eliminar;
+    private javax.swing.JRadioButton Estilista;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Modificar;
@@ -387,7 +426,9 @@ public class V_Servicio extends javax.swing.JPanel {
     private javax.swing.JPanel PanelLateral;
     private javax.swing.JLabel Precio;
     private javax.swing.JLabel Servicio;
+    private javax.swing.JLabel TipoTrabajador;
     private javax.swing.JLabel VerLista;
+    private javax.swing.JRadioButton Veterinario;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -409,7 +450,9 @@ public class V_Servicio extends javax.swing.JPanel {
     }
 
     private void limpiarCajas(){
-       txtObservaciones.setText(null);
+        Veterinario.setSelected(false);
+        Estilista.setSelected(false);
+        txtObservaciones.setText(null);
         txtDescripcion.setText(null);
         txtNombre.setText(null);
         txtPrecio.setText(null);
@@ -429,6 +472,8 @@ public class V_Servicio extends javax.swing.JPanel {
         if(txtVacio(txtNombre))
             return true;
         if(txtVacio(txtPrecio))
+            return true;
+        if(!Estilista.isSelected() && !Veterinario.isSelected())
             return true;
         return false;
     }
