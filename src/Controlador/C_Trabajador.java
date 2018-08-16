@@ -168,7 +168,6 @@ public class C_Trabajador {
                     if( !( (modelo instanceof M_Estilista) || (modelo instanceof M_Veterinario) ) ){                    
                         aux = modelo.toString();
                         aModel.addElement(aux);    
-                        JOptionPane.showMessageDialog(null, aux);
                     } 
                 }
             } else trabajadores.setEnabled(false);
