@@ -25,17 +25,6 @@ public class M_Cita {
         this.tratamiento = tratamiento;
         this.cancelado = false;
     }
-    
-//    // Si el servicio no es médico, entonces si usaría este constructor, ya que no aplica tratamiento
-//    public M_Cita(int id, M_Mascota mascota, M_Trabajador trabajador, M_Servicio servicio, String fecha, String diagnosticoFinal) {
-//        this.id = id;
-//        this.mascota = mascota;
-//        this.trabajador = trabajador;
-//        this.servicio = servicio;
-//        this.fecha = fecha;
-//        this.diagnosticoFinal = diagnosticoFinal;
-//        this.cancelado = false;
-//    }
 
     public M_Cita(int id, M_Trabajador trabajador, M_Servicio servicio, Date fecha, String diagnosticoFinal, String tratamiento, M_Mascota mascota, boolean cancelado) {
         this.id = id;

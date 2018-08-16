@@ -428,14 +428,11 @@ public class V_Cita extends javax.swing.JPanel {
             
                         
             modelo.actualizar(id, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
-
             controlador.modificarCita(id, modelo);
-            
-//            controlador.modificarMascota(?,auxNombre,auxObservaciones, modelo,id,controlador.buscarDueno(auxID,auxNombre));
 
             reiniciarValores();
             limpiarCajas();
-//            tablaMascotas.setModel(this.controlador.cargarTabla());
+            
             tablaCitas.setModel(this.controlador.cargarTabla());
         }
     }//GEN-LAST:event_ModificarMouseClicked
@@ -458,10 +455,12 @@ public class V_Cita extends javax.swing.JPanel {
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
         limpiarCajas();
+        reiniciarValores();
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
-        controlador.listarCitas();    
+        controlador.listarCitas();  
+        reiniciarValores();
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaCitasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCitasMousePressed

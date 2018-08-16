@@ -69,6 +69,20 @@ public class C_Cita {
         }
     }
     
+    public int getNumCitasCanceladas(){
+        try{
+            M_Cita c = new M_Cita(0, null, null, null, null, null, null, true);            
+            ObjectSet result = Conexion.getInstancia().buscar(c);
+            if (!result.isEmpty()){
+                return result.size();
+            }
+            return 0;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "error en C_Cita->getNumCitasExistentes: "+e);
+            return 0;
+        }
+    }
+    
     public void modificarCita(int id, M_Cita c){
         try{    
             M_Cita cita = new M_Cita(id, null, null, null, null, null, null);            
@@ -166,18 +180,19 @@ public class C_Cita {
     
     public DefaultTableModel cargarTabla() {
         try{
-            String titulos[] = {"ID","Mascota","Propietario","Trabajador", "Servicio", "Fecha"};
+            String titulos[] = {"ID","Mascota","Propietario","Trabajador", "Servicio", "Fecha", "Cancelado"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Cita[] p = getCitas();
             if (p != null) {
                 for (M_Cita per : p) {
-                    Object[] cli = new Object[6];
+                    Object[] cli = new Object[7];
                     cli[0] = per.getId();
                     cli[1] = per.getMascota().getNombre();
                     cli[2] = per.getMascota().getDueno().nombreCompleto();
                     cli[3] = per.getTrabajador().nombreApellido();
                     cli[4] = per.getServicio().toString();
-                    cli[5] = C_Fecha.deDateToString(per.getFecha());//getFecha().toString());
+                    cli[5] = C_Fecha.deDateToString(per.getFecha());
+                    cli[6] = per.isCancelado();
                     dtm.addRow(cli);
                 }
             }
@@ -209,19 +224,23 @@ public class C_Cita {
         }
     }
     
-    public void cargarCitas(JComboBox combito){
+    public void cargarCitasSinCancelar(JComboBox combito){
         try {
             M_Cita m = new M_Cita(0,null, null, null, null, null, null,false);
             ObjectSet resultados = Conexion.getInstancia().buscar(m);
             DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            M_Cita modelo = null;
             String aux = "";
             combito.setModel(aModel);
             
-            if(resultados.size() >0){
+            if(resultados.size() >0){ 
                 combito.setEnabled(true);
-                while(resultados.hasNext() ){
-                    aux = ((M_Cita)resultados.next()).toString();
-                    aModel.addElement(aux);
+                while(resultados.hasNext() ){ 
+                    modelo = (M_Cita)resultados.next();
+                    if (!modelo.isCancelado()){
+                        aux = modelo.toString();
+                        aModel.addElement(aux);                        
+                    }
                 }
             } else combito.setEnabled(false);
             
