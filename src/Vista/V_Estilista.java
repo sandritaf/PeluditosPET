@@ -577,9 +577,6 @@ public class V_Estilista extends javax.swing.JPanel {
         txtTelefono.setText(null);
         txtPK.setText(null);
         txtProfesion.setText(null);
-        Modificar.setEnabled(false);
-        Eliminar.setEnabled(false);
-        Guardar.setEnabled(true);
         Si.setSelected(false);
         No.setSelected(false);
     }
@@ -597,8 +594,6 @@ public class V_Estilista extends javax.swing.JPanel {
     
     public boolean txtVacio(JTextField txt){
         return (txt.getText().isEmpty());
-         //   return true;
-       // return false;
     }
     
     //Verifica si hay txtFields sin llenar
@@ -643,5 +638,11 @@ public class V_Estilista extends javax.swing.JPanel {
     //Devuelve el valor de un txtField
     public String getText(JTextField txt){
         return txt.getText();
+    }
+
+    public void reiniciarBotones(){
+        Guardar.setEnabled(true);     
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
     }
 }

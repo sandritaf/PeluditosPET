@@ -23,14 +23,16 @@ public class V_Mascota extends javax.swing.JPanel {
     public V_Mascota() {
         initComponents();
         
-        controlador = new C_Mascota();
-        controlador.cargarDuenos(cmbDueno/*, "Natural"*/);
+        controlador = new C_Mascota();        
+        controlador.cargarDuenos(cmbDueno);
         controlador.cargarEspecies(cmbEspecie);
 
         if(controlador.getNumMascotasExistentes() > 0)
             tablaMascotas.setModel(this.controlador.cargarTabla());
 
         reiniciarValores();
+        reiniciarBotones();
+        limpiarCajas();
     }
 
     @SuppressWarnings("unchecked")
@@ -355,8 +357,8 @@ public class V_Mascota extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
         else{                    
-            //id = getTextCombo(cmbDueno);
-            id = getIDComboSelected(cmbDueno);
+
+            id = getCedulaCombo(cmbDueno);
             nombre = getText(txtNombre);
             edad = Integer.parseInt(getText(txtEdad));
             especie = getTextCombo(cmbEspecie);
@@ -372,6 +374,7 @@ public class V_Mascota extends javax.swing.JPanel {
             controlador.guardarMascota(modelo,obtenerDueno(cmbDueno));
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaMascotas.setModel(this.controlador.cargarTabla());
         }
@@ -385,8 +388,9 @@ public class V_Mascota extends javax.swing.JPanel {
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
-        else{                    
-            id = getIDComboSelected(cmbDueno);
+        else{               
+            
+            id = getCedulaCombo(cmbDueno);
             nombre = getText(txtNombre);
             edad = Integer.parseInt(getText(txtEdad));
             especie = getTextCombo(cmbEspecie);
@@ -403,6 +407,7 @@ public class V_Mascota extends javax.swing.JPanel {
             controlador.modificarMascota(codigo,auxID,auxNombre, modelo,id,controlador.buscarDueno(auxID,auxNombre));
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaMascotas.setModel(this.controlador.cargarTabla());
         }
@@ -424,16 +429,16 @@ public class V_Mascota extends javax.swing.JPanel {
         auxObservaciones = txtObservaciones.getText();
         
         modelo = new M_Mascota();
-        modelo = controlador.getMascota(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString(), getIDComboSelected(cmbDueno));
+        modelo = controlador.getMascota(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0).toString(), getCedulaCombo(cmbDueno));
         
-//        if(modelo.getSexo().equals("F")){
-//            Femenino.setSelected(true);
-//            Masculino.setSelected(false);
-//        }
-//        if(modelo.getSexo().equals("M")){
-//            Masculino.setSelected(true);
-//            Femenino.setSelected(false);
-//        }
+        if(modelo.getSexo().equals("F")){
+            Femenino.setSelected(true);
+            Masculino.setSelected(false);
+        }
+        if(modelo.getSexo().equals("M")){
+            Masculino.setSelected(true);
+            Femenino.setSelected(false);
+        }
         
         Guardar.setEnabled(false);
         Modificar.setEnabled(true);
@@ -446,12 +451,13 @@ public class V_Mascota extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");
         }
         else{     
-            id = getIDComboSelected(cmbDueno);
+            id = getCedulaCombo(cmbDueno);
             nombre = getText(txtNombre);
             
             controlador.eliminarMascota(codigo,id,nombre,obtenerDueno(cmbDueno));
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaMascotas.setModel(this.controlador.cargarTabla());
         }
@@ -511,6 +517,8 @@ public class V_Mascota extends javax.swing.JPanel {
     }
     
     private void limpiarCajas(){
+        Femenino.setSelected(false);
+        Masculino.setSelected(false);
         txtNombre.setText(null);
         txtEdad.setText(null);
         txtObservaciones.setText(null);
@@ -520,18 +528,7 @@ public class V_Mascota extends javax.swing.JPanel {
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
-    public int getComboSelected(JComboBox combito){
-        String codigo = combito.getSelectedItem().toString(); 
-        String codigoFinal = "";
-        
-        int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(1, guion);
-        
-        return Integer.parseInt(codigoFinal);
-    }
-    
-    //Devuelve el codigo de la opcion seleccionada en un combo
-    public String getIDComboSelected(JComboBox combito){
+    public String getCedulaCombo(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
         
@@ -571,17 +568,24 @@ public class V_Mascota extends javax.swing.JPanel {
         auxObservaciones = null;
         codigo = 0;
         sexo = null;
-        Guardar.setEnabled(true);
-        Modificar.setEnabled(false);
-        Eliminar.setEnabled(false);
     }
-    
+     
     public String getText(JTextField txt){
         return txt.getText();
     }
     
     public String getTextCombo(JComboBox cmb){
         return (String) cmb.getSelectedItem();
+    }
+    
+    public void reiniciarBotones(){
+        Guardar.setEnabled(true);
+        Eliminar.setEnabled(false);
+        Modificar.setEnabled(false);
+    }
+
+    public boolean datosCompletos(){
+        return false;
     }
     
 }

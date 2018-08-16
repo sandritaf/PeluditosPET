@@ -161,16 +161,17 @@ public class C_Trabajador {
 
             // si hay trabajadores
             if(rs.size() >0){
+                trabajadores.setEnabled(true);                
+                
                 while(rs.hasNext() ){
-                    
-                    if( !(rs instanceof M_Estilista) && !(rs instanceof M_Veterinario) ){
-                    
-                        aux = ((M_Trabajador)rs.next()).toString();
-                        aModel.addElement(aux);
-                    
-                    }
+                    M_Trabajador modelo = (M_Trabajador)rs.next();
+                    if( !( (modelo instanceof M_Estilista) || (modelo instanceof M_Veterinario) ) ){                    
+                        aux = modelo.toString();
+                        aModel.addElement(aux);    
+                        JOptionPane.showMessageDialog(null, aux);
+                    } 
                 }
-            }
+            } else trabajadores.setEnabled(false);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Trabajador->CargarTrabajadores: "+e);
         }

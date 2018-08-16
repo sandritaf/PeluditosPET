@@ -26,9 +26,9 @@ public class V_Factura extends javax.swing.JPanel {
     C_Cita cCita;
     C_Fecha cFecha;
     M_Cita mCita;
-    String cita, cliente, modoPago, trabajador;
+    String cliente, modoPago, trabajador;
     float iva, subtotal, total;
-    int id;
+    int id, idcita;
     Date fecha, fechaCita;
     
     public V_Factura() {
@@ -41,7 +41,7 @@ public class V_Factura extends javax.swing.JPanel {
         cCita = new C_Cita();
         cFecha = new C_Fecha();
   
-        cTrabajador.cargarTrabajador(cmbTrabajador);
+        cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenosSinID(cmbDueño);
         cCita.cargarCitas(cmbCitaSinCancelar);
         
@@ -49,8 +49,9 @@ public class V_Factura extends javax.swing.JPanel {
             tablaFacturas.setModel(controlador.cargarTabla());
         }
         
-        reiniciarValores();
         txtPK.setVisible(false);
+        reiniciarValores();
+        reiniciarBotones();
         limpiarCajas();
         cargarValores();
     //    controlador.eliminarFactura(1);
@@ -491,7 +492,7 @@ public class V_Factura extends javax.swing.JPanel {
             subtotal =  Float.parseFloat(getText(txtSubtotal)); System.out.println("subtotal "+subtotal);
             iva = Float.parseFloat(getText(txtIVA)); System.out.println("iva "+iva);
             total = Float.parseFloat(getText(txtTotal)); System.out.println("total "+total);
-            cita = getIDComboSelected(cmbCitaSinCancelar); System.out.println("cita "+cita);
+            idcita = getID(cmbCitaSinCancelar); System.out.println("cita "+idcita);
             
             if(Representante.isSelected())
                 cliente = getText(txtRepresentante); 
@@ -499,24 +500,19 @@ public class V_Factura extends javax.swing.JPanel {
                 cliente = getComboSelected(cmbDueño);
             
             System.out.println("cliente "+cliente);
-            
-            if(fechaCita == null)
-                System.out.println("la fecha cita es null");
-            if(fecha == null)
-                System.out.println("la fecha es null");
-            
+
             if(cFecha.fechasCorrectas(getText(txtFechaCita), getText(txtFecha))){
                 
-                mCita = cCita.getCita(Integer.parseInt(cita));
+                mCita = cCita.getCita(idcita);
                 
                 id = controlador.getNumFacturasExistentes() +1; System.out.println("id "+id);
-//              id = 70; System.out.println("id "+id);
 
                 modelo = new M_Factura(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
 
                 controlador.guardarFactura(modelo);
 
                 reiniciarValores();
+                reiniciarBotones();
                 limpiarCajas();
             
                 if(controlador.getFacturas() != null)
@@ -541,11 +537,11 @@ public class V_Factura extends javax.swing.JPanel {
             subtotal =  Float.parseFloat(getText(txtSubtotal));
             iva = Float.parseFloat(getText(txtIVA));
             total = Float.parseFloat(getText(txtTotal));
-            cita = getIDComboSelected(cmbCitaSinCancelar);
+            idcita = getID(cmbCitaSinCancelar);
             
             if(cFecha.fechasCorrectas(getText(txtFechaCita), getText(txtFecha))){
             
-                mCita = cCita.getCita(Integer.parseInt(cita));
+                mCita = cCita.getCita(idcita);
                 
                 if(mCita == null)
                     System.out.println("la cita es null");
@@ -561,10 +557,11 @@ public class V_Factura extends javax.swing.JPanel {
 
                 id = Integer.parseInt(getText(txtPK));
 
-                modelo = null;
+                modelo = new M_Factura();
                 modelo.actualizar(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
 
                 reiniciarValores();
+                reiniciarBotones();
                 limpiarCajas();        
 //                tablaFacturas.setModel(controlador.cargarTabla());
             }
@@ -579,7 +576,10 @@ public class V_Factura extends javax.swing.JPanel {
         }
         else{
             
+            controlador.eliminarFactura(id);
+            
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
 //            tablaFacturas.setModel(controlador.cargarTabla());
         }
@@ -597,7 +597,7 @@ public class V_Factura extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturasMousePressed
-        
+        cargarValores();
     }//GEN-LAST:event_tablaFacturasMousePressed
 
     private void RepresentanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RepresentanteMouseClicked
@@ -691,10 +691,6 @@ public class V_Factura extends javax.swing.JPanel {
         Representante.setSelected(false);
         Dueño.setSelected(false);
         cmbDueño.setEnabled(false);
-        Guardar.setEnabled(true);
-        Modificar.setEnabled(false);
-        Eliminar.setEnabled(false);
-        cmbDueño.setEnabled(false);
         txtRepresentante.setEnabled(false);
         txtTotal.setEnabled(false);
     }
@@ -705,17 +701,14 @@ public class V_Factura extends javax.swing.JPanel {
         return false;
     }
             
-    
     //Devuelve el codigo de la opcion seleccionada en un combo
-    public String getIDComboSelected(JComboBox combito){
+    public int getID(JComboBox combito){
         String codigo = combito.getSelectedItem().toString(); 
-        String codigoFinal = "";
-        
         int guion = codigo.indexOf(" -");
+        String codigoFinal;
         codigoFinal = codigo.substring(0, guion);
         
-//        return Integer.parseInt(codigoFinal);
-        return (codigoFinal);
+        return Integer.parseInt(codigoFinal);
     }
     
     public String getComboSelected(JComboBox combito){
@@ -730,12 +723,6 @@ public class V_Factura extends javax.swing.JPanel {
     
     //Verifica si hay txtFields sin llenar
     public boolean cajasVacias(){
-//        if(txtVacio(txtSubtotal))
-//            return true;
-//        if(txtVacio(txtTotal))
-//            return true;
-//        if(txtVacio(txtIVA))
-//            return true;
         if(txtVacio(txtFecha))
             return true;
         if(Representante.isSelected())
@@ -749,7 +736,7 @@ public class V_Factura extends javax.swing.JPanel {
     //Coloca en null los atributos de la empresa
     public void reiniciarValores(){
         id = 0; 
-        cita = null;
+        idcita = 0;
         cliente = null; 
         modoPago = null; 
         fecha = null;
@@ -775,7 +762,7 @@ public class V_Factura extends javax.swing.JPanel {
         
         if(cCita.getCitas() != null){
             
-            mCita = cCita.getCita(Integer.parseInt(getIDComboSelected(cmbCitaSinCancelar)));
+            mCita = cCita.getCita(getID(cmbCitaSinCancelar));
 
             txtFechaCita.setText(C_Fecha.deDateToString(mCita.getFecha()));
 
@@ -789,9 +776,15 @@ public class V_Factura extends javax.swing.JPanel {
             txtIVA.setText(Float.toString(modeloAux.getIva()));
             txtSubtotal.setText(Float.toString(modeloAux.getSubtotal()));
             txtTotal.setText(Float.toString(modeloAux.getTotal()));
-            //txtTrabajador.setText(modeloAux.getCita().getTrabajador().nombreApellido());
-            //cm.setText(modeloAux.getCita().getMascota().getDueno().nombreCompleto());
+            txtPK.setText(Integer.toString(modeloAux.getId()));
+            
         }
+    }
+    
+    public void reiniciarBotones(){
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
     }
     
 }

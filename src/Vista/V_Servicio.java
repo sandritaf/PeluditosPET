@@ -17,11 +17,14 @@ public class V_Servicio extends javax.swing.JPanel {
         initComponents();
         //txtPK.setVisible(false);
         controlador = new C_Servicio();
+    
         reiniciarValores();
+        reiniciarBotones();
         limpiarCajas();
         
         if(controlador.getServicios() != null)
             tablaServicios.setModel(controlador.cargarTabla());
+    
     }
 
     @SuppressWarnings("unchecked")
@@ -303,6 +306,7 @@ public class V_Servicio extends javax.swing.JPanel {
             controlador.guardarServicio(modelo);
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaServicios.setModel(controlador.cargarTabla());
         }
@@ -327,6 +331,7 @@ public class V_Servicio extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "No hay viejoNombre");
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaServicios.setModel(controlador.cargarTabla());
         }
@@ -337,20 +342,17 @@ public class V_Servicio extends javax.swing.JPanel {
         modelo = controlador.getServicio(tablaServicios.getValueAt(tablaServicios.getSelectedRow(), 0).toString());
         
         if(modelo != null){
-            //JOptionPane.showMessageDialog(null, "no soy null");
-        
-        
-        viejoNombre = modelo.getNombre(); System.out.println(viejoNombre);
-        txtNombre.setText(modelo.getNombre()); 
-        txtObservaciones.setText(modelo.getObservaciones());
-        txtDescripcion.setText(modelo.getDescripción());
-        txtPrecio.setText(Integer.toString(modelo.getPrecio()));
+            viejoNombre = modelo.getNombre(); System.out.println(viejoNombre);
+            txtNombre.setText(modelo.getNombre()); 
+            txtObservaciones.setText(modelo.getObservaciones());
+            txtDescripcion.setText(modelo.getDescripción());
+            txtPrecio.setText(Integer.toString(modelo.getPrecio()));
+            
+            Guardar.setEnabled(false);
+            Modificar.setEnabled(true);
+            Eliminar.setEnabled(true);
         }
-        
-        Guardar.setEnabled(false);
-        
-            //JOptionPane.showMessageDialog(null, modelo);
-        
+
     }//GEN-LAST:event_tablaServiciosMousePressed
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
@@ -365,6 +367,7 @@ public class V_Servicio extends javax.swing.JPanel {
             controlador.eliminarServicio(nombre);
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaServicios.setModel(controlador.cargarTabla());
         }
@@ -406,14 +409,10 @@ public class V_Servicio extends javax.swing.JPanel {
     }
 
     private void limpiarCajas(){
-//        txtPK.setText(null);
-        txtObservaciones.setText(null);
+       txtObservaciones.setText(null);
         txtDescripcion.setText(null);
         txtNombre.setText(null);
         txtPrecio.setText(null);
-        Guardar.setEnabled(true);
-        Modificar.setEnabled(true);
-        Eliminar.setEnabled(true);
     }
     
     public boolean txtVacio(JTextField txt){
@@ -439,5 +438,9 @@ public class V_Servicio extends javax.swing.JPanel {
         return txt.getText();
     }
     
-    
+    public void reiniciarBotones(){
+        Guardar.setEnabled(true);
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+    }
 }
