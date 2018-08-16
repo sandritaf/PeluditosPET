@@ -66,4 +66,8 @@ public class M_Natural extends M_Propietario{
     public String subString(int inicio){
         return cedula.substring(inicio);
     }
+
+    public String nombrecito(){
+        return nombre + " " + apellido;
+    }
 }

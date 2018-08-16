@@ -72,5 +72,10 @@ public class M_Juridico extends M_Propietario{
         this.RIF = RIF;
         this.razonSocial = razonSocial;
     }
+
+    @Override
+    public String nombrecito(){
+        return razonSocial;
+    }
     
 }

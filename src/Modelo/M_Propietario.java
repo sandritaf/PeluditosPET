@@ -57,4 +57,8 @@ public class M_Propietario {
         }
     }
     
+    public String nombrecito(){
+        return "";
+    }
+    
 }
