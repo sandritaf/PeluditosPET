@@ -227,7 +227,6 @@ public class V_Mascota extends javax.swing.JPanel {
         Masculino.setBackground(new java.awt.Color(153, 204, 255));
         buttonGroup1.add(Masculino);
         Masculino.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        Masculino.setSelected(true);
         Masculino.setText("M");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

@@ -25,6 +25,7 @@ public class V_Estilista extends javax.swing.JPanel {
             tablaEstilistas.setModel(this.controlador.cargarTabla());
         
         reiniciarValores();
+        reiniciarBotones();
         limpiarCajas();
     }
 
@@ -246,7 +247,6 @@ public class V_Estilista extends javax.swing.JPanel {
         No.setBackground(new java.awt.Color(153, 204, 255));
         buttonGroup1.add(No);
         No.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        No.setSelected(true);
         No.setText("No");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -421,6 +421,7 @@ public class V_Estilista extends javax.swing.JPanel {
                 controlador.guardarEstilista(modelo);
 
                 reiniciarValores();
+                reiniciarBotones();
                 limpiarCajas();
                 tablaEstilistas.setModel(this.controlador.cargarTabla());
             }
@@ -440,6 +441,7 @@ public class V_Estilista extends javax.swing.JPanel {
             controlador.eliminarEstilista(auxCI);
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaEstilistas.setModel(this.controlador.cargarTabla());
         }
@@ -476,6 +478,7 @@ public class V_Estilista extends javax.swing.JPanel {
                 controlador.modificarEstilista(auxCI,"V"+cedula,modelo);
 
                 reiniciarValores();
+                reiniciarBotones();
                 limpiarCajas();
                 tablaEstilistas.setModel(this.controlador.cargarTabla());
             }
@@ -501,27 +504,28 @@ public class V_Estilista extends javax.swing.JPanel {
         modelo = controlador.getPersona(tablaEstilistas.getValueAt(tablaEstilistas.getSelectedRow(), 0).toString());
 
 //        auxCI = modelo.subString(1);
-        auxCI = modelo.getCedula();
-        txtCedula.setText(modelo.subString(1));
-        txtNombre.setText(modelo.getNombre());
-        txtApellido.setText(modelo.getApellido());
-        txtRIF.setText(modelo.getRIF());
-        txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
-        txtEdad.setText(Integer.toString(modelo.getEdad()));
-        txtNivelI.setText(modelo.getNivelInstruccion());
-        txtProfesion.setText(modelo.getProfesion());
-        txtTelefono.setText(modelo.getTelefono());
-        
-        if(modelo.isStripping()){
-            Si.setSelected(true);
-            No.setSelected(false);
+        if(modelo != null){
+            auxCI = modelo.getCedula();
+            txtCedula.setText(modelo.subString(1));
+            txtNombre.setText(modelo.getNombre());
+            txtApellido.setText(modelo.getApellido());
+            txtRIF.setText(modelo.getRIF());
+            txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
+            txtEdad.setText(Integer.toString(modelo.getEdad()));
+            txtNivelI.setText(modelo.getNivelInstruccion());
+            txtProfesion.setText(modelo.getProfesion());
+            txtTelefono.setText(modelo.getTelefono());
+
+            if(modelo.isStripping()){
+                Si.setSelected(true);
+                No.setSelected(false);
+            }
+            else{
+                No.setSelected(true);
+                Si.setSelected(false);            
+            }
         }
-        else{
-            No.setSelected(true);
-            Si.setSelected(false);            
-        }
-        
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_tablaEstilistasMousePressed
 
     private void txtAniosEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAniosEActionPerformed

@@ -166,5 +166,19 @@ public class C_Factura {
            return 0;
         } 
     }
+
+    public M_Factura getFactura(int id){
+            try{
+            M_Factura n = new M_Factura(id, null, null, 0, 0, 0, null, null);
+            ObjectSet resultado = Conexion.getInstancia().buscar(n);
+            if (resultado.isEmpty())
+                return null;
+            M_Factura encontrado = (M_Factura) resultado.next();
+            return encontrado;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error en C_Factura->getFactura():"+e);
+            return null;  
+        }
+    }
     
 }

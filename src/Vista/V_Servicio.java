@@ -353,11 +353,13 @@ public class V_Servicio extends javax.swing.JPanel {
             observaciones = txtObservaciones.getText();
             descripcion = txtDescripcion.getText();
             precio = Integer.parseInt(txtPrecio.getText());
+            
             if(Veterinario.isSelected())
                 tipo = "Veterinario";
             if(Estilista.isSelected())
                 tipo = "Estilista";
             
+            modelo = new M_Servicio();
             modelo.actualizar(nombre, descripcion, observaciones, precio, tipo);
             if(viejoNombre!=null)
                 controlador.modificarServicio(nombre, viejoNombre, modelo);

@@ -333,7 +333,11 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="txtPK" min="-2" pref="69" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="cmbTrabajador" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="cmbTrabajador" min="-2" pref="240" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtPKCita" min="-2" pref="69" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -357,6 +361,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Trabajador" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbTrabajador" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPKCita" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -550,6 +555,8 @@
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbCitaSinCancelarItemStateChanged"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmbCitaSinCancelarMouseClicked"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmbCitaSinCancelarMousePressed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -637,6 +644,8 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTotalActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtPKCita">
             </Component>
           </SubComponents>
         </Container>
