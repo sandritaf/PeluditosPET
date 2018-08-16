@@ -41,7 +41,7 @@ public class V_Factura extends javax.swing.JPanel {
         cCita = new C_Cita();
         cFecha = new C_Fecha();
   
-        cTrabajador.cargarTrabajador(cmbTrabajador);
+        cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenosSinID(cmbDueño);
         cCita.cargarCitas(cmbCitaSinCancelar);
         
