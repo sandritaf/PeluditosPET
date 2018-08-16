@@ -39,6 +39,7 @@ public class V_Mascota extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Guardar = new javax.swing.JLabel();
@@ -219,10 +220,12 @@ public class V_Mascota extends javax.swing.JPanel {
         Dueno1.setText("Sexo");
 
         Femenino.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(Femenino);
         Femenino.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         Femenino.setText("F");
 
         Masculino.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(Masculino);
         Masculino.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         Masculino.setSelected(true);
         Masculino.setText("M");
@@ -484,6 +487,7 @@ public class V_Mascota extends javax.swing.JPanel {
     private javax.swing.JLabel Observaciones;
     private javax.swing.JLabel Raza;
     private javax.swing.JLabel VerLista;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbDueno;
     private javax.swing.JComboBox<String> cmbEspecie;
     private javax.swing.JComboBox<String> cmbRaza;

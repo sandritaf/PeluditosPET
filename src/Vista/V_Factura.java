@@ -43,7 +43,7 @@ public class V_Factura extends javax.swing.JPanel {
   
         cTrabajador.cargarTrabajadores(cmbTrabajador);
         cMascota.cargarDuenosSinID(cmbDueño);
-        cCita.cargarCitas(cmbCitaSinCancelar);
+        cCita.cargarCitasSinCancelar(cmbCitaSinCancelar);
         
         if(controlador.getFacturas() != null){
             tablaFacturas.setModel(controlador.cargarTabla());
@@ -503,20 +503,24 @@ public class V_Factura extends javax.swing.JPanel {
 
             if(cFecha.fechasCorrectas(getText(txtFechaCita), getText(txtFecha))){
                 
-                mCita = cCita.getCita(idcita);
                 
-                id = controlador.getNumFacturasExistentes() +1; System.out.println("id "+id);
+                mCita = cCita.getCita(idcita);
+                mCita.setCancelado(true);
+                cCita.modificarCita(idcita, mCita);
+                
+                id = controlador.getNumFacturasExistentes()+1; 
 
                 modelo = new M_Factura(id, mCita, fecha, iva, subtotal, total, modoPago, cliente);
 
                 controlador.guardarFactura(modelo);
+                cCita.cargarCitasSinCancelar(cmbCitaSinCancelar);
 
                 reiniciarValores();
                 reiniciarBotones();
                 limpiarCajas();
             
                 if(controlador.getFacturas() != null)
-                tablaFacturas.setModel(controlador.cargarTabla());
+                    tablaFacturas.setModel(controlador.cargarTabla());
             }
             else{
                 JOptionPane.showMessageDialog(null, "La fecha de la factura debe ser igual o luego de la fecha de la cita. Por favor ingrese una fecha válida");
@@ -760,7 +764,7 @@ public class V_Factura extends javax.swing.JPanel {
     
     public void cargarValores(){
         
-        if(cCita.getCitas() != null){
+        if(cCita.getNumCitasExistentes()-cCita.getNumCitasCanceladas() > 0){
             
             mCita = cCita.getCita(getID(cmbCitaSinCancelar));
 
