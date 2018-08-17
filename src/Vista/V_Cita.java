@@ -45,7 +45,7 @@ public class V_Cita extends javax.swing.JPanel {
         cFecha = new C_Fecha();
 
         cServicio.cargarServicios(cmbServicio);        
-        cTrabajador.cargarTrabajador(cmbTrabajador);
+//        cTrabajador.cargarTrabajador(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         
         reiniciarValores();
@@ -210,6 +210,11 @@ public class V_Cita extends javax.swing.JPanel {
         Trabajador.setText("Trabajador");
 
         cmbServicio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cmbServicio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbServicioItemStateChanged(evt);
+            }
+        });
 
         Fecha.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Fecha.setText("Fecha");
@@ -386,7 +391,7 @@ public class V_Cita extends javax.swing.JPanel {
             if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota,mNatural.getCedula());   
-                JOptionPane.showMessageDialog(null, mMascota.toString());
+//                JOptionPane.showMessageDialog(null, mMascota.toString());
             }
             else if(tipoDueño(cmbDueño).equals("J")){
                 mJuridico = cJuridico.getPersona(dueño);
@@ -494,6 +499,17 @@ public class V_Cita extends javax.swing.JPanel {
         controlador.cargarMascotas(cmbMascota, getID(cmbDueño));
     }//GEN-LAST:event_cmbDueñoItemStateChanged
 
+    private void cmbServicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbServicioItemStateChanged
+
+        servicio = getComboSelected(cmbServicio);
+        
+        M_Servicio mServAux = cServicio.getServicio(servicio);
+
+        String trab = mServAux.getTipoTrabajador();
+        
+        controlador.cargarTrabajadores(cmbTrabajador, trab);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbServicioItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Cita;

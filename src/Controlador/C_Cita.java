@@ -2,13 +2,17 @@ package Controlador;
 
 import Modelo.M_Cita;
 import Conexion.Conexion;
+import Modelo.M_Estilista;
 import Modelo.M_Mascota;
 import Modelo.M_Natural;
+import Modelo.M_Trabajador;
+import Modelo.M_Veterinario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
+import com.sun.swing.internal.plaf.metal.resources.metal;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -216,7 +220,7 @@ public class C_Cita {
             if(resultados.size() >0){
                 combito.setEnabled(true);
                 while(resultados.hasNext() ){
-                    aux = ((M_Mascota)resultados.next()).toString();
+                    aux = ((M_Mascota)resultados.next()).printNombreID();// toString();
                     aModel.addElement(aux);
                 }
             } else combito.setEnabled(false);
@@ -278,6 +282,54 @@ public class C_Cita {
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en C_Cita->cargarTabla: "+e);
             return null;
+        }
+    }
+    
+    public void cargarTrabajadores(JComboBox combito, String servicio){
+        try {
+            
+            M_Trabajador trabajador = null;
+            M_Trabajador trabajador1 = null;
+            
+            if(servicio.equals("Veterinario"))
+                trabajador = new M_Veterinario(null, null, null, null, null, null, 0, null, null, 0, null, 0);
+            else{
+                trabajador = new M_Estilista(null, null, null, null, 0, null, null, 0, null, 0, true);
+                trabajador1 = new M_Estilista(null, null, null, null, 0, null, null, 0, null, 0, false);
+            }
+            
+            ObjectSet resultados = Conexion.getInstancia().buscar(trabajador);
+            
+            if(trabajador1 != null){
+                ObjectSet resultados1 = Conexion.getInstancia().buscar(trabajador1);
+            }
+            
+            DefaultComboBoxModel aModel = new DefaultComboBoxModel();
+            String aux = "";
+            combito.setModel(aModel);
+            
+            if(resultados.size() >0){
+                combito.setEnabled(true);
+                while(resultados.hasNext() ){
+                    aux = ((M_Trabajador)resultados.next()).toString();
+                    aModel.addElement(aux);
+                }
+            } else combito.setEnabled(false);
+            
+            if(trabajador1 != null){
+                ObjectSet resultados1 = Conexion.getInstancia().buscar(trabajador1);
+            
+                if(resultados1.size() >0){
+                    combito.setEnabled(true);
+                    while(resultados.hasNext() ){
+                        aux = ((M_Trabajador)resultados1.next()).toString();
+                        aModel.addElement(aux);
+                    }
+                } else combito.setEnabled(false);
+            }
+            
+        } catch (DatabaseClosedException | DatabaseReadOnlyException e) {
+            JOptionPane.showMessageDialog(null, "Error en C_Cita->cargarTrabajadores: "+e);
         }
     }
 }
