@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.C_Natural;
+import Controlador.C_Persona;
 import Modelo.M_Natural;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -11,11 +12,13 @@ public class V_Natural extends javax.swing.JPanel {
 
     M_Natural modelo;
     C_Natural controlador;
+    C_Persona cPersona;
     String nombre, apellido, cedula, telefono, direccion, auxCI;
     
     public V_Natural() {
         initComponents();
         controlador = new C_Natural();
+        cPersona = new C_Persona();
         reiniciarValores();
         tablaNaturales.setModel(controlador.cargarTabla());
         limpiarCajas();
@@ -314,12 +317,20 @@ public class V_Natural extends javax.swing.JPanel {
             direccion = txtDireccion.getText();
             
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono)){
-                modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
-                controlador.guardarNatural(modelo);
+                
+                if(!cPersona.personaExiste("V"+cedula)){
+                    
+                    modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
+                    controlador.guardarNatural(modelo);
 
-                reiniciarValores();
-                limpiarCajas();
-                tablaNaturales.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaNaturales.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
+
             }
             else
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");                
@@ -344,12 +355,19 @@ public class V_Natural extends javax.swing.JPanel {
             
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono)){
 
-                modelo.actualizar(direccion, telefono, nombre, apellido, cedula);            
-                controlador.modificarNatural(auxCI,"V"+cedula,modelo);
+                if(!cPersona.personaExiste("V"+cedula)){
+                
+                    modelo.actualizar(direccion, telefono, nombre, apellido, cedula);            
+                    controlador.modificarNatural(auxCI,"V"+cedula,modelo);
 
-                reiniciarValores();
-                limpiarCajas();
-                tablaNaturales.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaNaturales.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
+                
             }
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");

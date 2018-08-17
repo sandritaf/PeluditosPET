@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.C_Trabajador;
+import Controlador.C_Persona;
 import Modelo.M_Trabajador;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ public class V_Personal extends javax.swing.JPanel {
 
     M_Trabajador modelo;
     C_Trabajador controlador;
+    C_Persona cPersona;
     String nombre, apellido, cedula, rif, telefono, nivelI, profesion, auxCI;
     int edad, aniosE, precioTrabajo;
     
@@ -18,6 +20,7 @@ public class V_Personal extends javax.swing.JPanel {
         initComponents();
         txtPK.setVisible(false);
         controlador = new C_Trabajador();
+        cPersona = new C_Persona();
         reiniciarValores();
         limpiarCajas();
         
@@ -370,15 +373,21 @@ public class V_Personal extends javax.swing.JPanel {
             
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                precioTrabajo = modelo.precioSegunAnios(aniosE);
-                modelo.setPrecioTrabajo(precioTrabajo);
+                if(!cPersona.personaExiste("V"+cedula)){
+                    
+                    modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                    precioTrabajo = modelo.precioSegunAnios(aniosE);
+                    modelo.setPrecioTrabajo(precioTrabajo);
 
-                controlador.guardarTrabajador(modelo);
+                    controlador.guardarTrabajador(modelo);
 
-                reiniciarValores();
-                limpiarCajas();
-                tablaPersonal.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaPersonal.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
@@ -411,15 +420,21 @@ public class V_Personal extends javax.swing.JPanel {
             
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                precioTrabajo = modelo.precioSegunAnios(aniosE);
-                modelo.setPrecioTrabajo(precioTrabajo);
+                if(!cPersona.personaExiste("V"+cedula)){
+                
+                    modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                    precioTrabajo = modelo.precioSegunAnios(aniosE);
+                    modelo.setPrecioTrabajo(precioTrabajo);
 
-                controlador.modificarTrabajador(auxCI,"V"+cedula,modelo);
+                    controlador.modificarTrabajador(auxCI,"V"+cedula,modelo);
 
-                reiniciarValores();
-                limpiarCajas();
-                tablaPersonal.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaPersonal.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");

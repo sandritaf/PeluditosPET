@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.C_Veterinario;
+import Controlador.C_Persona;
 import Modelo.M_Veterinario;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -11,12 +12,14 @@ public class V_Veterinario extends javax.swing.JPanel {
 
     private M_Veterinario modelo;
     private C_Veterinario controlador;
+    private C_Persona cPersona;
     private String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCI;
     private int edad, aniosE, precioTrabajo;
     
     public V_Veterinario() {
         initComponents();
         controlador = new C_Veterinario();
+        cPersona = new C_Persona();
         
         if(controlador.getVeterinarios() != null)
             tablaVeterinarios.setModel(this.controlador.cargarTabla());
@@ -398,20 +401,26 @@ public class V_Veterinario extends javax.swing.JPanel {
             especializacion = getText(txtEspecializacion);
             
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){                
-                modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                controlador.guardarVeterinario(modelo);
+                
+                if(!cPersona.personaExiste("V"+cedula)){
+                
+                    modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                    controlador.guardarVeterinario(modelo);
+
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
             }
 
-            while(!modelo.esNumero(cedula)){
-                JOptionPane.showMessageDialog(null, "La cédula debe constar de sólo números");
-                cedula = getText(txtCedula);               
-                if(modelo.esNumero(cedula))
-                    break;
-            }
             
-            reiniciarValores();
-            limpiarCajas();
-            tablaVeterinarios.setModel(this.controlador.cargarTabla());
         }
         
     }//GEN-LAST:event_GuardarMouseClicked
@@ -440,12 +449,19 @@ public class V_Veterinario extends javax.swing.JPanel {
             
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){
             
-                modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                controlador.modificarVeterinario(auxCI, "V"+cedula, modelo);
+                if(!cPersona.personaExiste("V"+cedula)){
+                
+                    modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                    controlador.modificarVeterinario(auxCI, "V"+cedula, modelo);
 
-                reiniciarValores();
-                limpiarCajas();
-                tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
+                
             }
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");

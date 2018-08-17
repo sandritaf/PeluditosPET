@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.C_Estilista;
+import Controlador.C_Persona;
 import Modelo.M_Estilista;
 import Modelo.M_Trabajador;
 import javax.swing.JComboBox;
@@ -12,6 +13,7 @@ public class V_Estilista extends javax.swing.JPanel {
 
     M_Estilista modelo;
     C_Estilista controlador;
+    C_Persona cPersona;
     String auxCI, nombre, apellido, cedula, rif, telefono, nivelI, profesion;
     int edad, aniosE, precioTrabajo;
     boolean stripping;
@@ -20,6 +22,7 @@ public class V_Estilista extends javax.swing.JPanel {
         initComponents();
         txtPK.setVisible(false);
         controlador = new C_Estilista();
+        cPersona = new C_Persona();
         
         if(controlador.getEstilistas() !=null)
             tablaEstilistas.setModel(this.controlador.cargarTabla());
@@ -413,22 +416,28 @@ public class V_Estilista extends javax.swing.JPanel {
             if(Si.isSelected()) stripping = true;
             else stripping = false;
 
-            if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
-                
-                modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
-                precioTrabajo = modelo.precioSegunAnios(aniosE);
-                modelo.setPrecioTrabajo(precioTrabajo);
-                controlador.guardarEstilista(modelo);
+            if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                reiniciarValores();
-                reiniciarBotones();
-                limpiarCajas();
-                tablaEstilistas.setModel(this.controlador.cargarTabla());
-            }
-            else{
+                if(!cPersona.personaExiste("V"+cedula)){
+            
+                    modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
+                    precioTrabajo = modelo.precioSegunAnios(aniosE);
+                    modelo.setPrecioTrabajo(precioTrabajo);
+                    controlador.guardarEstilista(modelo);
+
+                    reiniciarValores();
+                    reiniciarBotones();
+                    limpiarCajas();
+                    tablaEstilistas.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
+            
+            }else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
-            }    
-        }
+            }
+ }
     }//GEN-LAST:event_GuardarMouseClicked
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
@@ -471,16 +480,22 @@ public class V_Estilista extends javax.swing.JPanel {
 
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){
                 
-                modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
-                precioTrabajo = modelo.precioSegunAnios(aniosE);
-                modelo.setPrecioTrabajo(precioTrabajo);
+                if(!cPersona.personaExiste("V"+cedula)){
+                
+                    modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
+                    precioTrabajo = modelo.precioSegunAnios(aniosE);
+                    modelo.setPrecioTrabajo(precioTrabajo);
 
-                controlador.modificarEstilista(auxCI,"V"+cedula,modelo);
+                    controlador.modificarEstilista(auxCI,"V"+cedula,modelo);
 
-                reiniciarValores();
-                reiniciarBotones();
-                limpiarCajas();
-                tablaEstilistas.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    reiniciarBotones();
+                    limpiarCajas();
+                    tablaEstilistas.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
