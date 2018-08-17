@@ -375,15 +375,21 @@ public class V_Personal extends javax.swing.JPanel {
 
                 if(!cPersona.personaExiste("V"+cedula)){
                     
-                    modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                    precioTrabajo = modelo.precioSegunAnios(aniosE);
-                    modelo.setPrecioTrabajo(precioTrabajo);
+                    if(!cPersona.rifExiste("J"+rif)){
+                    
+                        modelo = new M_Trabajador(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                        precioTrabajo = modelo.precioSegunAnios(aniosE);
+                        modelo.setPrecioTrabajo(precioTrabajo);
 
-                    controlador.guardarTrabajador(modelo);
+                        controlador.guardarTrabajador(modelo);
 
-                    reiniciarValores();
-                    limpiarCajas();
-                    tablaPersonal.setModel(this.controlador.cargarTabla());
+                        reiniciarValores();
+                        limpiarCajas();
+                        tablaPersonal.setModel(this.controlador.cargarTabla());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");    
+                    }                    
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
@@ -422,15 +428,23 @@ public class V_Personal extends javax.swing.JPanel {
 
                 if(!cPersona.personaExiste("V"+cedula)){
                 
-                    modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                    precioTrabajo = modelo.precioSegunAnios(aniosE);
-                    modelo.setPrecioTrabajo(precioTrabajo);
+                    if(!cPersona.rifExiste("J"+rif)){
+                        
+                        modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                        precioTrabajo = modelo.precioSegunAnios(aniosE);
+                        modelo.setPrecioTrabajo(precioTrabajo);
 
-                    controlador.modificarTrabajador(auxCI,"V"+cedula,modelo);
+                        controlador.modificarTrabajador(auxCI,"V"+cedula,modelo);
 
-                    reiniciarValores();
-                    limpiarCajas();
-                    tablaPersonal.setModel(this.controlador.cargarTabla());
+                        reiniciarValores();
+                        limpiarCajas();
+                        tablaPersonal.setModel(this.controlador.cargarTabla());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");    
+                    }                    
+    
+
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    

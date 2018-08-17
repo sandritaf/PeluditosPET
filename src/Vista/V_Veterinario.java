@@ -403,13 +403,19 @@ public class V_Veterinario extends javax.swing.JPanel {
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){                
                 
                 if(!cPersona.personaExiste("V"+cedula)){
-                
-                    modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                    controlador.guardarVeterinario(modelo);
 
-                    reiniciarValores();
-                    limpiarCajas();
-                    tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                    if(!cPersona.rifExiste("J"+rif)){
+                    
+                        modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                        controlador.guardarVeterinario(modelo);
+
+                        reiniciarValores();
+                        limpiarCajas();
+                        tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");                        
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
@@ -451,12 +457,18 @@ public class V_Veterinario extends javax.swing.JPanel {
             
                 if(!cPersona.personaExiste("V"+cedula)){
                 
-                    modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                    controlador.modificarVeterinario(auxCI, "V"+cedula, modelo);
+                    if(!cPersona.rifExiste("J"+rif)){
+                        
+                        modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+                        controlador.modificarVeterinario(auxCI, "V"+cedula, modelo);
 
-                    reiniciarValores();
-                    limpiarCajas();
-                    tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                        reiniciarValores();
+                        limpiarCajas();
+                        tablaVeterinarios.setModel(this.controlador.cargarTabla());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    

@@ -2,6 +2,7 @@
 package Vista;
 
 import Controlador.C_Juridico;
+import Controlador.C_Persona;
 import Modelo.M_Juridico;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -11,11 +12,13 @@ public class V_Juridico extends javax.swing.JPanel {
     
     M_Juridico modelo;
     C_Juridico controlador;
+    C_Persona cPersona;
     String razonSocial, nombreGerente, rif, telefono, direccion, auxRIF, mision;
     
     public V_Juridico() {
         initComponents();
         controlador = new C_Juridico();
+        cPersona = new C_Persona();
         
         if(controlador.getJuridicos() != null)
             tablaJuridicos.setModel(this.controlador.cargarTabla());
@@ -338,12 +341,20 @@ public class V_Juridico extends javax.swing.JPanel {
             modelo = new M_Juridico();
             
             if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
-                modelo = new M_Juridico(direccion, telefono, razonSocial, nombreGerente, rif, razonSocial);            
-                controlador.guardarJuridico(modelo);
+                
+                if(!cPersona.rifExiste("J"+rif)){
+                    
+                    modelo = new M_Juridico(direccion, telefono, razonSocial, nombreGerente, rif, razonSocial);            
+                    controlador.guardarJuridico(modelo);
 
-                reiniciarValores();
-                limpiarCajas();
-                tablaJuridicos.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaJuridicos.setModel(this.controlador.cargarTabla());
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");    
+                }
             }
             else
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
@@ -373,13 +384,20 @@ public class V_Juridico extends javax.swing.JPanel {
             
             if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                modelo.actualizar(direccion, telefono, razonSocial, nombreGerente, rif, mision);
-                //auxrif no tiene valor aquí
-                controlador.modificarJuridico(auxRIF,modelo,"J"+rif);
+                if(!cPersona.rifExiste("J"+rif)){
+                
+                    modelo.actualizar(direccion, telefono, razonSocial, nombreGerente, rif, mision);
+                    //auxrif no tiene valor aquí
+                    controlador.modificarJuridico(auxRIF,modelo,"J"+rif);
 
-                reiniciarValores();
-                limpiarCajas();
-                tablaJuridicos.setModel(this.controlador.cargarTabla());
+                    reiniciarValores();
+                    limpiarCajas();
+                    tablaJuridicos.setModel(this.controlador.cargarTabla());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");    
+                }                    
+                
             }
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
