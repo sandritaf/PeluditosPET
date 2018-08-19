@@ -4,6 +4,7 @@ package Vista;
 import Controlador.C_Cita;
 import Controlador.C_Mascota;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 
 public class V_Historial extends javax.swing.JPanel {
 
@@ -220,12 +221,12 @@ public class V_Historial extends javax.swing.JPanel {
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
-        
+        String titulos[] = {"Diagnóstico Final","Tratamiento", "Veterinario","Servicio","Fecha"};//, "Edad","Observaciones"};
+        tablaHistorial.setModel(new DefaultTableModel(null,titulos));
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked
-        //controlador.listarNaturales();
-        //tablaHistorial.setModel(controlador.cargarTabla());
+
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaHistorialMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaHistorialMousePressed

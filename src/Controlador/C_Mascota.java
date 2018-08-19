@@ -105,6 +105,7 @@ public class C_Mascota {
                 M_Natural n = (M_Natural)dueno;
                 System.out.println(n.getCedula());
                 return c1.agregarMascota(n, n.getCedula());
+                
             } else {
                 C_Juridico c2 = new C_Juridico(); //Si su nuevo dueño es un cliente Juridico se le agrega
                 M_Juridico j = (M_Juridico)dueno;
@@ -123,6 +124,7 @@ public class C_Mascota {
                 C_Natural c3 = new C_Natural();
                 M_Natural n = (M_Natural)dueno;
                 c3.eliminarMascota(n, n.getCedula());
+                
             } else {
                 C_Juridico c4 = new C_Juridico(); //Si su dueño anterior era un cliente Juridico 
                 M_Juridico j = (M_Juridico)dueno;
@@ -175,18 +177,6 @@ public class C_Mascota {
         }        
     }
     
-    public M_Mascota verMascota(String cod, M_Propietario p){
-        try{
-            M_Mascota mascota = new M_Mascota(0, cod, null, null, null, 0,null, p, null);
-            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
-            return (M_Mascota) resultado;
-//            JOptionPane.showMessageDialog(null, resultado.next());
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error en void M_Mascota verMascota "+ e);
-            return null;
-        }        
-    }
-    
     public M_Propietario buscarDueno(String id, String nombre){
         try{
             M_Mascota mascota = new M_Mascota(0,id, nombre, null, null, 0, null, null);
@@ -236,29 +226,6 @@ public class C_Mascota {
                 }
             } else duenos.setEnabled(false);
     
-//            M_Natural p = new M_Natural(null, null, null, null, null);
-//            M_Juridico p1 = new M_Juridico(null, null, null, null, null, null); 
-//
-//            ObjectSet rs = Conexion.getInstancia().buscar(p);
-//            ObjectSet rs1 = Conexion.getInstancia().buscar(p1);
-
-//            // si hay propietarios naturales
-//            if(rs.size() > 0){
-//                while(rs.hasNext() ){
-//                    aux = rs.next().toString();
-//                    aModel.addElement(aux);
-//                }
-//            }
-//            // si hay propietarios juridicos
-//            if(rs1.size() > 0){ 
-//                while(rs1.hasNext() ){
-//                   aux = rs1.next().toString();
-//                   aModel.addElement(aux);
-//                }
-//            }
-
-
-
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
         }
@@ -283,8 +250,7 @@ public class C_Mascota {
             JOptionPane.showMessageDialog(null, "Error en C_Mascota->cargarDuenos(duenos) "+e);
         }
     }
-    
-    
+        
     
     public void recorrerMascotasParaEliminarlas(int codigo,String id,M_Propietario dueno) {
         try{
@@ -312,19 +278,6 @@ public class C_Mascota {
         }
     }
     
-    
-//    public boolean idExiste(String id){
-//        try{    
-//            M_Mascota mascota = new M_Mascota(0,id, null, null, null, 0, null);
-//            ObjectSet resultado = Conexion.getInstancia().buscar(mascota);
-//            if(!resultado.next().equals(""))
-//                return true;
-//            return false;
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, e);
-//            return false;
-//        }
-//    }
     
     public M_Mascota[] getMascotas(String dueno){
         try {
@@ -504,14 +457,14 @@ public class C_Mascota {
                 for (M_Cita per : p) {
                     Object[] cli = new Object[5];
                     
-                    if(per.getTrabajador() instanceof M_Veterinario){                        
+                 //   if(per.getTrabajador() instanceof M_Veterinario){       //Por què solo las citas medicas=????                  
                         cli[0] = per.getDiagnosticoFinal();// getCodigo();
                         cli[1] = per.getTratamiento();
                         cli[2] = per.getTrabajador().nombreApellido();
                         cli[3] = per.getServicio().getNombre();
                         cli[4] = C_Fecha.deDateToString(per.getFecha());
                         dtm.addRow(cli);
-                    }
+                 //   }
                 }
             }
             return dtm;

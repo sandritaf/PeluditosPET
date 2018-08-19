@@ -21,7 +21,6 @@ public class C_Servicio {
           try{
                 String nombre = servicio.getNombre().toLowerCase();
                 servicio.setNombre(nombre);
-//              juridico.setRIF("J"+juridico.getRIF());
               Conexion.getInstancia().guardar(servicio);
               JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del cliente jurídico");
           }catch(Exception e){

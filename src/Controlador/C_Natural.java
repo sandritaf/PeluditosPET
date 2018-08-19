@@ -1,11 +1,8 @@
 package Controlador;
 
 import Conexion.Conexion;
-import Modelo.M_Juridico;
 import Modelo.M_Natural;
-import Modelo.M_Mascota;
 import Modelo.M_Propietario;
-import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
@@ -47,7 +44,6 @@ public class C_Natural {
     
     public M_Natural getPersona(String cedula){
         try{
-    //        M_Natural n = new M_Natural(null, null, null, null,"V"+ cedula);
             M_Natural n = new M_Natural(null, null, null, null,cedula);
             ObjectSet resultado = Conexion.getInstancia().buscar(n);
             if (resultado.isEmpty())

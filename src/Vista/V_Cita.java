@@ -390,12 +390,10 @@ public class V_Cita extends javax.swing.JPanel {
             
             if(tipoDueño(cmbDueño).equals("V")){
                 mNatural = cNatural.getPersona(dueño);
-                mMascota = cMascota.getMascota(mascota,mNatural.getCedula());   
-//                JOptionPane.showMessageDialog(null, mMascota.toString());
+                mMascota = cMascota.getMascota(mascota,mNatural.getCedula());  
             }
             else if(tipoDueño(cmbDueño).equals("J")){
                 mJuridico = cJuridico.getPersona(dueño);
-                JOptionPane.showMessageDialog(null, mMascota.toString());
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
 
@@ -481,6 +479,9 @@ public class V_Cita extends javax.swing.JPanel {
         cmbMascota.setSelectedItem(modelo.getMascota().toString());
         cmbTrabajador.setSelectedItem(modelo.getTrabajador().toString());
         txtFecha.setText(C_Fecha.deDateToString(modelo.getFecha()));
+        txtTratamiento.setText(modelo.getTratamiento());
+        txtDiagnosticoFinal.setText(modelo.getDiagnosticoFinal());
+                
     }//GEN-LAST:event_tablaCitasMousePressed
 
     private void cmbMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMascotaActionPerformed

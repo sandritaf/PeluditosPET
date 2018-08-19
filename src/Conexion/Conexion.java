@@ -2,8 +2,6 @@
 package Conexion;
 
 import Modelo.M_Cita;
-import Modelo.M_Especie;
-import Modelo.M_Mascota;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -17,14 +15,12 @@ public class Conexion {
     
     private static Conexion modelo;
     
-    private String direccionSandra = "C:\\Users\\brenda\\Desktop\\PeluditosPET\\peluditospet.yap";
-    private String direccionSandra2 = "C:\\Users\\brenda\\Documents\\NetBeansProjects\\PeluditosPET\\src\\Conexion\\bddSandra.db4o";
     private String direccionGenova = "C:\\Users\\Ecastillo\\Documents\\NetBeansProjects\\PeluditosPET\\src\\Conexion\\peluditospet.db4o";
     private ObjectContainer bd;
     
     public Conexion(){
         EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
-        bd = Db4oEmbedded.openFile(config,direccionSandra2);
+        bd = Db4oEmbedded.openFile(config,direccionGenova);
     }
         
     public void cerrarConexion(){
@@ -72,8 +68,10 @@ public class Conexion {
         }
     }
         
-    public void buscarResultadosSODA(Date fechaI, Date fechaF /*, M_Trabajador trabajador*/ ) { 
-        Vector<M_Cita> resultado = new Vector<M_Cita>();
+    public M_Cita[] buscarResultadosSODA(Date fechaI, Date fechaF /*, M_Trabajador trabajador*/ ) { 
+      //  Vector<M_Cita> resultado = new Vector<M_Cita>();
+        M_Cita[] arrayCita = null;
+        int i = 0;
         
         Query consulta = bd.query(); 
         consulta.constrain(M_Cita.class);     
@@ -86,12 +84,22 @@ public class Conexion {
         
         ObjectSet resultados = consulta.execute();
         
-        while(resultados.hasNext()) { 
-            resultado.add((M_Cita)resultados.next()); 
-        } 
-        for(int i=0; i<resultado.size(); i++){
-            System.out.println((i+1)+".- "+resultado.elementAt(i));
+        if (resultados.hasNext()) {
+            arrayCita = new M_Cita[resultados.size()];
+            while (resultados.hasNext()) {
+                arrayCita[i] = (M_Cita) resultados.next();
+                i++;
+            }
         }
+        
+//        while(resultados.hasNext()) { 
+//            resultado.add((M_Cita)resultados.next()); 
+//        } 
+//        for(int i=0; i<resultado.size(); i++){
+//            System.out.println((i+1)+".- "+resultado.elementAt(i));
+//        }
+
+          return arrayCita;
     } 
     
 }

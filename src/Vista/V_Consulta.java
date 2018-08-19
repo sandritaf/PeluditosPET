@@ -270,7 +270,6 @@ public class V_Consulta extends javax.swing.JPanel {
 
     private void BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMouseClicked
      
-        
         if(cajasVacias()){
             JOptionPane.showMessageDialog(null, "Debe llenar todos los campos para guardar");    
         }

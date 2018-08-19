@@ -257,18 +257,15 @@ public class C_Cita {
     
     public DefaultTableModel cargarCitasCanceladas(String idVeterinario, Date fechai, Date fechaf){
         try{
-            C_Fecha cFecha = new C_Fecha();
-            
             String titulos[] = {"Mascota","Diagnóstico Final","Tratamiento","Servicio", "Fecha"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-            M_Cita[] p = getCitas();
-            
+            M_Cita[] p = Conexion.getInstancia().buscarResultadosSODA(fechai, fechaf);            
             
             if (p != null) {
                 for (M_Cita per : p) {
                     Object[] cli = new Object[5];
                     
-                    if(per.isCancelado() && per.getTrabajador().getCedula().equals(idVeterinario)){
+                    if(per.isCancelado()){
                         cli[0] = per.getMascota().getNombre();
                         cli[1] = per.getDiagnosticoFinal();
                         cli[2] = per.getTratamiento();
