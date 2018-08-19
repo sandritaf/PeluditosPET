@@ -1,7 +1,7 @@
 
 package Conexion;
 
-import Modelo.M_Cita;
+import Modelo.M_Factura;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -9,7 +9,6 @@ import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.query.Constraint;
 import com.db4o.query.Query;
 import java.util.Date;
-import java.util.Vector;
 
 public class Conexion {
     
@@ -68,38 +67,27 @@ public class Conexion {
         }
     }
         
-    public M_Cita[] buscarResultadosSODA(Date fechaI, Date fechaF /*, M_Trabajador trabajador*/ ) { 
-      //  Vector<M_Cita> resultado = new Vector<M_Cita>();
-        M_Cita[] arrayCita = null;
+    public M_Factura[] buscarResultadosSODA(Date fechaI, Date fechaF /*, M_Trabajador trabajador*/ ) { 
+        M_Factura[] arrayFactura = null;
         int i = 0;
         
         Query consulta = bd.query(); 
-        consulta.constrain(M_Cita.class);     
+        consulta.constrain(M_Factura.class);     
         
         Constraint c = consulta.descend("fecha").constrain(fechaF).smaller();
-        
-       // Constraint d = consulta.descend("trabajador").constrain((trabajador));
-        
-        consulta.descend("fecha").constrain((fechaI)).greater().and(c); //.and(d); ??
+        consulta.descend("fecha").constrain((fechaI)).greater().and(c);
         
         ObjectSet resultados = consulta.execute();
         
         if (resultados.hasNext()) {
-            arrayCita = new M_Cita[resultados.size()];
+            arrayFactura = new M_Factura[resultados.size()];
             while (resultados.hasNext()) {
-                arrayCita[i] = (M_Cita) resultados.next();
+                arrayFactura[i] = (M_Factura) resultados.next();
                 i++;
             }
         }
-        
-//        while(resultados.hasNext()) { 
-//            resultado.add((M_Cita)resultados.next()); 
-//        } 
-//        for(int i=0; i<resultado.size(); i++){
-//            System.out.println((i+1)+".- "+resultado.elementAt(i));
-//        }
 
-          return arrayCita;
+          return arrayFactura;
     } 
     
 }

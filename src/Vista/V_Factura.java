@@ -290,7 +290,7 @@ public class V_Factura extends javax.swing.JPanel {
         });
 
         Trabajador.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Trabajador.setText("Trabajador");
+        Trabajador.setText("Cajero");
 
         Fecha.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Fecha.setText("Fecha");
@@ -609,14 +609,13 @@ public class V_Factura extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturasMousePressed
-        
+        cmbCitaSinCancelar.setEnabled(false);
         Guardar.setEnabled(false);
         Modificar.setEnabled(true);
         Eliminar.setEnabled(true);
         
         limpiarCajas();
         
-        //mCita = cCita.getCita(getID(tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 0).toString()));
         modeloAux = controlador.getFactura(Integer.parseInt(tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 0).toString())); 
 
         if(modeloAux == null)
@@ -632,8 +631,6 @@ public class V_Factura extends javax.swing.JPanel {
         txtPKCita.setText(Integer.toString(modeloAux.getCita().getId()));
         txtFechaCita.setText(C_Fecha.deDateToString(mCita.getFecha()));
         txtFecha.setText(C_Fecha.deDateToString(mCita.getFecha()));
-        
-        //cmbDueño.setEnabled(true);
         
         cliente = modeloAux.getNombreCliente();
 
@@ -746,6 +743,7 @@ public class V_Factura extends javax.swing.JPanel {
         txtDueño.setEnabled(false);
         txtRepresentante.setEnabled(false);
         txtTotal.setEnabled(false);
+        cmbCitaSinCancelar.setEnabled(true);
     }
     
     private boolean fechaVacia(String fecha){
