@@ -31,6 +31,7 @@ public class V_Servicio extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         PanelFondo = new javax.swing.JPanel();
         PanelLateral = new javax.swing.JPanel();
         Guardar = new javax.swing.JLabel();
@@ -210,10 +211,12 @@ public class V_Servicio extends javax.swing.JPanel {
         TipoTrabajador.setText("Trabajador");
 
         Veterinario.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(Veterinario);
         Veterinario.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         Veterinario.setText("Veterinario");
 
         Estilista.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(Estilista);
         Estilista.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         Estilista.setText("Estilista");
 
@@ -329,7 +332,7 @@ public class V_Servicio extends javax.swing.JPanel {
             
             if(Veterinario.isSelected())
                 tipo = "Veterinario";
-            if(Estilista.isSelected())
+            else
                 tipo = "Estilista";
             
             modelo = new M_Servicio(nombre, descripcion, observaciones, precio, tipo);
@@ -356,7 +359,7 @@ public class V_Servicio extends javax.swing.JPanel {
             
             if(Veterinario.isSelected())
                 tipo = "Veterinario";
-            if(Estilista.isSelected())
+            else
                 tipo = "Estilista";
             
             modelo = new M_Servicio();
@@ -374,6 +377,9 @@ public class V_Servicio extends javax.swing.JPanel {
     }//GEN-LAST:event_ModificarMouseClicked
 
     private void tablaServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaServiciosMousePressed
+        
+        limpiarCajas();
+        
         modelo = controlador.getServicio(tablaServicios.getValueAt(tablaServicios.getSelectedRow(), 0).toString());
         
         if(modelo != null){
@@ -383,10 +389,14 @@ public class V_Servicio extends javax.swing.JPanel {
             txtDescripcion.setText(modelo.getDescripción());
             txtPrecio.setText(Integer.toString(modelo.getPrecio()));
             
-            if(modelo.getTipoTrabajador().equals("Veterinario"))
-                Veterinario.setSelected(true);
-            if(modelo.getTipoTrabajador().equals("Estilista"))
-                Estilista.setSelected(true);
+            if(modelo.getTipoTrabajador().equals("Veterinario")){
+                Veterinario.setSelected(true);   
+                Estilista.setSelected(false);   
+            }
+            else {
+                Estilista.setSelected(true);                
+                Veterinario.setSelected(false);                
+            }
             
             Guardar.setEnabled(false);
             Modificar.setEnabled(true);
@@ -431,6 +441,7 @@ public class V_Servicio extends javax.swing.JPanel {
     private javax.swing.JLabel TipoTrabajador;
     private javax.swing.JLabel VerLista;
     private javax.swing.JRadioButton Veterinario;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -59,6 +59,7 @@ public class C_Servicio {
                 encontrado.setDescripción(s.getDescripción());
                 encontrado.setObservaciones(s.getObservaciones());
                 encontrado.setPrecio(s.getPrecio());
+                encontrado.setTipoTrabajador(s.getTipoTrabajador());
                 
                 Conexion.getInstancia().guardar(encontrado);
                 JOptionPane.showMessageDialog(null, "Se ha modificado correctamente el servicio" );
