@@ -126,7 +126,7 @@ public class Menu extends javax.swing.JFrame {
         btnJuridico.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnJuridico.setForeground(new java.awt.Color(255, 255, 255));
         btnJuridico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/empresa48.png"))); // NOI18N
-        btnJuridico.setText("P. Juridico");
+        btnJuridico.setText("P. Jurídica");
         btnJuridico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnJuridicoMouseClicked(evt);
@@ -493,7 +493,4 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel pLateral;
     // End of variables declaration//GEN-END:variables
 
-    public Dimension getSize(){
-        return PanelPrincipal.getSize();
-    }
 }

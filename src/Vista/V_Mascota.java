@@ -334,8 +334,8 @@ public class V_Mascota extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -526,9 +526,9 @@ public class V_Mascota extends javax.swing.JPanel {
         txtNombre.setText(null);
         txtEdad.setText(null);
         txtObservaciones.setText(null);
-        cmbDueno.setSelectedIndex(0);
-        cmbEspecie.setSelectedIndex(0);
-        cmbRaza.setSelectedIndex(0);
+//        cmbDueno.setSelectedIndex(0);
+//        cmbEspecie.setSelectedIndex(0);
+//        cmbRaza.setSelectedIndex(0);
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo

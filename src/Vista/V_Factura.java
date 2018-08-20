@@ -40,7 +40,10 @@ public class V_Factura extends javax.swing.JPanel {
         cMascota = new C_Mascota();
         cCita = new C_Cita();
         cFecha = new C_Fecha();
-  
+
+        txtPK.setVisible(false);
+        txtPKCita.setVisible(false);
+        
         cTrabajador.cargarTrabajadores(cmbTrabajador);
         cCita.cargarCitasSinCancelar(cmbCitaSinCancelar);
         
@@ -296,7 +299,6 @@ public class V_Factura extends javax.swing.JPanel {
         Fecha.setText("Fecha");
 
         txtFecha.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        txtFecha.setForeground(new java.awt.Color(102, 102, 102));
         txtFecha.setText("yyyy-mm-dd");
         txtFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
