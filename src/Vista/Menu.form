@@ -299,7 +299,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Recursos/empresa48.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="P. Juridico"/>
+                <Property name="text" type="java.lang.String" value="P. Jur&#xed;dica"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnJuridicoMouseClicked"/>
