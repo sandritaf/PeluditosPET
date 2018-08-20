@@ -481,6 +481,9 @@ public class V_Cita extends javax.swing.JPanel {
         cmbMascota.setSelectedItem(modelo.getMascota().toString());
         cmbTrabajador.setSelectedItem(modelo.getTrabajador().toString());
         txtFecha.setText(C_Fecha.deDateToString(modelo.getFecha()));
+        txtDiagnosticoFinal.setText(modelo.getDiagnosticoFinal());
+        txtTratamiento.setText(modelo.getTratamiento());
+
     }//GEN-LAST:event_tablaCitasMousePressed
 
     private void cmbMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMascotaActionPerformed

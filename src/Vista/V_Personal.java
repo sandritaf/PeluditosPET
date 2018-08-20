@@ -238,6 +238,10 @@ public class V_Personal extends javax.swing.JPanel {
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion.setText("Profesión");
 
+        txtProfesion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -426,25 +430,11 @@ public class V_Personal extends javax.swing.JPanel {
             
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                if(!cPersona.personaExiste("V"+cedula)){
-                
-                    if(!cPersona.rifExiste("J"+rif)){
-                        
-                        modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                        precioTrabajo = modelo.precioSegunAnios(aniosE);
-                        modelo.setPrecioTrabajo(precioTrabajo);
-
-                        controlador.modificarTrabajador(auxCI,"V"+cedula,modelo);
-
-                        reiniciarValores();
-                        limpiarCajas();
-                        tablaPersonal.setModel(this.controlador.cargarTabla());
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");    
-                    }                    
-    
-
+                if(("V"+cedula).equals(auxCI)){
+                    modificar();
+                }
+                else if(!cPersona.personaExiste("V"+cedula)){
+                    modificar();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
@@ -617,6 +607,24 @@ public class V_Personal extends javax.swing.JPanel {
     //Devuelve el valor de un txtField
     public String getText(JTextField txt){
         return txt.getText();
+    }
+    
+    public void modificar(){
+        if(!cPersona.rifExiste("J"+rif)){
+
+            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            modelo.setPrecioTrabajo(precioTrabajo);
+
+            controlador.modificarTrabajador(auxCI,"V"+cedula,modelo);
+
+            reiniciarValores();
+            limpiarCajas();
+            tablaPersonal.setModel(this.controlador.cargarTabla());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");    
+        }
     }
     
 }

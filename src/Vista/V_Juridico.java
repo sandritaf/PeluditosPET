@@ -211,6 +211,8 @@ public class V_Juridico extends javax.swing.JPanel {
         Direccion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Direccion.setText("Dirección");
 
+        txtNombreGerente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         txtDireccion.setColumns(20);
         txtDireccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDireccion.setRows(5);
@@ -297,8 +299,8 @@ public class V_Juridico extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -384,15 +386,11 @@ public class V_Juridico extends javax.swing.JPanel {
             
             if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                if(!cPersona.rifExiste("J"+rif)){
-                
-                    modelo.actualizar(direccion, telefono, razonSocial, nombreGerente, rif, mision);
-                    //auxrif no tiene valor aquí
-                    controlador.modificarJuridico(auxRIF,modelo,"J"+rif);
-
-                    reiniciarValores();
-                    limpiarCajas();
-                    tablaJuridicos.setModel(this.controlador.cargarTabla());
+                if(("J"+rif).equals(auxRIF)){
+                    modificar();
+                }
+                else if(!cPersona.rifExiste("J"+rif)){
+                    modificar();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");    
@@ -408,16 +406,16 @@ public class V_Juridico extends javax.swing.JPanel {
 
     private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
         
-        if(getText(txtRIF).equals("")){
-            JOptionPane.showMessageDialog(null, "El campo de RIF debe estar lleno para realizar ésta acción");
-        }
-        else{                       
+//        if(getText(txtRIF).equals("")){
+//            JOptionPane.showMessageDialog(null, "El campo de RIF debe estar lleno para realizar ésta acción");
+//        }
+//        else{                       
             controlador.eliminarJuridico(auxRIF);
             
             reiniciarValores();
             limpiarCajas();
             tablaJuridicos.setModel(this.controlador.cargarTabla());
-        }
+//        }
         
     }//GEN-LAST:event_EliminarMouseClicked
 
@@ -531,6 +529,16 @@ public class V_Juridico extends javax.swing.JPanel {
     //Devuelve el valor de un txtField
     public String getText(JTextField txt){
         return txt.getText();
+    }
+    
+    public void modificar(){
+        modelo.actualizar(direccion, telefono, razonSocial, nombreGerente, rif, mision);
+        //auxrif no tiene valor aquí
+        controlador.modificarJuridico(auxRIF,modelo,"J"+rif);
+
+        reiniciarValores();
+        limpiarCajas();
+        tablaJuridicos.setModel(this.controlador.cargarTabla());
     }
     
 }

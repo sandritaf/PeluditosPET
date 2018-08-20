@@ -494,7 +494,4 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel pLateral;
     // End of variables declaration//GEN-END:variables
 
-    public Dimension getSize(){
-        return PanelPrincipal.getSize();
-    }
 }

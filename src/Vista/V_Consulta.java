@@ -291,7 +291,7 @@ public class V_Consulta extends javax.swing.JPanel {
     }//GEN-LAST:event_BuscarMouseClicked
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
-
+        limpiarCajas();
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void VerListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerListaMouseClicked

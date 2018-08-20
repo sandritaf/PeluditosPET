@@ -234,6 +234,10 @@ public class V_Estilista extends javax.swing.JPanel {
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion.setText("Profesión");
 
+        txtProfesion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -274,7 +278,7 @@ public class V_Estilista extends javax.swing.JPanel {
                     .addComponent(txtCedula)
                     .addComponent(txtNombre)
                     .addComponent(txtTelefono))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(RIF)
                     .addComponent(Edad)
@@ -282,11 +286,12 @@ public class V_Estilista extends javax.swing.JPanel {
                     .addComponent(Stripping)
                     .addComponent(Apellido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(Si)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(No))
+                        .addComponent(No)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                     .addComponent(txtRIF)
                     .addComponent(txtProfesion)
@@ -366,8 +371,8 @@ public class V_Estilista extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -486,24 +491,11 @@ public class V_Estilista extends javax.swing.JPanel {
 
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){
                 
-                if(!cPersona.personaExiste("V"+cedula)){
-                
-                    if(!cPersona.rifExiste("J"+rif)){
-                        
-                        modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
-                        precioTrabajo = modelo.precioSegunAnios(aniosE);
-                        modelo.setPrecioTrabajo(precioTrabajo);
-
-                        controlador.modificarEstilista(auxCI,"V"+cedula,modelo);
-
-                        reiniciarValores();
-                        reiniciarBotones();
-                        limpiarCajas();
-                        tablaEstilistas.setModel(this.controlador.cargarTabla());
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");                        
-                    }
+                if(("V"+cedula).equals(auxCI)){
+                    modificar();
+                }
+                else if(!cPersona.personaExiste("V"+cedula)){
+                    modificar();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
@@ -676,4 +668,24 @@ public class V_Estilista extends javax.swing.JPanel {
         Modificar.setEnabled(false);
         Eliminar.setEnabled(false);
     }
+    
+    public void modificar(){
+        if(!cPersona.rifExiste("J"+rif)){
+
+            modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
+            precioTrabajo = modelo.precioSegunAnios(aniosE);
+            modelo.setPrecioTrabajo(precioTrabajo);
+
+            controlador.modificarEstilista(auxCI,"V"+cedula,modelo);
+
+            reiniciarValores();
+            reiniciarBotones();
+            limpiarCajas();
+            tablaEstilistas.setModel(this.controlador.cargarTabla());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El rif ingresado coincide con una persona ya registrada. Intente de nuevo");                        
+        }
+    }
+    
 }

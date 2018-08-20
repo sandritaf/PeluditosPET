@@ -192,6 +192,7 @@ public class V_Natural extends javax.swing.JPanel {
         txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         txtDireccion.setColumns(20);
+        txtDireccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDireccion.setRows(5);
         jScrollPane1.setViewportView(txtDireccion);
 
@@ -278,10 +279,10 @@ public class V_Natural extends javax.swing.JPanel {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -355,14 +356,11 @@ public class V_Natural extends javax.swing.JPanel {
             
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono)){
 
-                if(!cPersona.personaExiste("V"+cedula)){
-                
-                    modelo.actualizar(direccion, telefono, nombre, apellido, cedula);            
-                    controlador.modificarNatural(auxCI,"V"+cedula,modelo);
-
-                    reiniciarValores();
-                    limpiarCajas();
-                    tablaNaturales.setModel(this.controlador.cargarTabla());
+                if(("V"+cedula).equals(auxCI)){
+                    modificar();
+                }
+                else if(!cPersona.personaExiste("V"+cedula)){
+                    modificar();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "La cédula ingresada coincide con una persona ya registrada. Intente de nuevo");    
@@ -500,6 +498,15 @@ public class V_Natural extends javax.swing.JPanel {
     //Devuelve el valor de un txtField
     public String getText(JTextField txt){
         return txt.getText();
+    }
+    
+    public void modificar(){
+        modelo.actualizar(direccion, telefono, nombre, apellido, cedula);            
+        controlador.modificarNatural(auxCI,"V"+cedula,modelo);
+
+        reiniciarValores();
+        limpiarCajas();
+        tablaNaturales.setModel(this.controlador.cargarTabla());
     }
     
 }
