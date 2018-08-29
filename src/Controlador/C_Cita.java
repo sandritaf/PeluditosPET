@@ -198,7 +198,7 @@ public class C_Cita {
                     cli[3] = per.getTrabajador().nombreApellido();
                     cli[4] = per.getServicio().toString();
                     cli[5] = C_Fecha.deDateToString(per.getFecha());
-                    cli[6] = per.isCancelado();
+                    cli[6] = per.estacancelado();
                     dtm.addRow(cli);
                 }
             }

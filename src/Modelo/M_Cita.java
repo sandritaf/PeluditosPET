@@ -150,4 +150,9 @@ public class M_Cita {
         return "Hola";
     }
     
+    public String estacancelado(){
+        if(isCancelado())
+            return "Si";
+        return "No";
+    }
 }
