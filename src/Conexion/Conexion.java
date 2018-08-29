@@ -1,9 +1,7 @@
 
 package Conexion;
 
-import Modelo.M_Cita;
-import Modelo.M_Especie;
-import Modelo.M_Mascota;
+import Modelo.M_Factura;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -11,7 +9,6 @@ import com.db4o.config.EmbeddedConfiguration;
 import com.db4o.query.Constraint;
 import com.db4o.query.Query;
 import java.util.Date;
-import java.util.Vector;
 
 public class Conexion {
     
@@ -24,7 +21,7 @@ public class Conexion {
     
     public Conexion(){
         EmbeddedConfiguration config = Db4oEmbedded.newConfiguration();
-        bd = Db4oEmbedded.openFile(config,direccionSandra2);
+        bd = Db4oEmbedded.openFile(config,direccionGenova);
     }
         
     public void cerrarConexion(){
@@ -72,26 +69,27 @@ public class Conexion {
         }
     }
         
-    public void buscarResultadosSODA(Date fechaI, Date fechaF /*, M_Trabajador trabajador*/ ) { 
-        Vector<M_Cita> resultado = new Vector<M_Cita>();
+    public M_Factura[] buscarResultadosSODA(Date fechaI, Date fechaF /*, M_Trabajador trabajador*/ ) { 
+        M_Factura[] arrayFactura = null;
+        int i = 0;
         
         Query consulta = bd.query(); 
-        consulta.constrain(M_Cita.class);     
+        consulta.constrain(M_Factura.class);     
         
         Constraint c = consulta.descend("fecha").constrain(fechaF).smaller();
-        
-       // Constraint d = consulta.descend("trabajador").constrain((trabajador));
-        
-        consulta.descend("fecha").constrain((fechaI)).greater().and(c); //.and(d); ??
+        consulta.descend("fecha").constrain((fechaI)).greater().and(c);
         
         ObjectSet resultados = consulta.execute();
         
-        while(resultados.hasNext()) { 
-            resultado.add((M_Cita)resultados.next()); 
-        } 
-        for(int i=0; i<resultado.size(); i++){
-            System.out.println((i+1)+".- "+resultado.elementAt(i));
+        if (resultados.hasNext()) {
+            arrayFactura = new M_Factura[resultados.size()];
+            while (resultados.hasNext()) {
+                arrayFactura[i] = (M_Factura) resultados.next();
+                i++;
+            }
         }
+
+          return arrayFactura;
     } 
     
 }

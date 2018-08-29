@@ -46,7 +46,8 @@ public class C_Especie {
 //            JOptionPane.showMessageDialog(null, e);
 //        }
 //    }
-        
+       
+    //Para agregar razas a la especie
     public void modificarEspecie(String nombreViejo, String nombre, String razaNueva){
         try{
             M_Especie esp = new M_Especie(nombreViejo);
@@ -65,16 +66,6 @@ public class C_Especie {
             }
          }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error modificando especie: "+ex);
-        }
-    }
-        
-    public void verEspecie(String nombre){
-        try{
-            M_Especie especie = new M_Especie(nombre);
-            ObjectSet result = Conexion.getInstancia().buscar(especie);
-            JOptionPane.showMessageDialog(null, result.next());
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
         }
     }
     

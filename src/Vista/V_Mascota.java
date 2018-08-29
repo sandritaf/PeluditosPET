@@ -222,6 +222,7 @@ public class V_Mascota extends javax.swing.JPanel {
         Femenino.setBackground(new java.awt.Color(153, 204, 255));
         buttonGroup1.add(Femenino);
         Femenino.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Femenino.setSelected(true);
         Femenino.setText("F");
 
         Masculino.setBackground(new java.awt.Color(153, 204, 255));

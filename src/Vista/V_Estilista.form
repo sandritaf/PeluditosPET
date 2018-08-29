@@ -246,11 +246,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="aniosExperiencia" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="NivelInstruccion" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="primerNombre" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtPK" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="primerNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Cedula" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Telefono" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -296,7 +292,6 @@
                           <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Apellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPK" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -512,8 +507,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="No"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtPK">
             </Component>
           </SubComponents>
         </Container>

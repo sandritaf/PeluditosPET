@@ -57,15 +57,6 @@ public class C_Estilista {
         }
     }
     
-    public void verEstilista(String cedula){
-        try{
-            M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null, 0, false);
-            ObjectSet result = Conexion.getInstancia().buscar(estilista);
-            JOptionPane.showMessageDialog(null, result.next());
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
     
     public void listarEstilistas(){
        try{
@@ -108,7 +99,7 @@ public class C_Estilista {
             if (p != null) {
                 for (M_Estilista per : p) {
                     Object[] cli = new Object[4];
-                    cli[0] = per.getCedula();// subString(1);
+                    cli[0] = per.getCedula();
                     cli[1] = per.getNombre();
                     cli[2] = per.getApellido();
                     cli[3] = per.getTelefono();
@@ -124,7 +115,6 @@ public class C_Estilista {
     
     public M_Estilista getPersona(String cedula){
         try{
-    //        M_Estilista estilista = new M_Estilista(null, null,"V"+ cedula, null, 0, null, null, 0, null, 0, false);
             M_Estilista estilista = new M_Estilista(null, null, cedula, null, 0, null, null, 0, null, 0, false);
             ObjectSet resultado = Conexion.getInstancia().buscar(estilista);
             if (resultado.isEmpty())

@@ -50,11 +50,9 @@ public class M_Especie {
     
     public void setRaza(String raza){
         for(int i=0; i<MAX_RAZAS; i++){
-            System.out.println("Ciclo:"+i);
             if (razas[i].compareTo("")==0){
                 razas[i] = raza;
                 numRazas++;
-                System.out.println("Se añadio una raza: "+raza+ ""+numRazas);
                 break;
             }
         }

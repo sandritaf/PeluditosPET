@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.M_Cita;
 import Conexion.Conexion;
 import Modelo.M_Estilista;
+import Modelo.M_Factura;
 import Modelo.M_Mascota;
 import Modelo.M_Natural;
 import Modelo.M_Trabajador;
@@ -257,18 +258,17 @@ public class C_Cita {
     
     public DefaultTableModel cargarCitasCanceladas(String idVeterinario, Date fechai, Date fechaf){
         try{
-            C_Fecha cFecha = new C_Fecha();
-            
             String titulos[] = {"Mascota","Diagnóstico Final","Tratamiento","Servicio", "Fecha"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
-            M_Cita[] p = getCitas();
-            
+            M_Factura[] p = Conexion.getInstancia().buscarResultadosSODA(fechai, fechaf);            
             
             if (p != null) {
-                for (M_Cita per : p) {
+                for (M_Factura result : p) {
+                    M_Cita per = result.getCita();
                     Object[] cli = new Object[5];
                     
-                    if(per.isCancelado() && per.getTrabajador().getCedula().equals(idVeterinario)){
+                    //Si el veterinario correspondiente a la cita es el mismo que selecciono el usuario
+                    if(per.getTrabajador().getCedula().compareTo(idVeterinario) == 0){
                         cli[0] = per.getMascota().getNombre();
                         cli[1] = per.getDiagnosticoFinal();
                         cli[2] = per.getTratamiento();

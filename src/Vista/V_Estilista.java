@@ -1,4 +1,3 @@
-
 package Vista;
 
 import Controlador.C_Estilista;
@@ -20,7 +19,6 @@ public class V_Estilista extends javax.swing.JPanel {
     
     public V_Estilista() {
         initComponents();
-        txtPK.setVisible(false);
         controlador = new C_Estilista();
         cPersona = new C_Persona();
         
@@ -67,7 +65,6 @@ public class V_Estilista extends javax.swing.JPanel {
         Stripping = new javax.swing.JLabel();
         Si = new javax.swing.JRadioButton();
         No = new javax.swing.JRadioButton();
-        txtPK = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaEstilistas = new javax.swing.JTable();
 
@@ -265,10 +262,7 @@ public class V_Estilista extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aniosExperiencia)
                     .addComponent(NivelInstruccion)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(primerNombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(primerNombre)
                     .addComponent(Cedula)
                     .addComponent(Telefono))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,8 +300,7 @@ public class V_Estilista extends javax.swing.JPanel {
                     .addComponent(primerNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Apellido)
-                    .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Apellido))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -456,8 +449,7 @@ public class V_Estilista extends javax.swing.JPanel {
         if(getText(txtCedula).equals("")){
             JOptionPane.showMessageDialog(null, "El campo de Cedula debe estar lleno para realizar ésta acción");
         }
-        else{
-            
+        else{            
             controlador.eliminarEstilista(auxCI);
             
             reiniciarValores();
@@ -522,7 +514,6 @@ public class V_Estilista extends javax.swing.JPanel {
         modelo = new M_Estilista();
         modelo = controlador.getPersona(tablaEstilistas.getValueAt(tablaEstilistas.getSelectedRow(), 0).toString());
 
-//        auxCI = modelo.subString(1);
         if(modelo != null){
             auxCI = modelo.getCedula();
             txtCedula.setText(modelo.subString(1));
@@ -583,7 +574,6 @@ public class V_Estilista extends javax.swing.JPanel {
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtNivelI;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPK;
     private javax.swing.JTextField txtProfesion;
     private javax.swing.JTextField txtRIF;
     private javax.swing.JTextField txtTelefono;
@@ -598,7 +588,6 @@ public class V_Estilista extends javax.swing.JPanel {
         txtRIF.setText(null);
         txtNivelI.setText(null);
         txtTelefono.setText(null);
-        txtPK.setText(null);
         txtProfesion.setText(null);
         Si.setSelected(false);
         No.setSelected(false);

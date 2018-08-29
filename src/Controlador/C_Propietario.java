@@ -3,9 +3,7 @@ package Controlador;
 import Modelo.M_Juridico;
 import Modelo.M_Natural;
 import Modelo.M_Propietario;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 
 public class C_Propietario {
 

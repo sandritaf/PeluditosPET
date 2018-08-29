@@ -3,14 +3,11 @@ package Controlador;
 
 import Conexion.Conexion;
 import Modelo.M_Juridico;
-import Modelo.M_Mascota;
 import Controlador.C_Mascota;
 import Modelo.M_Propietario;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
 import com.db4o.ext.DatabaseReadOnlyException;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

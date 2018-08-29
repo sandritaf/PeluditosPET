@@ -11,7 +11,6 @@ import Controlador.C_Trabajador;
 import Modelo.M_Cita;
 import Modelo.M_Factura;
 import java.util.Date;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -46,19 +45,18 @@ public class V_Factura extends javax.swing.JPanel {
         txtPKCita.setVisible(false);
         
         cTrabajador.cargarTrabajadores(cmbTrabajador);
-        //cMascota.cargarDuenosSinID(cmbDueño);
         cCita.cargarCitasSinCancelar(cmbCitaSinCancelar);
         
         if(controlador.getFacturas() != null){
             tablaFacturas.setModel(controlador.cargarTabla());
         }
         
-        //txtPK.setVisible(false);
+        txtPK.setVisible(false);
+        txtPKCita.setVisible(false);
+        
         reiniciarValores();
         reiniciarBotones();
         limpiarCajas();
-//        cargarValores();
-    //    controlador.eliminarFactura(1);
     }
 
     @SuppressWarnings("unchecked")
@@ -295,7 +293,7 @@ public class V_Factura extends javax.swing.JPanel {
         });
 
         Trabajador.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        Trabajador.setText("Trabajador");
+        Trabajador.setText("Cajero");
 
         Fecha.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Fecha.setText("Fecha");
@@ -395,14 +393,15 @@ public class V_Factura extends javax.swing.JPanel {
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(txtRepresentante, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(cmbCitaSinCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(cmbTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPKCita, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                            .addComponent(cmbTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtPKCita))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                            .addComponent(cmbCitaSinCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -612,14 +611,13 @@ public class V_Factura extends javax.swing.JPanel {
     }//GEN-LAST:event_VerListaMouseClicked
 
     private void tablaFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturasMousePressed
-        
+        cmbCitaSinCancelar.setEnabled(false);
         Guardar.setEnabled(false);
         Modificar.setEnabled(true);
         Eliminar.setEnabled(true);
         
         limpiarCajas();
         
-        //mCita = cCita.getCita(getID(tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 0).toString()));
         modeloAux = controlador.getFactura(Integer.parseInt(tablaFacturas.getValueAt(tablaFacturas.getSelectedRow(), 0).toString())); 
 
         if(modeloAux == null)
@@ -635,8 +633,6 @@ public class V_Factura extends javax.swing.JPanel {
         txtPKCita.setText(Integer.toString(modeloAux.getCita().getId()));
         txtFechaCita.setText(C_Fecha.deDateToString(mCita.getFecha()));
         txtFecha.setText(C_Fecha.deDateToString(mCita.getFecha()));
-        
-        //cmbDueño.setEnabled(true);
         
         cliente = modeloAux.getNombreCliente();
 
@@ -749,6 +745,7 @@ public class V_Factura extends javax.swing.JPanel {
         txtDueño.setEnabled(false);
         txtRepresentante.setEnabled(false);
         txtTotal.setEnabled(false);
+        cmbCitaSinCancelar.setEnabled(true);
     }
     
     private boolean fechaVacia(String fecha){
