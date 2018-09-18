@@ -4,7 +4,6 @@ package Vista;
 import Controlador.C_Juridico;
 import Controlador.C_Persona;
 import Modelo.M_Juridico;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -13,7 +12,7 @@ public class V_Juridico extends javax.swing.JPanel {
     M_Juridico modelo;
     C_Juridico controlador;
     C_Persona cPersona;
-    String razonSocial, nombreGerente, rif, telefono, direccion, auxRIF, mision;
+    String razonSocial, nombreGerente, rif, telefono, direccion, auxRIF, mision, tipo;
     
     public V_Juridico() {
         initComponents();
@@ -23,7 +22,9 @@ public class V_Juridico extends javax.swing.JPanel {
         if(controlador.getJuridicos() != null)
             tablaJuridicos.setModel(this.controlador.cargarTabla());
         
+        limpiarCajas();
         reiniciarValores();
+        reiniciarBotones();
     }
     
     @SuppressWarnings("unchecked")
@@ -31,6 +32,7 @@ public class V_Juridico extends javax.swing.JPanel {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Guardar = new javax.swing.JLabel();
@@ -56,6 +58,9 @@ public class V_Juridico extends javax.swing.JPanel {
         Mision = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtMision = new javax.swing.JTextArea();
+        J = new javax.swing.JRadioButton();
+        G = new javax.swing.JRadioButton();
+        C = new javax.swing.JRadioButton();
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -226,6 +231,21 @@ public class V_Juridico extends javax.swing.JPanel {
         txtMision.setRows(5);
         jScrollPane3.setViewportView(txtMision);
 
+        J.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(J);
+        J.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        J.setText("J");
+
+        G.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(G);
+        G.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        G.setText("G");
+
+        C.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(C);
+        C.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        C.setText("C");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -248,9 +268,16 @@ public class V_Juridico extends javax.swing.JPanel {
                             .addComponent(RIF)
                             .addComponent(NivelInstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRIF)
-                            .addComponent(txtNombreGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombreGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(J)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(G)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(C))))
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane3))
                 .addGap(0, 15, Short.MAX_VALUE))
@@ -263,7 +290,10 @@ public class V_Juridico extends javax.swing.JPanel {
                     .addComponent(RazonSocial)
                     .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RIF))
+                    .addComponent(RIF)
+                    .addComponent(J)
+                    .addComponent(G)
+                    .addComponent(C))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,8 +319,8 @@ public class V_Juridico extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
@@ -319,6 +349,7 @@ public class V_Juridico extends javax.swing.JPanel {
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
         limpiarCajas();
         reiniciarValores();
+        reiniciarBotones();
     }//GEN-LAST:event_LimpiarMouseClicked
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -340,16 +371,24 @@ public class V_Juridico extends javax.swing.JPanel {
             direccion = txtDireccion.getText();
             mision = txtMision.getText();
 
+            if(J.isSelected())
+                tipo = "J";
+            else if(C.isSelected())
+                tipo = "C";
+            else
+                tipo = "G";
+            
             modelo = new M_Juridico();
             
             if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
                 
-                if(!cPersona.rifExiste("J"+rif)){
+                if(!cPersona.rifExiste(tipo+rif)){
                     
                     modelo = new M_Juridico(direccion, telefono, razonSocial, nombreGerente, rif, razonSocial);            
-                    controlador.guardarJuridico(modelo);
+                    controlador.guardarJuridico(modelo, tipo);
 
                     reiniciarValores();
+                    reiniciarBotones();
                     limpiarCajas();
                     tablaJuridicos.setModel(this.controlador.cargarTabla());
 
@@ -383,13 +422,20 @@ public class V_Juridico extends javax.swing.JPanel {
             direccion = txtDireccion.getText();
             //auxRIF = "J"+txtRIF.getText(); //nuevo rif
             mision = txtMision.getText();
+    
+            if(J.isSelected())
+                tipo = "J";
+            else if(C.isSelected())
+                tipo = "C";
+            else
+                tipo = "G";
             
             if(modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                if(("J"+rif).equals(auxRIF)){
+                if((tipo+rif).equals(auxRIF)){
                     modificar();
                 }
-                else if(!cPersona.rifExiste("J"+rif)){
+                else if(!cPersona.rifExiste(tipo+rif)){
                     modificar();
                 }
                 else{
@@ -413,6 +459,7 @@ public class V_Juridico extends javax.swing.JPanel {
             controlador.eliminarJuridico(auxRIF);
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaJuridicos.setModel(this.controlador.cargarTabla());
 //        }
@@ -438,14 +485,36 @@ public class V_Juridico extends javax.swing.JPanel {
         txtNombreGerente.setText(modelo.getNombreGerente());
         txtDireccion.setText(modelo.getDireccion());
         txtMision.setText(modelo.getMision());
+        
+        switch (modelo.getRIF().charAt(0)) {
+            case 'G':
+                G.setSelected(true);
+                J.setSelected(false);
+                C.setSelected(false);
+                break;
+            case 'J':
+                G.setSelected(false);
+                J.setSelected(true);
+                C.setSelected(false);
+                break;
+            default:
+                G.setSelected(false);
+                J.setSelected(false);
+                C.setSelected(true);
+                break;
+        }
+        
     }//GEN-LAST:event_tablaJuridicosMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton C;
     private javax.swing.JLabel Cedula;
     private javax.swing.JLabel Direccion;
     private javax.swing.JLabel Eliminar;
+    private javax.swing.JRadioButton G;
     private javax.swing.JLabel Guardar;
+    private javax.swing.JRadioButton J;
     private javax.swing.JLabel Juridico;
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Mision;
@@ -454,6 +523,7 @@ public class V_Juridico extends javax.swing.JPanel {
     private javax.swing.JLabel RIF;
     private javax.swing.JLabel RazonSocial;
     private javax.swing.JLabel VerLista;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
@@ -478,6 +548,9 @@ public class V_Juridico extends javax.swing.JPanel {
         txtMision.setText(null);
         txtTelefono.setText(null);
         txtDireccion.setText(null);
+        G.setSelected(false);
+        J.setSelected(false);
+        C.setSelected(false);
     }
     
     public String getRIF(String c){ 
@@ -508,6 +581,8 @@ public class V_Juridico extends javax.swing.JPanel {
             return true;
         if(txtMision.getText().isEmpty())
             return true;
+        if(!J.isSelected() && !G.isSelected() && !C.isSelected())
+            return true;
         return false;
     }
     
@@ -520,9 +595,12 @@ public class V_Juridico extends javax.swing.JPanel {
         telefono = null;
         rif = null;
         auxRIF = null;
+        tipo = null;
+    }
+    
+    public void reiniciarBotones(){
         Modificar.setEnabled(false);
         Eliminar.setEnabled(false);
-        Limpiar.setEnabled(false);
         Guardar.setEnabled(true);
     }
     
@@ -534,9 +612,10 @@ public class V_Juridico extends javax.swing.JPanel {
     public void modificar(){
         modelo.actualizar(direccion, telefono, razonSocial, nombreGerente, rif, mision);
         //auxrif no tiene valor aquí
-        controlador.modificarJuridico(auxRIF,modelo,"J"+rif);
+        controlador.modificarJuridico(auxRIF,modelo,tipo+rif);
 
         reiniciarValores();
+        reiniciarBotones();
         limpiarCajas();
         tablaJuridicos.setModel(this.controlador.cargarTabla());
     }

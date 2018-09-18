@@ -13,7 +13,7 @@ public class V_Estilista extends javax.swing.JPanel {
     M_Estilista modelo;
     C_Estilista controlador;
     C_Persona cPersona;
-    String auxCI, nombre, apellido, cedula, rif, telefono, nivelI, profesion;
+    String auxCI, nombre, apellido, cedula, rif, telefono, nivelI, profesion, tipo;
     int edad, aniosE, precioTrabajo;
     boolean stripping;
     
@@ -35,6 +35,7 @@ public class V_Estilista extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Guardar = new javax.swing.JLabel();
@@ -65,6 +66,9 @@ public class V_Estilista extends javax.swing.JPanel {
         Stripping = new javax.swing.JLabel();
         Si = new javax.swing.JRadioButton();
         No = new javax.swing.JRadioButton();
+        V = new javax.swing.JRadioButton();
+        E = new javax.swing.JRadioButton();
+        P = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaEstilistas = new javax.swing.JTable();
 
@@ -253,6 +257,21 @@ public class V_Estilista extends javax.swing.JPanel {
         No.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         No.setText("No");
 
+        V.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup2.add(V);
+        V.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        V.setText("V");
+
+        E.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup2.add(E);
+        E.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        E.setText("E");
+
+        P.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup2.add(P);
+        P.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        P.setText("P");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -267,11 +286,18 @@ public class V_Estilista extends javax.swing.JPanel {
                     .addComponent(Telefono))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNivelI, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(txtNivelI)
                     .addComponent(txtAniosE)
-                    .addComponent(txtCedula)
                     .addComponent(txtNombre)
-                    .addComponent(txtTelefono))
+                    .addComponent(txtTelefono)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(V)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(E)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(P)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(RIF)
@@ -302,11 +328,16 @@ public class V_Estilista extends javax.swing.JPanel {
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Apellido))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cedula)
-                    .addComponent(RIF)
-                    .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(V)
+                        .addComponent(E)
+                        .addComponent(P))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Cedula)
+                        .addComponent(RIF)
+                        .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aniosExperiencia)
@@ -414,16 +445,23 @@ public class V_Estilista extends javax.swing.JPanel {
             if(Si.isSelected()) stripping = true;
             else stripping = false;
 
+            if(V.isSelected())
+                tipo = "V";
+            else if(E.isSelected())
+                tipo = "E";
+            else
+                tipo = "P";
+            
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono) && modelo.esNumero(rif)){
 
-                if(!cPersona.personaExiste("V"+cedula)){
+                if(!cPersona.personaExiste(tipo+cedula)){
 
-                    if(!cPersona.rifExiste("J"+rif)){
+                    if(!cPersona.rifExiste(tipo+rif)){
                                          
                         modelo = new M_Estilista(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
                         precioTrabajo = modelo.precioSegunAnios(aniosE);
                         modelo.setPrecioTrabajo(precioTrabajo);
-                        controlador.guardarEstilista(modelo);
+                        controlador.guardarEstilista(modelo, tipo);
 
                         reiniciarValores();
                         reiniciarBotones();
@@ -481,12 +519,21 @@ public class V_Estilista extends javax.swing.JPanel {
             if(Si.isSelected()) stripping = true;
             if(No.isSelected()) stripping = false;
 
+            if(V.isSelected())
+                tipo = "V";
+            else if(E.isSelected())
+                tipo = "E";
+            else
+                tipo = "P";
+            
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){
                 
-                if(("V"+cedula).equals(auxCI)){
+                // si no modificó la cedula
+                if((tipo+cedula).equals(auxCI)){
                     modificar();
                 }
-                else if(!cPersona.personaExiste("V"+cedula)){
+                // si la modificó, pero ya existe
+                else if(!cPersona.personaExiste(tipo+cedula)){
                     modificar();
                 }
                 else{
@@ -534,6 +581,24 @@ public class V_Estilista extends javax.swing.JPanel {
                 No.setSelected(true);
                 Si.setSelected(false);            
             }
+            
+            switch (modelo.getCedula().charAt(0)) {
+                case 'V':
+                    V.setSelected(true);
+                    E.setSelected(false);
+                    P.setSelected(false);
+                    break;
+                case 'E':
+                    V.setSelected(false);
+                    P.setSelected(false);
+                    E.setSelected(true);
+                    break;
+                default:
+                    V.setSelected(false);
+                    P.setSelected(true);
+                    E.setSelected(false);
+                    break;
+            }
         }
     
     }//GEN-LAST:event_tablaEstilistasMousePressed
@@ -546,6 +611,7 @@ public class V_Estilista extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;
     private javax.swing.JLabel Cedula;
+    private javax.swing.JRadioButton E;
     private javax.swing.JLabel Edad;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Estilista;
@@ -554,14 +620,17 @@ public class V_Estilista extends javax.swing.JPanel {
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel NivelInstruccion;
     private javax.swing.JRadioButton No;
+    private javax.swing.JRadioButton P;
     private javax.swing.JLabel Profesion;
     private javax.swing.JLabel RIF;
     private javax.swing.JRadioButton Si;
     private javax.swing.JLabel Stripping;
     private javax.swing.JLabel Telefono;
+    private javax.swing.JRadioButton V;
     private javax.swing.JLabel VerLista;
     private javax.swing.JLabel aniosExperiencia;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
@@ -591,6 +660,9 @@ public class V_Estilista extends javax.swing.JPanel {
         txtProfesion.setText(null);
         Si.setSelected(false);
         No.setSelected(false);
+        V.setSelected(false);
+        E.setSelected(false);
+        P.setSelected(false);
     }
     
     //Devuelve el codigo de la opcion seleccionada en un combo
@@ -628,6 +700,8 @@ public class V_Estilista extends javax.swing.JPanel {
             return true;        
         if(!Si.isSelected() && !No.isSelected())
             return true;
+        if(!V.isSelected() && !E.isSelected() && !P.isSelected())
+            return true;
         return false;
     }
     
@@ -645,6 +719,7 @@ public class V_Estilista extends javax.swing.JPanel {
         rif = null;
         precioTrabajo = 0;
         stripping = false;
+        tipo = null;
     }
     
     //Devuelve el valor de un txtField
@@ -659,13 +734,13 @@ public class V_Estilista extends javax.swing.JPanel {
     }
     
     public void modificar(){
-        if(!cPersona.rifExiste("J"+rif)){
+        if(!cPersona.rifExiste(tipo+rif)){
 
             modelo.actualizar(nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo, stripping);
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             modelo.setPrecioTrabajo(precioTrabajo);
 
-            controlador.modificarEstilista(auxCI,"V"+cedula,modelo);
+            controlador.modificarEstilista(auxCI,tipo+cedula,modelo);
 
             reiniciarValores();
             reiniciarBotones();

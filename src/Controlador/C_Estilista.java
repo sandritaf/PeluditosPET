@@ -11,9 +11,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class C_Estilista {
  
-    public void guardarEstilista(M_Estilista estilista){
+    public void guardarEstilista(M_Estilista estilista, String tipo){
         try{
-            estilista.setCedula("V"+estilista.getCedula());
+            estilista.setCedula(tipo+estilista.getCedula());
             Conexion.getInstancia().guardar(estilista);
             JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del estilista");
         }catch(Exception e){

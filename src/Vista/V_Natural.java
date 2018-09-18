@@ -4,7 +4,6 @@ package Vista;
 import Controlador.C_Natural;
 import Controlador.C_Persona;
 import Modelo.M_Natural;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -13,14 +12,18 @@ public class V_Natural extends javax.swing.JPanel {
     M_Natural modelo;
     C_Natural controlador;
     C_Persona cPersona;
-    String nombre, apellido, cedula, telefono, direccion, auxCI;
+    String nombre, apellido, cedula, telefono, direccion, auxCI, tipo;
     
     public V_Natural() {
         initComponents();
         controlador = new C_Natural();
         cPersona = new C_Persona();
+        
+        if(controlador.getNaturales() != null)
+            tablaNaturales.setModel(controlador.cargarTabla());
+
         reiniciarValores();
-        tablaNaturales.setModel(controlador.cargarTabla());
+        reiniciarBotones();
         limpiarCajas();
     }
 
@@ -28,6 +31,7 @@ public class V_Natural extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Guardar = new javax.swing.JLabel();
@@ -48,6 +52,9 @@ public class V_Natural extends javax.swing.JPanel {
         txtTelefono = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDireccion = new javax.swing.JTextArea();
+        V = new javax.swing.JRadioButton();
+        E = new javax.swing.JRadioButton();
+        P = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaNaturales = new javax.swing.JTable();
 
@@ -196,6 +203,26 @@ public class V_Natural extends javax.swing.JPanel {
         txtDireccion.setRows(5);
         jScrollPane1.setViewportView(txtDireccion);
 
+        V.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(V);
+        V.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        V.setText("V");
+        V.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VActionPerformed(evt);
+            }
+        });
+
+        E.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(E);
+        E.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        E.setText("E");
+
+        P.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(P);
+        P.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        P.setText("P");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -208,10 +235,18 @@ public class V_Natural extends javax.swing.JPanel {
                     .addComponent(Cedula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(txtCedula))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(txtCedula)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(V)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(E)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(P)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Apellido)
@@ -220,8 +255,7 @@ public class V_Natural extends javax.swing.JPanel {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTelefono)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -238,12 +272,15 @@ public class V_Natural extends javax.swing.JPanel {
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cedula)
                     .addComponent(Telefono)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(V)
+                    .addComponent(E)
+                    .addComponent(P))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(Direccion)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tablaNaturales.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -268,11 +305,15 @@ public class V_Natural extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
-                .addGap(26, 26, 26))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2)
+                        .addGap(24, 24, 24))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,8 +321,8 @@ public class V_Natural extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -317,14 +358,22 @@ public class V_Natural extends javax.swing.JPanel {
             cedula = getText(txtCedula); //Hay que verificar que no exista
             direccion = txtDireccion.getText();
             
+            if(V.isSelected())
+                tipo = "V";
+            else if(E.isSelected())
+                tipo = "E";
+            else
+                tipo = "P";
+            
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono)){
                 
-                if(!cPersona.personaExiste("V"+cedula)){
+                if(!cPersona.personaExiste(tipo+cedula)){
                     
                     modelo = new M_Natural(direccion, telefono, nombre, apellido, cedula);            
-                    controlador.guardarNatural(modelo);
+                    controlador.guardarNatural(modelo, tipo);
 
                     reiniciarValores();
+                    reiniciarBotones();
                     limpiarCajas();
                     tablaNaturales.setModel(this.controlador.cargarTabla());
                 }
@@ -354,12 +403,19 @@ public class V_Natural extends javax.swing.JPanel {
             cedula = getText(txtCedula);
             direccion = txtDireccion.getText();
             
+            if(V.isSelected())
+                tipo = "V";
+            else if(E.isSelected())
+                tipo = "E";
+            else
+                tipo = "P";
+            
             if(modelo.esNumero(cedula) && modelo.esNumero(telefono)){
 
-                if(("V"+cedula).equals(auxCI)){
+                if((tipo+cedula).equals(auxCI)){
                     modificar();
                 }
-                else if(!cPersona.personaExiste("V"+cedula)){
+                else if(!cPersona.personaExiste(tipo+cedula)){
                     modificar();
                 }
                 else{
@@ -370,7 +426,6 @@ public class V_Natural extends javax.swing.JPanel {
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
             }
-                
         }
     }//GEN-LAST:event_ModificarMouseClicked
 
@@ -384,6 +439,7 @@ public class V_Natural extends javax.swing.JPanel {
             controlador.eliminarNatural(auxCI);
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaNaturales.setModel(this.controlador.cargarTabla());
         }
@@ -414,21 +470,47 @@ public class V_Natural extends javax.swing.JPanel {
         txtCedula.setText(modelo.subString(1));
         txtDireccion.setText(modelo.getDireccion());
         
+        switch (modelo.getCedula().charAt(0)) {
+            case 'V':
+                V.setSelected(true);
+                E.setSelected(false);
+                P.setSelected(false);
+                break;
+            case 'E':
+                V.setSelected(false);
+                E.setSelected(true);
+                P.setSelected(false);
+                break;
+            case 'P':
+                V.setSelected(false);
+                E.setSelected(false);
+                P.setSelected(true);
+                break;
+        }
+        
     }//GEN-LAST:event_tablaNaturalesMousePressed
+
+    private void VActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_VActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;
     private javax.swing.JLabel Cedula;
     private javax.swing.JLabel Direccion;
+    private javax.swing.JRadioButton E;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Guardar;
     private javax.swing.JLabel Limpiar;
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel Natural;
     private javax.swing.JLabel Nombre;
+    private javax.swing.JRadioButton P;
     private javax.swing.JLabel Telefono;
+    private javax.swing.JRadioButton V;
     private javax.swing.JLabel VerLista;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
@@ -452,6 +534,9 @@ public class V_Natural extends javax.swing.JPanel {
         Guardar.setEnabled(true);
         Eliminar.setEnabled(false);
         Modificar.setEnabled(false);
+        V.setSelected(false);
+        E.setSelected(false);
+        P.setSelected(false);
     }
     
     public String getCedula(String c){ 
@@ -478,21 +563,26 @@ public class V_Natural extends javax.swing.JPanel {
             return true;
         if(txtDireccion.getText().isEmpty())
             return true;
+        if(!V.isSelected() && !E.isSelected() && !P.isSelected())
+            return true;
         return false;
     }
     
     //Coloca en null los atributos de la empresa
     public void reiniciarValores(){
-        Modificar.setEnabled(false);
-        Eliminar.setEnabled(false);
-        Limpiar.setEnabled(false);
-        Guardar.setEnabled(true);
         nombre = null;
         apellido = null;
         direccion = null;
         telefono = null;
         cedula = null;
         auxCI = null;
+        tipo = null;
+    }
+    
+    public void reiniciarBotones(){
+        Modificar.setEnabled(false);
+        Eliminar.setEnabled(false);
+        Guardar.setEnabled(true);
     }
     
     //Devuelve el valor de un txtField
@@ -501,10 +591,12 @@ public class V_Natural extends javax.swing.JPanel {
     }
     
     public void modificar(){
-        modelo.actualizar(direccion, telefono, nombre, apellido, cedula);            
-        controlador.modificarNatural(auxCI,"V"+cedula,modelo);
-
+        modelo.actualizar(direccion, telefono, nombre, apellido, cedula);
+        
+        controlador.modificarNatural(auxCI,tipo+cedula,modelo);
+        
         reiniciarValores();
+        reiniciarBotones();
         limpiarCajas();
         tablaNaturales.setModel(this.controlador.cargarTabla());
     }

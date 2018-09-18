@@ -14,9 +14,9 @@ public class C_Natural {
     public C_Natural(){
     }
     
-    public void guardarNatural(M_Natural natural){
+    public void guardarNatural(M_Natural natural, String tipo){
         try{
-            natural.setCedula("V"+natural.getCedula());
+            natural.setCedula(tipo+natural.getCedula());
             Conexion.getInstancia().guardar(natural);
             JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del cliente natural");
         }catch(Exception e){

@@ -15,9 +15,9 @@ public class C_Veterinario {
     public C_Veterinario(){
     }
     
-    public void guardarVeterinario(M_Veterinario veterinario){
+    public void guardarVeterinario(M_Veterinario veterinario, String tipo){
         try{
-            veterinario.setCedula("V"+veterinario.getCedula());
+            veterinario.setCedula(tipo+veterinario.getCedula());
             Conexion.getInstancia().guardar(veterinario);
             JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del veterinario");
         }catch(Exception e){

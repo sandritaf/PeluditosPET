@@ -13,7 +13,7 @@ public class V_Veterinario extends javax.swing.JPanel {
     private M_Veterinario modelo;
     private C_Veterinario controlador;
     private C_Persona cPersona;
-    private String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCI;
+    private String nombre, apellido, cedula, rif, telefono, nivelI, profesion, universidad, especializacion, auxCI, tipo;
     private int edad, aniosE, precioTrabajo;
     
     public V_Veterinario() {
@@ -26,12 +26,14 @@ public class V_Veterinario extends javax.swing.JPanel {
         
         limpiarCajas();
         reiniciarValores();
+        reiniciarBotones();
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Guardar = new javax.swing.JLabel();
@@ -63,6 +65,9 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtTelefono = new javax.swing.JTextField();
         txtNivelI = new javax.swing.JTextField();
         txtEspecializacion = new javax.swing.JTextField();
+        V = new javax.swing.JRadioButton();
+        E = new javax.swing.JRadioButton();
+        P = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaVeterinarios = new javax.swing.JTable();
 
@@ -223,6 +228,8 @@ public class V_Veterinario extends javax.swing.JPanel {
         Profesion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Profesion.setText("Profesión");
 
+        txtProfesion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         Universidad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Universidad.setText("Universidad");
 
@@ -234,9 +241,26 @@ public class V_Veterinario extends javax.swing.JPanel {
         Telefono.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Telefono.setText("Teléfono");
 
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         txtNivelI.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         txtEspecializacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
+        V.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(V);
+        V.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        V.setText("V");
+
+        E.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(E);
+        E.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        E.setText("E");
+
+        P.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(P);
+        P.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        P.setText("P");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -253,12 +277,19 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(Cedula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(txtAniosE, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtAniosE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                     .addComponent(txtNivelI, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUniversidad, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEspecializacion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre))
+                    .addComponent(txtNombre)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(V)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(E)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(P)))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(RIF)
@@ -285,11 +316,16 @@ public class V_Veterinario extends javax.swing.JPanel {
                     .addComponent(Apellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cedula)
-                    .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RIF))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(V)
+                        .addComponent(E)
+                        .addComponent(P))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Cedula)
+                        .addComponent(txtRIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(RIF)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -310,7 +346,7 @@ public class V_Veterinario extends javax.swing.JPanel {
                         .addComponent(Universidad)
                         .addComponent(txtUniversidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Telefono)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Especializacion)
                     .addComponent(txtEspecializacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -400,16 +436,24 @@ public class V_Veterinario extends javax.swing.JPanel {
             universidad = getText(txtUniversidad);
             especializacion = getText(txtEspecializacion);
             
+            if(V.isSelected())
+                tipo = "V";
+            else if(E.isSelected())
+                tipo = "E";
+            else
+                tipo = "P";
+            
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){                
                 
-                if(!cPersona.personaExiste("V"+cedula)){
+                if(!cPersona.personaExiste(tipo+cedula)){
 
-                    if(!cPersona.rifExiste("J"+rif)){
+                    if(!cPersona.rifExiste(tipo+rif)){
                     
                         modelo = new M_Veterinario(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-                        controlador.guardarVeterinario(modelo);
+                        controlador.guardarVeterinario(modelo, tipo);
 
                         reiniciarValores();
+                        reiniciarBotones();
                         limpiarCajas();
                         tablaVeterinarios.setModel(this.controlador.cargarTabla());
                     }
@@ -425,8 +469,6 @@ public class V_Veterinario extends javax.swing.JPanel {
             else{
                 JOptionPane.showMessageDialog(null, "Por favor ingrese los datos números de forma correcta");
             }
-
-            
         }
         
     }//GEN-LAST:event_GuardarMouseClicked
@@ -453,12 +495,21 @@ public class V_Veterinario extends javax.swing.JPanel {
             especializacion = getText(txtEspecializacion);
             precioTrabajo = modelo.precioSegunAnios(aniosE);
             
+            if(V.isSelected())
+                tipo = "V";
+            else if(E.isSelected())
+                tipo = "E";
+            else
+                tipo = "P";
+            
             if(modelo.esNumero(telefono) && modelo.esNumero(cedula) && modelo.esNumero(rif)){
             
-                if(("V"+cedula).equals(auxCI)){
+                // Si no modificó la cédula
+                if((tipo+cedula).equals(auxCI)){
                     modificar();
                 }                
-                else if(!cPersona.personaExiste("V"+cedula)){
+                // Si la modificó y no existe
+                else if(!cPersona.personaExiste(tipo+cedula)){
                     modificar();
                 }
                 else{
@@ -483,6 +534,7 @@ public class V_Veterinario extends javax.swing.JPanel {
             controlador.eliminarVeterinario(auxCI);
             
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaVeterinarios.setModel(this.controlador.cargarTabla());
         }
@@ -513,12 +565,32 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtNivelI.setText(modelo.getNivelInstruccion());
         txtAniosE.setText(Integer.toString(modelo.getAniosExperiencia()));
         txtCedula.setText(modelo.subString(1));
+        
+        switch (modelo.getCedula().charAt(0)) {
+            case 'V':
+                V.setSelected(true);
+                E.setSelected(false);
+                P.setSelected(false);
+                break;
+            case 'E':
+                V.setSelected(false);
+                P.setSelected(false);
+                E.setSelected(true);
+                break;
+            case 'P':
+                V.setSelected(false);
+                E.setSelected(false);  
+                P.setSelected(true);
+                break;
+        }
+        
     }//GEN-LAST:event_tablaVeterinariosMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Apellido;
     private javax.swing.JLabel Cedula;
+    private javax.swing.JRadioButton E;
     private javax.swing.JLabel Edad;
     private javax.swing.JLabel Eliminar;
     private javax.swing.JLabel Especializacion;
@@ -527,13 +599,16 @@ public class V_Veterinario extends javax.swing.JPanel {
     private javax.swing.JLabel Modificar;
     private javax.swing.JLabel NivelInstruccion;
     private javax.swing.JLabel Nombre;
+    private javax.swing.JRadioButton P;
     private javax.swing.JLabel Profesion;
     private javax.swing.JLabel RIF;
     private javax.swing.JLabel Telefono;
     private javax.swing.JLabel Universidad;
+    private javax.swing.JRadioButton V;
     private javax.swing.JLabel VerLista;
     private javax.swing.JLabel Veterinario;
     private javax.swing.JLabel aniosExperiencia;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -552,10 +627,13 @@ public class V_Veterinario extends javax.swing.JPanel {
     private javax.swing.JTextField txtUniversidad;
     // End of variables declaration//GEN-END:variables
     
-    private void limpiarCajas(){
+    private void reiniciarBotones(){
         Guardar.setEnabled(true);
         Modificar.setEnabled(false);
         Eliminar.setEnabled(false);
+    }
+    
+    private void limpiarCajas(){
         txtAniosE.setText(null);
         txtCedula.setText(null);
         txtEdad.setText(null);
@@ -567,6 +645,10 @@ public class V_Veterinario extends javax.swing.JPanel {
         txtNivelI.setText(null);
         txtProfesion.setText(null);
         txtTelefono.setText(null);
+        V.setSelected(false);
+        E.setSelected(false);
+        P.setSelected(false);
+        reiniciarBotones();
     }
 
     //Devuelve el codigo de la opcion seleccionada en un combo
@@ -608,6 +690,8 @@ public class V_Veterinario extends javax.swing.JPanel {
             return true;        
         if(txtVacio(txtUniversidad))
             return true;        
+        if(!V.isSelected() && !E.isSelected() && !P.isSelected())
+            return true;
         return false;
     }
     
@@ -626,10 +710,7 @@ public class V_Veterinario extends javax.swing.JPanel {
         especializacion = null;
         precioTrabajo = 0;
         auxCI = null;
-        Guardar.setEnabled(true);
-        Modificar.setEnabled(false);
-        Eliminar.setEnabled(false);
-        
+        tipo = null;
     }
     
     //Devuelve el valor de un txtField
@@ -638,12 +719,14 @@ public class V_Veterinario extends javax.swing.JPanel {
     }
     
     public void modificar(){
-        if(!cPersona.rifExiste("J"+rif)){
+        if(!cPersona.rifExiste(tipo+rif)){
 
             modelo.actualizar(especializacion, universidad, nombre, apellido, cedula, rif, edad, nivelI, profesion, aniosE, telefono, precioTrabajo);
-            controlador.modificarVeterinario(auxCI, "V"+cedula, modelo);
-
+            
+            controlador.modificarVeterinario(auxCI, tipo+cedula, modelo);
+            
             reiniciarValores();
+            reiniciarBotones();
             limpiarCajas();
             tablaVeterinarios.setModel(this.controlador.cargarTabla());
         }

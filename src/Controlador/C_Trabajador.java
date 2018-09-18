@@ -20,9 +20,9 @@ public class C_Trabajador {
     public C_Trabajador(){
     }
     
-    public void guardarTrabajador(M_Trabajador trabajador){
+    public void guardarTrabajador(M_Trabajador trabajador, String tipo){
         try{
-            trabajador.setCedula("V"+trabajador.getCedula());
+            trabajador.setCedula(tipo+trabajador.getCedula());
             Conexion.getInstancia().guardar(trabajador);
             JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del trabajador");
         }catch(Exception e){

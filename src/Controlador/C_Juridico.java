@@ -16,9 +16,9 @@ public class C_Juridico extends C_Propietario{
     public C_Juridico(){
     }
     
-    public void guardarJuridico(M_Juridico juridico){
+    public void guardarJuridico(M_Juridico juridico, String tipo){
           try{
-              juridico.setRIF("J"+juridico.getRIF());
+              juridico.setRIF(tipo+juridico.getRIF());
               Conexion.getInstancia().guardar(juridico);
               JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del cliente jurídico");
           }catch(Exception e){
