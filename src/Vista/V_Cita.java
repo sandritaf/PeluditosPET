@@ -45,7 +45,6 @@ public class V_Cita extends javax.swing.JPanel {
         cFecha = new C_Fecha();
 
         cServicio.cargarServicios(cmbServicio);        
-//        cTrabajador.cargarTrabajador(cmbTrabajador);
         cMascota.cargarDuenos(cmbDueño);
         
         reiniciarValores();
@@ -388,15 +387,14 @@ public class V_Cita extends javax.swing.JPanel {
         }
         else{           
             
-            if(tipoDueño(cmbDueño).equals("V")){
+            if(tipoDueño(cmbDueño).equals("V") || tipoDueño(cmbDueño).equals("E") || tipoDueño(cmbDueño).equals("P")){
                 mNatural = cNatural.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota,mNatural.getCedula());  
             }
-            else if(tipoDueño(cmbDueño).equals("J")){
+            else if(tipoDueño(cmbDueño).equals("J") || tipoDueño(cmbDueño).equals("G") || tipoDueño(cmbDueño).equals("C")){
                 mJuridico = cJuridico.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }
-
             modelo = new M_Cita(controlador.getNumCitasExistentes()+1, mMascota, mTrabajador, mServicio, fecha, diagnosticoFinal, tratamiento);
             controlador.guardarCita(modelo);
 
@@ -420,11 +418,11 @@ public class V_Cita extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Trabajador null");
                 //break;
             }
-            if(tipoDueño(cmbDueño).equals("V")){
+            if(tipoDueño(cmbDueño).equals("V") || tipoDueño(cmbDueño).equals("E") || tipoDueño(cmbDueño).equals("P")){
                 mNatural = cNatural.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota, mNatural.getCedula());
             }
-            else if(tipoDueño(cmbDueño).equals("J")){
+            else if(tipoDueño(cmbDueño).equals("J") || tipoDueño(cmbDueño).equals("G") || tipoDueño(cmbDueño).equals("C")){
                 mJuridico = cJuridico.getPersona(dueño);
                 mMascota = cMascota.getMascota(mascota, mJuridico.getRIF());
             }

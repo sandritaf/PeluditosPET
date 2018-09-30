@@ -137,7 +137,7 @@ public class M_Cita {
         } catch(Exception e){
             System.out.println("Error en M_Cita: toString: "+e);
         }
-        return "Hola";
+        return "toString";
     }
     
     public String imprimirT(){
@@ -147,7 +147,7 @@ public class M_Cita {
         } catch(Exception e){
             System.out.println("Error en M_Cita: toString: "+e);
         }
-        return "Hola";
+        return "imprimirT";
     }
     
     public String estacancelado(){
