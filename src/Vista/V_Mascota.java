@@ -361,9 +361,14 @@ public class V_Mascota extends javax.swing.JPanel {
         }
         else{                    
 
+            if (esNumero(getText(txtEdad))){
+                edad = Integer.parseInt(getText(txtEdad));
+            } else {
+                edad = -1;
+            }
+            
             id = getCedulaCombo(cmbDueno);
             nombre = getText(txtNombre);
-            edad = Integer.parseInt(getText(txtEdad));
             especie = getTextCombo(cmbEspecie);
             raza = getTextCombo(cmbRaza);
             observaciones = txtObservaciones.getText();
@@ -373,13 +378,14 @@ public class V_Mascota extends javax.swing.JPanel {
             if(Masculino.isSelected())
                 sexo = "M";
             
-            modelo = new M_Mascota(controlador.getNumMascotasExistentes()+1,id, nombre, especie, raza, edad, observaciones, sexo);
-            controlador.guardarMascota(modelo,obtenerDueno(cmbDueno));
-            
-            reiniciarValores();
-            reiniciarBotones();
-            limpiarCajas();
-            tablaMascotas.setModel(this.controlador.cargarTabla());
+            if (id != null && id != "" && edad > -1){
+                modelo = new M_Mascota(controlador.getNumMascotasExistentes()+1,id, nombre, especie, raza, edad, observaciones, sexo);
+                controlador.guardarMascota(modelo,obtenerDueno(cmbDueno));
+                reiniciarValores();
+                reiniciarBotones();
+                limpiarCajas();
+                tablaMascotas.setModel(this.controlador.cargarTabla());
+            } else JOptionPane.showMessageDialog(null, "´La información debe estar ompleta y correcta para guardar");
         }
     }//GEN-LAST:event_GuardarMouseClicked
 
@@ -533,12 +539,12 @@ public class V_Mascota extends javax.swing.JPanel {
     
     //Devuelve el codigo de la opcion seleccionada en un combo
     public String getCedulaCombo(JComboBox combito){
-        String codigo = combito.getSelectedItem().toString(); 
         String codigoFinal = "";
-        
-        int guion = codigo.indexOf(" -");
-        codigoFinal = codigo.substring(0, guion);
-        
+        if (combito.getItemCount()>0){
+            String codigo = combito.getSelectedItem().toString(); 
+            int guion = codigo.indexOf(" -");
+            codigoFinal = codigo.substring(0, guion);
+        }
         return codigoFinal;
     }
     
@@ -556,6 +562,8 @@ public class V_Mascota extends javax.swing.JPanel {
         if(txtObservaciones.getText().isEmpty())
             return true;
         if(!Femenino.isSelected() && !Masculino.isSelected())
+            return true;
+        if(cmbEspecie.getItemCount() < 1 || cmbRaza.getItemCount() < 1)
             return true;
         return false;
     }
@@ -592,4 +600,13 @@ public class V_Mascota extends javax.swing.JPanel {
         return false;
     }
     
+    public boolean esNumero(String cadena){
+        try {
+            Long.parseLong(cadena);
+            return true;
+        } catch (NumberFormatException excepcion) {
+            System.out.println("Tratando de averiguar si es numero: "+cadena+", capturada excepcion: "+excepcion);
+            return false;
+        }
+    }
 }
