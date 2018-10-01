@@ -22,7 +22,7 @@ public class C_Servicio {
                 String nombre = servicio.getNombre().toLowerCase();
                 servicio.setNombre(nombre);
               Conexion.getInstancia().guardar(servicio);
-              JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del cliente jurídico");
+              JOptionPane.showMessageDialog(null, "Se han almacenado correctamente los datos del servicio");
           }catch(Exception e){
               JOptionPane.showMessageDialog(null, "error en C_Servicio->guardarServicio: "+e);
           }

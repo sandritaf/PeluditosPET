@@ -258,14 +258,14 @@ public class C_Cita {
     
     public DefaultTableModel cargarCitasCanceladas(String idVeterinario, Date fechai, Date fechaf){
         try{
-            String titulos[] = {"Mascota","Diagnóstico Final","Tratamiento","Servicio", "Fecha"};
+            String titulos[] = {"Mascota","Diagnóstico Final","Tratamiento","Servicio", "Fecha", "Total"};
             DefaultTableModel dtm = new DefaultTableModel(null, titulos);
             M_Factura[] p = Conexion.getInstancia().buscarResultadosSODA(fechai, fechaf);            
             
             if (p != null) {
                 for (M_Factura result : p) {
                     M_Cita per = result.getCita();
-                    Object[] cli = new Object[5];
+                    Object[] cli = new Object[6];
                     
                     //Si el veterinario correspondiente a la cita es el mismo que selecciono el usuario
                     if(per.getTrabajador().getCedula().compareTo(idVeterinario) == 0){
@@ -274,6 +274,7 @@ public class C_Cita {
                         cli[2] = per.getTratamiento();
                         cli[3] = per.getServicio().toString();
                         cli[4] = C_Fecha.deDateToString(per.getFecha());
+                        cli[5] = result.getTotal();
                         dtm.addRow(cli);
                     }
                 }

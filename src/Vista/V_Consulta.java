@@ -51,6 +51,7 @@ public class V_Consulta extends javax.swing.JPanel {
         Desde = new javax.swing.JLabel();
         Hasta = new javax.swing.JLabel();
         txtHasta = new javax.swing.JTextField();
+        txtFacturado = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaConsultas = new javax.swing.JTable();
 
@@ -169,28 +170,35 @@ public class V_Consulta extends javax.swing.JPanel {
             }
         });
 
+        txtFacturado.setEditable(false);
+        txtFacturado.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtFacturado.setText("Total Facturado");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Periodo)
-                .addGap(29, 29, 29)
-                .addComponent(Desde)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(Veterinario)
+                        .addComponent(Periodo)
+                        .addGap(29, 29, 29)
+                        .addComponent(Desde)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Hasta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(Veterinario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtFacturado)))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +206,8 @@ public class V_Consulta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Veterinario)
-                    .addComponent(cmbVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFacturado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Periodo)
@@ -284,7 +293,8 @@ public class V_Consulta extends javax.swing.JPanel {
             
             if(mVeterinario != null){
                 idVeterinario = getID(cmbVeterinario);
-                tablaConsultas.setModel(cCita.cargarCitasCanceladas(idVeterinario, inicio, fin));            
+                tablaConsultas.setModel(cCita.cargarCitasCanceladas(idVeterinario, inicio, fin));  
+                txtFacturado.setText(obtenerTotal());
             }
         }
     }//GEN-LAST:event_BuscarMouseClicked
@@ -331,14 +341,15 @@ public class V_Consulta extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaConsultas;
     private javax.swing.JTextField txtDesde;
+    private javax.swing.JTextField txtFacturado;
     private javax.swing.JTextField txtHasta;
     // End of variables declaration//GEN-END:variables
     
     public void limpiarCajas(){
         txtDesde.setText("yyyy-mm-dd");
         txtHasta.setText("yyyy-mm-dd");
-    }
-    
+    }    
+       
     public boolean cajasVacias(){
         
         if(getText(txtDesde).equals("yyyy-mm-dd") || getText(txtDesde).isEmpty())
@@ -347,6 +358,14 @@ public class V_Consulta extends javax.swing.JPanel {
             return true;
 //        if(cmbVeterinario.getSelectedItem().equals(null))
         return false;
+    }
+    
+    public String obtenerTotal(){
+        float acum = 0;
+        for(int i=0; i<tablaConsultas.getRowCount(); i++){
+           acum+=Float.parseFloat(tablaConsultas.getValueAt(i, 5).toString()); 
+        }
+        return String.valueOf(acum);
     }
     
     public String getID(JComboBox combito){
